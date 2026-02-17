@@ -470,3 +470,12 @@ input:focus, textarea:focus{
   .gallery{grid-template-columns:1fr 1fr}
   .contact{grid-template-columns:1fr}
 }
+
+.hero__bgslide.is-active{
+  opacity:1;
+  animation: kenburns 7s ease-in-out both;
+}
+@keyframes kenburns{
+  from{ transform: scale(1.03); }
+  to{ transform: scale(1.08); }
+}

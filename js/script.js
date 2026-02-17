@@ -17,12 +17,12 @@ if (burger && nav) {
 
 // HERO background slider
 const slides = document.querySelectorAll(".hero__bgslide");
-let i = 0;
+let current = 0;
 
 if (slides.length > 1) {
   setInterval(() => {
-    slides[i].classList.remove("is-active");
-    i = (i + 1) % slides.length;
-    slides[i].classList.add("is-active");
-  }, 5000); // mijenja sliku svake 5 sekundi
+    slides[current].classList.remove("is-active");
+    current = (current + 1) % slides.length;
+    slides[current].classList.add("is-active");
+  }, 5000); // 5 sekundi
 }
