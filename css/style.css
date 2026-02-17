@@ -273,6 +273,41 @@ input:focus, textarea:focus{
   box-shadow: 0 0 0 4px rgba(25,182,255,.14);
 }
 
+/* FULL SCREEN HERO (100vh) */
+.hero--wow{
+  min-height: calc(100vh - 72px); /* minus header */
+  display:flex;
+  align-items:center;
+  padding: 90px 0 70px;
+}
+
+.hero__bg{
+  background:
+    radial-gradient(1100px 600px at 15% 0%, rgba(25,182,255,.40), transparent 62%),
+    radial-gradient(1000px 560px at 85% 5%, rgba(255,209,102,.32), transparent 60%),
+    radial-gradient(950px 560px at 55% 95%, rgba(45,212,191,.20), transparent 60%),
+    linear-gradient(180deg, rgba(7,18,31,.92), rgba(7,18,31,.72));
+}
+
+.hero__grid--wow-center{
+  align-items:center;
+}
+
+.hero__image--wow{
+  min-height: 460px; /* veća slika za WOW */
+}
+
+@media (max-width: 900px){
+  .hero--wow{
+    min-height: auto;
+    padding: 72px 0 50px;
+  }
+  .hero__image--wow{
+    min-height: 320px;
+  }
+}
+
+
 /* Footer */
 .footer{padding:26px 0 40px; background:#fff; border-top:1px solid rgba(0,0,0,.08);}
 .footer__inner{display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap;}
