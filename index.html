@@ -1,16 +1,199 @@
 <!DOCTYPE html>
 <html lang="hr">
 <head>
-  <link rel="stylesheet" href="css/style.css">
-
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Apartmani Lana</title>
+  <meta name="description" content="Apartmani uz more — opis, galerija, cijene i kontakt." />
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 
 <body>
-  <h1>Dobrodošli u Apartmane Lana 🌊</h1>
-  <p>Naša web stranica je u izradi.</p>
+  <header class="header">
+    <div class="container header__inner">
+      <a class="logo" href="#">Apartmani Lana</a>
+
+      <nav class="nav" id="nav">
+        <a href="#apartmani">Apartmani</a>
+        <a href="#galerija">Galerija</a>
+        <a href="#cijene">Cijene</a>
+        <a href="#lokacija">Lokacija</a>
+        <a href="#kontakt" class="btn btn--small">Kontakt</a>
+      </nav>
+
+      <button class="burger" id="burger" aria-label="Otvori meni">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero__grid">
+        <div class="hero__text">
+          <p class="badge">🌊 2 min do plaže</p>
+          <h1>Odmor uz more u mirnom i čistom apartmanu</h1>
+          <p class="lead">
+            Idealno za parove i obitelji. Klima, Wi-Fi, parking, terasa i pogled.
+          </p>
+
+          <div class="hero__cta">
+            <a class="btn" href="#kontakt">Pošalji upit</a>
+            <a class="btn btn--ghost" href="#galerija">Pogledaj galeriju</a>
+          </div>
+
+          <div class="hero__info">
+            <div class="chip">🛏️ 2+2</div>
+            <div class="chip">📶 Wi-Fi</div>
+            <div class="chip">❄️ Klima</div>
+            <div class="chip">🚗 Parking</div>
+          </div>
+        </div>
+
+        <div class="hero__image">
+          <!-- Kasnije ubaci svoju sliku u images/hero.jpg i promijeni src -->
+          <img src="images/hero.jpg" alt="Apartman uz more" onerror="this.style.display='none'">
+          <div class="hero__placeholder">
+            <p><strong>Dodaj sliku:</strong> <code>images/hero.jpg</code></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="apartmani" class="section">
+      <div class="container">
+        <h2>Apartmani</h2>
+        <p class="muted">Kratko predstavljanje smještaja (možeš kasnije dodati više apartmana).</p>
+
+        <div class="cards">
+          <article class="card">
+            <h3>Apartman 1</h3>
+            <p>50m² • 1 spavaća • dnevni boravak • terasa</p>
+            <ul class="list">
+              <li>Kuhinja opremljena</li>
+              <li>Posteljina i ručnici</li>
+              <li>Mirna lokacija</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <h3>Apartman 2</h3>
+            <p>35m² • studio • balkon</p>
+            <ul class="list">
+              <li>Pogled na more</li>
+              <li>Blizu centra</li>
+              <li>Besplatan parking</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <h3>Što je uključeno</h3>
+            <p>Osnovne pogodnosti za ugodan boravak.</p>
+            <ul class="list">
+              <li>Wi-Fi</li>
+              <li>Klima</li>
+              <li>Parking</li>
+              <li>Roštilj (ako imate)</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="galerija" class="section section--alt">
+      <div class="container">
+        <h2>Galerija</h2>
+        <p class="muted">Stavi svoje slike u folder <code>images/</code> i zamijeni nazive.</p>
+
+        <div class="gallery">
+          <div class="gallery__item">Slika 1</div>
+          <div class="gallery__item">Slika 2</div>
+          <div class="gallery__item">Slika 3</div>
+          <div class="gallery__item">Slika 4</div>
+          <div class="gallery__item">Slika 5</div>
+          <div class="gallery__item">Slika 6</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="cijene" class="section">
+      <div class="container">
+        <h2>Cijene</h2>
+        <p class="muted">Ovdje stavi okvirne cijene (po noćenju) i datume sezone.</p>
+
+        <div class="table">
+          <div class="row row--head">
+            <div>Sezona</div><div>Period</div><div>Cijena</div>
+          </div>
+          <div class="row">
+            <div>Predsezona</div><div>01.05 – 15.06</div><div>od 60 €</div>
+          </div>
+          <div class="row">
+            <div>Sezona</div><div>16.06 – 31.08</div><div>od 90 €</div>
+          </div>
+          <div class="row">
+            <div>Posezona</div><div>01.09 – 15.10</div><div>od 65 €</div>
+          </div>
+        </div>
+
+        <p class="note">Napomena: boravišna pristojba / finalno čišćenje (ako imate) navedi ovdje.</p>
+      </div>
+    </section>
+
+    <section id="lokacija" class="section section--alt">
+      <div class="container">
+        <h2>Lokacija</h2>
+        <p class="muted">Kasnije ubaci Google Maps embed (ja ti mogu pomoći kad dođemo do toga).</p>
+
+        <div class="map">
+          <div class="map__placeholder">
+            📍 Ovdje ide mapa
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="kontakt" class="section">
+      <div class="container">
+        <h2>Kontakt</h2>
+        <p class="muted">Najbrže je staviti telefon/WhatsApp + e-mail.</p>
+
+        <div class="contact">
+          <div class="card">
+            <h3>Javi nam se</h3>
+            <p><strong>Telefon/WhatsApp:</strong> <a href="tel:+385000000000">+385 00 000 0000</a></p>
+            <p><strong>E-mail:</strong> <a href="mailto:kontakt@primjer.com">kontakt@primjer.com</a></p>
+            <p><strong>Adresa:</strong> Ulica i mjesto</p>
+          </div>
+
+          <form class="card form" onsubmit="return false;">
+            <h3>Upit</h3>
+            <label>
+              Ime i prezime
+              <input type="text" placeholder="Upiši ime" />
+            </label>
+            <label>
+              E-mail
+              <input type="email" placeholder="Upiši e-mail" />
+            </label>
+            <label>
+              Poruka
+              <textarea rows="4" placeholder="Napiši poruku..."></textarea>
+            </label>
+            <button class="btn" type="button">Pošalji (demo)</button>
+            <p class="muted small">Ovo je demo forma — kasnije ćemo je povezati na e-mail/servis.</p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="container footer__inner">
+        <p>© <span id="year"></span> Apartmani Lana</p>
+        <p class="muted small">Izrađeno lokalno + GitHub Pages.</p>
+      </div>
+    </footer>
+  </main>
 
   <script src="js/script.js"></script>
 </body>
