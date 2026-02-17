@@ -164,18 +164,19 @@ h1{
 .lead--wow{max-width: 58ch}
 
 .hero__cta{display:flex; gap:12px; flex-wrap:wrap; margin-bottom:14px;}
+
 .btn--wow{
-  color:#02111e;
+  color:#fff;
   border:0;
-  background: linear-gradient(135deg, var(--sun), #ffe29a);
-  box-shadow: 0 12px 30px rgba(255,209,102,.25);
+  background: linear-gradient(135deg, #1ea7ff, #00d0ff);
+  box-shadow: 0 12px 30px rgba(30,167,255,.30);
 }
 .btn--wow-ghost{
-  color: var(--wowText);
-  background: rgba(255,255,255,.08);
-  border:1px solid var(--wowBorder);
-  box-shadow:none;
+  color:#0b1b2b;
+  background: rgba(255,255,255,.75);
+  border:1px solid rgba(0,0,0,.12);
 }
+
 
 .hero__info{display:flex; gap:10px; flex-wrap:wrap;}
 .chip{
