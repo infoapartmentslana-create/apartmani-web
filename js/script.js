@@ -14,3 +14,15 @@ if (burger && nav) {
     a.addEventListener("click", () => nav.classList.remove("is-open"));
   });
 }
+
+// HERO background slider
+const slides = document.querySelectorAll(".hero__bgslide");
+let i = 0;
+
+if (slides.length > 1) {
+  setInterval(() => {
+    slides[i].classList.remove("is-active");
+    i = (i + 1) % slides.length;
+    slides[i].classList.add("is-active");
+  }, 5000); // mijenja sliku svake 5 sekundi
+}

@@ -314,6 +314,51 @@ input:focus, textarea:focus{
   margin: 0 auto;
 }
 
+/* HERO BACKGROUND SLIDER */
+.hero{
+  position: relative;
+  overflow: hidden;
+}
+
+.hero__bgslider{
+  position:absolute;
+  inset:0;
+  z-index:0;
+}
+
+.hero__bgslide{
+  position:absolute;
+  inset:0;
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+  opacity:0;
+  transform: scale(1.03);
+  transition: opacity 900ms ease;
+  will-change: opacity;
+}
+
+.hero__bgslide.is-active{
+  opacity:1;
+}
+
+/* Svijetli overlay da tekst bude čitljiv */
+.hero__bgoverlay{
+  position:absolute;
+  inset:0;
+  z-index:1;
+  background:
+    linear-gradient(180deg, rgba(248,251,255,.35), rgba(248,251,255,.85));
+}
+
+/* da tekst bude iznad slidera */
+.hero .container,
+.hero__wrap,
+.hero__panel{
+  position:relative;
+  z-index:2;
+}
+
 /* PREMIUM FINISH (fade-in + scroll indicator) */
 
 /* Fade-in za hero tekst */
