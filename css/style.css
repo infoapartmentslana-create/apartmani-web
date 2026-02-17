@@ -318,7 +318,12 @@ input:focus, textarea:focus{
 .hero{
   position: relative;
   overflow: hidden;
+
+  min-height: calc(100vh - 72px); /* full screen minus header */
+  display: flex;
+  align-items: center;
 }
+
 
 .hero__bgslider{
   position:absolute;
@@ -333,7 +338,7 @@ input:focus, textarea:focus{
   background-position:center;
   background-repeat:no-repeat;
   opacity:0;
-  transform: scale(1.03);
+  transform: scale(1.05);
   transition: opacity 900ms ease;
   will-change: opacity;
 }
@@ -347,9 +352,16 @@ input:focus, textarea:focus{
   position:absolute;
   inset:0;
   z-index:1;
+
+  /* manje opacity = jača slika */
   background:
-    linear-gradient(180deg, rgba(248,251,255,.35), rgba(248,251,255,.85));
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,.15),
+      rgba(255,255,255,.45)
+    );
 }
+
 
 /* da tekst bude iznad slidera */
 .hero .container,
