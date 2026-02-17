@@ -26,3 +26,16 @@ if (slides.length > 1) {
     slides[current].classList.add("is-active");
   }, 5000); // 5 sekundi
 }
+
+// HERO PARALLAX EFFECT
+const heroSlider = document.querySelector(".hero__bgslider");
+
+window.addEventListener("scroll", () => {
+  if (!heroSlider) return;
+
+  const scrollY = window.scrollY;
+
+  // koliko se pomjera (manji broj = suptilnije)
+  heroSlider.style.transform = `translateY(${scrollY * 0.25}px)`;
+});
+
