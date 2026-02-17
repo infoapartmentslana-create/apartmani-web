@@ -294,12 +294,6 @@ input:focus, textarea:focus{
 }
 
 /* SIMPLE HERO */
-.hero__panel--simple{
-  max-width: 720px;
-  margin: 0 auto;
-  text-align: center;
-  padding: 40px 30px;
-}
 
 .hero__panel--simple h1{
   font-size: clamp(40px, 5vw, 70px);
@@ -377,10 +371,6 @@ input:focus, textarea:focus{
 
 /* PREMIUM FINISH (fade-in + scroll indicator) */
 
-/* Fade-in za hero tekst */
-.hero__panel--simple{
-  animation: heroIn .9s ease-out both;
-}
 @keyframes heroIn{
   from{opacity:0; transform: translateY(14px);}
   to{opacity:1; transform: translateY(0);}
@@ -389,18 +379,6 @@ input:focus, textarea:focus{
 .hero--new{
   position: relative;
   overflow: hidden;
-}
-
-.hero--new .hero__bg{
-  position:absolute;
-  inset:0;
-  background:
-    linear-gradient(180deg, rgba(248,251,255,.35), rgba(248,251,255,.85)),
-    url("../images/main-picture.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  z-index:0;
 }
 
 .hero--new .hero__wrap{
@@ -501,7 +479,13 @@ input:focus, textarea:focus{
   position: relative;
   z-index: 2;
 
-  /* glass + gradient samo iza teksta */
+  max-width: 760px;
+  margin: 0 auto;
+  text-align: center;
+
+  padding: 28px 32px;
+  border-radius: 24px;
+
   background:
     linear-gradient(
       90deg,
@@ -511,15 +495,10 @@ input:focus, textarea:focus{
     );
 
   backdrop-filter: blur(6px);
-  border-radius: 24px;
-  padding: 28px 32px;
 
-  max-width: 760px;
-}
-
-.hero__panel--simple{
   animation: heroFloat 1s ease-out both;
 }
+
 
 @keyframes heroFloat{
   from{
@@ -534,4 +513,10 @@ input:focus, textarea:focus{
 
 .hero__panel--simple h1{
   text-shadow: 0 2px 12px rgba(255,255,255,.35);
+}
+
+/* cinematic scroll smoothness */
+#heroPanel{
+  will-change: transform, opacity, filter;
+  transition: opacity .08s linear;
 }
