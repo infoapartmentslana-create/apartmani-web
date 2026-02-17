@@ -23,7 +23,7 @@ if (slides.length > 1) {
   }, 5000);
 }
 
-/* CINEMATIC SCROLL: parallax + fade/slide tekst */
+/* CINEMATIC SCROLL: parallax + fade/slide tekst (NO FREEZE) */
 const heroSlider = document.querySelector(".hero__bgslider");
 const heroPanel = document.getElementById("heroPanel");
 const heroSection = document.querySelector(".hero");
@@ -45,11 +45,12 @@ function cinematicScroll() {
   if (heroPanel) {
     const translate = progress * 28;
     const opacity = 1 - progress * 0.85;
-    const blur = progress * 2;
 
+    // Blur zna biti GPU-heavy i može trzat/zamrznut na slabijim uređajima,
+    // zato ga gasimo (ili stavi na max 1px ako baš želiš):
     heroPanel.style.transform = `translateY(${translate}px)`;
     heroPanel.style.opacity = `${opacity}`;
-    heroPanel.style.filter = `blur(${blur}px)`;
+    heroPanel.style.filter = `blur(0px)`;
   }
 }
 
@@ -63,7 +64,7 @@ function onScroll() {
   }
 }
 
-// init + on scroll (samo JEDNOM!)
+// init + 1 scroll listener
 cinematicScroll();
 window.addEventListener("scroll", onScroll, { passive: true });
 
