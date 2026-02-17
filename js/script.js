@@ -66,3 +66,21 @@ function cinematicScroll() {
 // start
 requestAnimationFrame(cinematicScroll);
 
+// TRANSPARENT HEADER EFFECT
+const header = document.querySelector(".header");
+
+function updateHeader() {
+  if (!header) return;
+
+  if (window.scrollY < 40) {
+    header.classList.add("header--transparent");
+    header.classList.remove("header--solid");
+  } else {
+    header.classList.remove("header--transparent");
+    header.classList.add("header--solid");
+  }
+}
+
+// init + on scroll
+updateHeader();
+window.addEventListener("scroll", updateHeader);
