@@ -103,10 +103,10 @@ function onHeaderScroll() {
   const goingDown = y > lastY;
   const goingUp = y < lastY;
 
-  // ako ideš GORE -> odmah sakrij i ne prikazuj
-  if (goingUp) {
-    hideHeader();
-    clearTimeout(hideTimer);
+  // ako ideš GORE -> pokaži header (da korisnik može navigaciju)
+  if (goingUp && y > SHOW_AFTER_Y) {
+    showHeader();
+    resetHideTimer(); // nakon mirovanja opet nestane
     lastY = y;
     return;
   }
