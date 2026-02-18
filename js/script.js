@@ -56,7 +56,13 @@ function cinematicScroll() {
   const progress = Math.min(Math.max(-rect.top / (heroHeight * 0.9), 0), 1);
 
   if (heroSlider) {
-    heroSlider.style.transform = `translateY(${progress * 60}px)`;
+    // progress ide 0 -> 1 dok scrollaš kroz hero
+    const translateY = progress * 60;
+
+    // zoom-out: 1.08 na vrhu, prema 1.00 kako ideš dolje
+    const scale = 1.08 - (progress * 0.08);
+
+    heroSlider.style.transform = `translateY(${translateY}px) scale(${scale})`;
   }
 
   if (heroPanel) {
