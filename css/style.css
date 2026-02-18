@@ -326,19 +326,39 @@ a{color:inherit}
 /* kad je open, prikaži linkove u panelu */
 .nav.is-open a{
   display:block;
-  padding:12px 12px;
+  padding:12px 14px;
   border-radius:12px;
-  color:var(--text);
+
+  color: var(--text);
   text-decoration:none;
-  font-weight:800;
-  border:1px solid rgba(10,25,40,.06);
-  background:rgba(30,167,255,.06);
+  font-weight:700;
+
+  /* isti tone kao header */
+  background: rgba(255,255,255,.55);
+  border: 1px solid rgba(255,255,255,.60);
+
+  backdrop-filter: blur(8px);
+
+  transition:
+    background .18s ease,
+    transform .18s ease,
+    box-shadow .18s ease;
+}
+
+.nav.is-open a:hover{
+  background: rgba(255,255,255,.78);
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 8px 18px rgba(10,40,70,.10),
+    inset 0 1px 0 rgba(255,255,255,.75);
 }
 
 .nav.is-open a.btn{
-  border:0;
-  background:linear-gradient(135deg,var(--blue),var(--blue2));
-  color:#fff;
+  border:1px solid rgba(10,25,40,.10);
+  background: rgba(11,27,43,.08);
+  color: var(--text);
+  font-weight:800;
 }
 
 /* BUTTONS */
