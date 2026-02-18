@@ -68,17 +68,51 @@ function onScroll() {
 cinematicScroll();
 window.addEventListener("scroll", onScroll, { passive: true });
 
-/* SHOW HEADER AFTER FIRST SCROLL */
+/* HEADER: pojavi se na scroll, sakrije nakon mirovanja */
+
 const header = document.querySelector(".header");
 
-function showHeaderOnScroll() {
-  if (!header) return;
+let lastY = window.scrollY;
+let hideTimer = null;
 
-  if (window.scrollY > 10) {
-    header.classList.add("header--visible");
-    window.removeEventListener("scroll", showHeaderOnScroll);
-  }
+const SHOW_AFTER_Y = 10;     // minimalni scroll
+const HIDE_AFTER_MS = 2500;  // vrijeme čekanja prije skrivanja
+
+function showHeader() {
+  if (!header) return;
+  header.classList.add("header--visible");
 }
 
-window.addEventListener("scroll", showHeaderOnScroll, { passive: true });
+function hideHeader() {
+  if (!header) return;
+  header.classList.remove("header--visible");
+}
 
+function resetHideTimer() {
+  clearTimeout(hideTimer);
+  hideTimer = setTimeout(() => {
+    hideHeader();
+  }, HIDE_AFTER_MS);
+}
+
+function onScroll() {
+  const y = window.scrollY;
+  const goingDown = y > lastY;
+
+  // prikaži header kad scrollaš prema dolje
+  if (goingDown && y > SHOW_AFTER_Y) {
+    showHeader();
+  }
+
+  // nakon prestanka scrollanja -> sakrij
+  if (y > SHOW_AFTER_Y) {
+    resetHideTimer();
+  }
+
+  lastY = y;
+}
+
+/* startno stanje */
+hideHeader();
+
+window.addEventListener("scroll", onScroll, { passive: true });
