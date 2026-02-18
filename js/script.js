@@ -81,6 +81,21 @@ function cinematicScroll() {
     hero.style.transform =
       `translateY(${y * 0.15}px) scale(${scale})`;
   }
+
+  /* DYNAMIC HEADER GLASS */
+  const headerEl = document.querySelector(".header");
+  if (headerEl) {
+    const y = window.scrollY;
+
+    // blur raste kako scrollaš
+    const blur = Math.min(22, 10 + y * 0.03);
+
+    // background postaje malo jači
+    const bg = Math.min(0.85, 0.68 + y * 0.0006);
+
+    headerEl.style.setProperty("--header-blur", `${blur}px`);
+    headerEl.style.setProperty("--header-bg", bg);
+  }
 }
 
 function onCinematicScroll() {
