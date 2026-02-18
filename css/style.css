@@ -11,6 +11,9 @@
   --blue:#1ea7ff;
   --blue2:#66ccff;
   --blueSoft:#eaf7ff;
+
+  --section-light: rgba(255,255,255,0.35);
+  --section-dark: rgba(255,255,255,0.12);
 }
 
 /* RESET */
@@ -491,10 +494,6 @@ h1{
   display:block;
 }
 
-/* SECTIONS */
-.section{
-  padding:70px 0;
-}
 .section--alt{
   background: linear-gradient(
     180deg,
@@ -630,10 +629,6 @@ input:focus, textarea:focus{
   min-height: 100vh;
   display: flex;
   align-items: center;
-}
-
-.section{
-  scroll-margin-top: 90px;
 }
 
 .hero__bgslider{
@@ -841,9 +836,36 @@ input:focus, textarea:focus{
 .section{
   padding: 90px 0;
   scroll-margin-top: 110px;
+
+  position: relative;
+  z-index: 1;
 }
 
-.section .container {
-  width: min(1100px, 92%);
-  margin: 0 auto;
+/* naizmjenično svjetlija / tamnija pozadina */
+main > .section:nth-of-type(odd){
+  background: linear-gradient(
+    180deg,
+    var(--section-dark),
+    rgba(255,255,255,0.02)
+  );
+}
+
+main > .section:nth-of-type(even){
+  background: linear-gradient(
+    180deg,
+    var(--section-light),
+    rgba(255,255,255,0.05)
+  );
+}
+
+.section::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: linear-gradient(
+    180deg,
+    rgba(255,255,255,.12),
+    transparent
+  );
+  pointer-events:none;
 }
