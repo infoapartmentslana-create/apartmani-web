@@ -54,7 +54,7 @@ function cinematicScroll() {
   }
 }
 
-function onScroll() {
+function onCinematicScroll() {
   if (!ticking) {
     ticking = true;
     requestAnimationFrame(() => {
@@ -66,7 +66,8 @@ function onScroll() {
 
 // init + 1 scroll listener
 cinematicScroll();
-window.addEventListener("scroll", onScroll, { passive: true });
+window.addEventListener("scroll", onCinematicScroll, { passive: true });
+
 
 /* HEADER: show only on scroll DOWN, hide on scroll UP or inactivity */
 
@@ -95,7 +96,7 @@ function resetHideTimer() {
   }, HIDE_AFTER_MS);
 }
 
-function onScroll() {
+function onHeaderScroll() {
   if (!header) return;
 
   const y = window.scrollY;
@@ -122,4 +123,4 @@ function onScroll() {
 // na učitavanju neka bude skriven
 hideHeader();
 
-window.addEventListener("scroll", onScroll, { passive: true });
+window.addEventListener("scroll", onHeaderScroll, { passive: true });
