@@ -61,6 +61,8 @@ a{color:inherit}
   transform: translateY(-130%);
   opacity: 0;
   transition: transform .45s cubic-bezier(.2,.9,.2,1), opacity .35s ease;
+
+  will-change: transform, opacity;
 }
 
 .header__inner{
@@ -74,6 +76,10 @@ a{color:inherit}
 .header--visible{
   transform: translateY(0);
   opacity: 1;
+
+  box-shadow:
+    0 22px 60px rgba(10,40,70,.22),
+    inset 0 1px 0 rgba(255,255,255,.65);
 }
 
 .logo{
