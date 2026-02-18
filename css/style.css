@@ -104,12 +104,20 @@ a{color:inherit}
 }
 
 .logo::before{
-  content:"";
-  width:10px;
-  height:10px;
-  border-radius:999px;
+  content:"L";
+  width:28px;
+  height:28px;
+  border-radius:10px;
+  display:grid;
+  place-items:center;
+
+  font-weight:950;
+  font-size:.95rem;
+  letter-spacing:.2px;
+  color:#fff;
+
   background: linear-gradient(135deg, var(--blue), var(--blue2));
-  box-shadow: 0 10px 25px rgba(30,167,255,.35);
+  box-shadow: 0 12px 28px rgba(30,167,255,.35);
 }
 
 .nav{
