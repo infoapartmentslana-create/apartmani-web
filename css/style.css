@@ -1268,7 +1268,7 @@ main > .section:nth-of-type(even){
 
 .aboutSplit__title{
   margin: 0 auto 14px;
-  max-width: 24ch;
+  max-width: 780px;
 
   /* manji i elegantniji */
   font-size: clamp(1.7rem, 2.8vw, 2.5rem);
