@@ -97,9 +97,10 @@ a{color:inherit}
 .logo{
   text-decoration:none;
 
-  font-weight: 900;
-  font-size: 1.05rem;
-  letter-spacing: .25px;
+  font-size: 1.08rem;
+  font-weight: 650;
+  font-style: italic;      /* daje signature vibe */
+  letter-spacing: .35px;
   line-height: 1;
 
   display:flex;
@@ -110,8 +111,6 @@ a{color:inherit}
 
   text-shadow:
     0 1px 0 rgba(255,255,255,.7);
-
-  font-variation-settings: "wght" 850;
 }
 
 .logo::before{
