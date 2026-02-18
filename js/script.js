@@ -67,3 +67,18 @@ function onScroll() {
 // init + 1 scroll listener
 cinematicScroll();
 window.addEventListener("scroll", onScroll, { passive: true });
+
+/* SHOW HEADER AFTER FIRST SCROLL */
+const header = document.querySelector(".header");
+
+function showHeaderOnScroll() {
+  if (!header) return;
+
+  if (window.scrollY > 10) {
+    header.classList.add("header--visible");
+    window.removeEventListener("scroll", showHeaderOnScroll);
+  }
+}
+
+window.addEventListener("scroll", showHeaderOnScroll, { passive: true });
+

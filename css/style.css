@@ -51,6 +51,19 @@ a{color:inherit}
   align-items:center;
   padding:14px 0;
 }
+
+/* HEADER HIDE / SHOW ON FIRST SCROLL */
+.header{
+  transform: translateY(-100%);
+  opacity: 0;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+.header--visible{
+  transform: translateY(0);
+  opacity: 1;
+}
+
 .logo{
   text-decoration:none;
   font-weight:900;
