@@ -1269,3 +1269,175 @@ main > .section:nth-of-type(even){
   font-weight: 750;
   color: rgba(11,27,43,.72);
 }
+
+/* =========================
+   O NAMA — SCROLLYTELLING
+   ========================= */
+.aboutS{
+  display:grid;
+  grid-template-columns: 1.1fr .9fr;
+  gap: 28px;
+  align-items:start;
+}
+
+.aboutS__kicker{
+  margin: 0 0 10px;
+  font-weight: 900;
+  color: rgba(11,27,43,.62);
+  letter-spacing: .25px;
+}
+
+.aboutS__title{
+  margin: 0 0 12px;
+}
+
+.aboutS__lead{
+  margin: 0 0 16px;
+  font-size: 1.12rem;
+  line-height: 1.9;
+  color: rgba(11,27,43,.82);
+}
+
+.aboutS__text{
+  margin: 0 0 12px;
+  color: var(--muted);
+  line-height: 1.9;
+}
+
+.aboutS__amenities{
+  display:flex;
+  flex-wrap:wrap;
+  gap: 10px 12px;
+  margin: 16px 0 18px;
+}
+
+.aboutS__amenities span{
+  padding: 8px 10px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.68);
+  border: 1px solid rgba(255,255,255,.72);
+  font-weight: 800;
+  color: rgba(11,27,43,.72);
+}
+
+.aboutS__cta{
+  display:flex;
+  align-items:center;
+  gap: 14px;
+  flex-wrap:wrap;
+}
+
+.aboutS__link{
+  text-decoration:none;
+  font-weight: 900;
+  color: rgba(11,27,43,.78);
+}
+.aboutS__link:hover{ text-decoration: underline; }
+
+/* Right side sticky like a brochure */
+.aboutS__side{
+  position: sticky;
+  top: 110px; /* ispod headera */
+}
+
+.aboutS__image{
+  height: 420px;
+  border-radius: 26px;
+  border: 1px solid rgba(10,25,40,.10);
+  box-shadow: 0 22px 70px rgba(10,40,70,.16);
+  overflow:hidden;
+
+  background-image: url('../images/about.jpg');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.aboutS__image::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: linear-gradient(
+    180deg,
+    rgba(255,255,255,.06),
+    rgba(255,255,255,.22)
+  );
+}
+
+.aboutS__highlights{
+  display:grid;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.aboutS__hl{
+  display:grid;
+  grid-template-columns: 44px 1fr;
+  gap: 12px;
+  padding: 14px 14px;
+  border-radius: 18px;
+  background: rgba(255,255,255,.72);
+  border: 1px solid rgba(10,25,40,.08);
+  box-shadow: 0 14px 34px rgba(10,40,70,.10);
+}
+
+.aboutS__hl h3{
+  margin: 0 0 4px;
+  font-size: 1.05rem;
+}
+.aboutS__hl p{
+  margin: 0;
+  color: rgba(11,27,43,.70);
+  line-height: 1.6;
+}
+
+.aboutS__hlIcon{
+  width:44px;
+  height:44px;
+  border-radius: 14px;
+  display:grid;
+  place-items:center;
+  background: rgba(255,255,255,.88);
+  border: 1px solid rgba(255,255,255,.78);
+  box-shadow: 0 10px 22px rgba(10,40,70,.10);
+  font-size: 1.05rem;
+}
+
+/* --- Reveal animation (premium, subtle) --- */
+.reveal{
+  opacity: 0;
+  transform: translateY(14px);
+  filter: blur(2px);
+  transition: opacity .6s ease, transform .6s ease, filter .6s ease;
+  will-change: opacity, transform, filter;
+}
+
+.reveal.is-visible{
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+/* Mobile */
+@media (max-width: 900px){
+  .aboutS{
+    grid-template-columns: 1fr;
+  }
+  .aboutS__side{
+    position: relative;
+    top: auto;
+  }
+  .aboutS__image{
+    height: 320px;
+  }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .reveal{
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition: none;
+  }
+}

@@ -195,3 +195,27 @@ if (header) {
 }
 
 window.addEventListener("scroll", onHeaderScroll, { passive: true });
+
+// Reveal on scroll (IntersectionObserver)
+(() => {
+  const items = document.querySelectorAll('.reveal');
+  if (!items.length) return;
+
+  // If user prefers reduced motion, show everything immediately
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce) {
+    items.forEach(el => el.classList.add('is-visible'));
+    return;
+  }
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  items.forEach(el => io.observe(el));
+})();
