@@ -1102,13 +1102,6 @@ main > .section:nth-of-type(even){
   align-items:start;
 }
 
-.aboutP__kicker{
-  margin:0 0 10px;
-  font-weight:800;
-  color: rgba(11,27,43,.62);
-  letter-spacing:.25px;
-}
-
 .aboutP__title{
   margin: 0 0 14px;
 }
@@ -1212,6 +1205,9 @@ main > .section:nth-of-type(even){
   background-size: cover;
   background-position: center;
   position: relative;
+
+  border-radius: 28px; /* malo “mekše” */
+  box-shadow: 0 22px 70px rgba(10,40,70,.18);
 }
 
 .aboutP__img::after{
@@ -1223,33 +1219,6 @@ main > .section:nth-of-type(even){
     rgba(255,255,255,.06),
     rgba(255,255,255,.26)
   );
-}
-
-.aboutP__float{
-  position: absolute;
-  right: 14px;
-  bottom: 14px;
-  width: min(340px, calc(100% - 28px));
-  padding: 14px 14px;
-
-  border-radius: 18px;
-  background: rgba(255,255,255,.72);
-  border: 1px solid rgba(255,255,255,.70);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  box-shadow: 0 18px 45px rgba(10,40,70,.14);
-}
-
-.aboutP__float h4{
-  margin: 0 0 10px;
-  font-size: 1.05rem;
-}
-
-.aboutP__float ul{
-  margin: 0;
-  padding-left: 18px;
-  color: rgba(11,27,43,.72);
-  line-height: 1.6;
 }
 
 @media (max-width: 900px){
