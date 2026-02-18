@@ -76,17 +76,6 @@ function cinematicScroll() {
     heroPanel.style.filter = `blur(0px)`;
   }
 
-  /* PREMIUM HERO PARALLAX (SAFE VERSION) */
-  if (heroSlider) {
-    const y = window.scrollY;
-
-    // lagani zoom-out dok scrollaš
-    const scale = Math.max(1, 1.08 - y * 0.0003);
-
-    heroSlider.style.transform =
-      `translateY(${y * 0.15}px) scale(${scale})`;
-  }
-
   /* DYNAMIC HEADER GLASS */
   const headerEl = document.querySelector(".header");
   if (headerEl) {

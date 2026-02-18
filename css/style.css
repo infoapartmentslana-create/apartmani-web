@@ -104,7 +104,7 @@ a{color:inherit}
 }
 
 .logo::before{
-  content:"L";
+  content:"✦";
 
   width:30px;
   height:30px;
