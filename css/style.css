@@ -98,7 +98,12 @@ a{color:inherit}
   display:flex;
   gap:18px;
   align-items:center;
+
+  opacity: 0;
+  transform: translateY(-8px);
+  pointer-events: none;
 }
+
 
 /* linkove sakrij, koristimo hamburger */
 .nav a{ display:none; }
@@ -164,6 +169,11 @@ a{color:inherit}
 
   border-radius:16px;
   box-shadow: 0 18px 40px rgba(10,40,70,.18);
+
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+  transition: opacity .18s ease, transform .22s ease;
 }
 
 
