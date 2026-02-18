@@ -70,15 +70,14 @@ function cinematicScroll() {
     heroPanel.style.filter = `blur(0px)`;
   }
 
-  /* PREMIUM HERO PARALLAX */
-  const hero = document.querySelector(".hero");
-  if (hero) {
+  /* PREMIUM HERO PARALLAX (SAFE VERSION) */
+  if (heroSlider) {
     const y = window.scrollY;
 
     // lagani zoom-out dok scrollaš
     const scale = Math.max(1, 1.08 - y * 0.0003);
 
-    hero.style.transform =
+    heroSlider.style.transform =
       `translateY(${y * 0.15}px) scale(${scale})`;
   }
 
