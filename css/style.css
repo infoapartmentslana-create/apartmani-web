@@ -1219,3 +1219,102 @@ main > .section:nth-of-type(even){
 .aboutText__link:hover{
   transform: translateY(-1px);
 }
+
+/* =========================
+   ABOUT SPLIT SECTION
+   ========================= */
+
+.aboutSplit__intro{
+  background: rgba(255,255,255,.65);
+  padding: 90px 0 80px;
+  text-align:center;
+}
+
+.aboutSplit__center{
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.aboutSplit__kicker{
+  margin: 0 0 14px;
+  font-size: .82rem;
+  font-weight: 900;
+  letter-spacing: .35px;
+  text-transform: uppercase;
+  color: rgba(11,27,43,.50);
+}
+
+.aboutSplit__title{
+  margin: 0 auto 16px;
+  max-width: 22ch;
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  line-height: 1.25;
+}
+
+.aboutSplit__subtitle{
+  max-width: 60ch;
+  margin: 0 auto 24px;
+  line-height: 1.8;
+  color: rgba(11,27,43,.68);
+}
+
+.aboutSplit__cta{
+  display:inline-block;
+  padding: 11px 16px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.70);
+  border:1px solid rgba(10,25,40,.10);
+  text-decoration:none;
+  font-weight:900;
+  color: rgba(11,27,43,.78);
+  box-shadow: 0 14px 34px rgba(10,40,70,.08);
+}
+
+/* DARK PART */
+.aboutSplit__benefits{
+  background: #1f2430;
+  color: #fff;
+  padding: 80px 0;
+}
+
+.aboutSplit__kicker--light{
+  color: rgba(255,255,255,.55);
+  text-align:center;
+}
+
+.aboutSplit__benefitTitle{
+  text-align:center;
+  margin: 0 0 36px;
+  font-size: clamp(1.8rem, 2.5vw, 2.4rem);
+}
+
+.aboutSplit__grid{
+  display:grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  gap: 24px;
+}
+
+.aboutSplit__item{
+  padding: 20px 20px;
+  border-radius: 18px;
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.08);
+}
+
+.aboutSplit__item h4{
+  margin: 0 0 8px;
+  font-size: 1.1rem;
+}
+
+.aboutSplit__item p{
+  margin:0;
+  color: rgba(255,255,255,.72);
+  line-height: 1.7;
+}
+
+@media (max-width: 900px){
+  .aboutSplit__grid{
+    grid-template-columns: 1fr;
+  }
+}
+
