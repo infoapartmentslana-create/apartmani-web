@@ -884,7 +884,7 @@ main > .section:nth-of-type(even){
 .about__media{
   position: absolute;
   inset: 0;
-  background-image: url('images/about.jpg'); /* <-- promijeni na svoju sliku */
+  background-image: url('../images/about.jpg');
   background-size: cover;
   background-position: center;
   transform: scale(1.02);
@@ -985,5 +985,104 @@ main > .section:nth-of-type(even){
       rgba(255,255,255,.55) 70%,
       rgba(255,255,255,.22) 100%
     );
+  }
+}
+
+/* O NAMA — premium 2-col layout */
+.about2{
+  display: grid;
+  grid-template-columns: 1.05fr .95fr;
+  gap: 18px;
+
+  border-radius: 24px;
+  overflow: hidden;
+  border: 1px solid rgba(10,25,40,.10);
+  box-shadow: var(--shadow);
+}
+
+.about2__card{
+  padding: 28px;
+  background: rgba(255,255,255,.62);
+  border-right: 1px solid rgba(255,255,255,.55);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.about2__image{
+  min-height: 520px;
+  background-image: url('../images/about.jpg'); /* <-- VAŽNO: putanja */
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+/* lagani overlay na slici */
+.about2__image::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: linear-gradient(
+    180deg,
+    rgba(255,255,255,.08),
+    rgba(255,255,255,.30)
+  );
+}
+
+.about2__eyebrow{
+  margin: 0 0 10px;
+  font-weight: 900;
+  letter-spacing: .25px;
+  color: rgba(11,27,43,.70);
+}
+
+.about2__lead{
+  margin: 10px 0 12px;
+  color: rgba(11,27,43,.82);
+  font-size: 1.06rem;
+  line-height: 1.75;
+}
+
+.about2__text{
+  margin: 0 0 16px;
+  color: var(--muted);
+}
+
+.about2__highlights{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 10px 0 18px;
+}
+
+.about2__pill{
+  padding: 9px 12px;
+  border-radius: 999px;
+  font-weight: 800;
+  background: rgba(255,255,255,.70);
+  border: 1px solid rgba(255,255,255,.70);
+  box-shadow: 0 10px 26px rgba(10,40,70,.10);
+  color: rgba(11,27,43,.80);
+}
+
+.about2__cta{
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 6px;
+}
+
+.about2__note{
+  margin: 14px 0 0;
+  color: rgba(11,27,43,.65);
+  font-weight: 700;
+}
+
+@media (max-width: 900px){
+  .about2{
+    grid-template-columns: 1fr;
+  }
+  .about2__image{
+    min-height: 280px;
+    order: -1; /* slika gore na mobitelu */
   }
 }
