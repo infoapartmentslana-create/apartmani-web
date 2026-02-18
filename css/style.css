@@ -39,20 +39,21 @@ a{color:inherit}
 /* PREMIUM HEADER */
 .header{
   position: fixed;
-  top: 14px;                 /* malo “float” od vrha */
+  top: 14px;
   left: 0;
   right: 0;
   z-index: 50;
 
-  /* da header bude centriran kao card */
   width: min(var(--container), calc(100% - 40px));
   margin: 0 auto;
 
-  border-radius: 999px;      /* pill look */
+  border-radius: 999px;
   border: 1px solid rgba(255,255,255,.55);
+
+  /* dynamic glass (ONLY ONE background) */
+  background: rgba(255,255,255,var(--header-bg, .68));
   backdrop-filter: blur(var(--header-blur, 10px));
   -webkit-backdrop-filter: blur(var(--header-blur, 10px));
-  background: rgba(255,255,255,var(--header-bg, .68));
 
   box-shadow:
     0 18px 55px rgba(10,40,70,.18),
@@ -309,16 +310,17 @@ a{color:inherit}
   border-radius:16px;
   box-shadow: 0 18px 40px rgba(10,40,70,.18);
 
+  /* smooth appear */
   opacity: 0;
   transform: translateY(-8px);
-  pointer-events: auto;
-  transition: opacity .18s ease, transform .22s ease;
-
   animation: menuIn .18s ease forwards;
 }
 
 @keyframes menuIn{
-  to{ opacity: 1; transform: translateY(0); }
+  to{
+    opacity:1;
+    transform: translateY(0);
+  }
 }
 
 /* kad je open, prikaži linkove u panelu */
