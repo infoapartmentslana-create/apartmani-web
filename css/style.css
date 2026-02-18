@@ -36,29 +36,39 @@ body{
 
 a{color:inherit}
 
-/* HEADER */
+/* PREMIUM HEADER */
 .header{
   position: fixed;
-  top: 0;
+  top: 14px;                 /* malo “float” od vrha */
   left: 0;
   right: 0;
   z-index: 50;
 
-  backdrop-filter: blur(10px);
-  background: rgba(255,255,255,.82);
-  border-bottom: 1px solid var(--border);
+  /* da header bude centriran kao card */
+  width: min(var(--container), calc(100% - 40px));
+  margin: 0 auto;
 
-  transform: translateY(-100%);
+  border-radius: 999px;      /* pill look */
+  border: 1px solid rgba(255,255,255,.55);
+  background: rgba(255,255,255,.68);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+
+  box-shadow:
+    0 18px 55px rgba(10,40,70,.18),
+    inset 0 1px 0 rgba(255,255,255,.65);
+
+  transform: translateY(-130%);
   opacity: 0;
-  transition: transform 0.4s ease, opacity 0.4s ease;
+  transition: transform .45s cubic-bezier(.2,.9,.2,1), opacity .35s ease;
 }
 
 .header__inner{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  padding:14px 0;
-  position: relative;
+  padding: 10px 14px;  /* manji padding jer je pill */
+  position: relative;  /* treba za dropdown nav */
 }
 
 .header--visible{
@@ -68,7 +78,20 @@ a{color:inherit}
 
 .logo{
   text-decoration:none;
-  font-weight:900;
+  font-weight: 950;
+  letter-spacing: .2px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.logo::before{
+  content:"";
+  width:10px;
+  height:10px;
+  border-radius:999px;
+  background: linear-gradient(135deg, var(--blue), var(--blue2));
+  box-shadow: 0 10px 25px rgba(30,167,255,.35);
 }
 
 .nav{
@@ -88,18 +111,36 @@ a{color:inherit}
   height:44px;
   align-items:center;
   justify-content:center;
-  border-radius:12px;
-  border:1px solid var(--border);
-  background:#fff;
-  box-shadow:var(--shadow);
+
+  border-radius: 999px;
+  border: 1px solid rgba(10,25,40,.10);
+  background: rgba(255,255,255,.85);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 12px 30px rgba(10,40,70,.12);
+
   cursor:pointer;
+  transition: transform .18s ease;
 }
+
+.burger:hover{ transform: translateY(-1px); }
+.burger:active{ transform: translateY(0); }
 
 .burger span{
   width:18px;
   height:2px;
-  background:rgba(11,27,43,.75);
+  background: rgba(11,27,43,.72);
   border-radius:999px;
+  transition: transform .22s ease, opacity .18s ease;
+}
+
+.nav.is-open + .burger span:nth-child(1){
+  transform: translateY(8px) rotate(45deg);
+}
+.nav.is-open + .burger span:nth-child(2){
+  opacity: 0;
+}
+.nav.is-open + .burger span:nth-child(3){
+  transform: translateY(-8px) rotate(-45deg);
 }
 
 /* dropdown panel menija */
@@ -116,11 +157,15 @@ a{color:inherit}
   width:min(320px, calc(100vw - 40px));
   padding:14px;
 
-  background:#fff;
-  border:1px solid var(--border);
+  background: rgba(255,255,255,.82);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255,255,255,.55);
+
   border-radius:16px;
-  box-shadow:0 18px 40px rgba(10,40,70,.18);
+  box-shadow: 0 18px 40px rgba(10,40,70,.18);
 }
+
 
 /* kad je open, prikaži linkove u panelu */
 .nav.is-open a{

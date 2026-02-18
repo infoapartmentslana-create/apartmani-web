@@ -1,6 +1,8 @@
 const burger = document.getElementById("burger");
 const nav = document.getElementById("nav");
 const year = document.getElementById("year");
+let isMenuOpen = false;
+let hideTimer = null;
 
 if (year) year.textContent = new Date().getFullYear();
 
@@ -11,7 +13,7 @@ if (burger && nav) {
 
     if (isMenuOpen) {
       clearTimeout(hideTimer);
-      showHeader(); // dok je meni otvoren header mora biti vidljiv
+      showHeader();
     } else {
       resetHideTimer();
     }
@@ -89,9 +91,7 @@ window.addEventListener("scroll", onCinematicScroll, { passive: true });
 const header = document.querySelector(".header");
 
 let lastY = window.scrollY;
-let hideTimer = null;
 let isHoveringHeader = false;
-let isMenuOpen = false;
 
 const SHOW_AFTER_Y = 10;     // minimalni scroll da počne raditi
 const HIDE_AFTER_MS = 2500;  // nakon koliko mirovanja se sakrije
