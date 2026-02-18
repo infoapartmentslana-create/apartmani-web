@@ -1441,3 +1441,83 @@ main > .section:nth-of-type(even){
     transition: none;
   }
 }
+
+/* ===== Premium override (less “app”, more “boutique”) ===== */
+
+/* manje plavo, više neutralno */
+.aboutS__kicker{
+  color: rgba(11,27,43,.50);
+  font-weight: 750;
+  letter-spacing: .35px;
+  text-transform: uppercase;
+  font-size: .82rem;
+}
+
+.aboutS__lead{
+  color: rgba(11,27,43,.78);
+  font-size: 1.08rem;
+}
+
+/* strong da bude suptilan */
+.aboutS__copy strong{
+  font-weight: 800;
+  color: rgba(11,27,43,.82);
+}
+
+/* amenities: umjesto chipova -> elegantna lista */
+.aboutS__amenities{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px 18px;
+  margin: 18px 0 18px;
+}
+
+.aboutS__amenities span{
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font-weight: 650;
+  color: rgba(11,27,43,.68);
+  border-bottom: 1px solid rgba(10,25,40,.08);
+  padding-bottom: 8px;
+}
+
+/* highlights: bez ikona, tanki border, manje “cardy” */
+.aboutS__hl{
+  grid-template-columns: 1fr;
+  padding: 16px 18px;
+  border-radius: 18px;
+  background: rgba(255,255,255,.55);
+  border: 1px solid rgba(10,25,40,.08);
+  box-shadow: 0 18px 45px rgba(10,40,70,.08);
+}
+
+.aboutS__hl h3{
+  font-size: 1.02rem;
+  letter-spacing: .2px;
+}
+
+.aboutS__hl p{
+  color: rgba(11,27,43,.62);
+}
+
+/* makni hlIcon ako je ostao negdje */
+.aboutS__hlIcon{ display:none; }
+
+/* CTA: primarni gumb + link, ali “clean” */
+.aboutS__link{
+  color: rgba(11,27,43,.70);
+}
+
+/* slika: malo “editorial” */
+.aboutS__image{
+  border-radius: 28px;
+  box-shadow: 0 26px 80px rgba(10,40,70,.14);
+}
+
+@media (max-width: 900px){
+  .aboutS__amenities{
+    grid-template-columns: 1fr;
+  }
+}
+
