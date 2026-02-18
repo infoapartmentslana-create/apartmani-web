@@ -1256,7 +1256,8 @@ main > .section:nth-of-type(even){
 
 
 .aboutSplit__subtitle{
-  max-width: 60ch;
+  font-size: 1.02rem;
+  max-width: 56ch;
   margin: 0 auto 24px;
   line-height: 1.8;
   color: rgba(11,27,43,.68);
@@ -1266,12 +1267,17 @@ main > .section:nth-of-type(even){
   display:inline-block;
   padding: 11px 16px;
   border-radius: 999px;
-  background: rgba(255,255,255,.70);
-  border:1px solid rgba(10,25,40,.10);
+  background: rgba(255,255,255,.75);
+  border: 1px solid rgba(10,25,40,.10);
   text-decoration:none;
   font-weight:900;
   color: rgba(11,27,43,.78);
   box-shadow: 0 14px 34px rgba(10,40,70,.08);
+  border-color: rgba(195,160,90,.35);
+}
+
+.aboutSplit__cta:hover{
+  box-shadow: 0 18px 45px rgba(10,40,70,.12);
 }
 
 /* DARK PART */
@@ -1284,6 +1290,21 @@ main > .section:nth-of-type(even){
     );
   color: #fff;
   padding: 80px 0;
+  position: relative;
+}
+
+.aboutSplit__benefits::before{
+  content:"";
+  position:absolute;
+  left:0; right:0;
+  top:-1px;
+  height: 60px;
+  background: linear-gradient(
+    180deg,
+    rgba(255,255,255,.70),
+    rgba(255,255,255,0)
+  );
+  pointer-events:none;
 }
 
 .aboutSplit__kicker--light{
@@ -1308,11 +1329,32 @@ main > .section:nth-of-type(even){
   border-radius: 18px;
   background: rgba(255,255,255,.05);
   border: 1px solid rgba(255,255,255,.10);
+  position: relative;
+  transition: transform .18s ease, border-color .18s ease, background .18s ease;
+}
+
+.aboutSplit__item:hover{
+  transform: translateY(-2px);
+  border-color: rgba(255,255,255,.14);
+  background: rgba(255,255,255,.06);
+}
+
+.aboutSplit__item::before{
+  content:"";
+  position:absolute;
+  left: 18px;
+  top: 14px;
+  width: 42px;
+  height: 2px;
+  border-radius: 99px;
+  background: rgba(195,160,90,.75); /* šampanj akcent */
+  opacity: .7;
 }
 
 .aboutSplit__item h4{
   margin: 0 0 8px;
   font-size: 1.1rem;
+  margin-top: 10px;
 }
 
 .aboutSplit__item p{
