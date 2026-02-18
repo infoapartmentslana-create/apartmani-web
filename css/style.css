@@ -96,11 +96,22 @@ a{color:inherit}
 
 .logo{
   text-decoration:none;
-  font-weight: 950;
-  letter-spacing: .2px;
+
+  font-weight: 900;
+  font-size: 1.05rem;
+  letter-spacing: .25px;
+  line-height: 1;
+
   display:flex;
   align-items:center;
   gap:10px;
+
+  color:#0b1b2b;
+
+  text-shadow:
+    0 1px 0 rgba(255,255,255,.7);
+
+  font-variation-settings: "wght" 850;
 }
 
 .logo::before{
@@ -135,6 +146,49 @@ a{color:inherit}
     0 10px 24px rgba(10,40,70,.16);
 
   backdrop-filter: blur(6px);
+}
+
+/* SHINE EFFECT */
+.logo{
+  position: relative;
+  overflow: hidden;
+}
+
+.logo::after{
+  content:"";
+  position:absolute;
+  top:-40%;
+  left:-60%;
+  width:40%;
+  height:180%;
+
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255,255,255,.65),
+    transparent
+  );
+
+  transform: skewX(-20deg);
+  opacity:0;
+  pointer-events:none;
+}
+
+/* kad se header pojavi -> lagani shine */
+.header--visible .logo::after{
+  animation: logoShine 1.2s ease forwards;
+}
+
+@keyframes logoShine{
+  0%{
+    left:-60%;
+    opacity:0;
+  }
+  20%{ opacity:.65; }
+  100%{
+    left:140%;
+    opacity:0;
+  }
 }
 
 .nav{
