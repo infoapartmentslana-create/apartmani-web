@@ -240,6 +240,7 @@ a{color:inherit}
   padding:70px 0 50px;
   position:relative;
   will-change: transform;
+  transform-origin: center center;
 }
 
 .hero__grid{

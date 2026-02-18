@@ -74,7 +74,12 @@ function cinematicScroll() {
   const hero = document.querySelector(".hero");
   if (hero) {
     const y = window.scrollY;
-    hero.style.transform = `translateY(${y * 0.15}px)`;
+
+    // lagani zoom-out dok scrollaš
+    const scale = Math.max(1, 1.08 - y * 0.0003);
+
+    hero.style.transform =
+      `translateY(${y * 0.15}px) scale(${scale})`;
   }
 }
 
