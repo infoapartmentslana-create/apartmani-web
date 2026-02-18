@@ -1233,3 +1233,39 @@ main > .section:nth-of-type(even){
     height: 320px;
   }
 }
+/* INFO CARD ISPOD SLIKE */
+.aboutP__nearby{
+  margin-top: 14px;
+  padding: 16px 18px;
+  border-radius: 18px;
+
+  background: rgba(255,255,255,.72);
+  border: 1px solid rgba(255,255,255,.70);
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  box-shadow: 0 14px 34px rgba(10,40,70,.10);
+}
+
+.aboutP__nearby h4{
+  margin: 0 0 10px;
+  font-size: 1.05rem;
+  font-weight: 900;
+  color: rgba(11,27,43,.85);
+}
+
+.aboutP__nearby-grid{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+.aboutP__nearby-grid span{
+  padding: 8px 10px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.80);
+  border: 1px solid rgba(255,255,255,.75);
+  font-weight: 750;
+  color: rgba(11,27,43,.72);
+}
