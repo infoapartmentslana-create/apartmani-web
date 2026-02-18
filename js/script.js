@@ -1,5 +1,6 @@
 const burger = document.getElementById("burger");
 const nav = document.getElementById("nav");
+const menuBackdrop = document.getElementById("menuBackdrop");
 const year = document.getElementById("year");
 let isMenuOpen = false;
 let hideTimer = null;
@@ -14,19 +15,31 @@ if (burger && nav) {
     if (isMenuOpen) {
       clearTimeout(hideTimer);
       showHeader();
+      menuBackdrop?.classList.add("is-visible");
     } else {
       resetHideTimer();
+      menuBackdrop?.classList.remove("is-visible");
     }
   });
 
+  // klik na link zatvara meni
   nav.querySelectorAll("a").forEach((a) => {
     a.addEventListener("click", () => {
       nav.classList.remove("is-open");
       isMenuOpen = false;
+      menuBackdrop?.classList.remove("is-visible");
       resetHideTimer();
     });
   });
 }
+
+// klik izvan menija (na backdrop) zatvara meni
+menuBackdrop?.addEventListener("click", () => {
+  nav?.classList.remove("is-open");
+  isMenuOpen = false;
+  menuBackdrop.classList.remove("is-visible");
+  resetHideTimer();
+});
 
 /* HERO background slider */
 const slides = document.querySelectorAll(".hero__bgslide");

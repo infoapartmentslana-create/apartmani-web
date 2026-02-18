@@ -361,6 +361,27 @@ a{color:inherit}
   font-weight:800;
 }
 
+/* BACKDROP iza otvorenog hamburger menija */
+.menu-backdrop{
+  position: fixed;
+  inset: 0;
+  z-index: 40; /* ispod headera (50), iznad sadržaja */
+
+  background: rgba(255,255,255,.08);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .2s ease;
+}
+
+/* aktivno stanje */
+.menu-backdrop.is-visible{
+  opacity: 1;
+  pointer-events: auto;
+}
+
 /* BUTTONS */
 .btn{
   display:inline-flex;
