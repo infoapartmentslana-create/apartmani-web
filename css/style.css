@@ -1093,3 +1093,174 @@ main > .section:nth-of-type(even){
     order: -1; /* slika gore na mobitelu */
   }
 }
+
+/* O NAMA — premium brochure layout */
+.aboutP{
+  display:grid;
+  grid-template-columns: 1.15fr .85fr;
+  gap: 26px;
+  align-items:start;
+}
+
+.aboutP__kicker{
+  margin:0 0 10px;
+  font-weight:800;
+  color: rgba(11,27,43,.62);
+  letter-spacing:.25px;
+}
+
+.aboutP__title{
+  margin: 0 0 14px;
+}
+
+.aboutP__lead{
+  font-size: 1.12rem;
+  line-height: 1.85;
+  color: rgba(11,27,43,.82);
+  margin: 0 0 14px;
+}
+
+.aboutP__text{
+  margin: 0 0 12px;
+  color: var(--muted);
+  line-height: 1.85;
+}
+
+.aboutP__grid{
+  display:grid;
+  gap: 12px;
+  margin: 18px 0 16px;
+}
+
+.aboutP__block{
+  display:grid;
+  grid-template-columns: 42px 1fr;
+  gap: 12px;
+  padding: 14px 14px;
+  border-radius: 18px;
+  background: rgba(255,255,255,.70);
+  border: 1px solid rgba(10,25,40,.08);
+  box-shadow: 0 14px 34px rgba(10,40,70,.10);
+}
+
+.aboutP__block h3{
+  margin: 0 0 4px;
+  font-size: 1.05rem;
+}
+.aboutP__block p{
+  margin: 0;
+  color: rgba(11,27,43,.70);
+}
+
+.aboutP__icon{
+  width:42px;
+  height:42px;
+  border-radius: 14px;
+  display:grid;
+  place-items:center;
+  background: rgba(255,255,255,.85);
+  border: 1px solid rgba(255,255,255,.75);
+  box-shadow: 0 10px 22px rgba(10,40,70,.10);
+  font-size: 1.05rem;
+}
+
+.aboutP__amenities{
+  display:flex;
+  flex-wrap:wrap;
+  gap: 10px 14px;
+  margin: 14px 0 18px;
+  color: rgba(11,27,43,.72);
+  font-weight: 750;
+}
+
+.aboutP__amenities span{
+  padding: 8px 10px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.60);
+  border: 1px solid rgba(255,255,255,.70);
+}
+
+.aboutP__cta{
+  display:flex;
+  align-items:center;
+  gap: 14px;
+  flex-wrap:wrap;
+  margin-top: 8px;
+}
+
+.aboutP__link{
+  text-decoration:none;
+  font-weight: 900;
+  color: rgba(11,27,43,.78);
+}
+.aboutP__link:hover{ text-decoration: underline; }
+
+/* media side */
+.aboutP__media{
+  position: sticky;
+  top: 110px; /* ispod headera */
+}
+
+.aboutP__img{
+  height: 620px;
+  border-radius: 24px;
+  border: 1px solid rgba(10,25,40,.10);
+  box-shadow: var(--shadow);
+  overflow:hidden;
+
+  background-image: url('../images/about.jpg');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.aboutP__img::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: linear-gradient(
+    180deg,
+    rgba(255,255,255,.06),
+    rgba(255,255,255,.26)
+  );
+}
+
+.aboutP__float{
+  position: absolute;
+  right: 14px;
+  bottom: 14px;
+  width: min(340px, calc(100% - 28px));
+  padding: 14px 14px;
+
+  border-radius: 18px;
+  background: rgba(255,255,255,.72);
+  border: 1px solid rgba(255,255,255,.70);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 18px 45px rgba(10,40,70,.14);
+}
+
+.aboutP__float h4{
+  margin: 0 0 10px;
+  font-size: 1.05rem;
+}
+
+.aboutP__float ul{
+  margin: 0;
+  padding-left: 18px;
+  color: rgba(11,27,43,.72);
+  line-height: 1.6;
+}
+
+@media (max-width: 900px){
+  .aboutP{
+    grid-template-columns: 1fr;
+  }
+  .aboutP__media{
+    position: relative;
+    top: auto;
+  }
+  .aboutP__img{
+    height: 320px;
+  }
+}
