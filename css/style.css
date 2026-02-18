@@ -38,13 +38,21 @@ a{color:inherit}
 
 /* HEADER */
 .header{
-  position:sticky;
-  top:0;
-  z-index:50;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+
   backdrop-filter: blur(10px);
   background: rgba(255,255,255,.82);
-  border-bottom:1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+
+  transform: translateY(-100%);
+  opacity: 0;
+  transition: transform 0.4s ease, opacity 0.4s ease;
 }
+
 .header__inner{
   display:flex;
   justify-content:space-between;
@@ -326,11 +334,14 @@ input:focus, textarea:focus{
   position: relative;
   overflow: hidden;
 
-  min-height: calc(100vh - 72px); /* full screen minus header */
+  min-height: 100vh;
   display: flex;
   align-items: center;
 }
 
+.section{
+  scroll-margin-top: 90px;
+}
 
 .hero__bgslider{
   position:absolute;
