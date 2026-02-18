@@ -75,6 +75,7 @@ const header = document.querySelector(".header");
 
 let lastY = window.scrollY;
 let hideTimer = null;
+let isHoveringHeader = false;
 
 const SHOW_AFTER_Y = 10;     // minimalni scroll da počne raditi
 const HIDE_AFTER_MS = 2500;  // nakon koliko mirovanja se sakrije
@@ -86,15 +87,22 @@ function showHeader() {
 
 function hideHeader() {
   if (!header) return;
+  if (isHoveringHeader) return;
   header.classList.remove("header--visible");
 }
 
 function resetHideTimer() {
   clearTimeout(hideTimer);
+
+  // ako je miš na headeru -> ne sakrivaj
+  if (isHoveringHeader) return;
+
   hideTimer = setTimeout(() => {
-    hideHeader();
+    // provjera još jednom, za svaki slučaj
+    if (!isHoveringHeader) hideHeader();
   }, HIDE_AFTER_MS);
 }
+
 
 function onHeaderScroll() {
   if (!header) return;
@@ -122,5 +130,18 @@ function onHeaderScroll() {
 
 // na učitavanju neka bude skriven
 hideHeader();
+// LOCK: dok je miš na headeru, ne skrivaj ga
+if (header) {
+  header.addEventListener("mouseenter", () => {
+    isHoveringHeader = true;
+    clearTimeout(hideTimer);
+    showHeader(); // da bude sigurno vidljiv dok hoveraš
+  });
+
+  header.addEventListener("mouseleave", () => {
+    isHoveringHeader = false;
+    resetHideTimer(); // kad izađe miš, opet kreni timer
+  });
+}
 
 window.addEventListener("scroll", onHeaderScroll, { passive: true });
