@@ -520,32 +520,3 @@ input:focus, textarea:focus{
   will-change: transform, opacity, filter;
   transition: opacity .08s linear;
 }
-
-/* TRANSPARENT HEADER (start) */
-.header{
-  transition: background 0.35s ease, box-shadow 0.35s ease;
-}
-
-/* stanje dok smo na vrhu hero sekcije */
-.header--transparent{
-  background: transparent !important;
-  border-bottom: 1px solid transparent;
-  box-shadow: none;
-}
-
-/* kada skrolamo dolje */
-.header--solid{
-  background: rgba(255,255,255,.82);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--border);
-  box-shadow: 0 6px 20px rgba(10,40,70,.08);
-}
-
-.header--transparent .logo,
-.header--transparent .nav a{
-  color:white;
-}
-
-.header--transparent .nav a:hover{
-  color:#eaf7ff;
-}
