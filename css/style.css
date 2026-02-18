@@ -82,6 +82,17 @@ a{color:inherit}
     inset 0 1px 0 rgba(255,255,255,.65);
 }
 
+.header:hover{
+  background: rgba(255,255,255,.78);
+  border-color: rgba(255,255,255,.75);
+
+  box-shadow:
+    0 26px 70px rgba(10,40,70,.24),
+    inset 0 1px 0 rgba(255,255,255,.75);
+
+  transform: translateY(-1px); /* tiny lift */
+}
+
 .logo{
   text-decoration:none;
   font-weight: 950;
@@ -228,6 +239,7 @@ a{color:inherit}
 .hero{
   padding:70px 0 50px;
   position:relative;
+  will-change: transform;
 }
 
 .hero__grid{

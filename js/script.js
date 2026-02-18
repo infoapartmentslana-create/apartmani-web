@@ -69,6 +69,13 @@ function cinematicScroll() {
     heroPanel.style.opacity = `${opacity}`;
     heroPanel.style.filter = `blur(0px)`;
   }
+
+  /* PREMIUM HERO PARALLAX */
+  const hero = document.querySelector(".hero");
+  if (hero) {
+    const y = window.scrollY;
+    hero.style.transform = `translateY(${y * 0.15}px)`;
+  }
 }
 
 function onCinematicScroll() {
