@@ -838,3 +838,17 @@ input:focus, textarea:focus{
   will-change: transform, opacity, filter;
   transition: opacity .08s linear;
 }
+
+.section {
+  padding: 90px 0;
+}
+
+.section .container {
+  width: min(1100px, 92%);
+  margin: 0 auto;
+}
+
+/* da anchor ne “uleti” pod sticky header */
+.section {
+  scroll-margin-top: 110px; /* prilagodi visini headera */
+}
