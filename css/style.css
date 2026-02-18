@@ -12,8 +12,16 @@
   --blue2:#66ccff;
   --blueSoft:#eaf7ff;
 
+  --gold1: rgba(228, 205, 150, .95);
+  --gold2: rgba(195, 160, 90, .85);
+  --goldSoft: rgba(195, 160, 90, .22);
+
   --section-light: rgba(255,255,255,0.35);
   --section-dark: rgba(255,255,255,0.12);
+
+  --champagne: rgba(195,160,90,.85);
+  --champagneSoft: rgba(195,160,90,.22);
+
 }
 
 /* RESET */
@@ -410,7 +418,7 @@ a{color:inherit}
 
 /* HERO */
 .hero{
-  padding:70px 0 50px;
+  padding:70px 0 110px;
   position:relative;
   will-change: transform;
   transform-origin: center center;
@@ -868,6 +876,10 @@ main > .section:nth-of-type(even){
   pointer-events:none;
 }
 
+#onama.section::before{
+  display: none;
+}
+
 /* =========================
    O NAMA — SCROLLYTELLING
    ========================= */
@@ -1223,11 +1235,21 @@ main > .section:nth-of-type(even){
 /* =========================
    ABOUT SPLIT SECTION
    ========================= */
+.aboutSplit{
+  margin-top: -110px;
+  position: relative;
+  z-index: 10;
+}
 
 .aboutSplit__intro{
-  background: rgba(255,255,255,.65);
-  padding: 90px 0 80px;
-  text-align:center;
+  background: rgba(255,255,255,.92);
+  border-radius: 28px;
+  box-shadow: 0 26px 80px rgba(0,0,0,.14);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  overflow: hidden;
+  padding: 90px 0 120px;
+  text-align: center;
 }
 
 .aboutSplit__center{
@@ -1265,50 +1287,65 @@ main > .section:nth-of-type(even){
 
 .aboutSplit__cta{
   display:inline-block;
-  padding: 11px 16px;
-  border-radius: 999px;
-  background: rgba(255,255,255,.75);
-  border: 1px solid rgba(10,25,40,.10);
-  text-decoration:none;
+  padding:11px 16px;
+  border-radius:999px;
+
+  background: #fff;
+  border: 1px solid rgba(195,160,90,.55);
+  color: #141310;
   font-weight:900;
-  color: rgba(11,27,43,.78);
-  box-shadow: 0 14px 34px rgba(10,40,70,.08);
-  border-color: rgba(195,160,90,.35);
+  text-decoration:none;
+
+  box-shadow: 0 10px 24px rgba(10,40,70,.10);
+  transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
 }
 
 .aboutSplit__cta:hover{
-  box-shadow: 0 18px 45px rgba(10,40,70,.12);
+  transform: translateY(-2px);
+  background: rgba(255,255,255,1);
+  box-shadow: 0 14px 34px rgba(10,40,70,.14);
 }
 
-/* DARK PART */
+@media (max-width: 900px){
+  .aboutSplit{ margin-top: -90px; }
+  .aboutSplit__intro{ border-radius: 22px; }
+}
+
+/* DARK PART — FIX + OCEAN TRANSITION */
+/* =========================
+   BENEFITS — OCEAN DUSK (NEW)
+   ========================= */
+
 .aboutSplit__benefits{
-  background:
-    linear-gradient(
-      180deg,
-      #30394a 0%,
-      #2b3240 100%
-    );
-  color: #fff;
-  padding: 80px 0;
+  background: #222225;
+  color: #f5f1ea;
+
+  padding: 92px 0 96px;
+
   position: relative;
+  overflow: hidden;
+
+  margin-top: -30px;
+  border-top-left-radius: 28px;
+  border-top-right-radius: 28px;
+
+  box-shadow: 0 -18px 60px rgba(0,0,0,.08);
 }
 
-.aboutSplit__benefits::before{
-  content:"";
-  position:absolute;
-  left:0; right:0;
-  top:-1px;
-  height: 60px;
-  background: linear-gradient(
-    180deg,
-    rgba(255,255,255,.70),
-    rgba(255,255,255,0)
-  );
-  pointer-events:none;
+
+/* sadržaj iznad overlay-a */
+.aboutSplit__benefits > .container{
+  position: relative;
+  z-index: 2;
+}
+
+.aboutSplit__benefits::before,
+.aboutSplit__benefits::after{
+  display:none !important;
 }
 
 .aboutSplit__kicker--light{
-  color: rgba(255,255,255,.55);
+  color: #f5f1ea;
   text-align:center;
 }
 
@@ -1316,52 +1353,101 @@ main > .section:nth-of-type(even){
   text-align:center;
   margin: 0 0 36px;
   font-size: clamp(1.8rem, 2.5vw, 2.4rem);
+  color: #f5f1ea;
+  margin-bottom: 48px;
 }
 
 .aboutSplit__grid{
   display:grid;
   grid-template-columns: repeat(2, minmax(0,1fr));
-  gap: 24px;
+  gap: 22px;
+  margin-top: 10px;
 }
 
 .aboutSplit__item{
-  padding: 20px 20px;
+  padding: 26px 24px;
   border-radius: 18px;
-  background: rgba(255,255,255,.05);
-  border: 1px solid rgba(255,255,255,.10);
   position: relative;
-  transition: transform .18s ease, border-color .18s ease, background .18s ease;
+
+  background: #303036;
+  border: 1px solid rgba(195,160,90,.40); /* gold rub */
+
+  box-shadow: 0 18px 40px rgba(0,0,0,.25);
+
+  transition: transform .20s ease, box-shadow .20s ease;
+  transform: translateZ(0);
+}
+
+/* premium stagger ulaz (1 po 1) */
+.aboutSplit__grid .aboutSplit__item.reveal{ transition-delay: 0ms; }
+.aboutSplit__grid .aboutSplit__item.reveal:nth-child(2){ transition-delay: 90ms; }
+.aboutSplit__grid .aboutSplit__item.reveal:nth-child(3){ transition-delay: 180ms; }
+.aboutSplit__grid .aboutSplit__item.reveal:nth-child(4){ transition-delay: 270ms; }
+
+/* BITNO: delay mora vrijediti i za reveal tranzicije */
+.aboutSplit__grid .aboutSplit__item.reveal{
+  transition-property: opacity, transform, filter, box-shadow, background-image;
 }
 
 .aboutSplit__item:hover{
-  transform: translateY(-2px);
-  border-color: rgba(255,255,255,.14);
-  background: rgba(255,255,255,.06);
+  transform: translateY(-3px);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.75),
+    0 22px 52px rgba(10,40,70,.14);
 }
 
+/* zlatni “signature” detalj gore */
 .aboutSplit__item::before{
   content:"";
   position:absolute;
-  left: 18px;
-  top: 14px;
-  width: 42px;
-  height: 2px;
-  border-radius: 99px;
-  background: rgba(195,160,90,.75); /* šampanj akcent */
-  opacity: .7;
+  left:18px;
+  top:14px;
+  width:52px;
+  height:2px;
+  border-radius:99px;
+  background: rgba(195,160,90,.85);
+  opacity:.55;
+}
+
+.aboutSplit__item::after{
+  content:"";
+  position:absolute;
+  top:-40%;
+  left:-70%;
+  width:40%;
+  height:180%;
+  transform: skewX(-20deg);
+  background: linear-gradient(120deg, transparent, rgba(255,255,255,.22), transparent);
+  opacity: 0;
+  pointer-events:none;
+}
+
+/* okidač: kad se reveal element pojavi */
+.aboutSplit__item.reveal.is-visible::after{
+  animation: cardShine 1.15s ease forwards;
+}
+
+@keyframes cardShine{
+  0%{ left:-70%; opacity:0; }
+  18%{ opacity:.85; }
+  100%{ left:140%; opacity:0; }
+}
+
+/* respect reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .aboutSplit__item.reveal.is-visible::after{
+    animation: none;
+  }
 }
 
 .aboutSplit__item h4{
   margin: 0 0 8px;
   font-size: 1.1rem;
   margin-top: 10px;
+  color: rgba(255,255,255,.94);
 }
 
-.aboutSplit__item p{
-  margin:0;
-  color: rgba(255,255,255,.72);
-  line-height: 1.7;
-}
+.aboutSplit__item p{ color: rgba(255,255,255,.74); }
 
 @media (max-width: 900px){
   .aboutSplit__grid{
@@ -1369,3 +1455,11 @@ main > .section:nth-of-type(even){
   }
 }
 
+/* mobile overlap malo blaži */
+@media (max-width: 900px){
+  .aboutSplit__benefits{
+    margin-top: -36px;
+    border-top-left-radius: 22px;
+    border-top-right-radius: 22px;
+  }
+}
