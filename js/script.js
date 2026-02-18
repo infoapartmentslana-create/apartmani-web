@@ -68,15 +68,15 @@ function onScroll() {
 cinematicScroll();
 window.addEventListener("scroll", onScroll, { passive: true });
 
-/* HEADER: pojavi se na scroll, sakrije nakon mirovanja */
+/* HEADER: show only on scroll DOWN, hide on scroll UP or inactivity */
 
 const header = document.querySelector(".header");
 
 let lastY = window.scrollY;
 let hideTimer = null;
 
-const SHOW_AFTER_Y = 10;     // minimalni scroll
-const HIDE_AFTER_MS = 2500;  // vrijeme čekanja prije skrivanja
+const SHOW_AFTER_Y = 10;     // minimalni scroll da počne raditi
+const HIDE_AFTER_MS = 2500;  // nakon koliko mirovanja se sakrije
 
 function showHeader() {
   if (!header) return;
@@ -96,23 +96,30 @@ function resetHideTimer() {
 }
 
 function onScroll() {
+  if (!header) return;
+
   const y = window.scrollY;
   const goingDown = y > lastY;
+  const goingUp = y < lastY;
 
-  // prikaži header kad scrollaš prema dolje
-  if (goingDown && y > SHOW_AFTER_Y) {
-    showHeader();
+  // ako ideš GORE -> odmah sakrij i ne prikazuj
+  if (goingUp) {
+    hideHeader();
+    clearTimeout(hideTimer);
+    lastY = y;
+    return;
   }
 
-  // nakon prestanka scrollanja -> sakrij
-  if (y > SHOW_AFTER_Y) {
-    resetHideTimer();
+  // ako ideš DOLJE -> pokaži (ali tek nakon malog pomaka)
+  if (goingDown && y > SHOW_AFTER_Y) {
+    showHeader();
+    resetHideTimer(); // kad staneš -> sakrije se
   }
 
   lastY = y;
 }
 
-/* startno stanje */
+// na učitavanju neka bude skriven
 hideHeader();
 
 window.addEventListener("scroll", onScroll, { passive: true });
