@@ -5,9 +5,24 @@ const year = document.getElementById("year");
 if (year) year.textContent = new Date().getFullYear();
 
 if (burger && nav) {
-  burger.addEventListener("click", () => nav.classList.toggle("is-open"));
+  burger.addEventListener("click", () => {
+    nav.classList.toggle("is-open");
+    isMenuOpen = nav.classList.contains("is-open");
+
+    if (isMenuOpen) {
+      clearTimeout(hideTimer);
+      showHeader(); // dok je meni otvoren header mora biti vidljiv
+    } else {
+      resetHideTimer();
+    }
+  });
+
   nav.querySelectorAll("a").forEach((a) => {
-    a.addEventListener("click", () => nav.classList.remove("is-open"));
+    a.addEventListener("click", () => {
+      nav.classList.remove("is-open");
+      isMenuOpen = false;
+      resetHideTimer();
+    });
   });
 }
 
@@ -76,6 +91,7 @@ const header = document.querySelector(".header");
 let lastY = window.scrollY;
 let hideTimer = null;
 let isHoveringHeader = false;
+let isMenuOpen = false;
 
 const SHOW_AFTER_Y = 10;     // minimalni scroll da počne raditi
 const HIDE_AFTER_MS = 2500;  // nakon koliko mirovanja se sakrije
@@ -87,7 +103,7 @@ function showHeader() {
 
 function hideHeader() {
   if (!header) return;
-  if (isHoveringHeader) return;
+  if (isHoveringHeader || isMenuOpen) return;
   header.classList.remove("header--visible");
 }
 
@@ -95,7 +111,7 @@ function resetHideTimer() {
   clearTimeout(hideTimer);
 
   // ako je miš na headeru -> ne sakrivaj
-  if (isHoveringHeader) return;
+  if (isHoveringHeader || isMenuOpen) return;
 
   hideTimer = setTimeout(() => {
     // provjera još jednom, za svaki slučaj
