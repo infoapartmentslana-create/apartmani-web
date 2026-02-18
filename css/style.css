@@ -1328,11 +1328,22 @@ main > .section:nth-of-type(even){
 }
 
 .aboutS__link{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:10px 14px;
+  border-radius:999px;
+  background: rgba(255,255,255,.60);
+  border: 1px solid rgba(10,25,40,.10);
+  box-shadow: 0 14px 34px rgba(10,40,70,.08);
   text-decoration:none;
   font-weight: 900;
-  color: rgba(11,27,43,.78);
+  color: rgba(11,27,43,.76);
 }
-.aboutS__link:hover{ text-decoration: underline; }
+.aboutS__link:hover{
+  transform: translateY(-1px);
+}
+
 
 /* Right side sticky like a brochure */
 .aboutS__side{
@@ -1504,11 +1515,6 @@ main > .section:nth-of-type(even){
 /* makni hlIcon ako je ostao negdje */
 .aboutS__hlIcon{ display:none; }
 
-/* CTA: primarni gumb + link, ali “clean” */
-.aboutS__link{
-  color: rgba(11,27,43,.70);
-}
-
 /* slika: malo “editorial” */
 .aboutS__image{
   border-radius: 28px;
@@ -1519,5 +1525,22 @@ main > .section:nth-of-type(even){
   .aboutS__amenities{
     grid-template-columns: 1fr;
   }
+}
+
+.titleBadge{
+  display:inline-grid;
+  place-items:center;
+  width:28px;
+  height:28px;
+  border-radius:999px;
+  margin-right:10px;
+
+  font-weight:900;
+  font-size:.95rem;
+  color: rgba(11,27,43,.75);
+
+  background: rgba(255,255,255,.65);
+  border: 1px solid rgba(10,25,40,.10);
+  box-shadow: 0 10px 22px rgba(10,40,70,.08);
 }
 
