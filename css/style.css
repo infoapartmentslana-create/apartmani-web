@@ -416,14 +416,6 @@ a{color:inherit}
   background:#fff;
 }
 
-/* HERO */
-.hero{
-  padding:70px 0 110px;
-  position:relative;
-  will-change: transform;
-  transform-origin: center center;
-}
-
 .hero__grid{
   display:grid;
   grid-template-columns:1.1fr .9fr;
@@ -642,9 +634,17 @@ input:focus, textarea:focus{
   position: relative;
   overflow: hidden;
 
-  min-height: 100vh;
+  height: 100dvh;      /* puni ekran */
+  min-height: 100vh;   /* fallback */
+
   display: flex;
   align-items: center;
+
+  padding: 0;          /* VAŽNO: nema paddinga na hero */
+
+  /* ako želiš zadržati iz svog CSS-a: */
+  will-change: transform;
+  transform-origin: center center;
 }
 
 .hero__bgslider{
@@ -688,7 +688,6 @@ input:focus, textarea:focus{
     );
 }
 
-
 /* da tekst bude iznad slidera */
 .hero .container,
 .hero__wrap,
@@ -698,7 +697,6 @@ input:focus, textarea:focus{
 }
 
 /* PREMIUM FINISH (fade-in + scroll indicator) */
-
 @keyframes heroIn{
   from{opacity:0; transform: translateY(14px);}
   to{opacity:1; transform: translateY(0);}
@@ -712,14 +710,18 @@ input:focus, textarea:focus{
 .hero--new .hero__wrap{
   position: relative;
   z-index: 1;
+  padding: 120px 0 80px;
 }
 
 
 /* Scroll indicator */
 .hero__wrap{
   position: relative;
-  padding-bottom: 34px; /* da ima mjesta za indikator */
+  z-index: 2;
+
+  padding: 120px 0 80px;
 }
+
 
 .hero__scroll{
   position:absolute;
@@ -1236,7 +1238,7 @@ main > .section:nth-of-type(even){
    ABOUT SPLIT SECTION
    ========================= */
 .aboutSplit{
-  margin-top: -110px;
+  margin-top: 0;
   position: relative;
   z-index: 10;
 }
