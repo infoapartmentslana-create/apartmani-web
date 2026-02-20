@@ -1893,27 +1893,66 @@ main > .section:nth-of-type(even){
 }
 
 .modal__head{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap: 12px;
-
-  padding: 16px 18px;
-  border-bottom: 1px solid rgba(10,25,40,.10);
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between; /* GURA X SKROZ DESNO */
+  gap: 20px;
+  position: relative;
 }
 
-.modal__head h3{
-  margin: 0;
-}
+/* =========================
+   Floating glass close button
+   ========================= */
 
 .modal__close{
-  width: 40px;
-  height: 40px;
-  border-radius: 999px;
-  border: 1px solid rgba(10,25,40,.12);
-  background: rgba(255,255,255,.8);
+  flex-shrink: 0;
+  margin-left: auto;  /* dodatno osiguranje */
+  right: 0;
+  top: 0;
+}
+
+.modal--details .modal__close{
+  position: relative;
+
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+
+  display: grid;
+  place-items: center;
+
+  font-size: 16px;
+  font-weight: 600;
+
+  background: rgba(255,255,255,.55);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  border: 1px solid rgba(255,255,255,.6);
+
+  box-shadow:
+    0 10px 30px rgba(10,40,70,.18),
+    inset 0 1px 0 rgba(255,255,255,.9);
+
+  color: rgba(11,27,43,.85);
+
   cursor: pointer;
-  font-size: 1.05rem;
+  transition:
+    transform .18s ease,
+    box-shadow .18s ease,
+    background .18s ease;
+}
+
+.modal--details .modal__close:hover{
+  transform: translateY(-2px);
+  background: rgba(255,255,255,.75);
+  box-shadow:
+    0 16px 40px rgba(10,40,70,.22),
+    inset 0 1px 0 rgba(255,255,255,.95);
+}
+
+.modal--details .modal__close:active{
+  transform: translateY(0);
 }
 
 .modal__body{
@@ -2164,3 +2203,645 @@ main > .section:nth-of-type(even){
 .galleryModal__stage { position: relative; overflow: visible; }
 .galleryModal__nav { z-index: 9999; pointer-events: auto; }
 .galleryModal__nav--prev { left: 14px !important; right: auto !important; }
+
+/* =========================
+   APARTMAN (A1) — BOUTIQUE LUX BODY
+   ========================= */
+
+.apt__body--lux{
+  padding: 22px 24px 20px;
+}
+
+/* Title + meta */
+.aptLux__head{
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.aptLux__head::after{
+  content:"";
+  display:block;
+  width: 54px;
+  height: 2px;
+  margin-top: 10px;
+  border-radius: 99px;
+  background: linear-gradient(90deg, rgba(195,160,90,.9), rgba(228,205,150,.65));
+  opacity: .9;
+}
+
+.aptLux__title{
+  margin: 0;
+  font-size: clamp(1.25rem, 1.7vw, 1.55rem);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+.aptLux__meta{
+  font-weight: 750;
+  color: rgba(11,27,43,.62);
+  font-size: .98rem;
+  letter-spacing: .1px;
+}
+
+.aptLux__titleDot{
+  margin: 0 10px;
+  color: rgba(11,27,43,.25);
+}
+
+/* Description (editorial feel) */
+.aptLux__desc p{
+  margin: 0 0 10px;
+  color: rgba(11,27,43,.70);
+  line-height: 1.75;
+  max-width: 62ch;
+  letter-spacing: .01em;
+}
+
+.aptLux__desc p:first-child{
+  color: rgba(11,27,43,.82);
+}
+
+/* Divider */
+.aptLux__divider{
+  height: 1px;
+  margin: 16px 0 16px;
+  background: linear-gradient(90deg, rgba(10,25,40,.14), rgba(10,25,40,.05), transparent);
+}
+
+/* Features list — boutique checkmarks */
+.aptLux__features{
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+  margin: 0 0 14px;
+}
+
+.aptLux__features li{
+  position: relative;
+  padding-left: 26px;
+  color: rgba(11,27,43,.70);
+  line-height: 1.6;
+  border-bottom: 1px solid rgba(10,25,40,.07);
+  padding-bottom: 8px;
+}
+
+.aptLux__features li:last-child{
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.aptLux__features li::before{
+  content:"";
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  position:absolute;
+  left: 2px;
+  top: 3px;
+  background: rgba(195,160,90,.22);
+  box-shadow: inset 0 0 0 2px rgba(195,160,90,.28);
+}
+
+.aptLux__features strong{
+  font-weight: 850;
+  color: rgba(11,27,43,.84);
+}
+
+/* Actions (3 boutique cards) */
+.aptLux__actions{
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.aptLux__action{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  padding: 12px 12px;
+  border-radius: 16px;
+
+  background: rgba(255,255,255,.66);
+  border: 1px solid rgba(10,25,40,.10);
+
+  box-shadow: 0 16px 40px rgba(10,40,70,.08);
+  text-decoration: none;
+  color: inherit;
+
+  cursor: pointer;
+  transition: transform .18s ease, box-shadow .18s ease, background .18s ease, border-color .18s ease;
+}
+
+.aptLux__action:hover{
+  transform: translateY(-2px);
+  background: rgba(255,255,255,.78);
+  border-color: rgba(10,25,40,.14);
+  box-shadow: 0 22px 54px rgba(10,40,70,.12);
+}
+
+.aptLux__action:active{
+  transform: translateY(0);
+}
+
+.aptLux__icon{
+  width: 34px;
+  height: 34px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+
+  background: rgba(11,27,43,.05);
+  border: 1px solid rgba(10,25,40,.08);
+
+  font-weight: 900;
+  color: rgba(11,27,43,.70);
+}
+
+.aptLux__actionText{
+  display: grid;
+  gap: 2px;
+}
+
+.aptLux__actionText strong{
+  font-weight: 950;
+  letter-spacing: .1px;
+}
+
+.aptLux__actionText em{
+  font-style: normal;
+  color: rgba(11,27,43,.62);
+  font-size: .92rem;
+  line-height: 1.2;
+}
+
+/* Primary action (reserve) — subtle premium emphasis, not loud */
+.aptLux__action--primary{
+  background: linear-gradient(135deg, rgba(30,167,255,.14), rgba(255,255,255,.78));
+  border-color: rgba(30,167,255,.18);
+}
+
+.aptLux__action--primary .aptLux__icon{
+  background: rgba(30,167,255,.10);
+  border-color: rgba(30,167,255,.16);
+}
+
+/* Responsive */
+@media (max-width: 900px){
+  .aptLux__actions{
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =========================
+   LUX BUTTONS — SVG ICONS + PREMIUM SHINE
+   ========================= */
+
+.aptLux__svg{
+  width: 18px;
+  height: 18px;
+  display: block;
+
+  fill: none;
+  stroke: rgba(11,27,43,.72);
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.aptLux__icon{
+  width: 36px;
+  height: 36px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+
+  background: rgba(255,255,255,.75);
+  border: 1px solid rgba(10,25,40,.10);
+
+  box-shadow:
+    0 10px 24px rgba(10,40,70,.08),
+    inset 0 1px 0 rgba(255,255,255,.75);
+}
+
+/* Action cards: refined + less chunky */
+.aptLux__action{
+  position: relative;
+  overflow: hidden;
+
+  padding: 12px 14px;
+  border-radius: 18px;
+
+  background: rgba(255,255,255,.62);
+  border: 1px solid rgba(10,25,40,.10);
+
+  box-shadow:
+    0 18px 45px rgba(10,40,70,.08),
+    inset 0 1px 0 rgba(255,255,255,.65);
+
+  transition:
+    transform .20s ease,
+    box-shadow .20s ease,
+    background .20s ease,
+    border-color .20s ease;
+}
+
+/* subtle shine sweep */
+.aptLux__action::after{
+  content:"";
+  position:absolute;
+  top:-55%;
+  left:-70%;
+  width:45%;
+  height:220%;
+  transform: skewX(-20deg);
+  background: linear-gradient(120deg, transparent, rgba(255,255,255,.55), transparent);
+  opacity: 0;
+  pointer-events:none;
+}
+
+.aptLux__action:hover{
+  transform: translateY(-2px);
+  background: rgba(255,255,255,.78);
+  border-color: rgba(10,25,40,.14);
+
+  box-shadow:
+    0 26px 64px rgba(10,40,70,.12),
+    inset 0 1px 0 rgba(255,255,255,.75);
+}
+
+.aptLux__action:hover::after{
+  opacity: 1;
+  animation: aptLuxShine .9s ease forwards;
+}
+
+@keyframes aptLuxShine{
+  0%{ left:-70%; }
+  100%{ left:140%; }
+}
+
+/* Primary: champagne accent (luxury, not loud) */
+.aptLux__action--primary{
+  border-color: rgba(195,160,90,.28);
+  background: linear-gradient(
+    135deg,
+    rgba(195,160,90,.12),
+    rgba(255,255,255,.78)
+  );
+}
+
+.aptLux__action--primary .aptLux__icon{
+  border-color: rgba(195,160,90,.30);
+  background: rgba(195,160,90,.10);
+}
+
+.aptLux__action--primary .aptLux__svg{
+  stroke: rgba(11,27,43,.78);
+}
+
+/* Better text feel */
+.aptLux__actionText strong{
+  font-weight: 950;
+  letter-spacing: .1px;
+}
+
+/* Focus states (premium + accessible) */
+.aptLux__action:focus-visible{
+  outline: 2px solid rgba(195,160,90,.35);
+  outline-offset: 3px;
+}
+
+/* =========================
+   DETAILS MODAL — BOUTIQUE
+   ========================= */
+
+.modal--details .modal__panel--details{
+  width: min(860px, calc(100vw - 28px));
+  position: relative;
+}
+
+.modal--details .modal__panel--details::after{
+  content:"";
+  position:absolute;
+  left:0; right:0; bottom:0;
+  height: 28px;
+  background: linear-gradient(180deg, transparent, rgba(255,255,255,.92));
+  pointer-events:none;
+}
+
+.detailsHead h3{
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.detailsHead__meta{
+  margin: 6px 0 0;
+  color: rgba(11,27,43,.62);
+  font-weight: 650;
+  font-size: .95rem;
+}
+
+.detailsBody{
+  padding-top: 14px;
+}
+
+.detailsHero{
+  padding: 14px 16px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, rgba(195,160,90,.10), rgba(255,255,255,.66));
+  border: 1px solid rgba(195,160,90,.18);
+  box-shadow: 0 18px 50px rgba(10,40,70,.08);
+  margin-bottom: 14px;
+}
+
+.detailsHero__badge{
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.66);
+  border: 1px solid rgba(10,25,40,.08);
+  font-weight: 850;
+  color: rgba(11,27,43,.72);
+}
+
+.detailsHero__dot{
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(195,160,90,.75);
+  box-shadow: 0 8px 18px rgba(195,160,90,.25);
+}
+
+.detailsHero__lead{
+  margin: 12px 0 0;
+  color: rgba(11,27,43,.74);
+  line-height: 1.85;
+  max-width: 72ch;
+}
+
+.detailsGrid{
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.detailsCard{
+  border-radius: 18px;
+  background: rgba(255,255,255,.66);
+  border: 1px solid rgba(10,25,40,.10);
+  box-shadow: 0 18px 45px rgba(10,40,70,.08);
+  padding: 14px 14px;
+}
+
+.detailsCard h4{
+  margin: 0 0 10px;
+  font-size: 1.02rem;
+  letter-spacing: -.01em;
+}
+
+.detailsCard--wide{
+  grid-column: 1 / -1;
+}
+
+.detailsList{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.detailsList li{
+  position: relative;
+  padding-left: 22px;
+  color: rgba(11,27,43,.70);
+  line-height: 1.55;
+}
+
+.detailsList li::before{
+  content:"";
+  position:absolute;
+  left: 2px;
+  top: 5px;
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+  background: rgba(195,160,90,.18);
+  box-shadow: inset 0 0 0 2px rgba(195,160,90,.26);
+}
+
+.detailsPins{
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.detailsPin{
+  display:flex;
+  justify-content:space-between;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: rgba(11,27,43,.03);
+  border: 1px solid rgba(10,25,40,.08);
+}
+
+.detailsPin__k{
+  color: rgba(11,27,43,.70);
+  font-weight: 750;
+}
+
+.detailsPin__v{
+  color: rgba(11,27,43,.84);
+  font-weight: 950;
+  white-space: nowrap;
+}
+
+.detailsFoot{
+  display:flex;
+  justify-content:flex-end;
+  gap: 10px;
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(10,25,40,.08);
+}
+
+@media (max-width: 900px){
+  .detailsGrid{ grid-template-columns: 1fr; }
+  .detailsPins{ grid-template-columns: 1fr; }
+}
+
+/* Details hero with image */
+.detailsHero--withImg{
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap: 14px;
+  align-items: stretch;
+}
+
+.detailsHero__media{
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(10,25,40,.10);
+  box-shadow: 0 18px 45px rgba(10,40,70,.10);
+  background: rgba(255,255,255,.55);
+  min-height: 190px;
+  position: relative;
+}
+
+.detailsHero__media::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: linear-gradient(
+    180deg,
+    rgba(255,255,255,.04),
+    rgba(255,255,255,.18)
+  );
+  pointer-events:none;
+}
+
+.detailsHero__media img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.detailsHero__content{
+  display: grid;
+  align-content: start;
+  gap: 10px;
+}
+
+/* Mobile: image on top */
+@media (max-width: 900px){
+  .detailsHero--withImg{
+    grid-template-columns: 1fr;
+  }
+  .detailsHero__media{
+    min-height: 210px;
+  }
+}
+
+/* =========================
+   PERFECT CENTERED DETAILS MODAL
+   ========================= */
+
+/* cijeli modal overlay koristi flex centriranje */
+.modal--details{
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+
+  align-items: center;
+  justify-content: center;
+  padding: 48px 32px;
+}
+
+.modal--details.is-open{
+  display: flex;
+}
+
+/* header ostaje sticky */
+.modal--details .modal__head{
+  position: sticky;
+  top: 0;
+  z-index: 5;
+
+  padding: 18px 22px;
+
+  background: rgba(255,255,255,.55);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+
+  border-bottom: 1px solid rgba(255,255,255,.6);
+
+  box-shadow:
+    0 8px 30px rgba(10,40,70,.08),
+    inset 0 1px 0 rgba(255,255,255,.8);
+}
+
+.modal--details .detailsHead h3{
+  font-size: 1.15rem;
+  letter-spacing: -.01em;
+  font-weight: 800;
+}
+
+.modal--details .detailsHead__meta{
+  margin-top: 6px;
+  font-size: .92rem;
+  color: rgba(11,27,43,.65);
+  font-weight: 600;
+}
+
+.modal--details .modal__head::after{
+  content:"";
+  display:block;
+  height: 1px;
+  margin-top: 14px;
+  background: linear-gradient(
+    90deg,
+    rgba(195,160,90,.6),
+    rgba(195,160,90,.15)
+  );
+}
+
+@keyframes detailsIn{
+  from{
+    opacity:0;
+    transform: translateY(8px) scale(.98);
+  }
+  to{
+    opacity:1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* =========================
+   DETAILS MODAL — true centering fix
+   (ukloni globalni margin:10vh)
+   ========================= */
+
+/* details modal overlay - hidden by default */
+.modal--details{
+  display: none;              /* važno: da nije stalno prikazan */
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+
+  align-items: center;
+  justify-content: center;
+  padding: 24px;              /* jednako gore i dolje */
+}
+
+/* otvoreno stanje */
+.modal--details.is-open{
+  display: flex;
+}
+
+/* OVODIJE JE KLJUČ: makni globalni margin s .modal__panel */
+.modal--details .modal__panel{
+  margin: 0 !important;       /* pregazi margin:10vh auto 0 */
+}
+
+/* panel visina + layout */
+.modal--details .modal__panel--details{
+  width: min(860px, 100%);
+  max-height: calc(100dvh - 96px);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* scroll samo unutar body */
+.modal--details .detailsBody{
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 12px;
+}
