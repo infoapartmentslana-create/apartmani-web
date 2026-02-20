@@ -109,9 +109,9 @@ a{color:inherit}
   text-decoration:none;
 
   font-size: 1.08rem;
-  font-weight: 650;
-  font-style: italic;
-  letter-spacing: .35px;
+  font-weight: 700;
+  font-style: normal;
+  letter-spacing: .5px;
 
   display:flex;
   align-items:center;
@@ -147,49 +147,9 @@ a{color:inherit}
   transform: scaleX(.85);
 }
 
-.logo::before{
-  content:"✦";
-
-  font-style: normal;
-
-  width:30px;
-  height:30px;
-  border-radius:10px;
-
-  display:grid;
-  place-items:center;
-
-  font-weight:950;
-  font-size:.95rem;
-  letter-spacing:.2px;
-
-  color: rgba(11,27,43,.88);
-
-  /* emboss glass feel */
-  background:
-    linear-gradient(
-      135deg,
-      rgba(255,255,255,.95),
-      rgba(255,255,255,.65)
-    );
-
-  border:1px solid rgba(255,255,255,.75);
-
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.85),
-    inset 0 -2px 6px rgba(10,40,70,.10),
-    0 10px 24px rgba(10,40,70,.16);
-
-  backdrop-filter: blur(6px);
-}
-
 /* BRAND HOVER — subtle premium movement */
 .logo{
   transition: transform .22s ease, filter .22s ease;
-}
-
-.logo::before{
-  transition: transform .22s ease, box-shadow .22s ease;
 }
 
 /* kad prijeđeš mišem preko cijelog loga */
@@ -213,41 +173,9 @@ a{color:inherit}
   overflow: hidden;
 }
 
-.logo::after{
-  content:"";
-  position:absolute;
-  top:-40%;
-  left:-60%;
-  width:40%;
-  height:180%;
-
-  background: linear-gradient(
-    120deg,
-    transparent,
-    rgba(255,255,255,.65),
-    transparent
-  );
-
-  transform: skewX(-20deg);
-  opacity:0;
-  pointer-events:none;
-}
-
 /* kad se header pojavi -> lagani shine */
 .header--visible .logo::after{
   animation: logoShine 1.2s ease forwards;
-}
-
-@keyframes logoShine{
-  0%{
-    left:-60%;
-    opacity:0;
-  }
-  20%{ opacity:.65; }
-  100%{
-    left:140%;
-    opacity:0;
-  }
 }
 
 .nav{
@@ -1260,12 +1188,24 @@ main > .section:nth-of-type(even){
 }
 
 .aboutSplit__kicker{
-  margin: 0 0 14px;
+  margin: 0 0 6px;
+
   font-size: .82rem;
-  font-weight: 900;
-  letter-spacing: .35px;
+  font-weight: 900;          /* jak bold */
+  letter-spacing: .4px;
   text-transform: uppercase;
-  color: rgba(11,27,43,.50);
+
+  color: rgba(11,27,43,.65); /* tamnije – bolji kontrast */
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.aboutSplit__kicker span{
+  font-size: 1.25rem;
+  transform: translateY(-1px);
 }
 
 .aboutSplit__title{
@@ -1287,25 +1227,99 @@ main > .section:nth-of-type(even){
   color: rgba(11,27,43,.68);
 }
 
+/* CTA — refined glass premium */
+/* CTA — glass + subtle shine */
 .aboutSplit__cta{
-  display:inline-block;
-  padding:11px 16px;
+  position: relative;
+  overflow: hidden;
+
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+
+  padding:14px 26px;
   border-radius:999px;
 
-  background: #fff;
-  border: 1px solid rgba(195,160,90,.55);
-  color: #141310;
+  background: rgba(11,27,43,.045);
+  border: 1px solid rgba(11,27,43,.08);
+
+  color:#0b1b2b;
   font-weight:900;
+  letter-spacing:.2px;
   text-decoration:none;
 
-  box-shadow: 0 10px 24px rgba(10,40,70,.10);
-  transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+  box-shadow:
+    0 12px 30px rgba(10,40,70,.08),
+    inset 0 1px 0 rgba(255,255,255,.6);
+
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
+  transition:
+    transform .25s ease,
+    box-shadow .25s ease,
+    background .25s ease,
+    border-color .25s ease;
 }
 
+/* strelica */
+.aboutSplit__cta::after{
+  content:"⟶";
+  font-size:1.1rem;
+  opacity:.85;
+  transition: transform .25s ease;
+}
+
+/* SHINE layer */
+.aboutSplit__cta::before{
+  content:"";
+  position:absolute;
+  top:-50%;
+  left:-60%;
+  width:40%;
+  height:200%;
+
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255,255,255,.7),
+    transparent
+  );
+
+  transform: skewX(-20deg);
+  opacity:0;
+}
+
+/* hover */
 .aboutSplit__cta:hover{
-  transform: translateY(-2px);
-  background: rgba(255,255,255,1);
-  box-shadow: 0 14px 34px rgba(10,40,70,.14);
+  transform: translateY(-3px);
+
+  background: rgba(11,27,43,.065);
+  border-color: rgba(11,27,43,.12);
+
+  box-shadow:
+    0 18px 45px rgba(10,40,70,.12),
+    inset 0 1px 0 rgba(255,255,255,.7);
+}
+
+.aboutSplit__cta:hover::after{
+  transform: translateX(5px);
+}
+
+/* activate shine */
+.aboutSplit__cta:hover::before{
+  animation: ctaShine 0.9s ease forwards;
+  opacity:1;
+}
+
+@keyframes ctaShine{
+  0%{
+    left:-60%;
+  }
+  100%{
+    left:140%;
+  }
 }
 
 @media (max-width: 900px){
