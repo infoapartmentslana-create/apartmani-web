@@ -250,3 +250,214 @@ window.addEventListener("scroll", onHeaderScroll, { passive: true });
     if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
   });
 })();
+
+/* =========================
+   Generic gallery modal (all apartments)
+   ========================= */
+(() => {
+  const modal = document.getElementById('galleryModal');
+  if (!modal) return;
+
+  const imgEl = document.getElementById('galleryImg');
+  const metaEl = document.getElementById('galleryMeta');
+  const titleEl = modal.querySelector('#galleryTitle');
+
+  const closeEls = modal.querySelectorAll('[data-close-gallery]');
+  const prevBtn = modal.querySelector('[data-gallery-prev]');
+  const nextBtn = modal.querySelector('[data-gallery-next]');
+
+  // Svi apartmani koji imaju galeriju
+  const cards = Array.from(document.querySelectorAll('[data-gallery]'));
+
+  // Trenutno otvorena galerija
+  let sources = [];
+  let index = 0;
+
+  function render() {
+    if (!sources.length) return;
+    imgEl.src = sources[index];
+    imgEl.alt = `${titleEl?.textContent || 'Galerija'} — slika ${index + 1} od ${sources.length}`;
+    if (metaEl) metaEl.textContent = `${index + 1} / ${sources.length}`;
+  }
+
+  function openGallery(opts) {
+    sources = opts.sources || [];
+    index = Math.max(0, Math.min(opts.index ?? 0, sources.length - 1));
+    if (titleEl && opts.title) titleEl.textContent = opts.title;
+
+    render();
+
+    modal.classList.add('is-open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeGallery() {
+    modal.classList.remove('is-open');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    imgEl.src = '';
+    sources = [];
+    index = 0;
+  }
+
+  function prev() {
+    if (!sources.length) return;
+    index = (index - 1 + sources.length) % sources.length;
+    render();
+  }
+
+  function next() {
+    if (!sources.length) return;
+    index = (index + 1) % sources.length;
+    render();
+  }
+
+  // Bind close/prev/next
+  closeEls.forEach(el => el.addEventListener('click', closeGallery));
+  prevBtn?.addEventListener('click', prev);
+  nextBtn?.addEventListener('click', next);
+
+  // Tipkovnica
+  window.addEventListener('keydown', (e) => {
+    if (!modal.classList.contains('is-open')) return;
+    if (e.key === 'Escape') closeGallery();
+    if (e.key === 'ArrowLeft') prev();
+    if (e.key === 'ArrowRight') next();
+  });
+
+   // Klik na sliku -> next (zgodno na mobu)
+  imgEl?.addEventListener('click', next);
+
+  /* =========================
+     Pinch-zoom disable (iOS) + Drag swipe (inertia feel)
+     ========================= */
+  const stage = modal.querySelector('.galleryModal__stage');
+  if (stage) {
+    // iOS Safari gesture events (pinch)
+    stage.addEventListener('gesturestart', (e) => e.preventDefault());
+    stage.addEventListener('gesturechange', (e) => e.preventDefault());
+    stage.addEventListener('gestureend', (e) => e.preventDefault());
+
+    // drag state
+    let isDown = false;
+    let startX = 0;
+    let lastX = 0;
+    let dx = 0;
+
+    const THRESHOLD = 60; // px koliko treba povući da prebaci sliku
+
+    function setTranslate(x) {
+      imgEl.style.transform = `translateX(${x}px)`;
+    }
+
+    function animateBack() {
+      imgEl.style.transition = 'transform 180ms ease';
+      setTranslate(0);
+      window.setTimeout(() => {
+        imgEl.style.transition = '';
+      }, 190);
+    }
+
+    function animateOut(dir, cb) {
+      // dir: -1 = lijevo (next), +1 = desno (prev)
+      const outX = dir * 180;
+      imgEl.style.transition = 'transform 140ms ease';
+      setTranslate(outX);
+      window.setTimeout(() => {
+        imgEl.style.transition = '';
+        setTranslate(0);
+        cb?.();
+      }, 150);
+    }
+
+    stage.addEventListener('pointerdown', (e) => {
+      // ✅ AKO SI KLIKNUO NA STRELICU ILI X (close) -> NE KREĆI DRAG, PUSTI KLIK
+      if (e.target.closest('[data-gallery-prev],[data-gallery-next],[data-close-gallery]')) return;
+
+      if (!modal.classList.contains('is-open')) return;
+      isDown = true;
+      startX = e.clientX;
+      lastX = startX;
+      dx = 0;
+
+      // “capture” pointer da drag radi i ako prst malo izađe van elementa
+      stage.setPointerCapture?.(e.pointerId);
+    });
+
+    stage.addEventListener('pointermove', (e) => {
+      if (e.target.closest('[data-gallery-prev],[data-gallery-next],[data-close-gallery]')) return; // ✅ ovo dodaj
+      if (!isDown) return;
+      lastX = e.clientX;
+      dx = lastX - startX;
+
+      const damped = dx * 0.9;
+      setTranslate(damped);
+    });
+
+    function endDrag() {
+      if (!isDown) return;
+      isDown = false;
+
+      if (Math.abs(dx) >= THRESHOLD) {
+        if (dx < 0) {
+          // povukao lijevo -> sljedeća
+          animateOut(-1, next);
+        } else {
+          // povukao desno -> prethodna
+          animateOut(1, prev);
+        }
+      } else {
+        animateBack();
+      }
+    }
+
+    stage.addEventListener('pointerup', endDrag);
+    stage.addEventListener('pointercancel', endDrag);
+
+    // dodatno: blokiraj ctrl+wheel zoom dok je modal otvoren (desktop trackpad)
+    stage.addEventListener('wheel', (e) => {
+      if (!modal.classList.contains('is-open')) return;
+      if (e.ctrlKey) e.preventDefault();
+    }, { passive: false });
+  }
+
+  // Za svaki apartman: hero + thumbs otvaraju isti modal
+  cards.forEach(card => {
+    const title = card.getAttribute('data-gallery-title') || 'Galerija';
+    const hero = card.querySelector('.apt__media > img');
+    const thumbs = Array.from(card.querySelectorAll('.apt__thumbs img'));
+
+    const aptId = card.getAttribute('data-gallery'); // "a1" / "a2" / "a3"
+    const count = parseInt(card.getAttribute('data-gallery-count') || '0', 10);
+
+    const generated = [];
+    if (aptId) {
+      generated.push(`images/apartmani/${aptId}/hero.jpg`);
+      for (let i = 1; i <= count; i++) {
+        generated.push(`images/apartmani/${aptId}/${i}.jpg`);
+      }
+    }
+
+    const fallback = [
+      hero?.getAttribute('src'),
+      ...thumbs.map(t => t.getAttribute('src')),
+    ].filter(Boolean);
+
+    const cardSources = (generated.length > 1 ? generated : fallback).filter(Boolean);
+
+    if (!cardSources.length) return;
+
+    // Hero klik (otvori na 0)
+    if (hero) {
+      hero.style.cursor = 'pointer';
+      hero.addEventListener('click', () => openGallery({ title, sources: cardSources, index: 0 }));
+    }
+
+    // Thumb klik (otvori na thumb indexu: +1 jer je hero 0)
+    thumbs.forEach((t, i) => {
+      t.style.cursor = 'pointer';
+      t.addEventListener('click', () => openGallery({ title, sources: cardSources, index: i + 1 }));
+    });
+  });
+})();

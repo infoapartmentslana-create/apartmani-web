@@ -131,19 +131,23 @@
             <span class="apartmentsS__kickerLine"></span>
           </p>
 
-          <h2 class="apartmentsS__title">Tri apartmana, svaki s vlastitom pričom.</h2>
+          <h2 class="apartmentsS__title">Prostor za opuštanje uz more.</h2>
 
           <p class="apartmentsS__subtitle">
-            Mir uz more, terasa i pogled koji ostaje u sjećanju.<br>
-            Odaberite apartman koji vam najviše odgovara.
+            Uživajte u udobnom smještaju, terasi i pogledu koji ostaje u sjećanju.
+            Odaberite apartman prema broju osoba i ugođaju koji tražite.
+          </p>
+
+          <p class="apartmentsS__meta">
+            Privatnost <span aria-hidden="true">•</span> Terasa <span aria-hidden="true">•</span> Pogled na more
           </p>
         </header>
 
         <!-- A1 -->
-        <article class="apt reveal">
+        <article class="apt reveal" data-gallery="a1" data-gallery-title="Apartman A1" data-gallery-count="11">
           <div class="apt__media">
             <img src="images/apartmani/a1/hero.jpg" alt="Apartman A1 - terasa i pogled" loading="lazy">
-            <div class="apt__thumbs" aria-hidden="true">
+            <div class="apt__thumbs">
               <img src="images/apartmani/a1/1.jpg" alt="" loading="lazy">
               <img src="images/apartmani/a1/2.jpg" alt="" loading="lazy">
               <img src="images/apartmani/a1/3.jpg" alt="" loading="lazy">
@@ -177,15 +181,21 @@
               <a class="btn" href="#kontakt">Rezerviraj / upit</a>
             </div>
 
+            <div class="apt__trust">
+              <span>✅ Bez posrednika</span>
+              <span>⏱ Odgovor u roku 2–6 h</span>
+              <span>🔒 Siguran dogovor</span>
+            </div>
+
             <p class="apt__note">* Kalendar je placeholder — kasnije ubacujemo stvarne termine.</p>
           </div>
         </article>
 
-        <!-- A2 (alternating) -->
-        <article class="apt apt--alt reveal">
+        <!-- A2 -->
+        <article class="apt apt--alt reveal" data-gallery="a2" data-gallery-title="Apartman A2" data-gallery-count="11">
           <div class="apt__media">
             <img src="images/apartmani/a2/hero.jpg" alt="Apartman A2 - interijer i uvala" loading="lazy">
-            <div class="apt__thumbs" aria-hidden="true">
+            <div class="apt__thumbs">
               <img src="images/apartmani/a2/1.jpg" alt="" loading="lazy">
               <img src="images/apartmani/a2/2.jpg" alt="" loading="lazy">
               <img src="images/apartmani/a2/3.jpg" alt="" loading="lazy">
@@ -204,6 +214,13 @@
               Smješten na mirnoj poziciji, a opet blizu dućana i restorana.
               Odličan izbor ako želite praktičnost bez gužve.
             </p>
+
+            <div class="apt__quick">
+              <div class="apt__q"><span>❄️</span><strong>Klima</strong><em>hladno i ugodno</em></div>
+              <div class="apt__q"><span>📶</span><strong>Wi-Fi</strong><em>stabilan internet</em></div>
+              <div class="apt__q"><span>🅿️</span><strong>Parking</strong><em>privatno mjesto</em></div>
+              <div class="apt__q"><span>🏖️</span><strong>Plaža</strong><em>130–150 m</em></div>
+            </div>
 
             <ul class="apt__facts">
               <li><strong>Klima</strong> i Wi-Fi</li>
@@ -224,10 +241,10 @@
         </article>
 
         <!-- A3 -->
-        <article class="apt reveal">
+        <article class="apt reveal" data-gallery="a3" data-gallery-title="Apartman A3" data-gallery-count="10">
           <div class="apt__media">
             <img src="images/apartmani/a3/hero.jpg" alt="Apartman A3 - obiteljski apartman i terasa" loading="lazy">
-            <div class="apt__thumbs" aria-hidden="true">
+            <div class="apt__thumbs">
               <img src="images/apartmani/a3/1.jpg" alt="" loading="lazy">
               <img src="images/apartmani/a3/2.jpg" alt="" loading="lazy">
               <img src="images/apartmani/a3/3.jpg" alt="" loading="lazy">
@@ -300,6 +317,29 @@
             <a class="btn btn--primary" href="#kontakt" data-close-calendar>Pošalji upit</a>
             <button class="btn" type="button" data-close-calendar>Zatvori</button>
           </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GALLERY MODAL -->
+    <div class="modal modal--gallery" id="galleryModal" aria-hidden="true">
+      <div class="modal__backdrop" data-close-gallery></div>
+
+      <div class="modal__panel modal__panel--gallery" role="dialog" aria-modal="true" aria-labelledby="galleryTitle">
+        <div class="modal__head">
+          <h3 id="galleryTitle">Galerija — Apartman A1</h3>
+
+          <div class="galleryModal__meta" id="galleryMeta" aria-live="polite"></div>
+
+          <button class="modal__close" type="button" aria-label="Zatvori" data-close-gallery>✕</button>
+        </div>
+
+        <div class="galleryModal__stage">
+          <button class="galleryModal__nav galleryModal__nav--prev" type="button" aria-label="Prethodna" data-gallery-prev>‹</button>
+
+          <img class="galleryModal__img" id="galleryImg" alt="">
+
+          <button class="galleryModal__nav galleryModal__nav--next" type="button" aria-label="Sljedeća" data-gallery-next>›</button>
         </div>
       </div>
     </div>
