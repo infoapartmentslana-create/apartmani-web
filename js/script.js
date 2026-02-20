@@ -219,3 +219,34 @@ window.addEventListener("scroll", onHeaderScroll, { passive: true });
 
   items.forEach(el => io.observe(el));
 })();
+
+/* =========================
+   Calendar modal (placeholder)
+   ========================= */
+(() => {
+  const modal = document.getElementById('calendarModal');
+  if (!modal) return;
+
+  const openers = document.querySelectorAll('[data-open-calendar]');
+  const closers = document.querySelectorAll('[data-close-calendar]');
+
+  function openModal(){
+    modal.classList.add('is-open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal(){
+    modal.classList.remove('is-open');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  openers.forEach(btn => btn.addEventListener('click', openModal));
+  closers.forEach(btn => btn.addEventListener('click', closeModal));
+
+  // ESC zatvara
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
+  });
+})();

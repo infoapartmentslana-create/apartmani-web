@@ -121,45 +121,188 @@
 
     </section>
 
-    <section id="apartmani" class="section">
+    <section id="apartmani" class="section apartmentsS">
       <div class="container">
-        <h2>Apartmani</h2>
-        <p class="muted">Kratko predstavljanje smještaja (možeš kasnije dodati više apartmana).</p>
 
-        <div class="cards">
-          <article class="card">
-            <h3>🌹 Apartman A1 (2+2) ⭐⭐⭐</h3>
-            <p class="muted">Za 4 osobe • Terasa s pogledom • Prvi red do mora</p>
-            <ul class="list">
-              <li>Klima, Wi-Fi, privatni parking</li>
-              <li>Grill</li>
-              <li>Plaža 130–150 m</li>
-            </ul>
-          </article>
+        <header class="apartmentsS__head">
+          <p class="apartmentsS__kicker">
+            <span class="apartmentsS__kickerLine"></span>
+            NAŠI APARTMANI
+            <span class="apartmentsS__kickerLine"></span>
+          </p>
 
-          <article class="card">
-            <h3>🌸 Apartman A2 (2+2) ⭐⭐⭐</h3>
-            <p class="muted">Za 4 osobe • Mirna uvala • Blizu dućana/restorana</p>
-            <ul class="list">
-              <li>Klima, Wi-Fi, privatni parking</li>
-              <li>Grill</li>
-              <li>Dućan/restorani 200 m</li>
-            </ul>
-          </article>
+          <h2 class="apartmentsS__title">Tri apartmana, svaki s vlastitom pričom.</h2>
 
-          <article class="card">
-            <h3>🍀 Apartman A3 (2+3) ⭐⭐⭐</h3>
-            <p class="muted">Za 5 osoba • Idealno za obitelj • Terasa s pogledom</p>
-            <ul class="list">
-              <li>Klima, Wi-Fi, privatni parking</li>
-              <li>Grill</li>
-              <li>Rtina Miočići (20 km prije Zadra)</li>
+          <p class="apartmentsS__subtitle">
+            Mir uz more, terasa i pogled koji ostaje u sjećanju.<br>
+            Odaberite apartman koji vam najviše odgovara.
+          </p>
+        </header>
+
+        <!-- A1 -->
+        <article class="apt reveal">
+          <div class="apt__media">
+            <img src="images/apartmani/a1/hero.jpg" alt="Apartman A1 - terasa i pogled" loading="lazy">
+            <div class="apt__thumbs" aria-hidden="true">
+              <img src="images/apartmani/a1/1.jpg" alt="" loading="lazy">
+              <img src="images/apartmani/a1/2.jpg" alt="" loading="lazy">
+              <img src="images/apartmani/a1/3.jpg" alt="" loading="lazy">
+            </div>
+          </div>
+
+          <div class="apt__body">
+            <div class="apt__badges">
+              <span class="apt__badge">Prvi red do mora</span>
+              <span class="apt__badge">Terasa s pogledom</span>
+            </div>
+
+            <h3 class="apt__title">Apartman A1 <span class="apt__meta">· 2+2 osobe</span></h3>
+
+            <p class="apt__lead">
+              Najbliže moru — terasa s otvorenim horizontom i zalaskom sunca.
+              Idealan za parove ili obitelj koja želi mir i “prvi red” do mora.
+            </p>
+
+            <ul class="apt__facts">
+              <li><strong>Klima</strong> i Wi-Fi</li>
+              <li><strong>Privatni parking</strong></li>
+              <li><strong>Grill</strong></li>
+              <li>Plaža <strong>130–150 m</strong></li>
             </ul>
-          </article>
-        </div>
+
+            <div class="apt__cta">
+              <button class="btn btn--primary" type="button" data-open-calendar>
+                Provjeri slobodne termine
+              </button>
+              <a class="btn" href="#kontakt">Rezerviraj / upit</a>
+            </div>
+
+            <p class="apt__note">* Kalendar je placeholder — kasnije ubacujemo stvarne termine.</p>
+          </div>
+        </article>
+
+        <!-- A2 (alternating) -->
+        <article class="apt apt--alt reveal">
+          <div class="apt__media">
+            <img src="images/apartmani/a2/hero.jpg" alt="Apartman A2 - interijer i uvala" loading="lazy">
+            <div class="apt__thumbs" aria-hidden="true">
+              <img src="images/apartmani/a2/1.jpg" alt="" loading="lazy">
+              <img src="images/apartmani/a2/2.jpg" alt="" loading="lazy">
+              <img src="images/apartmani/a2/3.jpg" alt="" loading="lazy">
+            </div>
+          </div>
+
+          <div class="apt__body">
+            <div class="apt__badges">
+              <span class="apt__badge">Mirna uvala</span>
+              <span class="apt__badge">Blizu sadržaja</span>
+            </div>
+
+            <h3 class="apt__title">Apartman A2 <span class="apt__meta">· 2+2 osobe</span></h3>
+
+            <p class="apt__lead">
+              Smješten na mirnoj poziciji, a opet blizu dućana i restorana.
+              Odličan izbor ako želite praktičnost bez gužve.
+            </p>
+
+            <ul class="apt__facts">
+              <li><strong>Klima</strong> i Wi-Fi</li>
+              <li><strong>Privatni parking</strong></li>
+              <li><strong>Grill</strong></li>
+              <li>Dućan/restorani <strong>200 m</strong></li>
+            </ul>
+
+            <div class="apt__cta">
+              <button class="btn btn--primary" type="button" data-open-calendar>
+                Provjeri slobodne termine
+              </button>
+              <a class="btn" href="#kontakt">Rezerviraj / upit</a>
+            </div>
+
+            <p class="apt__note">* Kalendar je placeholder — kasnije ubacujemo stvarne termine.</p>
+          </div>
+        </article>
+
+        <!-- A3 -->
+        <article class="apt reveal">
+          <div class="apt__media">
+            <img src="images/apartmani/a3/hero.jpg" alt="Apartman A3 - obiteljski apartman i terasa" loading="lazy">
+            <div class="apt__thumbs" aria-hidden="true">
+              <img src="images/apartmani/a3/1.jpg" alt="" loading="lazy">
+              <img src="images/apartmani/a3/2.jpg" alt="" loading="lazy">
+              <img src="images/apartmani/a3/3.jpg" alt="" loading="lazy">
+            </div>
+          </div>
+
+          <div class="apt__body">
+            <div class="apt__badges">
+              <span class="apt__badge">Za obitelj</span>
+              <span class="apt__badge">Prostran</span>
+            </div>
+
+            <h3 class="apt__title">Apartman A3 <span class="apt__meta">· 2+3 osobe</span></h3>
+
+            <p class="apt__lead">
+              Najviše prostora za bezbrižan obiteljski odmor.
+              Komotan raspored i terasa za duga ljetna jutra i večeri.
+            </p>
+
+            <ul class="apt__facts">
+              <li><strong>Klima</strong> i Wi-Fi</li>
+              <li><strong>Privatni parking</strong></li>
+              <li><strong>Grill</strong></li>
+              <li>Lokacija: <strong>Rtina Miočići</strong></li>
+            </ul>
+
+            <div class="apt__cta">
+              <button class="btn btn--primary" type="button" data-open-calendar>
+                Provjeri slobodne termine
+              </button>
+              <a class="btn" href="#kontakt">Rezerviraj / upit</a>
+            </div>
+
+            <p class="apt__note">* Kalendar je placeholder — kasnije ubacujemo stvarne termine.</p>
+          </div>
+        </article>
 
       </div>
     </section>
+
+    <!-- KALENDAR MODAL (placeholder) -->
+    <div class="modal" id="calendarModal" aria-hidden="true">
+      <div class="modal__backdrop" data-close-calendar></div>
+
+      <div class="modal__panel" role="dialog" aria-modal="true" aria-labelledby="calendarTitle">
+        <div class="modal__head">
+          <h3 id="calendarTitle">Slobodni termini</h3>
+          <button class="modal__close" type="button" aria-label="Zatvori" data-close-calendar>✕</button>
+        </div>
+
+        <div class="modal__body">
+          <p class="muted">
+            Ovdje će doći kalendar s dostupnim terminima po danima.
+            Za sada je ovo samo mjesto (placeholder).
+          </p>
+
+          <div class="calendarPlaceholder">
+            <div class="calendarPlaceholder__grid" aria-hidden="true">
+              <div class="calendarPlaceholder__cell is-free">Slobodno</div>
+              <div class="calendarPlaceholder__cell is-free">Slobodno</div>
+              <div class="calendarPlaceholder__cell is-busy">Zauzeto</div>
+              <div class="calendarPlaceholder__cell is-free">Slobodno</div>
+              <div class="calendarPlaceholder__cell is-busy">Zauzeto</div>
+              <div class="calendarPlaceholder__cell is-free">Slobodno</div>
+              <div class="calendarPlaceholder__cell is-free">Slobodno</div>
+            </div>
+          </div>
+
+          <div class="modal__foot">
+            <a class="btn btn--primary" href="#kontakt" data-close-calendar>Pošalji upit</a>
+            <button class="btn" type="button" data-close-calendar>Zatvori</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <section id="lokacija" class="section">
       <div class="container">

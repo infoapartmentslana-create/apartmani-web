@@ -1577,3 +1577,366 @@ main > .section:nth-of-type(even){
     padding: 92px 0 96px;
   }
 }
+
+/* =========================
+   APARTMANI — EDITORIAL SHOWCASE
+   ========================= */
+
+.apartmentsS__head{
+  max-width: 960px;
+  margin: 0 auto 48px;
+  text-align: center;
+
+  padding: 32px 0 0;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+
+.apartmentsS__kicker{
+  margin: 0 0 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+
+  font-weight: 950;
+  letter-spacing: .8px;
+  text-transform: uppercase;
+  font-size: .86rem;
+  color: rgba(11,27,43,.60);
+}
+
+/* linije lijevo/desno */
+.apartmentsS__kickerLine{
+  width: 96px;
+  height: 1px;
+  border-radius: 999px;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(195,160,90,.92),
+    rgba(228,205,150,.62),
+    transparent
+  );
+  opacity: .95;
+}
+
+.apartmentsS__kicker::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  bottom:-9px;
+  transform: translateX(-50%);
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(195,160,90,.60);
+  box-shadow: 0 10px 26px rgba(195,160,90,.14);
+  opacity: .45;
+  display:none;
+}
+
+.apartmentsS__title{
+  margin: 0 auto 12px;
+  max-width: 22ch;
+
+  font-size: clamp(2.05rem, 3.6vw, 2.85rem);
+  line-height: 1.12;
+  letter-spacing: -0.022em;
+
+  color: rgba(11,27,43,.92);
+}
+
+.apartmentsS__subtitle{
+  margin: 0 auto;          /* BITNO: centriranje bloka */
+  max-width: 56ch;
+
+  font-size: 1.03rem;
+  line-height: 1.85;
+  color: rgba(11,27,43,.62);
+
+  text-align: center;      /* BITNO: centriranje teksta */
+}
+
+.apartmentsS__subtitle::after{
+  content:"";
+  display:block;
+  width:60px;
+  height:1px;
+  margin:18px auto 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(195,160,90,.7),
+    transparent
+  );
+  opacity:.7;
+}
+
+.apartmentsS__topCtas{
+  display: inline-flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 6px;
+}
+
+.apartmentsS__btnSoft{
+  background: rgba(255,255,255,.72);
+  border: 1px solid rgba(10,25,40,.10);
+  box-shadow: 0 14px 34px rgba(10,40,70,.08);
+}
+
+.apartmentsS__btnSoft:hover{
+  transform: translateY(-1px);
+}
+
+@media (max-width: 520px){
+  .apartmentsS__kickerLine{ width: 46px; }
+  .apartmentsS__title{ max-width: 18ch; }
+}
+
+/* One apartment block */
+.apt{
+  display:grid;
+  grid-template-columns: 1.05fr .95fr;
+  gap: 26px;
+  align-items: center;
+
+  margin: 30px 0;
+  padding: 18px;
+
+  border-radius: 28px;
+
+  background: rgba(255,255,255,.36);
+  border: 1px solid rgba(255,255,255,.55);
+  box-shadow: 0 22px 70px rgba(10,40,70,.10);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.apt--alt{
+  grid-template-columns: .95fr 1.05fr;
+}
+.apt--alt .apt__media{ order: 2; }
+.apt--alt .apt__body{ order: 1; }
+
+.apt__media{
+  border-radius: 22px;
+  overflow: hidden;
+  border: 1px solid rgba(10,25,40,.10);
+  background: #fff;
+  box-shadow: 0 20px 55px rgba(10,40,70,.12);
+}
+
+.apt__media > img{
+  width:100%;
+  height: 360px;
+  object-fit: cover;
+  display:block;
+}
+
+.apt__thumbs{
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  padding: 12px;
+  background: rgba(255,255,255,.7);
+  border-top: 1px solid rgba(10,25,40,.08);
+}
+
+.apt__thumbs img{
+  width:100%;
+  height: 92px;
+  object-fit: cover;
+  border-radius: 14px;
+  border: 1px solid rgba(10,25,40,.08);
+  display:block;
+}
+
+.apt__badges{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-bottom: 10px;
+}
+
+.apt__badge{
+  padding: 8px 10px;
+  border-radius: 999px;
+
+  background: rgba(11,27,43,.045);
+  border: 1px solid rgba(11,27,43,.08);
+
+  font-weight: 850;
+  font-size: .86rem;
+  color: rgba(11,27,43,.72);
+}
+
+.apt__title{
+  margin: 0 0 10px;
+  font-size: clamp(1.35rem, 2.2vw, 1.85rem);
+  letter-spacing: -0.01em;
+}
+
+.apt__meta{
+  font-weight: 800;
+  color: rgba(11,27,43,.55);
+  font-size: .95rem;
+}
+
+.apt__lead{
+  margin: 0 0 14px;
+  color: rgba(11,27,43,.70);
+  line-height: 1.85;
+}
+
+.apt__facts{
+  margin: 0 0 16px;
+  padding-left: 18px;
+  color: rgba(11,27,43,.68);
+  line-height: 1.8;
+}
+
+.apt__facts li{
+  margin: 6px 0;
+}
+
+.apt__cta{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-top: 8px;
+}
+
+.apt__note{
+  margin: 12px 0 0;
+  font-size: .92rem;
+  color: rgba(11,27,43,.52);
+}
+
+/* Responsive */
+@media (max-width: 900px){
+  .apt{
+    grid-template-columns: 1fr;
+    padding: 14px;
+  }
+  .apt__media > img{ height: 280px; }
+  .apt__thumbs img{ height: 86px; }
+}
+
+/* =========================
+   MODAL (Calendar placeholder)
+   ========================= */
+
+.modal{
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+
+  display:none;
+}
+
+.modal.is-open{
+  display:block;
+}
+
+.modal__backdrop{
+  position:absolute;
+  inset:0;
+  background: rgba(0,0,0,.30);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.modal__panel{
+  position: relative;
+  width: min(720px, calc(100% - 28px));
+  margin: 10vh auto 0;
+
+  border-radius: 22px;
+  overflow: hidden;
+
+  background: rgba(255,255,255,.90);
+  border: 1px solid rgba(255,255,255,.65);
+  box-shadow: 0 26px 80px rgba(0,0,0,.22);
+
+  transform: translateY(10px);
+  animation: modalIn .18s ease forwards;
+}
+
+@keyframes modalIn{
+  to{ transform: translateY(0); }
+}
+
+.modal__head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 12px;
+
+  padding: 16px 18px;
+  border-bottom: 1px solid rgba(10,25,40,.10);
+}
+
+.modal__head h3{
+  margin: 0;
+}
+
+.modal__close{
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  border: 1px solid rgba(10,25,40,.12);
+  background: rgba(255,255,255,.8);
+  cursor: pointer;
+  font-size: 1.05rem;
+}
+
+.modal__body{
+  padding: 16px 18px 18px;
+}
+
+.modal__foot{
+  display:flex;
+  gap: 12px;
+  justify-content:flex-end;
+  flex-wrap:wrap;
+  margin-top: 16px;
+}
+
+/* Calendar placeholder look */
+.calendarPlaceholder{
+  margin-top: 14px;
+  padding: 14px;
+  border-radius: 18px;
+  border: 1px solid rgba(10,25,40,.10);
+  background: rgba(11,27,43,.03);
+}
+
+.calendarPlaceholder__grid{
+  display:grid;
+  grid-template-columns: repeat(7, minmax(0,1fr));
+  gap: 10px;
+}
+
+.calendarPlaceholder__cell{
+  padding: 12px 10px;
+  border-radius: 14px;
+  font-weight: 900;
+  font-size: .9rem;
+  text-align:center;
+  border: 1px solid rgba(10,25,40,.10);
+  background: rgba(255,255,255,.75);
+  color: rgba(11,27,43,.70);
+}
+
+.calendarPlaceholder__cell.is-free{
+  box-shadow: 0 10px 22px rgba(30,167,255,.10);
+}
+
+.calendarPlaceholder__cell.is-busy{
+  opacity: .55;
+  text-decoration: line-through;
+}
