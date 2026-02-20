@@ -957,15 +957,13 @@ main > .section:nth-of-type(even){
 .reveal{
   opacity: 0;
   transform: translateY(14px);
-  filter: none;
-  transition: opacity .6s ease, transform .6s ease, filter .6s ease;
-  will-change: opacity, transform, filter;
+  transition: opacity .6s ease, transform .6s ease;
+  will-change: opacity, transform;
 }
 
 .reveal.is-visible{
   opacity: 1;
   transform: translateY(0);
-  filter: blur(0);
 }
 
 /* Mobile */
@@ -1338,16 +1336,15 @@ main > .section:nth-of-type(even){
    ========================= */
 
 .aboutSplit__benefits{
-  /* manje "crno", više ocean dusk */
-  background: linear-gradient(
-    180deg,
-    #1c2230 0%,
-    #171c27 55%,
-    #121622 100%
-  );
+  /* luxury: deep navy + subtle vignette */
+  background:
+    radial-gradient(900px 520px at 50% 0%, rgba(255,255,255,.06), transparent 60%),
+    radial-gradient(700px 420px at 20% 20%, rgba(30,167,255,.10), transparent 60%),
+    radial-gradient(700px 420px at 80% 30%, rgba(195,160,90,.12), transparent 65%),
+    linear-gradient(180deg, #1c2230 0%, #171c27 55%, #121622 100%);
   color: #f5f1ea;
 
-  padding: 96px 0 104px;
+  padding: 104px 0 112px;
 
   position: relative;
   overflow: hidden;
@@ -1356,7 +1353,9 @@ main > .section:nth-of-type(even){
   border-top-left-radius: 28px;
   border-top-right-radius: 28px;
 
-  box-shadow: 0 -18px 60px rgba(0,0,0,.10);
+  box-shadow:
+    0 -22px 70px rgba(0,0,0,.16),
+    inset 0 1px 0 rgba(255,255,255,.04);
 }
 
 /* sadržaj iznad overlay-a */
@@ -1377,21 +1376,22 @@ main > .section:nth-of-type(even){
 }
 
 .aboutSplit__kicker--light{
-  color: rgba(245,241,234,.78);
-  letter-spacing: .55px;
+  color: rgba(245,241,234,.76);
   text-align:center;
   text-transform: uppercase;
+  letter-spacing: .62px;
   font-weight: 800;
-  font-size: .78rem;
-  margin-bottom: 10px;
+  font-size: .76rem;
+  margin: 0 0 10px;
 }
 
 .aboutSplit__benefitTitle{
   text-align:center;
-  margin: 0 0 64px;
-  font-size: clamp(1.9rem, 2.6vw, 2.6rem);
-  color: rgba(255,255,255,.94);
-  letter-spacing: -0.01em;
+  margin: 0 0 68px;
+
+  font-size: clamp(2.0rem, 2.7vw, 2.7rem);
+  color: rgba(255,255,255,.95);
+  letter-spacing: -0.012em;
 }
 
 .aboutSplit__grid{
@@ -1405,31 +1405,36 @@ main > .section:nth-of-type(even){
 }
 
 .aboutSplit__item{
-  padding: 28px 26px;
-  border-radius: 22px;
   position: relative;
   overflow: hidden;
-  top: 0;
 
+  padding: 30px 28px;
+  border-radius: 22px;
+
+  /* softer + more premium */
   background: linear-gradient(
     145deg,
-    rgba(255,255,255,.075),
+    rgba(255,255,255,.07),
     rgba(255,255,255,.02)
   );
 
-  border: 1px solid rgba(195,160,90,.20);
+  border: 1px solid rgba(195,160,90,.22);
 
   box-shadow:
-    0 18px 44px rgba(0,0,0,.28),
+    0 18px 44px rgba(0,0,0,.30),
     inset 0 1px 0 rgba(255,255,255,.08);
-
-  transition: top .22s ease, box-shadow .22s ease, border-color .22s ease, background .22s ease;
-  transform: translate3d(0,0,0);
-  will-change: transform;
-  backface-visibility: hidden;
 
   outline: 0 solid rgba(195,160,90,0);
   outline-offset: 2px;
+
+  top: 0;
+  transition:
+    top .22s ease,
+    box-shadow .22s ease,
+    border-color .22s ease,
+    outline-color .22s ease,
+    outline-width .22s ease,
+    background .22s ease;
 }
 
 /* premium stagger ulaz (1 po 1) */
@@ -1444,16 +1449,22 @@ main > .section:nth-of-type(even){
 }
 
 .aboutSplit__item:hover{
+  top: -4px;
+
   outline-width: 1px;
   outline-color: rgba(195,160,90,.22);
-
   border-color: rgba(195,160,90,.32);
-  box-shadow:
-    0 26px 62px rgba(0,0,0,.34),
-    0 0 0 6px rgba(195,160,90,.06),  /* soft outer glow ring */
-    inset 0 1px 0 rgba(255,255,255,.09);
 
-  top: -4px;
+  background: linear-gradient(
+    145deg,
+    rgba(255,255,255,.085),
+    rgba(255,255,255,.02)
+  );
+
+  box-shadow:
+    0 28px 66px rgba(0,0,0,.36),
+    0 0 0 6px rgba(195,160,90,.055),
+    inset 0 1px 0 rgba(255,255,255,.09);
 }
 
 .aboutSplit__item:hover::before{
@@ -1477,10 +1488,10 @@ main > .section:nth-of-type(even){
 
   background: linear-gradient(
     90deg,
-    rgba(195,160,90,.95),
-    rgba(228,205,150,.70)
+    rgba(195,160,90,.96),
+    rgba(228,205,150,.72)
   );
-  opacity:.95;
+  opacity:.92;
 
   transform-origin: left center;
   transition: transform .22s ease, opacity .22s ease;
@@ -1493,21 +1504,21 @@ main > .section:nth-of-type(even){
   left:-75%;
   width:50%;
   height:180%;
+  transform: skewX(-20deg);
 
   background: linear-gradient(
     120deg,
     transparent,
-    rgba(255,255,255,.14),
+    rgba(255,255,255,.16),
     transparent
   );
 
-  transform: skewX(-20deg);
   opacity:0;
   pointer-events:none;
 }
 
 .aboutSplit__item:hover::after{
-  animation: premiumSweep 1.2s ease forwards;
+  animation: premiumSweep 1.05s ease forwards;
 }
 
 /* okidač: kad se reveal element pojavi */
@@ -1516,17 +1527,9 @@ main > .section:nth-of-type(even){
 }
 
 @keyframes premiumSweep{
-  0%{
-    left:-75%;
-    opacity:0;
-  }
-  20%{
-    opacity:.9;
-  }
-  100%{
-    left:140%;
-    opacity:0;
-  }
+  0%{ left:-75%; opacity:0; }
+  18%{ opacity:.9; }
+  100%{ left:140%; opacity:0; }
 }
 
 @keyframes cardShine{
@@ -1544,16 +1547,17 @@ main > .section:nth-of-type(even){
 
 .aboutSplit__item h4{
   margin: 0 0 10px;
-  margin-top: 14px; /* da ne lupa u signature line */
-  font-size: 1.1rem;
+  margin-top: 14px;
+
+  font-size: 1.12rem;
   color: rgba(255,255,255,.95);
-  letter-spacing: .1px;
+  letter-spacing: .08px;
 
   transition: color .22s ease;
 }
 
 .aboutSplit__item:hover h4{
-  color: rgba(255,255,255,.98);
+  color: rgba(255,255,255,.985);
 }
 
 .aboutSplit__item p{
@@ -1564,12 +1568,12 @@ main > .section:nth-of-type(even){
 
 /* responsive */
 @media (max-width: 900px){
-  .aboutSplit__grid{
-    grid-template-columns: 1fr;
-  }
+  .aboutSplit__grid{ grid-template-columns: 1fr; }
+
   .aboutSplit__benefits{
     margin-top: -36px;
     border-top-left-radius: 22px;
     border-top-right-radius: 22px;
+    padding: 92px 0 96px;
   }
 }
