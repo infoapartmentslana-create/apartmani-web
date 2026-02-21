@@ -1336,26 +1336,26 @@ main > .section:nth-of-type(even){
    ========================= */
 
 .aboutSplit__benefits{
-  /* luxury: deep navy + subtle vignette */
-  background:
-    radial-gradient(900px 520px at 50% 0%, rgba(255,255,255,.06), transparent 60%),
-    radial-gradient(700px 420px at 20% 20%, rgba(30,167,255,.10), transparent 60%),
-    radial-gradient(700px 420px at 80% 30%, rgba(195,160,90,.12), transparent 65%),
-    linear-gradient(180deg, #1c2230 0%, #171c27 55%, #121622 100%);
-  color: #f5f1ea;
-
-  padding: 72px 0 80px;
-
   position: relative;
   overflow: hidden;
 
-  margin-top: -30px;
-  border-top-left-radius: 28px;
-  border-top-right-radius: 28px;
+  /* tamni, ali elegantniji */
+  background:
+    radial-gradient(600px 320px at 50% -10%, rgba(228,205,150,.08), transparent 70%),
+    linear-gradient(180deg, #1a1f2b 0%, #141823 100%);
+
+  color: #f5f1ea;
+
+  /* 🎯 MANJE VISINE */
+  padding: 60px 0 70px;
+
+  margin-top: -40px;
+
+  border-top-left-radius: 34px;
+  border-top-right-radius: 34px;
 
   box-shadow:
-    0 -22px 70px rgba(0,0,0,.16),
-    inset 0 1px 0 rgba(255,255,255,.04);
+    0 -18px 60px rgba(0,0,0,.18);
 }
 
 /* sadržaj iznad overlay-a */
@@ -1387,11 +1387,29 @@ main > .section:nth-of-type(even){
 
 .aboutSplit__benefitTitle{
   text-align:center;
-  margin: 0 0 48px;
+  margin: 0 0 40px;
 
   font-size: clamp(2.0rem, 2.7vw, 2.7rem);
   color: rgba(255,255,255,.95);
   letter-spacing: -0.012em;
+}
+
+.aboutSplit__benefitTitle::after{
+  content:"";
+  display:block;
+  width:60px;
+  height:2px;
+  margin:18px auto 0;
+
+  background: linear-gradient(
+    90deg,
+    rgba(195,160,90,.0),
+    rgba(228,205,150,.8),
+    rgba(195,160,90,.0)
+  );
+
+  border-radius:99px;
+  opacity:.85;
 }
 
 .aboutSplit__grid{
