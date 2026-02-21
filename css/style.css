@@ -1877,7 +1877,7 @@ main > .section:nth-of-type(even){
   gap: 26px;
 
   margin: 10px 0 30px 0;
-  padding: 18px;
+  padding: 14px 18px 18px;
 
   border-radius: 28px;
   align-items: stretch; 
@@ -1955,7 +1955,7 @@ main > .section:nth-of-type(even){
   display:flex;
   gap:10px;
   flex-wrap:wrap;
-  margin-bottom: 10px;
+  margin: 4px 0 8px;
 }
 
 .apt__badge{
@@ -2767,26 +2767,28 @@ main > .section:nth-of-type(even){
 }
 
 .aptLux__title{
-  font-size:1.85rem;
-  font-weight:800;
-  letter-spacing:-0.01em;
-  color:#0b1b2b;
-  line-height:1.15;
-  position:relative;
+  font-size: 1.85rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: #0b1b2b;
+  line-height: 1.15;
+  position: relative;
+
+  display: inline-block; /* bitno: da underline prati samo tekst */
 }
 
 .aptLux__title::after{
   content:"";
   display:block;
-  width:48px;
-  height:3px;
-  margin-top:10px;
-  border-radius:99px;
+  width: 100%;           /* <-- OVO je ono što želiš */
+  height: 3px;
+  margin-top: 10px;
+  border-radius: 99px;
 
-  background:linear-gradient(
+  background: linear-gradient(
     90deg,
     var(--a1-accent),
-    rgba(31,58,95,.35)
+    rgba(31,58,95,35)
   );
 }
 
@@ -2828,31 +2830,62 @@ main > .section:nth-of-type(even){
 /* ako ti još uvijek postoji ova crta ispod cijene — ugasi je */
 .aptLux__price::after{ content:none; }
 
+/* Kapacitet badge: učini "4 osobe" glavnim, "2+2" sekundarnim */
 .aptLux__cap{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
 
-  padding:8px 16px;
-  border-radius:999px;
+  padding: 0;              /* makni osjećaj gumba */
+  border: 0;
+  background: transparent; /* bez pozadine */
+  box-shadow: none;        /* bez sjene */
+  border-radius: 0;
 
-  font-weight:800;
-  font-size:.9rem;
-  letter-spacing:.04em;
+  color: #0b1b2b;          /* normalan tekst (ili var(--text)) */
+}
 
-  color:var(--a1-accent);
+.aptLux__cap svg,
+.aptLux__cap i{
+  position: relative;
+  top: 1px; /* sitno spuštanje ako treba */
+}
 
-  background:var(--a1-accent-soft);
-  border:1px solid var(--a1-accent-border);
+.aptLux__cap .cap__sub{
+  font-weight: 600;
+  font-size: 1rem;   /* <-- malo veće */
+  opacity: .75;
+  line-height: 1;
+}
 
-  box-shadow:0 8px 20px rgba(31,58,95,.08);
+/* Overlay badge na slici */
+.apt__capOverlay{
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 2;
+
+  padding: 10px 12px;
+  border-radius: 999px;
+
+  font-weight: 900;
+  font-size: .92rem;
+  letter-spacing: .02em;
+
+  color: #0b1b2b;
+  background: rgba(255,255,255,.86);
+  border: 1px solid rgba(10,25,40,.12);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  box-shadow: 0 14px 34px rgba(10,40,70,.14);
 }
 
 .aptLux__cap:hover{
-  transform:translateY(-2px);
-  box-shadow:
-    0 18px 40px rgba(10,40,70,.12),
-    inset 0 1px 0 rgba(255,255,255,.85);
+  transform: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  cursor: default;
 }
 
 /* 4) opis */
@@ -2868,6 +2901,33 @@ main > .section:nth-of-type(even){
   height: 1px;
   background: var(--a1-accent-border);  /* <-- ovo */
   margin: 6px 0 18px;
+}
+
+.aptLux__cap .cap__top{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  font-weight: 700;
+  font-size: 1.02rem;   /* <-- povećano */
+  line-height: 1;
+}
+
+.cap__icon{
+  font-size: 1.2em;  /* 👈 OVO će sigurno povećati ikonu */
+  display: inline-flex;
+  align-items: center;
+}
+
+.cap__icon svg{
+  width: 22px;
+  height: 22px;
+  color: var(--a1-accent);   /* A1 plava */
+}
+
+.aptLux__cap .cap__top::first-letter{
+  line-height: 1; /* dodatno smiri emoji baseline */
+  font-size: 1.3em;
 }
 
 @media (max-width: 700px){
@@ -3031,4 +3091,46 @@ main > .section:nth-of-type(even){
   .aptLux__actions{
     grid-template-columns: 1fr;
   }
+}
+
+/* ===== Apartman A1 – premium fix ===== */
+
+.apt__body h3{
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
+  font-size: 2.2rem;          /* VEĆE */
+  letter-spacing: -0.4px;
+  margin-bottom: 6px;
+  color: #0b1b2b;
+  margin-top: 0;
+}
+
+/* A1 dio malo naglasi */
+.apt__body h3 span{
+  font-size: 1.15em;          /* povećava A1 */
+  font-weight: 700;
+}
+
+/* Plava gradijent linija */
+/* ===== Premium tapered underline ===== */
+
+.apt__body h3::after{
+  content:"";
+  display:block;
+  width: 150px;
+  height: 2px;
+  margin-top: 12px;
+
+  background: linear-gradient(
+    90deg,
+    var(--a1-accent) 0%,
+    var(--a1-accent) 35%,
+    rgba(31,58,95,.6) 65%,
+    rgba(31,58,95,0) 100%
+  );
+
+  /* sužavanje u špic */
+  clip-path: polygon(0 0, 100% 0, 85% 100%, 0% 100%);
+
+  border-radius: 2px;
 }
