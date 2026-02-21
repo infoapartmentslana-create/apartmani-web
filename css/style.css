@@ -1344,7 +1344,7 @@ main > .section:nth-of-type(even){
     linear-gradient(180deg, #1c2230 0%, #171c27 55%, #121622 100%);
   color: #f5f1ea;
 
-  padding: 104px 0 112px;
+  padding: 72px 0 80px;
 
   position: relative;
   overflow: hidden;
@@ -1387,7 +1387,7 @@ main > .section:nth-of-type(even){
 
 .aboutSplit__benefitTitle{
   text-align:center;
-  margin: 0 0 68px;
+  margin: 0 0 48px;
 
   font-size: clamp(2.0rem, 2.7vw, 2.7rem);
   color: rgba(255,255,255,.95);
@@ -1622,6 +1622,12 @@ main > .section:nth-of-type(even){
   border: 1px solid rgba(195,160,90,.25);
 
   flex-shrink: 0; /* da se ne smanjuje */
+
+  transition:
+    transform .35s cubic-bezier(.2,.8,.2,1),
+    box-shadow .35s ease,
+    border-color .35s ease,
+    background .35s ease;
 }
 
 .aboutSplit__icon::after{
@@ -1682,16 +1688,21 @@ main > .section:nth-of-type(even){
 }
 
 .aboutSplit__item:hover .aboutSplit__icon{
-  border-color: rgba(228,205,150,.55);
-  background: rgba(228,205,150,.10);
+  transform: translateY(-2px) scale(1.05);
+
+  border-color: rgba(228,205,150,.45);
+  background: rgba(228,205,150,.08);
 
   box-shadow:
-    0 0 0 1px rgba(228,205,150,.25),
-    0 0 18px rgba(228,205,150,.35),
-    0 0 38px rgba(195,160,90,.18),
+    0 12px 28px rgba(0,0,0,.35),
+    0 0 18px rgba(228,205,150,.25),
     inset 0 1px 0 rgba(255,255,255,.6);
 
-  transition: all .35s ease;
+  transition:
+    transform .35s cubic-bezier(.2,.8,.2,1),
+    box-shadow .35s ease,
+    border-color .35s ease,
+    background .35s ease;
 }
 
 .aboutSplit__item:hover .aboutSplit__icon svg{
