@@ -1355,7 +1355,9 @@ main > .section:nth-of-type(even){
   border-top-right-radius: 34px;
 
   box-shadow:
-    0 -18px 60px rgba(0,0,0,.18);
+    0 -18px 60px rgba(0,0,0,.22),
+    0 0 0 1px rgba(228,205,150,.06),
+    0 0 80px rgba(195,160,90,.05);
 }
 
 /* sadržaj iznad overlay-a */
@@ -1375,6 +1377,17 @@ main > .section:nth-of-type(even){
   z-index:0;
 }
 
+.aboutSplit__benefits::after{
+  content:"";
+  position:absolute;
+  inset:0;
+
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+
+  mix-blend-mode: overlay;
+  pointer-events:none;
+}
+
 .aboutSplit__kicker--light{
   color: rgba(245,241,234,.76);
   text-align:center;
@@ -1391,7 +1404,13 @@ main > .section:nth-of-type(even){
 
   font-size: clamp(2.0rem, 2.7vw, 2.7rem);
   color: rgba(255,255,255,.95);
-  letter-spacing: -0.012em;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.aboutSplit__benefitTitle span{
+  font-weight: 300;
+  opacity: .85;
 }
 
 .aboutSplit__benefitTitle::after{
@@ -1425,7 +1444,6 @@ main > .section:nth-of-type(even){
 .aboutSplit__item{
   position: relative;
   overflow: hidden;
-
   padding: 32px 28px;
   border-radius: 22px;
 
@@ -1435,47 +1453,44 @@ main > .section:nth-of-type(even){
     rgba(255,255,255,.07),
     rgba(255,255,255,.02)
   );
-
   border: 1px solid rgba(195,160,90,.22);
-
   box-shadow:
     0 18px 44px rgba(0,0,0,.30),
     inset 0 1px 0 rgba(255,255,255,.08);
 
   outline: 0 solid rgba(195,160,90,0);
   outline-offset: 2px;
-
   text-align: left;
+  backdrop-filter: blur(2px);
 
   top: 0;
   transition:
-    top .22s ease,
-    box-shadow .22s ease,
-    border-color .22s ease,
-    outline-color .22s ease,
-    outline-width .22s ease,
-    background .22s ease;
+    transform .26s cubic-bezier(.25,.8,.25,1),
+    box-shadow .26s ease,
+    border-color .26s ease,
+    background .26s ease;
 }
 
 /* === PREMIUM HOVER EFFECT === */
 
-.aboutSplit__item{
-  transition:
-    transform .35s cubic-bezier(.2,.8,.2,1),
-    box-shadow .35s ease,
-    border-color .35s ease,
-    background .35s ease;
-}
-
 .aboutSplit__item:hover{
   transform: translateY(-6px);
 
-  border-color: rgba(228,205,150,.45);
+  border-color: rgba(228,205,150,.40);
+  outline-width: 1px;
+  outline-color: rgba(228,205,150,.16);
+
+  background: linear-gradient(
+    145deg,
+    rgba(255,255,255,.10),
+    rgba(255,255,255,.03)
+  );
 
   box-shadow:
-    0 35px 80px rgba(0,0,0,.45),
-    0 0 0 1px rgba(228,205,150,.15),
-    0 0 40px rgba(228,205,150,.12);
+    0 32px 76px rgba(0,0,0,.44),
+    0 0 0 1px rgba(228,205,150,.12),
+    0 0 40px rgba(195,160,90,.10),
+    inset 0 1px 0 rgba(255,255,255,.10);
 }
 
 .aboutSplit__head{
@@ -1501,28 +1516,18 @@ main > .section:nth-of-type(even){
 .aboutSplit__grid .aboutSplit__item.reveal:nth-child(3){ transition-delay: 180ms; }
 .aboutSplit__grid .aboutSplit__item.reveal:nth-child(4){ transition-delay: 270ms; }
 
+.aboutSplit__grid .aboutSplit__item.reveal.is-visible{
+  transition-delay: 0ms !important;
+}
+
+/* i kad hoveraš, nikad nemoj čekati */
+.aboutSplit__item:hover{
+  transition-delay: 0ms !important;
+}
+
 /* BITNO: delay mora vrijediti i za reveal tranzicije */
 .aboutSplit__grid .aboutSplit__item.reveal{
   transition-property: opacity, transform, filter, box-shadow, background-image;
-}
-
-.aboutSplit__item:hover{
-  top: -4px;
-
-  outline-width: 1px;
-  outline-color: rgba(195,160,90,.22);
-  border-color: rgba(195,160,90,.32);
-
-  background: linear-gradient(
-    145deg,
-    rgba(255,255,255,.085),
-    rgba(255,255,255,.02)
-  );
-
-  box-shadow:
-    0 28px 66px rgba(0,0,0,.36),
-    0 0 0 6px rgba(195,160,90,.055),
-    inset 0 1px 0 rgba(255,255,255,.09);
 }
 
 .aboutSplit__item:hover::before{
@@ -1531,7 +1536,7 @@ main > .section:nth-of-type(even){
 }
 
 .aboutSplit__benefits .aboutSplit__item:hover{
-  transform: none !important;
+  transform: translateY(-6px) !important;
 }
 
 /* zlatni “signature” detalj gore */
@@ -1642,10 +1647,12 @@ main > .section:nth-of-type(even){
   flex-shrink: 0; /* da se ne smanjuje */
 
   transition:
-    transform .35s cubic-bezier(.2,.8,.2,1),
-    box-shadow .35s ease,
-    border-color .35s ease,
-    background .35s ease;
+    transform .45s cubic-bezier(.2,.8,.2,1),
+    box-shadow .45s cubic-bezier(.2,.8,.2,1),
+    border-color .45s cubic-bezier(.2,.8,.2,1),
+    background .45s cubic-bezier(.2,.8,.2,1);
+
+  transition-delay: 90ms;
 }
 
 .aboutSplit__icon::after{
@@ -1715,12 +1722,6 @@ main > .section:nth-of-type(even){
     0 12px 28px rgba(0,0,0,.35),
     0 0 18px rgba(228,205,150,.25),
     inset 0 1px 0 rgba(255,255,255,.6);
-
-  transition:
-    transform .35s cubic-bezier(.2,.8,.2,1),
-    box-shadow .35s ease,
-    border-color .35s ease,
-    background .35s ease;
 }
 
 .aboutSplit__item:hover .aboutSplit__icon svg{
