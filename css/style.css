@@ -26,6 +26,10 @@
   --a1-accent-soft: rgba(31,58,95,.10);
   --a1-accent-border: rgba(31,58,95,.28);
 
+  --a2-accent: #3f8f52;              /* sage/maslinasta */
+  --a2-accent-soft: rgba(63,143,82,.10);
+  --a2-accent-border: rgba(63,143,82,.28);
+
 }
 
 /* RESET */
@@ -1870,6 +1874,29 @@ main > .section:nth-of-type(even){
   padding-top: 60px;
 }
 
+.apt{
+  --apt-accent: var(--a1-accent);
+  --apt-accent-soft: var(--a1-accent-soft);
+  --apt-accent-border: var(--a1-accent-border);
+}
+
+.aptLux__title::after{
+  background: linear-gradient(90deg, var(--apt-accent), transparent);
+}
+.aptLux__priceValue{ color: var(--apt-accent); }
+.aptLux__euroIcon{ stroke: var(--apt-accent); }
+.cap__icon svg{ color: var(--apt-accent); }
+.aptLux__divider{ background: var(--apt-accent-border); }
+.aptLux__check{ color: var(--apt-accent); }
+.aptLux__perks li{ border-bottom: 1px solid var(--apt-accent-border); }
+
+.aptLux__action--primary{
+  border-color: var(--apt-accent-border);
+  background: linear-gradient(135deg, var(--apt-accent-soft), rgba(255,255,255,.78));
+}
+.aptLux__action--primary .aptLux__actionText strong{ color: var(--apt-accent); }
+.aptLux__action--primary .aptLux__svg{ stroke: var(--apt-accent); }
+
 /* One apartment block */
 .apt{
   display:grid;
@@ -1888,6 +1915,13 @@ main > .section:nth-of-type(even){
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   transition: transform .35s ease, box-shadow .35s ease;
+}
+
+/* A2 override (maslinasto/sage) */
+.apt--a2{
+  --apt-accent: var(--a2-accent);
+  --apt-accent-soft: var(--a2-accent-soft);
+  --apt-accent-border: var(--a2-accent-border);
 }
 
 .apt:hover{

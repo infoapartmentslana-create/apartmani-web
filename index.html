@@ -309,10 +309,11 @@
           </div>
         </article>
 
-        <!-- A2 -->
-        <article class="apt apt--alt reveal" data-gallery="a2" data-gallery-title="Apartman A2" data-gallery-count="11">
+        <!-- A2 (LUX kao A1, druga boja preko .apt--a2) -->
+        <article class="apt apt--alt apt--a2 reveal" data-gallery="a2" data-gallery-title="Apartman A2" data-gallery-count="11">
           <div class="apt__media">
             <img src="images/apartmani/a2/hero.jpg" alt="Apartman A2 - interijer i uvala" loading="lazy">
+
             <div class="apt__thumbs">
               <img src="images/apartmani/a2/1.jpg" alt="" loading="lazy">
               <img src="images/apartmani/a2/2.jpg" alt="" loading="lazy">
@@ -320,48 +321,126 @@
             </div>
           </div>
 
-          <div class="apt__body">
-            <div class="apt__badges">
-              <span class="apt__badge">Mirna uvala</span>
-              <span class="apt__badge">Blizu sadržaja</span>
+          <div class="apt__body apt__body--lux">
+            <header class="aptLux__head">
+              <div class="aptLux__titleBlock">
+                <h3 class="aptLux__title">Apartman <span>A2</span></h3>
+
+                <div class="aptLux__price">
+                  <span class="aptLux__priceFrom">od</span>
+
+                  <span class="aptLux__priceMain">
+                    <strong class="aptLux__priceValue">60</strong>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                      stroke-linecap="round" stroke-linejoin="round"
+                      class="aptLux__euroIcon" aria-hidden="true">
+                      <path d="M4 10h12"/><path d="M4 14h9"/><path d="M19 6a7.7 7.7 0 0 0-5.2-2A7.9 7.9 0 0 0 6 12c0 4.4 3.5 8 7.8 8 2 0 3.8-.8 5.2-2"/>
+                    </svg>
+                  </span>
+
+                  <span class="aptLux__priceUnit">/ noć</span>
+                </div>
+              </div>
+
+              <div class="aptLux__cap" aria-label="Kapacitet: 4 osobe (2+2)">
+                <span class="cap__top">
+                  <span class="cap__icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                      stroke-linecap="round" stroke-linejoin="round">
+                      <circle cx="9" cy="8" r="3"></circle>
+                      <path d="M3 20c0-3 3-5 6-5s6 2 6 5"></path>
+                      <circle cx="17" cy="10" r="2.5"></circle>
+                      <path d="M14 20c0-2 2-3.5 4-3.5S22 18 22 20"></path>
+                    </svg>
+                  </span>
+                  4 osobe
+                </span>
+                <span class="cap__sub">(2+2)</span>
+              </div>
+            </header>
+
+            <div class="aptLux__desc">
+              <p>
+                Smješten na mirnoj poziciji, a opet blizu dućana i restorana.
+                Odličan izbor ako želite praktičnost bez gužve.
+              </p>
             </div>
 
-            <h3 class="apt__title">Apartman A2 <span class="apt__meta">· 2+2 osobe</span></h3>
+            <ul class="aptLux__perks">
+              <li>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="aptLux__check">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                </svg>
+                <span>MIRNA UVALA</span>
+              </li>
 
-            <p class="apt__lead">
-              Smješten na mirnoj poziciji, a opet blizu dućana i restorana.
-              Odličan izbor ako želite praktičnost bez gužve.
-            </p>
+              <li>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="aptLux__check">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                </svg>
+                <span>PRIVATNI PARKING</span>
+              </li>
 
-            <div class="apt__quick">
-              <div class="apt__q"><span>❄️</span><strong>Klima</strong><em>hladno i ugodno</em></div>
-              <div class="apt__q"><span>📶</span><strong>Wi-Fi</strong><em>stabilan internet</em></div>
-              <div class="apt__q"><span>🅿️</span><strong>Parking</strong><em>privatno mjesto</em></div>
-              <div class="apt__q"><span>🏖️</span><strong>Plaža</strong><em>130–150 m</em></div>
-            </div>
+              <li>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="aptLux__check">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                </svg>
+                <span>KLIMA + WI-FI</span>
+              </li>
 
-            <ul class="apt__facts">
-              <li><strong>Klima</strong> i Wi-Fi</li>
-              <li><strong>Privatni parking</strong></li>
-              <li><strong>Grill</strong></li>
-              <li>Dućan/restorani <strong>200 m</strong></li>
+              <li>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="aptLux__check">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                </svg>
+                <span>PLAŽA 130–150 m</span>
+              </li>
             </ul>
 
-            <div class="apt__cta">
-              <button class="btn btn--primary" type="button" data-open-calendar>
-                Provjeri slobodne termine
-              </button>
-              <a class="btn" href="#kontakt">Rezerviraj / upit</a>
-            </div>
+            <div class="aptLux__divider" aria-hidden="true"></div>
 
-            <p class="apt__note">* Kalendar je placeholder — kasnije ubacujemo stvarne termine.</p>
+            <div class="aptLux__actions">
+              <button class="aptLux__action" type="button" data-open-details>
+                <span class="aptLux__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" class="aptLux__svg">
+                    <path d="M12 17v-6" />
+                    <path d="M12 8h.01" />
+                    <path d="M21 12a9 9 0 1 1-18 0a9 9 0 0 1 18 0Z" />
+                  </svg>
+                </span>
+                <span class="aptLux__actionText"><strong>Detalji</strong></span>
+              </button>
+
+              <button class="aptLux__action" type="button" data-open-calendar>
+                <span class="aptLux__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" class="aptLux__svg">
+                    <path d="M8 2v3M16 2v3" />
+                    <path d="M3.5 9h17" />
+                    <path d="M6 5h12a2.5 2.5 0 0 1 2.5 2.5v12A2.5 2.5 0 0 1 18 22H6A2.5 2.5 0 0 1 3.5 19.5v-12A2.5 2.5 0 0 1 6 5Z" />
+                  </svg>
+                </span>
+                <span class="aptLux__actionText"><strong>Kalendar</strong></span>
+              </button>
+
+              <a class="aptLux__action aptLux__action--primary" href="#kontakt">
+                <span class="aptLux__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" class="aptLux__svg">
+                    <path d="M4 6h16v12H4z" />
+                    <path d="m4 7 8 6 8-6" />
+                  </svg>
+                </span>
+                <span class="aptLux__actionText"><strong>Rezerviraj</strong></span>
+              </a>
+            </div>
           </div>
         </article>
 
         <!-- A3 -->
-        <article class="apt reveal" data-gallery="a3" data-gallery-title="Apartman A3" data-gallery-count="10">
+        <!-- A3 (LUX kao A1/A2) -->
+        <article class="apt apt--a3 reveal" data-gallery="a3" data-gallery-title="Apartman A3" data-gallery-count="11">
           <div class="apt__media">
-            <img src="images/apartmani/a3/hero.jpg" alt="Apartman A3 - obiteljski apartman i terasa" loading="lazy">
+            <img src="images/apartmani/a3/hero.jpg" alt="Apartman A3 - interijer" loading="lazy">
+
             <div class="apt__thumbs">
               <img src="images/apartmani/a3/1.jpg" alt="" loading="lazy">
               <img src="images/apartmani/a3/2.jpg" alt="" loading="lazy">
@@ -369,34 +448,118 @@
             </div>
           </div>
 
-          <div class="apt__body">
-            <div class="apt__badges">
-              <span class="apt__badge">Za obitelj</span>
-              <span class="apt__badge">Prostran</span>
+          <div class="apt__body apt__body--lux">
+            <header class="aptLux__head">
+              <div class="aptLux__titleBlock">
+                <h3 class="aptLux__title">Apartman <span>A3</span></h3>
+
+                <div class="aptLux__price">
+                  <span class="aptLux__priceFrom">od</span>
+
+                  <!-- PROMIJENI CIJENU PO POTREBI -->
+                  <span class="aptLux__priceMain">
+                    <strong class="aptLux__priceValue">70</strong>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                      stroke-linecap="round" stroke-linejoin="round"
+                      class="aptLux__euroIcon" aria-hidden="true">
+                      <path d="M4 10h12"/><path d="M4 14h9"/><path d="M19 6a7.7 7.7 0 0 0-5.2-2A7.9 7.9 0 0 0 6 12c0 4.4 3.5 8 7.8 8 2 0 3.8-.8 5.2-2"/>
+                    </svg>
+                  </span>
+
+                  <span class="aptLux__priceUnit">/ noć</span>
+                </div>
+              </div>
+
+              <div class="aptLux__cap" aria-label="Kapacitet: 5 osoba (2+3)">
+                <span class="cap__top">
+                  <span class="cap__icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                      stroke-linecap="round" stroke-linejoin="round">
+                      <circle cx="9" cy="8" r="3"></circle>
+                      <path d="M3 20c0-3 3-5 6-5s6 2 6 5"></path>
+                      <circle cx="17" cy="10" r="2.5"></circle>
+                      <path d="M14 20c0-2 2-3.5 4-3.5S22 18 22 20"></path>
+                    </svg>
+                  </span>
+                  5 osoba
+                </span>
+                <span class="cap__sub">(2+3)</span>
+              </div>
+            </header>
+
+            <div class="aptLux__desc">
+              <p>
+                Najviše prostora za bezbrižan obiteljski odmor. Komotan raspored
+                i terasa za duga ljetna jutra i večeri.
+              </p>
             </div>
 
-            <h3 class="apt__title">Apartman A3 <span class="apt__meta">· 2+3 osobe</span></h3>
+            <ul class="aptLux__perks">
+              <li>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="aptLux__check">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                </svg>
+                <span>KLIMA + WI-FI</span>
+              </li>
 
-            <p class="apt__lead">
-              Najviše prostora za bezbrižan obiteljski odmor.
-              Komotan raspored i terasa za duga ljetna jutra i večeri.
-            </p>
+              <li>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="aptLux__check">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                </svg>
+                <span>PRIVATNI PARKING</span>
+              </li>
 
-            <ul class="apt__facts">
-              <li><strong>Klima</strong> i Wi-Fi</li>
-              <li><strong>Privatni parking</strong></li>
-              <li><strong>Grill</strong></li>
-              <li>Lokacija: <strong>Rtina Miočići</strong></li>
+              <li>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="aptLux__check">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                </svg>
+                <span>GRILL</span>
+              </li>
+
+              <li>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="aptLux__check">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                </svg>
+                <span>LOKACIJA: RTINA MIOČIĆI</span>
+              </li>
             </ul>
 
-            <div class="apt__cta">
-              <button class="btn btn--primary" type="button" data-open-calendar>
-                Provjeri slobodne termine
-              </button>
-              <a class="btn" href="#kontakt">Rezerviraj / upit</a>
-            </div>
+            <div class="aptLux__divider" aria-hidden="true"></div>
 
-            <p class="apt__note">* Kalendar je placeholder — kasnije ubacujemo stvarne termine.</p>
+            <div class="aptLux__actions">
+              <button class="aptLux__action" type="button" data-open-details>
+                <span class="aptLux__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" class="aptLux__svg">
+                    <path d="M12 17v-6" />
+                    <path d="M12 8h.01" />
+                    <path d="M21 12a9 9 0 1 1-18 0a9 9 0 0 1 18 0Z" />
+                  </svg>
+                </span>
+                <span class="aptLux__actionText"><strong>Detalji</strong></span>
+              </button>
+
+              <button class="aptLux__action" type="button" data-open-calendar>
+                <span class="aptLux__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" class="aptLux__svg">
+                    <path d="M8 2v3M16 2v3" />
+                    <path d="M3.5 9h17" />
+                    <path d="M6 5h12a2.5 2.5 0 0 1 2.5 2.5v12A2.5 2.5 0 0 1 18 22H6A2.5 2.5 0 0 1 3.5 19.5v-12A2.5 2.5 0 0 1 6 5Z" />
+                  </svg>
+                </span>
+                <span class="aptLux__actionText"><strong>Kalendar</strong></span>
+              </button>
+
+              <a class="aptLux__action aptLux__action--primary" href="#kontakt">
+                <span class="aptLux__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" class="aptLux__svg">
+                    <path d="M4 6h16v12H4z" />
+                    <path d="m4 7 8 6 8-6" />
+                  </svg>
+                </span>
+                <span class="aptLux__actionText"><strong>Rezerviraj</strong></span>
+              </a>
+            </div>
           </div>
         </article>
 
