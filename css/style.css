@@ -3198,26 +3198,35 @@ main > .section:nth-of-type(even){
 .apt .aptLux__action--primary .aptLux__actionText strong{ color: var(--apt-accent) !important; }
 .apt .aptLux__action--primary .aptLux__svg{ stroke: var(--apt-accent) !important; }
 
-/* ===== Soft tinted apartment background ===== */
+/* ===== Luxury Accent Edge ===== */
 
 .apt{
-  background: linear-gradient(
-    135deg,
-    var(--apt-accent-soft),
-    rgba(255,255,255,0.92)
-  );
-  
-  border: 1px solid var(--apt-accent-border);
-  
-  transition: background 0.4s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
 }
 
-/* malo luksuzniji efekt na hover */
+/* vertikalna linija */
+.apt::before{
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 4px;
+  background: var(--apt-accent);
+  opacity: 0.9;
+}
+
+/* suptilan glow */
+.apt{
+  box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+  border: 1px solid var(--apt-accent-border);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
 .apt:hover{
-  box-shadow: 0 10px 30px rgba(0,0,0,0.06);
-  background: linear-gradient(
-    135deg,
-    var(--apt-accent-soft),
-    rgba(255,255,255,0.85)
-  );
+  transform: translateY(-4px);
+  box-shadow: 
+    0 14px 35px rgba(0,0,0,0.06),
+    0 0 0 1px var(--apt-accent-border);
 }
