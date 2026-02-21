@@ -30,6 +30,10 @@
   --a2-accent-soft: rgba(63,143,82,.10);
   --a2-accent-border: rgba(63,143,82,.28);
 
+  --a3-accent: #8a4b2a;              /* primjer: terakota/bakar */
+  --a3-accent-soft: rgba(138,75,42,.10);
+  --a3-accent-border: rgba(138,75,42,.28);
+
 }
 
 /* RESET */
@@ -1924,6 +1928,12 @@ main > .section:nth-of-type(even){
   --apt-accent-border: var(--a2-accent-border);
 }
 
+.apt--a3{
+  --apt-accent: var(--a3-accent);
+  --apt-accent-soft: var(--a3-accent-soft);
+  --apt-accent-border: var(--a3-accent-border);
+}
+
 .apt:hover{
   transform: translateY(-6px);
   box-shadow: 0 40px 90px rgba(10,40,70,.18);
@@ -3167,4 +3177,47 @@ main > .section:nth-of-type(even){
   clip-path: polygon(0 0, 100% 0, 85% 100%, 0% 100%);
 
   border-radius: 2px;
+}
+
+/* ==== FORCE per-apartment accent (override hardcoded A1 styles) ==== */
+.apt .aptLux__title::after{
+  background: linear-gradient(90deg, var(--apt-accent), transparent) !important;
+}
+.apt .aptLux__priceValue{ color: var(--apt-accent) !important; }
+.apt .aptLux__euroIcon{ stroke: var(--apt-accent) !important; }
+.apt .aptLux__divider{ background: var(--apt-accent-border) !important; }
+.apt .cap__icon svg{ color: var(--apt-accent) !important; }
+.apt .aptLux__perks li{ border-bottom-color: var(--apt-accent-border) !important; }
+.apt .aptLux__check{ color: var(--apt-accent) !important; }
+
+/* primary button */
+.apt .aptLux__action--primary{
+  border-color: var(--apt-accent-border) !important;
+  background: linear-gradient(135deg, var(--apt-accent-soft), rgba(255,255,255,.78)) !important;
+}
+.apt .aptLux__action--primary .aptLux__actionText strong{ color: var(--apt-accent) !important; }
+.apt .aptLux__action--primary .aptLux__svg{ stroke: var(--apt-accent) !important; }
+
+/* ===== Soft tinted apartment background ===== */
+
+.apt{
+  background: linear-gradient(
+    135deg,
+    var(--apt-accent-soft),
+    rgba(255,255,255,0.92)
+  );
+  
+  border: 1px solid var(--apt-accent-border);
+  
+  transition: background 0.4s ease, box-shadow 0.3s ease;
+}
+
+/* malo luksuzniji efekt na hover */
+.apt:hover{
+  box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+  background: linear-gradient(
+    135deg,
+    var(--apt-accent-soft),
+    rgba(255,255,255,0.85)
+  );
 }
