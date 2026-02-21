@@ -34,7 +34,6 @@
         <div class="hero__bgslide" style="background-image:url('images/hero/hero-2.jpg')"></div>
         <div class="hero__bgslide" style="background-image:url('images/hero/hero-3.jpg')"></div>
         <div class="hero__bgslide" style="background-image:url('images/hero/hero-4.jpg')"></div>
-        <div class="hero__bgslide" style="background-image:url('images/hero/hero-5.jpg')"></div>
       </div>
       <div class="hero__bgoverlay" aria-hidden="true"></div>
 
@@ -192,25 +191,66 @@
 
           <div class="apt__body apt__body--lux">
             <header class="aptLux__head">
-              <h3 class="aptLux__title">Apartman A1- od 60€ noć</h3>
+              <div class="aptLux__titleBlock">
+                <h3 class="aptLux__title">Apartman A1</h3>
+                <div class="aptLux__price">
+                  <span class="aptLux__priceFrom">od</span>
+
+                  <span class="aptLux__priceMain">
+                    <strong class="aptLux__priceValue">60</strong>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                      stroke-linecap="round" stroke-linejoin="round"
+                      class="aptLux__euroIcon" aria-hidden="true">
+                      <path d="M4 10h12"/><path d="M4 14h9"/><path d="M19 6a7.7 7.7 0 0 0-5.2-2A7.9 7.9 0 0 0 6 12c0 4.4 3.5 8 7.8 8 2 0 3.8-.8 5.2-2"/>
+                    </svg>
+                  </span>
+
+                  <span class="aptLux__priceUnit">/ noć</span>
+                </div>
+              </div>
+
+              <div class="aptLux__cap">2 + 2</div>
             </header>
 
             <div class="aptLux__desc">
               <p>
-                Smješten tik uz more, Apartman A1 nudi otvoreni pogled na horizont i zalaske sunca.
+                Apartman A1 nudi otvoreni pogled na horizont i zalaske sunca.
                 Prostrana terasa idealna je za jutarnju kavu ili večernje opuštanje u tišini ljetne noći.
               </p>
             </div>
 
-            <div class="aptLux__divider" aria-hidden="true"></div>
+            <ul class="aptLux__perks">
+              <li>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="aptLux__check">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                </svg>
+                <span>PRIVATNA TERASA</span>
+              </li>
 
-            <ul class="aptLux__features">
-              <li>Kapacitet: <strong>2 odraslih + 2 djece</strong></li>
-              <li>Raspored: <strong>1 spavaća soba + dnevni boravak</strong></li>
-              <li>Privatna terasa: <strong>pogled na more</strong></li>
-              <li>Klima uređaj + <strong>Wi-Fi</strong></li>
-              <li>Privatni <strong>parking</strong></li>
+              <li>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="aptLux__check">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                </svg>
+                <span>PARKING</span>
+              </li>
+
+              <li>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="aptLux__check">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                </svg>
+                <span>KLIMA</span>
+              </li>
+
+              <li>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="aptLux__check">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                </svg>
+                <span>WI-FI</span>
+              </li>
             </ul>
+
+            <div class="aptLux__divider" aria-hidden="true"></div>
 
             <div class="aptLux__actions">
               <button class="aptLux__action" type="button" data-open-details>
@@ -478,7 +518,7 @@
 
           <div class="galleryModal__meta" id="galleryMeta" aria-live="polite"></div>
 
-          <button class="modal__close" type="button" aria-label="Zatvori" data-close-gallery><span aria-hidden="true">×</span></button>
+          <button class="modal__close" type="button" aria-label="Zatvori" data-close-gallery>✕</button>
         </div>
 
         <div class="galleryModal__stage">

@@ -22,6 +22,10 @@
   --champagne: rgba(195,160,90,.85);
   --champagneSoft: rgba(195,160,90,.22);
 
+  --a1-accent: #1f3a5f;        /* duboka morska plava */
+  --a1-accent-soft: rgba(31,58,95,.10);
+  --a1-accent-border: rgba(31,58,95,.28);
+
 }
 
 /* RESET */
@@ -106,23 +110,23 @@ a{color:inherit}
 }
 
 .logo{
-  text-decoration:none;
-
-  font-size: 1.08rem;
-  font-weight: 700;
-  font-style: normal;
-  letter-spacing: .5px;
-
+  position: relative;
+  overflow: hidden;
   display:flex;
   align-items:center;
   gap:10px;
 
+  text-decoration:none;
+  font-size: 1.08rem;
+  font-weight: 700;
+  letter-spacing: .5px;
   color:#0b1b2b;
 
-  /* ✨ marker-on-glass feel */
   text-shadow:
     0 0 0 rgba(11,27,43,.55),
     0 1px 1px rgba(255,255,255,.65);
+
+  transition: transform .22s ease, filter .22s ease;
 }
 
 .logo span{
@@ -147,11 +151,6 @@ a{color:inherit}
   transform: scaleX(.85);
 }
 
-/* BRAND HOVER — subtle premium movement */
-.logo{
-  transition: transform .22s ease, filter .22s ease;
-}
-
 /* kad prijeđeš mišem preko cijelog loga */
 .logo:hover{
   transform: translateY(-1px);
@@ -164,13 +163,6 @@ a{color:inherit}
     inset 0 1px 0 rgba(255,255,255,.85),
     inset 0 -2px 6px rgba(10,40,70,.10),
     0 14px 30px rgba(10,40,70,.22);
-}
-
-
-/* SHINE EFFECT */
-.logo{
-  position: relative;
-  overflow: hidden;
 }
 
 /* kad se header pojavi -> lagani shine */
@@ -599,6 +591,7 @@ input:focus, textarea:focus{
 
 .hero__bgslide.is-active{
   opacity:1;
+  animation: kenburns 7s ease-in-out both;
 }
 
 /* Svijetli overlay da tekst bude čitljiv */
@@ -723,10 +716,6 @@ input:focus, textarea:focus{
   .contact{grid-template-columns:1fr}
 }
 
-.hero__bgslide.is-active{
-  opacity:1;
-  animation: kenburns 7s ease-in-out both;
-}
 @keyframes kenburns{
   from{ transform: scale(1.03); }
   to{ transform: scale(1.08); }
@@ -1748,7 +1737,7 @@ main > .section:nth-of-type(even){
 
 .apartmentsS__head{
   max-width: 1100px;
-  margin: 30px auto 55px;
+  margin: 10px auto 40px;
   padding: 0;
   text-align: center;
   background: transparent;
@@ -1873,23 +1862,37 @@ main > .section:nth-of-type(even){
   .apartmentsS__title{ max-width: 18ch; }
 }
 
+#apartmani{
+  padding-top: 60px;   /* bilo je 90px kroz .section */
+}
+
+#apartmani.section{
+  padding-top: 60px;
+}
+
 /* One apartment block */
 .apt{
   display:grid;
   grid-template-columns: 1.05fr .95fr;
   gap: 26px;
-  align-items: center;
 
-  margin: 30px 0;
+  margin: 10px 0 30px 0;
   padding: 18px;
 
   border-radius: 28px;
+  align-items: stretch; 
 
   background: rgba(255,255,255,.36);
   border: 1px solid rgba(255,255,255,.55);
   box-shadow: 0 22px 70px rgba(10,40,70,.10);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
+  transition: transform .35s ease, box-shadow .35s ease;
+}
+
+.apt:hover{
+  transform: translateY(-6px);
+  box-shadow: 0 40px 90px rgba(10,40,70,.18);
 }
 
 .apt--alt{
@@ -1899,6 +1902,10 @@ main > .section:nth-of-type(even){
 .apt--alt .apt__body{ order: 1; }
 
 .apt__media{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+
   border-radius: 22px;
   overflow: hidden;
   border: 1px solid rgba(10,25,40,.10);
@@ -1907,21 +1914,26 @@ main > .section:nth-of-type(even){
 }
 
 .apt__media > img{
+  flex: 1;
   width:100%;
-  height: 360px;
+  min-height: 320px;
   object-fit: cover;
   display:block;
+
+  transform: scale(1.01);
+  transition: transform .6s ease;
 }
 
 .apt__media > img,
 .apt__thumbs img { cursor: pointer; }
 
 .apt__thumbs{
+  margin-top: auto;
   display:grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 10px;
   padding: 12px;
-  background: rgba(255,255,255,.7);
+  background: rgba(255,255,255,.70);
   border-top: 1px solid rgba(10,25,40,.08);
 }
 
@@ -1929,9 +1941,14 @@ main > .section:nth-of-type(even){
   width:100%;
   height: 92px;
   object-fit: cover;
-  border-radius: 14px;
-  border: 1px solid rgba(10,25,40,.08);
   display:block;
+
+  border-radius:14px;
+  border: 1px solid rgba(10,25,40,.08);
+  opacity: .92;
+
+  transition: transform .25s ease, box-shadow .25s ease;
+  cursor: pointer;
 }
 
 .apt__badges{
@@ -1957,21 +1974,17 @@ main > .section:nth-of-type(even){
 }
 
 .apt__lead{
+  margin: 0 0 14px;
   font-size: 1.03rem;
   letter-spacing: .005em;
-  color: rgba(11,27,43,.68);
+  color: rgba(11,27,43,.70);
+  line-height: 1.85;
 }
 
 .apt__meta{
   font-weight: 800;
   color: rgba(11,27,43,.55);
   font-size: .95rem;
-}
-
-.apt__lead{
-  margin: 0 0 14px;
-  color: rgba(11,27,43,.70);
-  line-height: 1.85;
 }
 
 .apt__facts{
@@ -2075,7 +2088,8 @@ main > .section:nth-of-type(even){
   top: 0;
 }
 
-.modal--details .modal__close{
+.modal--details .modal__close,
+.modal--gallery .modal__close{
   position: relative;
 
   width: 42px;
@@ -2088,17 +2102,17 @@ main > .section:nth-of-type(even){
   font-size: 16px;
   font-weight: 600;
 
-  background: rgba(255,255,255,.55);
+  background: rgba(255,255,255,55);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
 
-  border: 1px solid rgba(255,255,255,.6);
+  border: 1px solid rgba(255,255,255,6);
 
   box-shadow:
-    0 10px 30px rgba(10,40,70,.18),
-    inset 0 1px 0 rgba(255,255,255,.9);
+    0 10px 30px rgba(10,40,70,18),
+    inset 0 1px 0 rgba(255,255,255,9);
 
-  color: rgba(11,27,43,.85);
+  color: rgba(11,27,43,85);
 
   cursor: pointer;
   transition:
@@ -2107,15 +2121,24 @@ main > .section:nth-of-type(even){
     background .18s ease;
 }
 
-.modal--details .modal__close:hover{
+.modal--details .modal__close:hover,
+.modal--gallery .modal__close:hover{
   transform: translateY(-2px);
-  background: rgba(255,255,255,.75);
+  background: rgba(255,255,255,75);
   box-shadow:
-    0 16px 40px rgba(10,40,70,.22),
-    inset 0 1px 0 rgba(255,255,255,.95);
+    0 16px 40px rgba(10,40,70,22),
+    inset 0 1px 0 rgba(255,255,255,95);
 }
 
-.modal--details .modal__close:active{
+.modal--gallery .modal__close span{
+  font-size: 22px;
+  line-height: 1;
+  transform: translateY(-1px);
+  display: block;
+}
+
+.modal--details .modal__close:active,
+.modal--gallery .modal__close:active{
   transform: translateY(0);
 }
 
@@ -2166,46 +2189,22 @@ main > .section:nth-of-type(even){
   text-decoration: line-through;
 }
 
-/* ===== Apartment media: premium polish ===== */
-.apt__media{
-  position: relative;
-}
-
 .apt__media::after{
   content:"";
   position:absolute;
   inset:0;
   pointer-events:none;
-  /* editorial overlay – daje “premium photo” dojam */
-  background:
-    linear-gradient(180deg, rgba(0,0,0,.00) 55%, rgba(0,0,0,.22) 100%);
+  background: linear-gradient(180deg, rgba(0,0,0,0) 55%, rgba(0,0,0,.22) 100%);
   opacity:.9;
-}
-
-.apt__media > img{
-  transform: scale(1.01);
-  transition: transform .6s ease;
 }
 
 .apt:hover .apt__media > img{
   transform: scale(1.04);
 }
 
-/* thumbs – luksuzni “filmstrip” */
-.apt__thumbs{
-  position: relative;
-}
-
-.apt__thumbs img{
-  cursor: pointer;
-  transition: transform .18s ease, box-shadow .18s ease, opacity .18s ease;
-  opacity: .92;
-}
-
 .apt__thumbs img:hover{
-  transform: translateY(-2px);
-  opacity: 1;
-  box-shadow: 0 18px 40px rgba(10,40,70,.16);
+  transform: translateY(-3px) scale(1.04);
+  box-shadow: 0 16px 35px rgba(0,0,0,.15);
 }
 
 /* fokus za accessibility (premium = detalji) */
@@ -2291,8 +2290,23 @@ main > .section:nth-of-type(even){
   margin: 7vh auto 0;
 }
 
-.apt__media > img{
-  cursor: pointer; /* da se vidi da je klikabilno */
+/* Gallery header – da naslov ne bude zalijepljen i da izgleda premium */
+.modal--gallery .modal__head{
+  padding: 18px 22px;
+  background: rgba(255,255,255,55);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255,255,255,6);
+  box-shadow:
+    0 8px 30px rgba(10,40,70,08),
+    inset 0 1px 0 rgba(255,255,255,8);
+}
+
+.modal--gallery .modal__head h3{
+  margin: 0;
+  font-size: 1.15rem;
+  letter-spacing: -.01em;
+  font-weight: 800;
 }
 
 .galleryModal__meta{
@@ -2367,315 +2381,6 @@ main > .section:nth-of-type(even){
 .galleryModal__stage { position: relative; overflow: visible; }
 .galleryModal__nav { z-index: 9999; pointer-events: auto; }
 .galleryModal__nav--prev { left: 14px !important; right: auto !important; }
-
-/* =========================
-   APARTMAN (A1) — BOUTIQUE LUX BODY
-   ========================= */
-
-.apt__body--lux{
-  padding: 22px 24px 20px;
-}
-
-/* Title + meta */
-.aptLux__head{
-  position: relative;
-  margin-bottom: 10px;
-}
-
-.aptLux__head::after{
-  content:"";
-  display:block;
-  width: 54px;
-  height: 2px;
-  margin-top: 10px;
-  border-radius: 99px;
-  background: linear-gradient(90deg, rgba(195,160,90,.9), rgba(228,205,150,.65));
-  opacity: .9;
-}
-
-.aptLux__title{
-  margin: 0;
-  font-size: clamp(1.25rem, 1.7vw, 1.55rem);
-  line-height: 1.25;
-  letter-spacing: -0.01em;
-}
-
-.aptLux__meta{
-  font-weight: 750;
-  color: rgba(11,27,43,.62);
-  font-size: .98rem;
-  letter-spacing: .1px;
-}
-
-.aptLux__titleDot{
-  margin: 0 10px;
-  color: rgba(11,27,43,.25);
-}
-
-/* Description (editorial feel) */
-.aptLux__desc p{
-  margin: 0 0 10px;
-  color: rgba(11,27,43,.70);
-  line-height: 1.75;
-  max-width: 62ch;
-  letter-spacing: .01em;
-}
-
-.aptLux__desc p:first-child{
-  color: rgba(11,27,43,.82);
-}
-
-/* Divider */
-.aptLux__divider{
-  height: 1px;
-  margin: 16px 0 16px;
-  background: linear-gradient(90deg, rgba(10,25,40,.14), rgba(10,25,40,.05), transparent);
-}
-
-/* Features list — boutique checkmarks */
-.aptLux__features{
-  list-style: none;
-  padding: 0;
-  display: grid;
-  gap: 8px;
-  margin: 0 0 14px;
-}
-
-.aptLux__features li{
-  position: relative;
-  padding-left: 26px;
-  color: rgba(11,27,43,.70);
-  line-height: 1.6;
-  border-bottom: 1px solid rgba(10,25,40,.07);
-  padding-bottom: 8px;
-}
-
-.aptLux__features li:last-child{
-  border-bottom: 0;
-  padding-bottom: 0;
-}
-
-.aptLux__features li::before{
-  content:"";
-  width: 10px;
-  height: 10px;
-  border-radius: 999px;
-  position:absolute;
-  left: 2px;
-  top: 3px;
-  background: rgba(195,160,90,.22);
-  box-shadow: inset 0 0 0 2px rgba(195,160,90,.28);
-}
-
-.aptLux__features strong{
-  font-weight: 850;
-  color: rgba(11,27,43,.84);
-}
-
-/* Actions (3 boutique cards) */
-.aptLux__actions{
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 10px;
-  margin-top: 6px;
-}
-
-.aptLux__action{
-  display: flex;
-  align-items: center;
-  gap: 12px;
-
-  padding: 12px 12px;
-  border-radius: 16px;
-
-  background: rgba(255,255,255,.66);
-  border: 1px solid rgba(10,25,40,.10);
-
-  box-shadow: 0 16px 40px rgba(10,40,70,.08);
-  text-decoration: none;
-  color: inherit;
-
-  cursor: pointer;
-  transition: transform .18s ease, box-shadow .18s ease, background .18s ease, border-color .18s ease;
-}
-
-.aptLux__action:hover{
-  transform: translateY(-2px);
-  background: rgba(255,255,255,.78);
-  border-color: rgba(10,25,40,.14);
-  box-shadow: 0 22px 54px rgba(10,40,70,.12);
-}
-
-.aptLux__action:active{
-  transform: translateY(0);
-}
-
-.aptLux__icon{
-  width: 34px;
-  height: 34px;
-  border-radius: 12px;
-  display: grid;
-  place-items: center;
-
-  background: rgba(11,27,43,.05);
-  border: 1px solid rgba(10,25,40,.08);
-
-  font-weight: 900;
-  color: rgba(11,27,43,.70);
-}
-
-.aptLux__actionText{
-  display: grid;
-  gap: 2px;
-}
-
-.aptLux__actionText strong{
-  font-weight: 950;
-  letter-spacing: .1px;
-}
-
-.aptLux__actionText em{
-  font-style: normal;
-  color: rgba(11,27,43,.62);
-  font-size: .92rem;
-  line-height: 1.2;
-}
-
-/* Primary action (reserve) — subtle premium emphasis, not loud */
-.aptLux__action--primary{
-  background: linear-gradient(135deg, rgba(30,167,255,.14), rgba(255,255,255,.78));
-  border-color: rgba(30,167,255,.18);
-}
-
-.aptLux__action--primary .aptLux__icon{
-  background: rgba(30,167,255,.10);
-  border-color: rgba(30,167,255,.16);
-}
-
-/* Responsive */
-@media (max-width: 900px){
-  .aptLux__actions{
-    grid-template-columns: 1fr;
-  }
-}
-
-/* =========================
-   LUX BUTTONS — SVG ICONS + PREMIUM SHINE
-   ========================= */
-
-.aptLux__svg{
-  width: 18px;
-  height: 18px;
-  display: block;
-
-  fill: none;
-  stroke: rgba(11,27,43,.72);
-  stroke-width: 1.7;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-.aptLux__icon{
-  width: 36px;
-  height: 36px;
-  border-radius: 14px;
-  display: grid;
-  place-items: center;
-
-  background: rgba(255,255,255,.75);
-  border: 1px solid rgba(10,25,40,.10);
-
-  box-shadow:
-    0 10px 24px rgba(10,40,70,.08),
-    inset 0 1px 0 rgba(255,255,255,.75);
-}
-
-/* Action cards: refined + less chunky */
-.aptLux__action{
-  position: relative;
-  overflow: hidden;
-
-  padding: 12px 14px;
-  border-radius: 18px;
-
-  background: rgba(255,255,255,.62);
-  border: 1px solid rgba(10,25,40,.10);
-
-  box-shadow:
-    0 18px 45px rgba(10,40,70,.08),
-    inset 0 1px 0 rgba(255,255,255,.65);
-
-  transition:
-    transform .20s ease,
-    box-shadow .20s ease,
-    background .20s ease,
-    border-color .20s ease;
-}
-
-/* subtle shine sweep */
-.aptLux__action::after{
-  content:"";
-  position:absolute;
-  top:-55%;
-  left:-70%;
-  width:45%;
-  height:220%;
-  transform: skewX(-20deg);
-  background: linear-gradient(120deg, transparent, rgba(255,255,255,.55), transparent);
-  opacity: 0;
-  pointer-events:none;
-}
-
-.aptLux__action:hover{
-  transform: translateY(-2px);
-  background: rgba(255,255,255,.78);
-  border-color: rgba(10,25,40,.14);
-
-  box-shadow:
-    0 26px 64px rgba(10,40,70,.12),
-    inset 0 1px 0 rgba(255,255,255,.75);
-}
-
-.aptLux__action:hover::after{
-  opacity: 1;
-  animation: aptLuxShine .9s ease forwards;
-}
-
-@keyframes aptLuxShine{
-  0%{ left:-70%; }
-  100%{ left:140%; }
-}
-
-/* Primary: champagne accent (luxury, not loud) */
-.aptLux__action--primary{
-  border-color: rgba(195,160,90,.28);
-  background: linear-gradient(
-    135deg,
-    rgba(195,160,90,.12),
-    rgba(255,255,255,.78)
-  );
-}
-
-.aptLux__action--primary .aptLux__icon{
-  border-color: rgba(195,160,90,.30);
-  background: rgba(195,160,90,.10);
-}
-
-.aptLux__action--primary .aptLux__svg{
-  stroke: rgba(11,27,43,.78);
-}
-
-/* Better text feel */
-.aptLux__actionText strong{
-  font-weight: 950;
-  letter-spacing: .1px;
-}
-
-/* Focus states (premium + accessible) */
-.aptLux__action:focus-visible{
-  outline: 2px solid rgba(195,160,90,.35);
-  outline-offset: 3px;
-}
 
 /* =========================
    DETAILS MODAL — BOUTIQUE
@@ -3008,4 +2713,322 @@ main > .section:nth-of-type(even){
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   padding-bottom: 12px;
+}
+
+/* =========================
+   APARTMAN A1 — FINAL (single block)
+   Zalijepi na KRAJ style.css
+   ========================= */
+
+/* oba stupca nek se rastegnu na istu visinu */
+.apt__media,
+.apt__body{
+  height: 100%;
+}
+
+.apt--a1 .apt__features li{
+  padding: 12px 0;
+  border-bottom: 1px solid var(--a1-accent-border);
+}
+
+.apt--a1 .apt__features li:last-child{
+  border-bottom: 1px solid var(--a1-accent-border); /* zadrži liniju i ispod Wi-Fi */
+}
+
+.apt--a1 .btn--reserve:hover{
+  transform: translateY(-2px);
+  box-shadow: 
+    0 25px 60px rgba(31,58,95,.45);
+}
+
+/* 2) A1 body layout */
+.apt__body--lux{
+  background: rgba(255,255,255,.78);
+  backdrop-filter: blur(8px);
+  border:1px solid rgba(255,255,255,.6);
+  box-shadow: 0 30px 80px rgba(10,40,70,.12);
+  border-radius:28px;
+  padding:34px;
+}
+
+/* A1 header: naslov + cijena ispod, desno badge 2+2 */
+.aptLux__head{
+  display:flex;
+  justify-content:space-between;
+  align-items: baseline; /* umjesto center ili flex-start */
+  gap:20px;
+  margin-bottom:18px;
+}
+
+.aptLux__titleBlock{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+.aptLux__title{
+  font-size:1.85rem;
+  font-weight:800;
+  letter-spacing:-0.01em;
+  color:#0b1b2b;
+  line-height:1.15;
+  position:relative;
+}
+
+.aptLux__title::after{
+  content:"";
+  display:block;
+  width:48px;
+  height:3px;
+  margin-top:10px;
+  border-radius:99px;
+
+  background:linear-gradient(
+    90deg,
+    var(--a1-accent),
+    rgba(31,58,95,.35)
+  );
+}
+
+.aptLux__price{
+  display:flex;
+  align-items:center;
+  gap:10px;
+
+  font-size:.95rem;
+  font-weight:700;
+  color:rgba(11,27,43,.65);
+}
+
+.aptLux__priceMain{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+}
+
+.aptLux__priceValue{
+  font-weight:550;
+  font-size:1.15rem;
+  color:var(--a1-accent);
+  letter-spacing:.01em;
+}
+
+.aptLux__euroIcon{
+  width:18px;
+  height:18px;
+  stroke:var(--a1-accent);
+  opacity:.95;
+}
+
+.aptLux__priceFrom,
+.aptLux__priceUnit{
+  opacity:.85;
+}
+
+/* ako ti još uvijek postoji ova crta ispod cijene — ugasi je */
+.aptLux__price::after{ content:none; }
+
+.aptLux__cap{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+
+  padding:8px 16px;
+  border-radius:999px;
+
+  font-weight:800;
+  font-size:.9rem;
+  letter-spacing:.04em;
+
+  color:var(--a1-accent);
+
+  background:var(--a1-accent-soft);
+  border:1px solid var(--a1-accent-border);
+
+  box-shadow:0 8px 20px rgba(31,58,95,.08);
+}
+
+.aptLux__cap:hover{
+  transform:translateY(-2px);
+  box-shadow:
+    0 18px 40px rgba(10,40,70,.12),
+    inset 0 1px 0 rgba(255,255,255,.85);
+}
+
+/* 4) opis */
+.aptLux__desc p{
+  margin: 0;
+  max-width: 62ch;
+  font-size: 1.05rem;
+  line-height: 1.9;
+  color: rgba(11,27,43,.70);
+}
+
+.aptLux__divider{
+  height: 1px;
+  background: var(--a1-accent-border);  /* <-- ovo */
+  margin: 6px 0 18px;
+}
+
+@media (max-width: 700px){
+  .aptLux__head{
+    align-items: flex-start;
+  }
+  .aptLux__cap{
+    padding: 9px 14px;
+    font-size: .95rem;
+  }
+}
+
+/* Mobile */
+@media (max-width: 700px){
+  .aptLux__facts{
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+}
+
+/* A1 — PERKS (4 stavke s check ikonom) */
+.aptLux__perks{
+  list-style: none;
+  padding: 0;
+  margin: 6px 0 0;
+  margin-bottom: 0;
+
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+.aptLux__perks li{
+  padding: 8px 0;
+  border-bottom: 1px solid var(--a1-accent-border);
+}
+
+.aptLux__perks li:last-child{
+  border-bottom: 0;
+}
+
+.aptLux__check{
+  width: 18px;
+  height: 18px;
+  flex: 0 0 18px;
+  color: var(--a1-accent); /* A1 plava */
+}
+
+.aptLux__perks span{
+  font-size: .92rem;
+  font-weight: 900;
+  letter-spacing: .08em;
+  color: rgba(11,27,43,.78);
+}
+
+/* Mobile: Kapacitet/Raspored u 1 kolonu */
+@media (max-width: 700px){
+  .aptLux__facts{
+    grid-template-columns: 1fr;
+  }
+}
+
+/* 6) ACTIONS: niži gumbi */
+.aptLux__actions{
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+
+  margin-top: auto; /* gurne gumbe dolje da desni stupac lijepo popuni visinu */
+}
+
+.aptLux__action{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 10px 12px;    /* NIŽE */
+  border-radius: 16px;
+
+  background: rgba(255,255,255,.62);
+  border: 1px solid rgba(10,25,40,.10);
+  box-shadow: 0 16px 40px rgba(10,40,70,.08);
+
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+
+  transition: transform .18s ease, box-shadow .18s ease, background .18s ease, border-color .18s ease;
+}
+
+.aptLux__action:hover{
+  transform: translateY(-2px);
+  background: rgba(255,255,255,.78);
+  border-color: rgba(10,25,40,.14);
+  box-shadow: 0 22px 54px rgba(10,40,70,.12);
+}
+
+.aptLux__icon{
+  width: 32px;
+  height: 32px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+
+  background: rgba(255,255,255,.75);
+  border: 1px solid rgba(10,25,40,.10);
+}
+
+.aptLux__svg{
+  width: 16px;
+  height: 16px;
+  display: block;
+
+  fill: none;
+  stroke: rgba(11,27,43,.72);
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* primary (rezerviraj) */
+.aptLux__action--primary{
+  border-color: var(--a1-accent-border);
+
+  background: linear-gradient(
+    135deg,
+    var(--a1-accent-soft),
+    rgba(255,255,255,.78)
+  );
+}
+
+/* da tekst i ikona budu A1 */
+.aptLux__action--primary .aptLux__actionText strong{
+  color: var(--a1-accent);
+}
+
+.aptLux__action--primary .aptLux__svg{
+  stroke: var(--a1-accent);
+}
+
+.aptLux__actionText strong{
+  font-weight: 750; /* manje “debel” */
+  letter-spacing: .1px;
+}
+
+/* mobile */
+@media (max-width: 900px){
+  .apt__media > img{
+    min-height: 260px;
+  }
+
+  .aptLux__head{
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .aptLux__price{
+    text-align: left;
+  }
+
+  .aptLux__actions{
+    grid-template-columns: 1fr;
+  }
 }
