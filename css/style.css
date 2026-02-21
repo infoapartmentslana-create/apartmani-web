@@ -1408,7 +1408,7 @@ main > .section:nth-of-type(even){
   position: relative;
   overflow: hidden;
 
-  padding: 30px 28px;
+  padding: 32px 28px;
   border-radius: 22px;
 
   /* softer + more premium */
@@ -1427,6 +1427,8 @@ main > .section:nth-of-type(even){
   outline: 0 solid rgba(195,160,90,0);
   outline-offset: 2px;
 
+  text-align: left;
+
   top: 0;
   transition:
     top .22s ease,
@@ -1435,6 +1437,44 @@ main > .section:nth-of-type(even){
     outline-color .22s ease,
     outline-width .22s ease,
     background .22s ease;
+}
+
+/* === PREMIUM HOVER EFFECT === */
+
+.aboutSplit__item{
+  transition:
+    transform .35s cubic-bezier(.2,.8,.2,1),
+    box-shadow .35s ease,
+    border-color .35s ease,
+    background .35s ease;
+}
+
+.aboutSplit__item:hover{
+  transform: translateY(-6px);
+
+  border-color: rgba(228,205,150,.45);
+
+  box-shadow:
+    0 35px 80px rgba(0,0,0,.45),
+    0 0 0 1px rgba(228,205,150,.15),
+    0 0 40px rgba(228,205,150,.12);
+}
+
+.aboutSplit__head{
+  display: flex;
+  align-items: center; /* OVO centrirа h4 u odnosu na ikonu */
+  gap: 16px;
+}
+
+.aboutSplit__head h4{
+  margin: 0;
+  transform: translateY(-1px);
+}
+
+/* opis neka krene ispod naslova (poravnan s naslovom, ne ispod ikone) */
+.aboutSplit__desc{
+  margin-top: 10px;
+  margin-left: 64px;
 }
 
 /* premium stagger ulaz (1 po 1) */
@@ -1478,6 +1518,7 @@ main > .section:nth-of-type(even){
 
 /* zlatni “signature” detalj gore */
 .aboutSplit__item::before{
+  display:none;
   content:"";
   position:absolute;
   left:22px;
@@ -1546,24 +1587,117 @@ main > .section:nth-of-type(even){
 }
 
 .aboutSplit__item h4{
-  margin: 0 0 10px;
-  margin-top: 14px;
-
+  margin: 0;              /* nema dodatnog pomaka */
+  text-align: left;
   font-size: 1.12rem;
+  line-height: 1.25;      /* bitno za optičko centriranje */
   color: rgba(255,255,255,.95);
   letter-spacing: .08px;
-
-  transition: color .22s ease;
 }
 
 .aboutSplit__item:hover h4{
   color: rgba(255,255,255,.985);
 }
 
+.aboutSplit__header{
+  display: flex;
+  align-items: center;   /* vertikalno centriranje */
+  gap: 18px;             /* razmak između ikone i naslova */
+  margin-top: 0px;
+}
+
+/* ICON u benefit karticama */
+.aboutSplit__icon{
+  position: relative;
+  overflow: visible;
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(195,160,90,.25);
+
+  flex-shrink: 0; /* da se ne smanjuje */
+}
+
+.aboutSplit__icon::after{
+  content:"";
+  position:absolute;
+  inset:-8px;
+  border-radius: 18px;
+  background: radial-gradient(
+    circle,
+    rgba(228,205,150,.25),
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity .35s ease;
+  pointer-events:none;
+}
+
+.aboutSplit__item:hover .aboutSplit__icon::after{
+  opacity: 1;
+}
+
+/* SVG veličina + boja */
+.aboutSplit__icon svg{
+  width: 22px;
+  height: 22px;
+  color: rgba(228, 205, 150, .95);
+}
+
+.aboutSplit__item:hover .aboutSplit__icon svg{
+  color: rgba(255, 233, 190, .98);
+}
+
+.aboutSplit__row{
+  display: flex;
+  align-items: center; /* OVO centrirа ikonu prema cijelom tekstu */
+  gap: 18px;
+}
+
+.aboutSplit__text{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.aboutSplit__text h4{
+  margin: 0;
+  line-height: 1.2;
+}
+
+.aboutSplit__text p{
+  margin: 10px 0 0 0; /* mali razmak ispod naslova */
+}
+
 .aboutSplit__item p{
   margin: 0;
   color: rgba(245,241,234,.72);
   line-height: 1.7;
+}
+
+.aboutSplit__item:hover .aboutSplit__icon{
+  border-color: rgba(228,205,150,.55);
+  background: rgba(228,205,150,.10);
+
+  box-shadow:
+    0 0 0 1px rgba(228,205,150,.25),
+    0 0 18px rgba(228,205,150,.35),
+    0 0 38px rgba(195,160,90,.18),
+    inset 0 1px 0 rgba(255,255,255,.6);
+
+  transition: all .35s ease;
+}
+
+.aboutSplit__item:hover .aboutSplit__icon svg{
+  color: rgba(255,233,190,1);
+  filter: drop-shadow(0 0 6px rgba(228,205,150,.6));
+  transition: all .35s ease;
 }
 
 /* responsive */
