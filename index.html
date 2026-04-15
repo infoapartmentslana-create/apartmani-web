@@ -7,13 +7,17 @@
   <meta name="description" content="Apartmani uz more — opis, galerija, cijene i kontakt." />
   <link rel="stylesheet" href="css/style.css?v=123" />
 
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
 </head>
 
 <body>
   <header class="header">
     <div class="container header__inner">
-      <a class="logo" href="#"><span>Apartmani Lana</span></a>
+      <a class="logo" href="#">
+        <span class="logo__label">Apartmani</span>
+        <span class="logo__divider" aria-hidden="true"></span>
+        <span class="logo__name">Lana</span>
+      </a>
 
       <nav class="nav" id="nav">
         <a href="#apartmani">Apartmani</a>
@@ -41,14 +45,46 @@
 
       <div class="container hero__wrap">
         <div class="hero__panel hero__panel--simple" id="heroPanel">
-          <h1>Apartmani Lana</h1>
-
+          <p class="hero__welcome">Dobrodošli</p>
+          <h1>Vaš odmor uz more<br>počinje ovdje</h1>
           <p class="hero__sub hero__sub--simple">
-            Dobrodošli u Apartmane Lana — mjesto za opušten odmor uz more,
-            ljetne zalaske sunca i mirnu atmosferu daleko od gužve.
-            Uživajte u čistom moru, toplim ljetnim danima i ugodnom smještaju
-            idealnom za parove i obitelji.
+            Udobni apartmani uz kristalno čisto more, mediteranski mir
+            i toplinu dalmatinskog primorja — idealno za parove i obitelji.
           </p>
+
+          <div class="hero__meta">
+            <div class="hero__meta-item">
+              <svg class="hero__google-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-label="Google">
+                <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/>
+                <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+              </svg>
+              <div class="hero__stars" aria-label="3 zvjezdice">
+                <span>★</span><span>★</span><span>★</span>
+              </div>
+              <span class="hero__rating">5.0</span>
+            </div>
+
+            <span class="hero__meta-sep" aria-hidden="true"></span>
+
+            <div class="hero__meta-item">
+              <svg class="hero__pin-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z" fill="currentColor"/>
+              </svg>
+              <span class="hero__location">Rtina Miočići</span>
+            </div>
+
+            <span class="hero__meta-sep" aria-hidden="true"></span>
+
+            <div class="hero__meta-item">
+              <svg class="hero__apt-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+                <path d="M9 21V12h6v9" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+              </svg>
+              <span class="hero__location">3 apartmana</span>
+            </div>
+          </div>
         </div>
 
       </div>
@@ -171,13 +207,39 @@
           <h2 class="apartmentsS__title">Prostor za opuštanje uz more.</h2>
 
           <p class="apartmentsS__subtitle">
-            Uživajte u udobnom smještaju, terasi i pogledu koji ostaje u sjećanju.
-            Odaberite apartman prema broju osoba i ugođaju koji tražite.
+            Svaki apartman nudi vlastitu terasu s pogledom na more, potpunu privatnost
+            i ugođaj koji od odmora čini pravo iskustvo.
           </p>
 
-          <p class="apartmentsS__meta">
-            Privatnost <span aria-hidden="true">•</span> Terasa <span aria-hidden="true">•</span> Pogled na more
-          </p>
+          <ul class="apartmentsS__pills" aria-label="Ključne prednosti">
+            <li class="apartmentsS__pill">
+              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"
+                fill="none" stroke="currentColor" stroke-width="2.2"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              </svg>
+              Privatnost
+            </li>
+            <li class="apartmentsS__pill">
+              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"
+                fill="none" stroke="currentColor" stroke-width="2.2"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="4"/>
+                <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+              </svg>
+              Terasa
+            </li>
+            <li class="apartmentsS__pill">
+              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"
+                fill="none" stroke="currentColor" stroke-width="2.2"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/>
+                <path d="M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/>
+                <path d="M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/>
+              </svg>
+              Pogled na more
+            </li>
+          </ul>
         </header>
 
         <!-- A1 -->
@@ -241,33 +303,34 @@
               </p>
             </div>
 
-            <ul class="aptLux__perks">
-              <li>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="aptLux__check">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+            <ul class="aptLux__chips">
+              <li class="aptLux__chip">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M23 12a11.05 11.05 0 0 0-22 0zm-5 7a3 3 0 0 1-6 0v-7"/>
                 </svg>
-                <span>PRIVATNA TERASA</span>
+                Privatna terasa
               </li>
-
-              <li>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="aptLux__check">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+              <li class="aptLux__chip">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <rect x="3" y="3" width="18" height="18" rx="2"/>
+                  <path d="M9 17V7h4a3 3 0 0 1 0 6H9"/>
                 </svg>
-                <span>PARKING</span>
+                Parking
               </li>
-
-              <li>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="aptLux__check">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+              <li class="aptLux__chip">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2"/>
                 </svg>
-                <span>KLIMA</span>
+                Klima
               </li>
-
-              <li>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="aptLux__check">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+              <li class="aptLux__chip">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M5 12.55a11 11 0 0 1 14.08 0"/>
+                  <path d="M1.42 9a16 16 0 0 1 21.16 0"/>
+                  <path d="M8.53 16.11a6 6 0 0 1 6.95 0"/>
+                  <line x1="12" y1="20" x2="12.01" y2="20"/>
                 </svg>
-                <span>WI-FI</span>
+                Wi-Fi
               </li>
             </ul>
 
@@ -362,38 +425,39 @@
 
             <div class="aptLux__desc">
               <p>
-                Smješten na mirnoj poziciji, a opet blizu dućana i restorana.
-                Odličan izbor ako želite praktičnost bez gužve.
+                Apartman A2 nudi udoban smještaj s lijepim pogledom i mirnim okruženjem.
+                Idealan je izbor za opušteni odmor, s lako dostupnim sadržajima i blizinom plaže.
               </p>
             </div>
 
-            <ul class="aptLux__perks">
-              <li>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="aptLux__check">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+            <ul class="aptLux__chips">
+              <li class="aptLux__chip">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M23 12a11.05 11.05 0 0 0-22 0zm-5 7a3 3 0 0 1-6 0v-7"/>
                 </svg>
-                <span>MIRNA UVALA</span>
+                Privatna terasa
               </li>
-
-              <li>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="aptLux__check">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+              <li class="aptLux__chip">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <rect x="3" y="3" width="18" height="18" rx="2"/>
+                  <path d="M9 17V7h4a3 3 0 0 1 0 6H9"/>
                 </svg>
-                <span>PRIVATNI PARKING</span>
+                Parking
               </li>
-
-              <li>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="aptLux__check">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+              <li class="aptLux__chip">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2"/>
                 </svg>
-                <span>KLIMA + WI-FI</span>
+                Klima
               </li>
-
-              <li>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="aptLux__check">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+              <li class="aptLux__chip">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M5 12.55a11 11 0 0 1 14.08 0"/>
+                  <path d="M1.42 9a16 16 0 0 1 21.16 0"/>
+                  <path d="M8.53 16.11a6 6 0 0 1 6.95 0"/>
+                  <line x1="12" y1="20" x2="12.01" y2="20"/>
                 </svg>
-                <span>PLAŽA 130–150 m</span>
+                Wi-Fi
               </li>
             </ul>
 
@@ -495,33 +559,34 @@
               </p>
             </div>
 
-            <ul class="aptLux__perks">
-              <li>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="aptLux__check">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+            <ul class="aptLux__chips">
+              <li class="aptLux__chip">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M23 12a11.05 11.05 0 0 0-22 0zm-5 7a3 3 0 0 1-6 0v-7"/>
                 </svg>
-                <span>KLIMA + WI-FI</span>
+                Privatna terasa
               </li>
-
-              <li>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="aptLux__check">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+              <li class="aptLux__chip">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <rect x="3" y="3" width="18" height="18" rx="2"/>
+                  <path d="M9 17V7h4a3 3 0 0 1 0 6H9"/>
                 </svg>
-                <span>PRIVATNI PARKING</span>
+                Parking
               </li>
-
-              <li>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="aptLux__check">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+              <li class="aptLux__chip">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2"/>
                 </svg>
-                <span>GRILL</span>
+                Klima
               </li>
-
-              <li>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="aptLux__check">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+              <li class="aptLux__chip">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M5 12.55a11 11 0 0 1 14.08 0"/>
+                  <path d="M1.42 9a16 16 0 0 1 21.16 0"/>
+                  <path d="M8.53 16.11a6 6 0 0 1 6.95 0"/>
+                  <line x1="12" y1="20" x2="12.01" y2="20"/>
                 </svg>
-                <span>LOKACIJA: RTINA MIOČIĆI</span>
+                Wi-Fi
               </li>
             </ul>
 
@@ -577,22 +642,30 @@
         </div>
 
         <div class="modal__body">
-          <p class="muted">
-            Ovdje će doći kalendar s dostupnim terminima po danima.
-            Za sada je ovo samo mjesto (placeholder).
-          </p>
+          <div class="calHead">
+            <div class="calHead__left">
+              <div class="calApt" id="calAptLabel">Apartman</div>
+              <div class="calMonth" id="calMonthLabel">Mjesec</div>
+            </div>
 
-          <div class="calendarPlaceholder">
-            <div class="calendarPlaceholder__grid" aria-hidden="true">
-              <div class="calendarPlaceholder__cell is-free">Slobodno</div>
-              <div class="calendarPlaceholder__cell is-free">Slobodno</div>
-              <div class="calendarPlaceholder__cell is-busy">Zauzeto</div>
-              <div class="calendarPlaceholder__cell is-free">Slobodno</div>
-              <div class="calendarPlaceholder__cell is-busy">Zauzeto</div>
-              <div class="calendarPlaceholder__cell is-free">Slobodno</div>
-              <div class="calendarPlaceholder__cell is-free">Slobodno</div>
+            <div class="calHead__right">
+              <button class="btn btn--small" type="button" id="calPrev">‹</button>
+              <button class="btn btn--small" type="button" id="calToday">Danas</button>
+              <button class="btn btn--small" type="button" id="calNext">›</button>
             </div>
           </div>
+
+          <div class="calLegend">
+            <span class="calDot calDot--free"></span> Slobodno
+            <span class="calDot calDot--busy"></span> Zauzeto
+            <span class="calHint">Klik: zauzeto/slobodno · Dvoklik: upiši cijenu</span>
+          </div>
+
+          <div class="calWeekdays" aria-hidden="true">
+            <div>P</div><div>U</div><div>S</div><div>Č</div><div>P</div><div>S</div><div>N</div>
+          </div>
+
+          <div class="calGrid" id="calGrid"></div>
 
           <div class="modal__foot">
             <a class="btn btn--primary" href="#kontakt" data-close-calendar>Pošalji upit</a>

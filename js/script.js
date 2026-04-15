@@ -4,6 +4,35 @@ const menuBackdrop = document.getElementById("menuBackdrop");
 const year = document.getElementById("year");
 let isMenuOpen = false;
 let hideTimer = null;
+let isAdminMode = false;
+
+/* ADMIN LOGIN */
+
+const ADMIN_PASSWORD = "1234"; // promijeni u svoju lozinku
+
+document.addEventListener('keydown', (e) => {
+  if (e.ctrlKey && e.altKey && e.key.toLowerCase() === 'a') {
+
+    if (!isAdminMode) {
+
+      const entered = prompt("Admin password:");
+
+      if (entered === ADMIN_PASSWORD) {
+        isAdminMode = true;
+        alert("Admin mode ON");
+      } else {
+        alert("Wrong password");
+      }
+
+    } else {
+
+      isAdminMode = false;
+      alert("Admin mode OFF");
+
+    }
+
+  }
+});
 
 if (year) year.textContent = new Date().getFullYear();
 
@@ -221,7 +250,7 @@ window.addEventListener("scroll", onHeaderScroll, { passive: true });
 })();
 
 /* =========================
-   Calendar modal (placeholder)
+   Calendar modal (A1/A2/A3) — price + busy, saved in localStorage
    ========================= */
 (() => {
   const modal = document.getElementById('calendarModal');
@@ -230,22 +259,176 @@ window.addEventListener("scroll", onHeaderScroll, { passive: true });
   const openers = document.querySelectorAll('[data-open-calendar]');
   const closers = document.querySelectorAll('[data-close-calendar]');
 
-  function openModal(){
+  const calGrid = document.getElementById('calGrid');
+  const calMonthLabel = document.getElementById('calMonthLabel');
+  const calAptLabel = document.getElementById('calAptLabel');
+
+  const btnPrev = document.getElementById('calPrev');
+  const btnNext = document.getElementById('calNext');
+  const btnToday = document.getElementById('calToday');
+
+  // state
+  let currentApt = 'a1'; // a1/a2/a3
+  let viewYear = new Date().getFullYear();
+  let viewMonth = new Date().getMonth(); // 0-11
+
+  // storage model:
+  // key: "aptCalendar:a1"
+  // value: { "YYYY-MM-DD": { price: 70, busy: true } }
+  const storageKey = (aptId) => `aptCalendar:${aptId}`;
+
+  function loadData(aptId) {
+    try {
+      return JSON.parse(localStorage.getItem(storageKey(aptId)) || '{}');
+    } catch {
+      return {};
+    }
+  }
+
+  function saveData(aptId, data) {
+    localStorage.setItem(storageKey(aptId), JSON.stringify(data));
+  }
+
+  function pad2(n){ return String(n).padStart(2,'0'); }
+  function ymd(y,m,d){ return `${y}-${pad2(m+1)}-${pad2(d)}`; }
+
+  function monthNameHr(m){
+    const names = ['Siječanj','Veljača','Ožujak','Travanj','Svibanj','Lipanj','Srpanj','Kolovoz','Rujan','Listopad','Studeni','Prosinac'];
+    return names[m] || '';
+  }
+
+  function render() {
+    if (!calGrid) return;
+
+    const data = loadData(currentApt);
+
+    // header labels
+    if (calAptLabel) calAptLabel.textContent = `Apartman ${currentApt.toUpperCase()}`;
+    if (calMonthLabel) calMonthLabel.textContent = `${monthNameHr(viewMonth)} ${viewYear}`;
+
+    calGrid.innerHTML = '';
+
+    // calendar grid: start on Monday
+    const first = new Date(viewYear, viewMonth, 1);
+    const daysInMonth = new Date(viewYear, viewMonth + 1, 0).getDate();
+
+    // JS: Sunday=0 ... Saturday=6
+    // We want Monday=0 ... Sunday=6
+    let startIndex = (first.getDay() + 6) % 7;
+
+    // create 42 cells (6 weeks) to keep grid stable
+    const totalCells = 42;
+
+    for (let i = 0; i < totalCells; i++) {
+      const cell = document.createElement('button');
+      cell.type = 'button';
+      cell.className = 'calCell';
+
+      const dayNum = i - startIndex + 1;
+      const inMonth = dayNum >= 1 && dayNum <= daysInMonth;
+
+      if (!inMonth) {
+        cell.classList.add('is-out');
+        cell.disabled = true;
+        cell.innerHTML = `<div class="calCell__day"></div><div class="calCell__price"></div>`;
+        calGrid.appendChild(cell);
+        continue;
+      }
+
+      const key = ymd(viewYear, viewMonth, dayNum);
+      const info = data[key] || { price: null, busy: false };
+
+      if (info.busy) cell.classList.add('is-busy');
+
+      cell.innerHTML = `
+        <div class="calCell__day">${dayNum}</div>
+        <div class="calCell__price">${info.price != null && info.price !== '' ? `${info.price} €` : ''}</div>
+      `;
+
+      if (isAdminMode) {
+
+        // click: toggle busy
+        cell.addEventListener('click', () => {
+          const fresh = loadData(currentApt);
+          const cur = fresh[key] || { price: null, busy: false };
+          cur.busy = !cur.busy;
+          fresh[key] = cur;
+          saveData(currentApt, fresh);
+          render();
+        });
+
+        // double click: set price
+        cell.addEventListener('dblclick', () => {
+          const fresh = loadData(currentApt);
+          const cur = fresh[key] || { price: null, busy: false };
+
+          const entered = window.prompt(`Cijena za ${key} (EUR):`, cur.price ?? '');
+          if (entered === null) return;
+
+          const trimmed = String(entered).trim();
+          cur.price = trimmed === '' ? null : Number(trimmed);
+
+          if (cur.price !== null && Number.isNaN(cur.price)) return;
+
+          fresh[key] = cur;
+          saveData(currentApt, fresh);
+          render();
+        });
+
+      }
+
+      calGrid.appendChild(cell);
+    }
+  }
+
+  function openModal(e) {
+    const btn = e?.currentTarget;
+    const card = btn?.closest('.apt'); // <article class="apt"... data-gallery="a1">
+    const aptId = (card?.getAttribute('data-gallery') || 'a1').toLowerCase();
+
+    currentApt = ['a1','a2','a3'].includes(aptId) ? aptId : 'a1';
+
+    // reset view to current month when opening
+    const now = new Date();
+    viewYear = now.getFullYear();
+    viewMonth = now.getMonth();
+
     modal.classList.add('is-open');
     modal.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
+
+    render();
   }
 
-  function closeModal(){
+  function closeModal() {
     modal.classList.remove('is-open');
     modal.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
   }
 
+  // nav buttons
+  btnPrev?.addEventListener('click', () => {
+    viewMonth--;
+    if (viewMonth < 0) { viewMonth = 11; viewYear--; }
+    render();
+  });
+
+  btnNext?.addEventListener('click', () => {
+    viewMonth++;
+    if (viewMonth > 11) { viewMonth = 0; viewYear++; }
+    render();
+  });
+
+  btnToday?.addEventListener('click', () => {
+    const now = new Date();
+    viewYear = now.getFullYear();
+    viewMonth = now.getMonth();
+    render();
+  });
+
   openers.forEach(btn => btn.addEventListener('click', openModal));
   closers.forEach(btn => btn.addEventListener('click', closeModal));
 
-  // ESC zatvara
   window.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
   });
@@ -463,7 +646,7 @@ window.addEventListener("scroll", onHeaderScroll, { passive: true });
 })();
 
 /* =========================
-   Details modal (A1)
+   Details modal (A1/A2/A3)
    ========================= */
 (() => {
   const modal = document.getElementById('detailsModal');
@@ -472,7 +655,55 @@ window.addEventListener("scroll", onHeaderScroll, { passive: true });
   const openers = document.querySelectorAll('[data-open-details]');
   const closers = modal.querySelectorAll('[data-close-details]');
 
-  function openModal(){
+  // Elements inside modal we update
+  const titleEl = modal.querySelector('#detailsTitle');
+  const metaEl = modal.querySelector('.detailsHead__meta');
+  const heroImg = modal.querySelector('.detailsHero__media img');
+  const badgeEl = modal.querySelector('.detailsHero__badge');
+  const leadEl = modal.querySelector('.detailsHero__lead');
+
+  // Default (current A1 content) – used as fallback
+  const defaultContent = {
+    meta: metaEl?.textContent?.trim() || '',
+    badge: badgeEl?.textContent?.trim() || '',
+    lead: leadEl?.textContent?.trim() || '',
+  };
+
+  // Optional per-apartment overrides (you can edit texts later)
+  const DETAILS = {
+    a1: { ...defaultContent },
+    a2: { ...defaultContent },
+    a3: { ...defaultContent },
+  };
+
+  function setDetailsForApartment(card) {
+    const aptId = (card?.getAttribute('data-gallery') || '').toLowerCase(); // a1/a2/a3
+    const title = card?.getAttribute('data-gallery-title') || `Apartman ${aptId?.toUpperCase() || ''}`;
+
+    // Title
+    if (titleEl) titleEl.textContent = `Detalji — ${title}`;
+
+    // Image (hero)
+    if (heroImg && aptId) {
+      heroImg.src = `images/apartmani/${aptId}/hero.jpg`;
+      heroImg.alt = `${title} - pogled/interijer`;
+    }
+
+    // Texts
+    const cfg = DETAILS[aptId] || defaultContent;
+    if (metaEl && cfg.meta) metaEl.textContent = cfg.meta;
+    if (badgeEl && cfg.badge) badgeEl.textContent = cfg.badge;
+    if (leadEl && cfg.lead) leadEl.textContent = cfg.lead;
+
+    // Accessibility: keep aria-labelledby pointing to correct heading
+    if (titleEl?.id) modal.querySelector('[role="dialog"]')?.setAttribute('aria-labelledby', titleEl.id);
+  }
+
+  function openModal(e){
+    const btn = e?.currentTarget;
+    const card = btn?.closest('.apt');
+    if (card) setDetailsForApartment(card);
+
     modal.classList.add('is-open');
     modal.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
