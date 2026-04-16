@@ -11,7 +11,7 @@ let isAdminMode = false;
 const ADMIN_PASSWORD = "1234"; // promijeni u svoju lozinku
 
 document.addEventListener('keydown', (e) => {
-  if (e.ctrlKey && e.altKey && e.key.toLowerCase() === 'a') {
+  if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'o') {
 
     if (!isAdminMode) {
 
@@ -20,6 +20,7 @@ document.addEventListener('keydown', (e) => {
       if (entered === ADMIN_PASSWORD) {
         isAdminMode = true;
         alert("Admin mode ON");
+        document.dispatchEvent(new CustomEvent('adminModeChanged'));
       } else {
         alert("Wrong password");
       }
@@ -28,6 +29,7 @@ document.addEventListener('keydown', (e) => {
 
       isAdminMode = false;
       alert("Admin mode OFF");
+      document.dispatchEvent(new CustomEvent('adminModeChanged'));
 
     }
 
@@ -249,188 +251,311 @@ window.addEventListener("scroll", onHeaderScroll, { passive: true });
   items.forEach(el => io.observe(el));
 })();
 
+// Reviews slider prev/next
+(() => {
+  const track = document.getElementById('revTrack');
+  if (!track) return;
+  const btnPrev = document.querySelector('.revSlider__btn--prev');
+  const btnNext = document.querySelector('.revSlider__btn--next');
+  const scrollBy = 340;
+  btnPrev && btnPrev.addEventListener('click', () => {
+    track.scrollBy({ left: -scrollBy, behavior: 'smooth' });
+  });
+  btnNext && btnNext.addEventListener('click', () => {
+    track.scrollBy({ left: scrollBy, behavior: 'smooth' });
+  });
+})();
+
 /* =========================
-   Calendar modal (A1/A2/A3) — price + busy, saved in localStorage
+   Calendar modal (A1/A2/A3) — redesign
+   Price + busy days, saved in localStorage
+   Constrained to current year only
    ========================= */
 (() => {
-  const modal = document.getElementById('calendarModal');
+  const modal    = document.getElementById('calendarModal');
   if (!modal) return;
+
+  const panel        = document.getElementById('cmPanel');
+  const cmAptSpan    = document.getElementById('cmAptSpan');
+  const cmMonthLabel = document.getElementById('cmMonthLabel');
+  const cmGrid       = document.getElementById('cmGrid');
+  const btnPrev      = document.getElementById('cmPrev');
+  const btnNext      = document.getElementById('cmNext');
+  const cmAdminBar   = document.getElementById('cmAdminBar');
+  const cmHint       = document.getElementById('cmHint');
+  const btnBlock     = document.getElementById('cmBlockMonth');
+
+  // Price popup elements
+  const pricePopup   = document.getElementById('cmPricePopup');
+  const priceDayEl   = document.getElementById('cmPriceDay');
+  const priceInput   = document.getElementById('cmPriceVal');
+  const btnPriceSave = document.getElementById('cmPriceSave');
+  const btnPriceCancel = document.getElementById('cmPriceCancel');
 
   const openers = document.querySelectorAll('[data-open-calendar]');
   const closers = document.querySelectorAll('[data-close-calendar]');
 
-  const calGrid = document.getElementById('calGrid');
-  const calMonthLabel = document.getElementById('calMonthLabel');
-  const calAptLabel = document.getElementById('calAptLabel');
+  // ── State ──────────────────────────────────
+  const YEAR = new Date().getFullYear(); // locked to current year
+  let currentApt = 'a1';
+  let viewMonth  = new Date().getMonth(); // 0-11
+  let priceKey   = null; // key being edited in price popup
 
-  const btnPrev = document.getElementById('calPrev');
-  const btnNext = document.getElementById('calNext');
-  const btnToday = document.getElementById('calToday');
+  const aptMeta = {
+    a1: { span: 'Sunrise' },
+    a2: { span: 'Olive'   },
+    a3: { span: 'Sky'     },
+  };
 
-  // state
-  let currentApt = 'a1'; // a1/a2/a3
-  let viewYear = new Date().getFullYear();
-  let viewMonth = new Date().getMonth(); // 0-11
+  const monthNames = ['Siječanj','Veljača','Ožujak','Travanj','Svibanj','Lipanj',
+                      'Srpanj','Kolovoz','Rujan','Listopad','Studeni','Prosinac'];
+  const dayNames   = ['1.','2.','3.','4.','5.','6.','7.','8.','9.','10.',
+                      '11.','12.','13.','14.','15.','16.','17.','18.','19.','20.',
+                      '21.','22.','23.','24.','25.','26.','27.','28.','29.','30.','31.'];
 
-  // storage model:
-  // key: "aptCalendar:a1"
-  // value: { "YYYY-MM-DD": { price: 70, busy: true } }
-  const storageKey = (aptId) => `aptCalendar:${aptId}`;
-
-  function loadData(aptId) {
-    try {
-      return JSON.parse(localStorage.getItem(storageKey(aptId)) || '{}');
-    } catch {
-      return {};
-    }
+  // ── Storage ────────────────────────────────
+  const storageKey = (id) => `aptCalendar:${id}`;
+  function loadData(id) {
+    try { return JSON.parse(localStorage.getItem(storageKey(id)) || '{}'); }
+    catch { return {}; }
+  }
+  function saveData(id, data) {
+    localStorage.setItem(storageKey(id), JSON.stringify(data));
   }
 
-  function saveData(aptId, data) {
-    localStorage.setItem(storageKey(aptId), JSON.stringify(data));
-  }
+  function pad2(n) { return String(n).padStart(2,'0'); }
+  function ymd(m, d) { return `${YEAR}-${pad2(m+1)}-${pad2(d)}`; }
 
-  function pad2(n){ return String(n).padStart(2,'0'); }
-  function ymd(y,m,d){ return `${y}-${pad2(m+1)}-${pad2(d)}`; }
-
-  function monthNameHr(m){
-    const names = ['Siječanj','Veljača','Ožujak','Travanj','Svibanj','Lipanj','Srpanj','Kolovoz','Rujan','Listopad','Studeni','Prosinac'];
-    return names[m] || '';
-  }
-
-  function render() {
-    if (!calGrid) return;
-
+  // ── Block entire month ─────────────────────
+  function isMonthFullyBlocked() {
     const data = loadData(currentApt);
+    const days = new Date(YEAR, viewMonth + 1, 0).getDate();
+    for (let d = 1; d <= days; d++) {
+      if (!data[ymd(viewMonth, d)]?.busy) return false;
+    }
+    return true;
+  }
 
-    // header labels
-    if (calAptLabel) calAptLabel.textContent = `Apartman ${currentApt.toUpperCase()}`;
-    if (calMonthLabel) calMonthLabel.textContent = `${monthNameHr(viewMonth)} ${viewYear}`;
+  function updateBlockBtn() {
+    if (!btnBlock) return;
+    btnBlock.textContent = isMonthFullyBlocked()
+      ? 'Odblokiraj cijeli mjesec'
+      : 'Blokiraj cijeli mjesec';
+  }
 
-    calGrid.innerHTML = '';
+  function toggleBlockMonth() {
+    const data = loadData(currentApt);
+    const days = new Date(YEAR, viewMonth + 1, 0).getDate();
+    const shouldBlock = !isMonthFullyBlocked();
+    for (let d = 1; d <= days; d++) {
+      const key = ymd(viewMonth, d);
+      const cur = data[key] || { price: null, busy: false };
+      cur.busy = shouldBlock;
+      data[key] = cur;
+    }
+    saveData(currentApt, data);
+    render();
+  }
 
-    // calendar grid: start on Monday
-    const first = new Date(viewYear, viewMonth, 1);
-    const daysInMonth = new Date(viewYear, viewMonth + 1, 0).getDate();
+  // ── Price popup ────────────────────────────
+  function openPricePopup(key, dayNum) {
+    if (!pricePopup) return;
+    const data = loadData(currentApt);
+    const cur  = data[key] || { price: null, busy: false };
+    priceKey = key;
+    if (priceDayEl) priceDayEl.textContent = `${dayNum}. ${monthNames[viewMonth].toLowerCase()} ${YEAR}`;
+    if (priceInput) { priceInput.value = cur.price ?? ''; }
+    pricePopup.hidden = false;
+    priceInput?.focus();
+  }
 
-    // JS: Sunday=0 ... Saturday=6
-    // We want Monday=0 ... Sunday=6
-    let startIndex = (first.getDay() + 6) % 7;
+  function closePricePopup() {
+    if (pricePopup) pricePopup.hidden = true;
+    priceKey = null;
+  }
 
-    // create 42 cells (6 weeks) to keep grid stable
-    const totalCells = 42;
+  function savePricePopup() {
+    if (!priceKey) { closePricePopup(); return; }
+    const data = loadData(currentApt);
+    const cur  = data[priceKey] || { price: null, busy: false };
+    const val  = String(priceInput?.value ?? '').trim();
+    cur.price  = val === '' ? null : Number(val);
+    if (cur.price !== null && Number.isNaN(cur.price)) { closePricePopup(); return; }
+    data[priceKey] = cur;
+    saveData(currentApt, data);
+    closePricePopup();
+    render();
+  }
+
+  btnPriceSave?.addEventListener('click', savePricePopup);
+  btnPriceCancel?.addEventListener('click', closePricePopup);
+  priceInput?.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') savePricePopup();
+    if (e.key === 'Escape') closePricePopup();
+  });
+
+  // ── Render ─────────────────────────────────
+  function render() {
+    if (!cmGrid) return;
+    closePricePopup();
+
+    const data       = loadData(currentApt);
+    const today      = new Date();
+    const isThisYear = today.getFullYear() === YEAR;
+    const todayKey   = isThisYear ? ymd(today.getMonth(), today.getDate()) : null;
+
+    // Month label
+    if (cmMonthLabel) cmMonthLabel.textContent = `${monthNames[viewMonth]} ${YEAR}`;
+
+    // Disable nav at year boundaries
+    if (btnPrev) btnPrev.disabled = (viewMonth === 0);
+    if (btnNext) btnNext.disabled = (viewMonth === 11);
+
+    // Admin controls
+    if (cmAdminBar) cmAdminBar.hidden = !isAdminMode;
+    if (cmHint)     cmHint.style.display = isAdminMode ? '' : 'none';
+    updateBlockBtn();
+
+    // Build grid
+    cmGrid.innerHTML = '';
+    const first      = new Date(YEAR, viewMonth, 1);
+    const daysInMonth = new Date(YEAR, viewMonth + 1, 0).getDate();
+    const startIndex  = (first.getDay() + 6) % 7; // Mon=0
+    const totalCells  = Math.ceil((startIndex + daysInMonth) / 7) * 7;
 
     for (let i = 0; i < totalCells; i++) {
-      const cell = document.createElement('button');
-      cell.type = 'button';
-      cell.className = 'calCell';
-
-      const dayNum = i - startIndex + 1;
+      const dayNum  = i - startIndex + 1;
       const inMonth = dayNum >= 1 && dayNum <= daysInMonth;
 
+      const cell = document.createElement('div');
+      cell.className = 'cmCell';
+
       if (!inMonth) {
-        cell.classList.add('is-out');
-        cell.disabled = true;
-        cell.innerHTML = `<div class="calCell__day"></div><div class="calCell__price"></div>`;
-        calGrid.appendChild(cell);
+        cell.classList.add('cmCell--out');
+        cmGrid.appendChild(cell);
         continue;
       }
 
-      const key = ymd(viewYear, viewMonth, dayNum);
+      const key  = ymd(viewMonth, dayNum);
       const info = data[key] || { price: null, busy: false };
+      const isToday = (key === todayKey);
 
-      if (info.busy) cell.classList.add('is-busy');
+      if (info.busy)  cell.classList.add('cmCell--busy');
+      if (isToday)    cell.classList.add('cmCell--today');
+      // Weekend (Saturday=col6, Sunday=col7)
+      const colPos = (startIndex + dayNum - 1) % 7; // 0=Mon … 6=Sun
+      if (colPos === 5 || colPos === 6) cell.classList.add('cmCell--weekend');
+
+      // Price only shown when day is NOT busy
+      const priceText = (!info.busy && info.price != null && info.price !== '') ? `${info.price}€` : '';
 
       cell.innerHTML = `
-        <div class="calCell__day">${dayNum}</div>
-        <div class="calCell__price">${info.price != null && info.price !== '' ? `${info.price} €` : ''}</div>
+        <span class="cmCell__num">${dayNum}</span>
+        ${priceText ? `<span class="cmCell__price">${priceText}</span>` : ''}
+        ${info.busy ? '<span class="cmCell__status">Zauzeto</span>' : ''}
       `;
 
       if (isAdminMode) {
+        cell.setAttribute('role', 'button');
+        cell.setAttribute('tabindex', '0');
+        cell.title = 'Desni klik: zauzeto/slobodno · 2× klik: postavi cijenu';
 
-        // click: toggle busy
-        cell.addEventListener('click', () => {
+        // Right click: toggle busy (clears price when marking busy)
+        cell.addEventListener('contextmenu', (e) => {
+          e.preventDefault();
           const fresh = loadData(currentApt);
-          const cur = fresh[key] || { price: null, busy: false };
-          cur.busy = !cur.busy;
-          fresh[key] = cur;
+          const cur   = fresh[key] || { price: null, busy: false };
+          cur.busy    = !cur.busy;
+          if (cur.busy) cur.price = null;
+          fresh[key]  = cur;
           saveData(currentApt, fresh);
           render();
         });
 
-        // double click: set price
+        // Double click: open price popup
         cell.addEventListener('dblclick', () => {
-          const fresh = loadData(currentApt);
-          const cur = fresh[key] || { price: null, busy: false };
-
-          const entered = window.prompt(`Cijena za ${key} (EUR):`, cur.price ?? '');
-          if (entered === null) return;
-
-          const trimmed = String(entered).trim();
-          cur.price = trimmed === '' ? null : Number(trimmed);
-
-          if (cur.price !== null && Number.isNaN(cur.price)) return;
-
-          fresh[key] = cur;
-          saveData(currentApt, fresh);
-          render();
+          openPricePopup(key, dayNum);
         });
 
+        // Keyboard: Enter/Space toggles busy
+        cell.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            const fresh = loadData(currentApt);
+            const cur   = fresh[key] || { price: null, busy: false };
+            cur.busy    = !cur.busy;
+            if (cur.busy) cur.price = null;
+            fresh[key]  = cur;
+            saveData(currentApt, fresh);
+            render();
+          }
+        });
       }
 
-      calGrid.appendChild(cell);
+      cmGrid.appendChild(cell);
     }
   }
 
+  // ── Open / Close ───────────────────────────
   function openModal(e) {
-    const btn = e?.currentTarget;
-    const card = btn?.closest('.apt'); // <article class="apt"... data-gallery="a1">
+    const card  = e?.currentTarget?.closest('.apt');
     const aptId = (card?.getAttribute('data-gallery') || 'a1').toLowerCase();
+    currentApt  = ['a1','a2','a3'].includes(aptId) ? aptId : 'a1';
 
-    currentApt = ['a1','a2','a3'].includes(aptId) ? aptId : 'a1';
+    // Apply apartment accent class
+    if (panel) {
+      panel.classList.remove('cm--a1','cm--a2','cm--a3');
+      panel.classList.add(`cm--${currentApt}`);
+    }
 
-    // reset view to current month when opening
-    const now = new Date();
-    viewYear = now.getFullYear();
-    viewMonth = now.getMonth();
+    // Apartment name span
+    if (cmAptSpan) cmAptSpan.textContent = aptMeta[currentApt]?.span || '';
+
+    // Start at current month
+    viewMonth = new Date().getMonth();
+
+    render();
 
     modal.classList.add('is-open');
     modal.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
-
-    render();
   }
 
   function closeModal() {
+    closePricePopup();
     modal.classList.remove('is-open');
     modal.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
   }
 
-  // nav buttons
-  btnPrev?.addEventListener('click', () => {
-    viewMonth--;
-    if (viewMonth < 0) { viewMonth = 11; viewYear--; }
-    render();
-  });
+  btnPrev?.addEventListener('click', () => { if (viewMonth > 0)  { viewMonth--; render(); } });
+  btnNext?.addEventListener('click', () => { if (viewMonth < 11) { viewMonth++; render(); } });
+  btnBlock?.addEventListener('click', toggleBlockMonth);
 
-  btnNext?.addEventListener('click', () => {
-    viewMonth++;
-    if (viewMonth > 11) { viewMonth = 0; viewYear++; }
-    render();
-  });
-
-  btnToday?.addEventListener('click', () => {
-    const now = new Date();
-    viewYear = now.getFullYear();
-    viewMonth = now.getMonth();
-    render();
+  document.addEventListener('adminModeChanged', () => {
+    if (modal.classList.contains('is-open')) render();
   });
 
   openers.forEach(btn => btn.addEventListener('click', openModal));
   closers.forEach(btn => btn.addEventListener('click', closeModal));
-
   window.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
+  });
+
+  // Otvaranje iz detalja modala (zna koji apartman)
+  document.addEventListener('openCalendarFor', (e) => {
+    const aptId = e.detail?.aptId || 'a1';
+    currentApt = ['a1','a2','a3'].includes(aptId) ? aptId : 'a1';
+    if (panel) {
+      panel.classList.remove('cm--a1','cm--a2','cm--a3');
+      panel.classList.add(`cm--${currentApt}`);
+    }
+    if (cmAptSpan) cmAptSpan.textContent = aptMeta[currentApt]?.span || '';
+    viewMonth = new Date().getMonth();
+    render();
+    modal.classList.add('is-open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
   });
 })();
 
@@ -655,48 +780,110 @@ window.addEventListener("scroll", onHeaderScroll, { passive: true });
   const openers = document.querySelectorAll('[data-open-details]');
   const closers = modal.querySelectorAll('[data-close-details]');
 
+  // Panel element (gets dm--a1/a2/a3 class for theming)
+  const panel = document.getElementById('dmPanel');
+
   // Elements inside modal we update
-  const titleEl = modal.querySelector('#detailsTitle');
-  const metaEl = modal.querySelector('.detailsHead__meta');
-  const heroImg = modal.querySelector('.detailsHero__media img');
-  const badgeEl = modal.querySelector('.detailsHero__badge');
-  const leadEl = modal.querySelector('.detailsHero__lead');
+  const titleSpanEl  = modal.querySelector('#dmTitleSpan');
+  const metaEl       = modal.querySelector('#dmMeta');
+  const heroImg      = modal.querySelector('#dmHeroImg');
+  const badgeEl      = modal.querySelector('#dmBadge');
+  const leadEl       = modal.querySelector('#dmLead');
+  const summaryEl    = modal.querySelector('#dmSummary');
+  const equipmentEl  = modal.querySelector('#dmEquipment');
+  const calBtn       = modal.querySelector('#dmCalBtn');
 
-  // Default (current A1 content) – used as fallback
-  const defaultContent = {
-    meta: metaEl?.textContent?.trim() || '',
-    badge: badgeEl?.textContent?.trim() || '',
-    lead: leadEl?.textContent?.trim() || '',
-  };
+  let currentDetailsApt = 'a1';
 
-  // Optional per-apartment overrides (you can edit texts later)
+  // Per-apartment content
   const DETAILS = {
-    a1: { ...defaultContent },
-    a2: { ...defaultContent },
-    a3: { ...defaultContent },
+    a1: {
+      nameSpan: 'Sunrise',
+      meta:    '40 m² · 1. kat · Bračni krevet + kauč na razvlačenje',
+      badge:   'Otvoren horizont · terasa · tople boje zalaska',
+      lead:    'Apartman Sunrise naglašava najljepši dio dana uz more — pogled, terasu i tople boje zalaska. Terasa je idealna za jutarnju kavu, večernje opuštanje i pogled koji ostaje u sjećanju.',
+      summary: ['40 m² · 1. kat (7 stepenica)', 'Bračni krevet + kauč na razvlačenje', 'Terasa s pogledom na more'],
+      equipment: [
+        'Kuhinja s pećnicom, pločom i kuhalnom',
+        'Kompletno posuđe i pribor',
+        'Smart TV + klima uređaj',
+        'Wi-Fi',
+        'Kupaonica s tušem i ručnicima',
+        'Terasa: stol i stolice',
+        'Zajednički roštilj u dvorištu',
+      ],
+    },
+    a2: {
+      nameSpan: 'Olive',
+      meta:    '40 m² · 1. kat · Bračni krevet + kauč na razvlačenje',
+      badge:   'Mediteranski mir · udoban interijer · blizina plaže',
+      lead:    'Apartman Olive donosi miran, prirodan ugođaj i udoban prostor za lagan odmor. Idealan je za goste koji žele jednostavnost, privatnost i sve potrebno nadohvat ruke.',
+      summary: ['40 m² · 1. kat', 'Bračni krevet + kauč na razvlačenje', 'Vrtni prostor i pogled na maslinike'],
+      equipment: [
+        'Kuhinja s pećnicom, pločom i kuhalnom',
+        'Kompletno posuđe i pribor',
+        'Smart TV + klima uređaj',
+        'Wi-Fi',
+        'Kupaonica s tušem i ručnicima',
+        'Terasa: stol i stolice',
+        'Zajednički roštilj u dvorištu',
+      ],
+    },
+    a3: {
+      nameSpan: 'Sky',
+      meta:    '40 m² · 2. kat · Bračni krevet · kauč na razvlačenje · krevet 90×200',
+      badge:   'Prostran boravak · obiteljski odmor · morska svježina',
+      lead:    'Apartman Sky pruža najviše prostora za obiteljski odmor uz more. Komotan raspored, dodatni ležajevi i prostrana terasa stvaraju svjež, opušten ritam ljetnih dana.',
+      summary: ['40 m² · 2. kat', 'Bračni krevet + kauč na razvlačenje', 'Krevet 90×200', 'Terasa s pogledom na more'],
+      equipment: [
+        'Kuhinja s pločom i kuhalnom',
+        'Kompletno posuđe i pribor',
+        'TV + klima uređaj',
+        'Wi-Fi',
+        'Kupaonica s tušem i ručnicima',
+        'Terasa: stol i stolice',
+        'Zajednički roštilj u dvorištu',
+      ],
+    },
   };
 
   function setDetailsForApartment(card) {
-    const aptId = (card?.getAttribute('data-gallery') || '').toLowerCase(); // a1/a2/a3
-    const title = card?.getAttribute('data-gallery-title') || `Apartman ${aptId?.toUpperCase() || ''}`;
+    const aptId = (card?.getAttribute('data-gallery') || 'a1').toLowerCase();
+    const cfg = DETAILS[aptId] || DETAILS.a1;
+    currentDetailsApt = aptId;
 
-    // Title
-    if (titleEl) titleEl.textContent = `Detalji — ${title}`;
+    // Apartment accent class on panel
+    if (panel) {
+      panel.classList.remove('dm--a1', 'dm--a2', 'dm--a3');
+      panel.classList.add(`dm--${aptId}`);
+    }
 
-    // Image (hero)
-    if (heroImg && aptId) {
+    // Update calendar button text
+    if (calBtn) calBtn.textContent = `Slobodni termini — ${cfg.nameSpan}`;
+
+    // Title colored span
+    if (titleSpanEl) titleSpanEl.textContent = cfg.nameSpan;
+
+    // Hero image
+    if (heroImg) {
       heroImg.src = `images/apartmani/${aptId}/hero.jpg`;
-      heroImg.alt = `${title} - pogled/interijer`;
+      heroImg.alt = `Apartman ${cfg.nameSpan}`;
     }
 
     // Texts
-    const cfg = DETAILS[aptId] || defaultContent;
-    if (metaEl && cfg.meta) metaEl.textContent = cfg.meta;
-    if (badgeEl && cfg.badge) badgeEl.textContent = cfg.badge;
-    if (leadEl && cfg.lead) leadEl.textContent = cfg.lead;
+    if (metaEl)  metaEl.textContent  = cfg.meta;
+    if (badgeEl) badgeEl.textContent = cfg.badge;
+    if (leadEl)  leadEl.textContent  = cfg.lead;
 
-    // Accessibility: keep aria-labelledby pointing to correct heading
-    if (titleEl?.id) modal.querySelector('[role="dialog"]')?.setAttribute('aria-labelledby', titleEl.id);
+    // Summary bullets
+    if (summaryEl) {
+      summaryEl.innerHTML = cfg.summary.map(s => `<li>${s}</li>`).join('');
+    }
+
+    // Equipment list
+    if (equipmentEl) {
+      equipmentEl.innerHTML = cfg.equipment.map(s => `<li>${s}</li>`).join('');
+    }
   }
 
   function openModal(e){
@@ -717,6 +904,11 @@ window.addEventListener("scroll", onHeaderScroll, { passive: true });
 
   openers.forEach(btn => btn.addEventListener('click', openModal));
   closers.forEach(btn => btn.addEventListener('click', closeModal));
+
+  calBtn?.addEventListener('click', () => {
+    closeModal();
+    document.dispatchEvent(new CustomEvent('openCalendarFor', { detail: { aptId: currentDetailsApt } }));
+  });
 
   window.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();

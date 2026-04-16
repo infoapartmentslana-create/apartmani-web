@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Apartmani Lana</title>
   <meta name="description" content="Apartmani uz more — opis, galerija, cijene i kontakt." />
-  <link rel="stylesheet" href="css/style.css?v=123" />
+  <link rel="stylesheet" href="css/style.css?v=202" />
 
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
 </head>
@@ -242,10 +242,11 @@
           </ul>
         </header>
 
-        <!-- A1 -->
-        <article class="apt apt--a1 reveal" data-gallery="a1" data-gallery-title="Apartman A1" data-gallery-count="11">
+        <!-- Sunrise -->
+        <article class="apt apt--a1 reveal" data-gallery="a1" data-gallery-title="Apartman Sunrise" data-gallery-count="11">
           <div class="apt__media">
-            <img src="images/apartmani/a1/hero.jpg" alt="Apartman A1 - terasa i pogled" loading="lazy">
+            <img src="images/apartmani/a1/hero.jpg" alt="Apartman Sunrise - terasa i pogled" loading="lazy">
+            <div class="apt__priceBadge" aria-label="Cijena od 60 eura po noći">od <strong>60€</strong> / noć</div>
             <div class="apt__thumbs">
               <img src="images/apartmani/a1/1.jpg" alt="" loading="lazy">
               <img src="images/apartmani/a1/2.jpg" alt="" loading="lazy">
@@ -253,130 +254,59 @@
             </div>
           </div>
 
-          <div class="apt__body apt__body--lux">
-            <header class="aptLux__head">
-              <div class="aptLux__titleBlock">
-                <h3 class="aptLux__title">Apartman <span>A1</span></h3>
-                <div class="aptLux__price">
-                  <span class="aptLux__priceFrom">od</span>
+          <div class="apt__body apt__body--clean">
+            <h3 class="apt__name">Apartman <span>Sunrise</span></h3>
+            <p class="apt__shortDesc">Prostrana terasa s pogledom na horizont — tople boje zalaska i jutarnja kava uz zvuk valova.</p>
 
-                  <span class="aptLux__priceMain">
-                    <strong class="aptLux__priceValue">60</strong>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                      stroke-linecap="round" stroke-linejoin="round"
-                      class="aptLux__euroIcon" aria-hidden="true">
-                      <path d="M4 10h12"/><path d="M4 14h9"/><path d="M19 6a7.7 7.7 0 0 0-5.2-2A7.9 7.9 0 0 0 6 12c0 4.4 3.5 8 7.8 8 2 0 3.8-.8 5.2-2"/>
-                    </svg>
-                  </span>
-
-                  <span class="aptLux__priceUnit">/ noć</span>
-                </div>
+            <div class="apt__specs">
+              <div class="apt__spec">
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="Osobe">
+                  <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                  <circle cx="9" cy="7" r="4"/>
+                  <path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
+                </svg>
+                <span>4</span>
               </div>
-
-              <div class="aptLux__cap" aria-label="Kapacitet: 4 osobe (2+2)">
-                <span class="cap__top">
-                  <span class="cap__icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                        stroke-linecap="round" stroke-linejoin="round">
-                      <!-- glava 1 -->
-                      <circle cx="9" cy="8" r="3"></circle>
-                      <!-- tijelo 1 -->
-                      <path d="M3 20c0-3 3-5 6-5s6 2 6 5"></path>
-
-                      <!-- glava 2 -->
-                      <circle cx="17" cy="10" r="2.5"></circle>
-                      <!-- tijelo 2 -->
-                      <path d="M14 20c0-2 2-3.5 4-3.5S22 18 22 20"></path>
-                    </svg>
-                  </span>
-                  4 osobe
-                </span>
-                <span class="cap__sub">(2+2)</span>
+              <div class="apt__spec">
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="Kreveta">
+                  <rect width="20" height="8" x="2" y="13" rx="2"/>
+                  <path d="M6 13V9a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v4"/>
+                  <path d="M2 21v-2M22 21v-2"/>
+                </svg>
+                <span>2</span>
               </div>
-            </header>
-
-            <div class="aptLux__desc">
-              <p>
-                Apartman A1 nudi otvoreni pogled na horizont i zalaske sunca.
-                Prostrana terasa idealna je za jutarnju kavu ili večernje opuštanje u tišini ljetne noći.
-              </p>
+              <div class="apt__spec">
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="Kupaonice">
+                  <path d="M9 6 6.5 3.5a1.5 1.5 0 0 0-1-.5C4.683 3 4 3.683 4 4.5V17a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5"/>
+                  <line x1="10" x2="8" y1="5" y2="7"/>
+                  <line x1="2" x2="22" y1="12" y2="12"/>
+                  <line x1="7" x2="7" y1="19" y2="21"/>
+                  <line x1="17" x2="17" y1="19" y2="21"/>
+                </svg>
+                <span>1</span>
+              </div>
             </div>
 
-            <ul class="aptLux__chips">
-              <li class="aptLux__chip">
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="M23 12a11.05 11.05 0 0 0-22 0zm-5 7a3 3 0 0 1-6 0v-7"/>
-                </svg>
-                Privatna terasa
-              </li>
-              <li class="aptLux__chip">
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <rect x="3" y="3" width="18" height="18" rx="2"/>
-                  <path d="M9 17V7h4a3 3 0 0 1 0 6H9"/>
-                </svg>
-                Parking
-              </li>
-              <li class="aptLux__chip">
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2"/>
-                </svg>
-                Klima
-              </li>
-              <li class="aptLux__chip">
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="M5 12.55a11 11 0 0 1 14.08 0"/>
-                  <path d="M1.42 9a16 16 0 0 1 21.16 0"/>
-                  <path d="M8.53 16.11a6 6 0 0 1 6.95 0"/>
-                  <line x1="12" y1="20" x2="12.01" y2="20"/>
-                </svg>
-                Wi-Fi
-              </li>
+            <ul class="apt__checklist">
+              <li>Privatna terasa</li>
+              <li>Parking</li>
+              <li>Klima</li>
+              <li>Wi-Fi</li>
             </ul>
 
-            <div class="aptLux__divider" aria-hidden="true"></div>
-
-            <div class="aptLux__actions">
-              <button class="aptLux__action" type="button" data-open-details>
-                <span class="aptLux__icon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" class="aptLux__svg">
-                    <path d="M12 17v-6" />
-                    <path d="M12 8h.01" />
-                    <path d="M21 12a9 9 0 1 1-18 0a9 9 0 0 1 18 0Z" />
-                  </svg>
-                </span>
-                <span class="aptLux__actionText"><strong>Detalji</strong></span>
-              </button>
-
-              <button class="aptLux__action" type="button" data-open-calendar>
-                <span class="aptLux__icon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" class="aptLux__svg">
-                    <path d="M8 2v3M16 2v3" />
-                    <path d="M3.5 9h17" />
-                    <path d="M6 5h12a2.5 2.5 0 0 1 2.5 2.5v12A2.5 2.5 0 0 1 18 22H6A2.5 2.5 0 0 1 3.5 19.5v-12A2.5 2.5 0 0 1 6 5Z" />
-                  </svg>
-                </span>
-                <span class="aptLux__actionText"><strong>Kalendar</strong></span>
-              </button>
-
-              <a class="aptLux__action aptLux__action--primary" href="#kontakt">
-                <span class="aptLux__icon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" class="aptLux__svg">
-                    <path d="M4 6h16v12H4z" />
-                    <path d="m4 7 8 6 8-6" />
-                  </svg>
-                </span>
-                <span class="aptLux__actionText"><strong>Rezerviraj</strong></span>
-              </a>
+            <div class="apt__footer">
+              <button class="apt__btnInfo" type="button" data-open-details>Detalji</button>
+              <button class="apt__btnCal" type="button" data-open-calendar>Kalendar</button>
+              <a class="apt__btnBook" href="#kontakt">Rezerviraj</a>
             </div>
           </div>
         </article>
 
-        <!-- A2 (LUX kao A1, druga boja preko .apt--a2) -->
-        <article class="apt apt--alt apt--a2 reveal" data-gallery="a2" data-gallery-title="Apartman A2" data-gallery-count="11">
+        <!-- Olive -->
+        <article class="apt apt--alt apt--a2 reveal" data-gallery="a2" data-gallery-title="Apartman Olive" data-gallery-count="11">
           <div class="apt__media">
-            <img src="images/apartmani/a2/hero.jpg" alt="Apartman A2 - interijer i uvala" loading="lazy">
-
+            <img src="images/apartmani/a2/hero.jpg" alt="Apartman Olive - interijer i uvala" loading="lazy">
+            <div class="apt__priceBadge" aria-label="Cijena od 60 eura po noći">od <strong>60€</strong> / noć</div>
             <div class="apt__thumbs">
               <img src="images/apartmani/a2/1.jpg" alt="" loading="lazy">
               <img src="images/apartmani/a2/2.jpg" alt="" loading="lazy">
@@ -384,127 +314,59 @@
             </div>
           </div>
 
-          <div class="apt__body apt__body--lux">
-            <header class="aptLux__head">
-              <div class="aptLux__titleBlock">
-                <h3 class="aptLux__title">Apartman <span>A2</span></h3>
+          <div class="apt__body apt__body--clean">
+            <h3 class="apt__name">Apartman <span>Olive</span></h3>
+            <p class="apt__shortDesc">Mediteranski mir, udoban interijer i pogled na uvalu — idealan za opušten odmor bez žurbe.</p>
 
-                <div class="aptLux__price">
-                  <span class="aptLux__priceFrom">od</span>
-
-                  <span class="aptLux__priceMain">
-                    <strong class="aptLux__priceValue">60</strong>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                      stroke-linecap="round" stroke-linejoin="round"
-                      class="aptLux__euroIcon" aria-hidden="true">
-                      <path d="M4 10h12"/><path d="M4 14h9"/><path d="M19 6a7.7 7.7 0 0 0-5.2-2A7.9 7.9 0 0 0 6 12c0 4.4 3.5 8 7.8 8 2 0 3.8-.8 5.2-2"/>
-                    </svg>
-                  </span>
-
-                  <span class="aptLux__priceUnit">/ noć</span>
-                </div>
+            <div class="apt__specs">
+              <div class="apt__spec">
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="Osobe">
+                  <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                  <circle cx="9" cy="7" r="4"/>
+                  <path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
+                </svg>
+                <span>4</span>
               </div>
-
-              <div class="aptLux__cap" aria-label="Kapacitet: 4 osobe (2+2)">
-                <span class="cap__top">
-                  <span class="cap__icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                      stroke-linecap="round" stroke-linejoin="round">
-                      <circle cx="9" cy="8" r="3"></circle>
-                      <path d="M3 20c0-3 3-5 6-5s6 2 6 5"></path>
-                      <circle cx="17" cy="10" r="2.5"></circle>
-                      <path d="M14 20c0-2 2-3.5 4-3.5S22 18 22 20"></path>
-                    </svg>
-                  </span>
-                  4 osobe
-                </span>
-                <span class="cap__sub">(2+2)</span>
+              <div class="apt__spec">
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="Kreveta">
+                  <rect width="20" height="8" x="2" y="13" rx="2"/>
+                  <path d="M6 13V9a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v4"/>
+                  <path d="M2 21v-2M22 21v-2"/>
+                </svg>
+                <span>2</span>
               </div>
-            </header>
-
-            <div class="aptLux__desc">
-              <p>
-                Apartman A2 nudi udoban smještaj s lijepim pogledom i mirnim okruženjem.
-                Idealan je izbor za opušteni odmor, s lako dostupnim sadržajima i blizinom plaže.
-              </p>
+              <div class="apt__spec">
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="Kupaonice">
+                  <path d="M9 6 6.5 3.5a1.5 1.5 0 0 0-1-.5C4.683 3 4 3.683 4 4.5V17a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5"/>
+                  <line x1="10" x2="8" y1="5" y2="7"/>
+                  <line x1="2" x2="22" y1="12" y2="12"/>
+                  <line x1="7" x2="7" y1="19" y2="21"/>
+                  <line x1="17" x2="17" y1="19" y2="21"/>
+                </svg>
+                <span>1</span>
+              </div>
             </div>
 
-            <ul class="aptLux__chips">
-              <li class="aptLux__chip">
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="M23 12a11.05 11.05 0 0 0-22 0zm-5 7a3 3 0 0 1-6 0v-7"/>
-                </svg>
-                Privatna terasa
-              </li>
-              <li class="aptLux__chip">
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <rect x="3" y="3" width="18" height="18" rx="2"/>
-                  <path d="M9 17V7h4a3 3 0 0 1 0 6H9"/>
-                </svg>
-                Parking
-              </li>
-              <li class="aptLux__chip">
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2"/>
-                </svg>
-                Klima
-              </li>
-              <li class="aptLux__chip">
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="M5 12.55a11 11 0 0 1 14.08 0"/>
-                  <path d="M1.42 9a16 16 0 0 1 21.16 0"/>
-                  <path d="M8.53 16.11a6 6 0 0 1 6.95 0"/>
-                  <line x1="12" y1="20" x2="12.01" y2="20"/>
-                </svg>
-                Wi-Fi
-              </li>
+            <ul class="apt__checklist">
+              <li>Privatna terasa</li>
+              <li>Parking</li>
+              <li>Klima</li>
+              <li>Wi-Fi</li>
             </ul>
 
-            <div class="aptLux__divider" aria-hidden="true"></div>
-
-            <div class="aptLux__actions">
-              <button class="aptLux__action" type="button" data-open-details>
-                <span class="aptLux__icon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" class="aptLux__svg">
-                    <path d="M12 17v-6" />
-                    <path d="M12 8h.01" />
-                    <path d="M21 12a9 9 0 1 1-18 0a9 9 0 0 1 18 0Z" />
-                  </svg>
-                </span>
-                <span class="aptLux__actionText"><strong>Detalji</strong></span>
-              </button>
-
-              <button class="aptLux__action" type="button" data-open-calendar>
-                <span class="aptLux__icon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" class="aptLux__svg">
-                    <path d="M8 2v3M16 2v3" />
-                    <path d="M3.5 9h17" />
-                    <path d="M6 5h12a2.5 2.5 0 0 1 2.5 2.5v12A2.5 2.5 0 0 1 18 22H6A2.5 2.5 0 0 1 3.5 19.5v-12A2.5 2.5 0 0 1 6 5Z" />
-                  </svg>
-                </span>
-                <span class="aptLux__actionText"><strong>Kalendar</strong></span>
-              </button>
-
-              <a class="aptLux__action aptLux__action--primary" href="#kontakt">
-                <span class="aptLux__icon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" class="aptLux__svg">
-                    <path d="M4 6h16v12H4z" />
-                    <path d="m4 7 8 6 8-6" />
-                  </svg>
-                </span>
-                <span class="aptLux__actionText"><strong>Rezerviraj</strong></span>
-              </a>
+            <div class="apt__footer">
+              <button class="apt__btnInfo" type="button" data-open-details>Detalji</button>
+              <button class="apt__btnCal" type="button" data-open-calendar>Kalendar</button>
+              <a class="apt__btnBook" href="#kontakt">Rezerviraj</a>
             </div>
           </div>
         </article>
 
-        <!-- A3 -->
-        <!-- A3 (LUX kao A1/A2) -->
-        <article class="apt apt--a3 reveal" data-gallery="a3" data-gallery-title="Apartman A3" data-gallery-count="11">
+        <!-- Sky -->
+        <article class="apt apt--a3 reveal" data-gallery="a3" data-gallery-title="Apartman Sky" data-gallery-count="11">
           <div class="apt__media">
-            <img src="images/apartmani/a3/hero.jpg" alt="Apartman A3 - interijer" loading="lazy">
-
+            <img src="images/apartmani/a3/hero.jpg" alt="Apartman Sky - interijer" loading="lazy">
+            <div class="apt__priceBadge" aria-label="Cijena od 70 eura po noći">od <strong>70€</strong> / noć</div>
             <div class="apt__thumbs">
               <img src="images/apartmani/a3/1.jpg" alt="" loading="lazy">
               <img src="images/apartmani/a3/2.jpg" alt="" loading="lazy">
@@ -512,118 +374,50 @@
             </div>
           </div>
 
-          <div class="apt__body apt__body--lux">
-            <header class="aptLux__head">
-              <div class="aptLux__titleBlock">
-                <h3 class="aptLux__title">Apartman <span>A3</span></h3>
+          <div class="apt__body apt__body--clean">
+            <h3 class="apt__name">Apartman <span>Sky</span></h3>
+            <p class="apt__shortDesc">Prostran obiteljski apartman s terasom i morskom svježinom — za one koji žele više prostora i mira.</p>
 
-                <div class="aptLux__price">
-                  <span class="aptLux__priceFrom">od</span>
-
-                  <!-- PROMIJENI CIJENU PO POTREBI -->
-                  <span class="aptLux__priceMain">
-                    <strong class="aptLux__priceValue">70</strong>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                      stroke-linecap="round" stroke-linejoin="round"
-                      class="aptLux__euroIcon" aria-hidden="true">
-                      <path d="M4 10h12"/><path d="M4 14h9"/><path d="M19 6a7.7 7.7 0 0 0-5.2-2A7.9 7.9 0 0 0 6 12c0 4.4 3.5 8 7.8 8 2 0 3.8-.8 5.2-2"/>
-                    </svg>
-                  </span>
-
-                  <span class="aptLux__priceUnit">/ noć</span>
-                </div>
+            <div class="apt__specs">
+              <div class="apt__spec">
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="Osobe">
+                  <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                  <circle cx="9" cy="7" r="4"/>
+                  <path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
+                </svg>
+                <span>5</span>
               </div>
-
-              <div class="aptLux__cap" aria-label="Kapacitet: 5 osoba (2+3)">
-                <span class="cap__top">
-                  <span class="cap__icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                      stroke-linecap="round" stroke-linejoin="round">
-                      <circle cx="9" cy="8" r="3"></circle>
-                      <path d="M3 20c0-3 3-5 6-5s6 2 6 5"></path>
-                      <circle cx="17" cy="10" r="2.5"></circle>
-                      <path d="M14 20c0-2 2-3.5 4-3.5S22 18 22 20"></path>
-                    </svg>
-                  </span>
-                  5 osoba
-                </span>
-                <span class="cap__sub">(2+3)</span>
+              <div class="apt__spec">
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="Kreveta">
+                  <rect width="20" height="8" x="2" y="13" rx="2"/>
+                  <path d="M6 13V9a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v4"/>
+                  <path d="M2 21v-2M22 21v-2"/>
+                </svg>
+                <span>3</span>
               </div>
-            </header>
-
-            <div class="aptLux__desc">
-              <p>
-                Najviše prostora za bezbrižan obiteljski odmor. Komotan raspored
-                i terasa za duga ljetna jutra i večeri.
-              </p>
+              <div class="apt__spec">
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="Kupaonice">
+                  <path d="M9 6 6.5 3.5a1.5 1.5 0 0 0-1-.5C4.683 3 4 3.683 4 4.5V17a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5"/>
+                  <line x1="10" x2="8" y1="5" y2="7"/>
+                  <line x1="2" x2="22" y1="12" y2="12"/>
+                  <line x1="7" x2="7" y1="19" y2="21"/>
+                  <line x1="17" x2="17" y1="19" y2="21"/>
+                </svg>
+                <span>1</span>
+              </div>
             </div>
 
-            <ul class="aptLux__chips">
-              <li class="aptLux__chip">
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="M23 12a11.05 11.05 0 0 0-22 0zm-5 7a3 3 0 0 1-6 0v-7"/>
-                </svg>
-                Privatna terasa
-              </li>
-              <li class="aptLux__chip">
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <rect x="3" y="3" width="18" height="18" rx="2"/>
-                  <path d="M9 17V7h4a3 3 0 0 1 0 6H9"/>
-                </svg>
-                Parking
-              </li>
-              <li class="aptLux__chip">
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2"/>
-                </svg>
-                Klima
-              </li>
-              <li class="aptLux__chip">
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="M5 12.55a11 11 0 0 1 14.08 0"/>
-                  <path d="M1.42 9a16 16 0 0 1 21.16 0"/>
-                  <path d="M8.53 16.11a6 6 0 0 1 6.95 0"/>
-                  <line x1="12" y1="20" x2="12.01" y2="20"/>
-                </svg>
-                Wi-Fi
-              </li>
+            <ul class="apt__checklist">
+              <li>Privatna terasa</li>
+              <li>Parking</li>
+              <li>Klima</li>
+              <li>Wi-Fi</li>
             </ul>
 
-            <div class="aptLux__divider" aria-hidden="true"></div>
-
-            <div class="aptLux__actions">
-              <button class="aptLux__action" type="button" data-open-details>
-                <span class="aptLux__icon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" class="aptLux__svg">
-                    <path d="M12 17v-6" />
-                    <path d="M12 8h.01" />
-                    <path d="M21 12a9 9 0 1 1-18 0a9 9 0 0 1 18 0Z" />
-                  </svg>
-                </span>
-                <span class="aptLux__actionText"><strong>Detalji</strong></span>
-              </button>
-
-              <button class="aptLux__action" type="button" data-open-calendar>
-                <span class="aptLux__icon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" class="aptLux__svg">
-                    <path d="M8 2v3M16 2v3" />
-                    <path d="M3.5 9h17" />
-                    <path d="M6 5h12a2.5 2.5 0 0 1 2.5 2.5v12A2.5 2.5 0 0 1 18 22H6A2.5 2.5 0 0 1 3.5 19.5v-12A2.5 2.5 0 0 1 6 5Z" />
-                  </svg>
-                </span>
-                <span class="aptLux__actionText"><strong>Kalendar</strong></span>
-              </button>
-
-              <a class="aptLux__action aptLux__action--primary" href="#kontakt">
-                <span class="aptLux__icon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" class="aptLux__svg">
-                    <path d="M4 6h16v12H4z" />
-                    <path d="m4 7 8 6 8-6" />
-                  </svg>
-                </span>
-                <span class="aptLux__actionText"><strong>Rezerviraj</strong></span>
-              </a>
+            <div class="apt__footer">
+              <button class="apt__btnInfo" type="button" data-open-details>Detalji</button>
+              <button class="apt__btnCal" type="button" data-open-calendar>Kalendar</button>
+              <a class="apt__btnBook" href="#kontakt">Rezerviraj</a>
             </div>
           </div>
         </article>
@@ -632,46 +426,66 @@
     </section>
 
     <!-- KALENDAR MODAL (placeholder) -->
-    <div class="modal" id="calendarModal" aria-hidden="true">
+    <div class="modal modal--calendar" id="calendarModal" aria-hidden="true">
       <div class="modal__backdrop" data-close-calendar></div>
 
-      <div class="modal__panel" role="dialog" aria-modal="true" aria-labelledby="calendarTitle">
-        <div class="modal__head">
-          <h3 id="calendarTitle">Slobodni termini</h3>
-          <button class="modal__close" type="button" aria-label="Zatvori" data-close-calendar>✕</button>
+      <div class="cm cm--a1" id="cmPanel" role="dialog" aria-modal="true" aria-labelledby="cmTitle">
+
+        <!-- accent strip -->
+        <div class="cm__strip"></div>
+
+        <!-- header -->
+        <div class="cm__head">
+          <div>
+            <p class="cm__aptName">Apartman <span id="cmAptSpan">Sunrise</span></p>
+            <h3 class="cm__title" id="cmTitle">Slobodni termini</h3>
+          </div>
+          <button class="cm__close" type="button" aria-label="Zatvori" data-close-calendar>&#x2715;</button>
         </div>
 
-        <div class="modal__body">
-          <div class="calHead">
-            <div class="calHead__left">
-              <div class="calApt" id="calAptLabel">Apartman</div>
-              <div class="calMonth" id="calMonthLabel">Mjesec</div>
+        <!-- month navigation -->
+        <div class="cm__nav">
+          <button class="cm__navBtn" type="button" id="cmPrev" aria-label="Prethodni mjesec">&#8249;</button>
+          <div class="cm__monthLabel" id="cmMonthLabel">Siječanj 2026</div>
+          <button class="cm__navBtn" type="button" id="cmNext" aria-label="Sljedeći mjesec">&#8250;</button>
+        </div>
+
+        <!-- weekday labels -->
+        <div class="cm__weekdays" aria-hidden="true">
+          <div>Pon</div><div>Uto</div><div>Sri</div><div>Čet</div><div>Pet</div><div>Sub</div><div>Ned</div>
+        </div>
+
+        <!-- calendar grid (filled by JS) -->
+        <div class="cm__grid" id="cmGrid"></div>
+
+        <!-- footer: legend + admin + cta -->
+        <div class="cm__foot">
+          <div class="cm__legend">
+            <span class="cm__legendItem"><span class="cm__dot cm__dot--free"></span>Slobodno</span>
+            <span class="cm__legendItem"><span class="cm__dot cm__dot--busy"></span>Zauzeto</span>
+            <span class="cm__legendHint" id="cmHint">Desni klik: zauzeto/slobodno &nbsp;&middot;&nbsp; 2&times; klik: cijena</span>
+          </div>
+          <div class="cm__adminBar" id="cmAdminBar" hidden>
+            <button class="cm__blockBtn" type="button" id="cmBlockMonth">Blokiraj cijeli mjesec</button>
+          </div>
+          <a href="#kontakt" class="cm__cta" data-close-calendar>Pošalji upit za rezervaciju</a>
+        </div>
+
+        <!-- floating price editor -->
+        <div class="cm__pricePopup" id="cmPricePopup" hidden>
+          <div class="cm__priceCard">
+            <p class="cm__priceDay" id="cmPriceDay">1. siječnja</p>
+            <div class="cm__priceField">
+              <input class="cm__priceInput" type="number" id="cmPriceVal" min="0" step="1" placeholder="75" aria-label="Cijena u eurima">
+              <span class="cm__priceSuffix">&euro;</span>
             </div>
-
-            <div class="calHead__right">
-              <button class="btn btn--small" type="button" id="calPrev">‹</button>
-              <button class="btn btn--small" type="button" id="calToday">Danas</button>
-              <button class="btn btn--small" type="button" id="calNext">›</button>
+            <div class="cm__priceBtns">
+              <button class="cm__priceSave" type="button" id="cmPriceSave">Spremi</button>
+              <button class="cm__priceCancel" type="button" id="cmPriceCancel">Odustani</button>
             </div>
-          </div>
-
-          <div class="calLegend">
-            <span class="calDot calDot--free"></span> Slobodno
-            <span class="calDot calDot--busy"></span> Zauzeto
-            <span class="calHint">Klik: zauzeto/slobodno · Dvoklik: upiši cijenu</span>
-          </div>
-
-          <div class="calWeekdays" aria-hidden="true">
-            <div>P</div><div>U</div><div>S</div><div>Č</div><div>P</div><div>S</div><div>N</div>
-          </div>
-
-          <div class="calGrid" id="calGrid"></div>
-
-          <div class="modal__foot">
-            <a class="btn btn--primary" href="#kontakt" data-close-calendar>Pošalji upit</a>
-            <button class="btn" type="button" data-close-calendar>Zatvori</button>
           </div>
         </div>
+
       </div>
     </div>
 
@@ -679,90 +493,94 @@
     <div class="modal modal--details" id="detailsModal" aria-hidden="true">
       <div class="modal__backdrop" data-close-details></div>
 
-      <div class="modal__panel modal__panel--details" role="dialog" aria-modal="true" aria-labelledby="detailsTitle">
-        <div class="modal__head">
-          <div class="detailsHead">
-            <h3 id="detailsTitle">Detalji — Apartman A1</h3>
-            <p class="detailsHead__meta">40 m² · 1. kat (7 stepenica) · Bračni krevet + kauč na razvlačenje</p>
-          </div>
+      <div class="dm dm--a1" id="dmPanel" role="dialog" aria-modal="true" aria-labelledby="dmTitle">
 
-          <button class="modal__close" type="button" aria-label="Zatvori" data-close-details>✕</button>
+        <!-- accent strip -->
+        <div class="dm__strip"></div>
+
+        <!-- sticky header -->
+        <div class="dm__head">
+          <div class="dm__headText">
+            <h3 class="dm__title" id="dmTitle">Apartman <span id="dmTitleSpan">Sunrise</span></h3>
+            <p class="dm__meta" id="dmMeta">40 m² &middot; 1. kat &middot; Bračni krevet + kauč na razvlačenje</p>
+          </div>
+          <button class="dm__close" type="button" aria-label="Zatvori" data-close-details>&#x2715;</button>
         </div>
 
-        <div class="modal__body detailsBody">
-          <div class="detailsHero detailsHero--withImg">
-            <div class="detailsHero__media">
-              <img src="images/apartmani/a1/hero.jpg" alt="Apartman A1 - pogled na more" loading="lazy">
-            </div>
+        <!-- scrollable body -->
+        <div class="dm__body">
 
-            <div class="detailsHero__content">
-              <div class="detailsHero__badge">
-                <span class="detailsHero__dot"></span>
-                Prvi red do mora · otvoreni horizont · bez objekata ispred
-              </div>
-
-              <p class="detailsHero__lead">
-                Najjači adut Apartmana A1 je pogled koji se proteže u daljinu — ispred vas su samo priroda i more.
-                Terasa je idealna za jutarnju kavu i mirne večeri bez gužve.
-              </p>
-            </div>
+          <!-- hero image -->
+          <div class="dm__hero">
+            <img id="dmHeroImg" src="images/apartmani/a1/hero.jpg" alt="Apartman Sunrise" loading="lazy">
+            <div class="dm__heroBadge" id="dmBadge">Otvoren horizont &middot; terasa &middot; tople boje zalaska</div>
           </div>
 
-          <div class="detailsGrid">
-            <section class="detailsCard">
-              <h4>Oprema</h4>
-              <ul class="detailsList">
-                <li>Kuhinja: pećnica, ploča, kuhalo + kompletno posuđe i pribor</li>
-                <li>Kupaonica: tuš + ručnici</li>
-                <li>Dnevni boravak: Smart TV + klima</li>
-                <li>Wi-Fi</li>
-                <li>Terasa: stol i stolice</li>
-                <li>Roštilj: zajednički</li>
-              </ul>
-            </section>
+          <!-- lead -->
+          <p class="dm__lead" id="dmLead">Apartman Sunrise naglašava najljepši dio dana uz more — pogled, terasu i tople boje zalaska. Terasa je idealna za jutarnju kavu i mirne večeri bez gužve.</p>
 
-            <section class="detailsCard">
-              <h4>Pravila</h4>
-              <ul class="detailsList">
-                <li>Check-in: <strong>od 14:00</strong></li>
-                <li>Check-out: <strong>do 10:00</strong></li>
-                <li>Pušenje: <strong>ne</strong></li>
-                <li>Kućni ljubimci: <strong>ne</strong></li>
-                <li>Zabave/party: <strong>ne</strong></li>
-              </ul>
-            </section>
+          <!-- info grid -->
+          <div class="dm__grid">
 
-            <section class="detailsCard detailsCard--wide">
-              <h4>Lokacija i udaljenosti</h4>
-              <div class="detailsPins">
-                <div class="detailsPin"><span class="detailsPin__k">Prirodna plaža</span><span class="detailsPin__v">100 m</span></div>
-                <div class="detailsPin"><span class="detailsPin__k">Šljunčana plaža</span><span class="detailsPin__v">150 m</span></div>
-                <div class="detailsPin"><span class="detailsPin__k">Zračne linije do mora</span><span class="detailsPin__v">80 m</span></div>
-                <div class="detailsPin"><span class="detailsPin__k">Dućan</span><span class="detailsPin__v">200 m</span></div>
-                <div class="detailsPin"><span class="detailsPin__k">Restorani / kafići</span><span class="detailsPin__v">3 u krugu 300 m</span></div>
+            <!-- Oprema -->
+            <div class="dm__section">
+              <h4 class="dm__sHead">Oprema</h4>
+              <ul class="dm__list" id="dmEquipment"></ul>
+            </div>
+
+            <!-- Pravila -->
+            <div class="dm__section">
+              <h4 class="dm__sHead">Pravila kuće</h4>
+              <div class="dm__rules">
+                <div class="dm__rule"><span>Check-in</span><b>od 14:00</b></div>
+                <div class="dm__rule"><span>Check-out</span><b>do 10:00</b></div>
+                <div class="dm__rule"><span>Pušenje</span><b>nije dozvoljeno</b></div>
+                <div class="dm__rule"><span>Kućni ljubimci</span><b>nisu dozvoljeni</b></div>
+                <div class="dm__rule"><span>Zabave</span><b>nisu dozvoljene</b></div>
               </div>
-            </section>
+            </div>
 
-            <section class="detailsCard">
-              <h4>Parking & dolazak</h4>
-              <ul class="detailsList">
-                <li>Privatni parking u dvorištu ispred kuće</li>
-                <li>Jednostavan ulaz autom</li>
-                <li>EV punjač: <strong>ne</strong></li>
+            <!-- Udaljenosti -->
+            <div class="dm__section dm__section--full">
+              <h4 class="dm__sHead">Udaljenosti od objekta</h4>
+              <div class="dm__dists">
+                <div class="dm__dist"><span class="dm__distLabel">More</span><b class="dm__distVal">80 m</b></div>
+                <div class="dm__dist"><span class="dm__distLabel">Prirodna plaža</span><b class="dm__distVal">100 m</b></div>
+                <div class="dm__dist"><span class="dm__distLabel">Šljunčana plaža</span><b class="dm__distVal">150 m</b></div>
+                <div class="dm__dist"><span class="dm__distLabel">Dućan</span><b class="dm__distVal">200 m</b></div>
+                <div class="dm__dist"><span class="dm__distLabel">Restorani</span><b class="dm__distVal">300 m</b></div>
+              </div>
+            </div>
+
+            <!-- Parking -->
+            <div class="dm__section">
+              <h4 class="dm__sHead">Parking i dolazak</h4>
+              <ul class="dm__list">
+                <li>Privatni parking u dvorištu</li>
+                <li>Jednostavan pristup autom</li>
+                <li>EV punjač nije dostupan</li>
               </ul>
-            </section>
+            </div>
 
-            <section class="detailsCard">
-              <h4>Brzi sažetak</h4>
-              <ul class="detailsList">
-                <li>40 m² · 1. kat (7 stepenica)</li>
+            <!-- Sažetak -->
+            <div class="dm__section">
+              <h4 class="dm__sHead">Kratki sažetak</h4>
+              <ul class="dm__list" id="dmSummary">
+                <li>40 m² &middot; 1. kat (7 stepenica)</li>
                 <li>Bračni krevet + kauč na razvlačenje</li>
                 <li>Terasa s pogledom na more</li>
               </ul>
-            </section>
+            </div>
+
+          </div><!-- /dm__grid -->
+
+          <!-- CTA -->
+          <div class="dm__foot">
+            <button class="dm__cta" type="button" id="dmCalBtn">Slobodni termini</button>
           </div>
-        </div>
-      </div>
+
+        </div><!-- /dm__body -->
+      </div><!-- /dm -->
     </div>
 
     <!-- GALLERY MODAL -->
@@ -771,7 +589,7 @@
 
       <div class="modal__panel modal__panel--gallery" role="dialog" aria-modal="true" aria-labelledby="galleryTitle">
         <div class="modal__head">
-          <h3 id="galleryTitle">Galerija — Apartman A1</h3>
+          <h3 id="galleryTitle">Galerija — Apartman Sunrise</h3>
 
           <div class="galleryModal__meta" id="galleryMeta" aria-live="polite"></div>
 
@@ -788,11 +606,35 @@
       </div>
     </div>
 
-    <section id="lokacija" class="section">
+    <section id="lokacija" class="section lokacijaSection">
       <div class="container">
-        <h2>Lokacija</h2>
 
-        <div class="map">
+        <!-- Header -->
+        <div class="lokHead">
+          <div class="lokHead__titleRow">
+            <span class="lokHead__pin" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="#e03131" stroke="none">
+                <path d="M12 2C8.134 2 5 5.134 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.866-3.134-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/>
+              </svg>
+            </span>
+            <h2 class="lokHead__title">Lokacija</h2>
+          </div>
+          <p class="lokHead__sub">Smješteni u prvom redu do mora u mirnom mjestu Rtina, idealno za opušten odmor.</p>
+        </div>
+
+        <!-- Slim address bar above map -->
+        <div class="lokAddrBar">
+          <svg class="lokAddrBar__icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z"/>
+            <path d="M9 21V12h6v9"/>
+          </svg>
+          <span class="lokAddrBar__label">ADRESA</span>
+          <span class="lokAddrBar__sep">&middot;</span>
+          <span class="lokAddrBar__addr">Rtina 2, 171 G &nbsp;&middot;&nbsp; Rtina Miočići, Hrvatska</span>
+        </div>
+
+        <!-- Full-width map -->
+        <div class="lokMapFull">
           <iframe
             src="https://www.google.com/maps?q=44.2957525,15.2988722&z=15&output=embed"
             loading="lazy"
@@ -801,12 +643,312 @@
           </iframe>
         </div>
 
+        <!-- Okolna mjesta + Prirodne atrakcije -->
+        <div class="lokNearby">
+
+          <!-- Lijevo: Mjesta i gradovi -->
+          <div class="lokNearby__col">
+            <div class="lokNearby__head">
+              <span class="lokNearby__headIcon lokNearby__headIcon--blue" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="10" r="3"/><path d="M12 2C8.134 2 5 5.134 5 10c0 5 7 12 7 12s7-7 7-12c0-4.866-3.134-8-7-8z"/></svg>
+              </span>
+              <h3 class="lokNearby__headTitle">Okolna mjesta i gradovi</h3>
+            </div>
+            <div class="lokNearbyGrid">
+              <div class="lokNearbyRow">
+                <span class="lokNearbyRow__icon" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="10" r="3"/><path d="M12 2C8.134 2 5 5.134 5 10c0 5 7 12 7 12s7-7 7-12c0-4.866-3.134-8-7-8z"/></svg>
+                </span>
+                <span class="lokNearbyRow__name">Ražanac</span>
+                <span class="lokNearbyRow__km">4 km</span>
+              </div>
+              <div class="lokNearbyRow">
+                <span class="lokNearbyRow__icon" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="10" r="3"/><path d="M12 2C8.134 2 5 5.134 5 10c0 5 7 12 7 12s7-7 7-12c0-4.866-3.134-8-7-8z"/></svg>
+                </span>
+                <span class="lokNearbyRow__name">Otok Pag</span>
+                <span class="lokNearbyRow__km">4 km</span>
+              </div>
+              <div class="lokNearbyRow">
+                <span class="lokNearbyRow__icon" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg>
+                </span>
+                <span class="lokNearbyRow__name">Zadar</span>
+                <span class="lokNearbyRow__km">20 km</span>
+              </div>
+              <div class="lokNearbyRow">
+                <span class="lokNearbyRow__icon" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg>
+                </span>
+                <span class="lokNearbyRow__name">Nin</span>
+                <span class="lokNearbyRow__km">24 km</span>
+              </div>
+              <div class="lokNearbyRow">
+                <span class="lokNearbyRow__icon" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg>
+                </span>
+                <span class="lokNearbyRow__name">Grad Pag</span>
+                <span class="lokNearbyRow__km">24 km</span>
+              </div>
+              <div class="lokNearbyRow">
+                <span class="lokNearbyRow__icon" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="10" r="3"/><path d="M12 2C8.134 2 5 5.134 5 10c0 5 7 12 7 12s7-7 7-12c0-4.866-3.134-8-7-8z"/></svg>
+                </span>
+                <span class="lokNearbyRow__name">Otok Vir</span>
+                <span class="lokNearbyRow__km">30 km</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Desno: Prirodne atrakcije -->
+          <div class="lokNearby__col">
+            <div class="lokNearby__head">
+              <span class="lokNearby__headIcon lokNearby__headIcon--green" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V12"/><path d="M5 12H2l10-10 10 10h-3"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></svg>
+              </span>
+              <h3 class="lokNearby__headTitle">Prirodne atrakcije</h3>
+            </div>
+            <div class="lokNatureList">
+
+              <div class="lokNatureCard">
+                <div class="lokNatureCard__iconWrap lokNatureCard__iconWrap--green" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3l4 8 5-5 5 15H2L8 3z"/></svg>
+                </div>
+                <span class="lokNatureCard__name">Nacionalni park Paklenica</span>
+                <span class="lokNatureCard__dist">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M15 17a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M5 17h-2v-6l2 -5h9l4 5h1a2 2 0 0 1 2 2v4h-2m-4 0h-6m-6 -6h15m-6 0v-5" /></svg>
+                  35 km
+                </span>
+              </div>
+
+              <div class="lokNatureCard">
+                <div class="lokNatureCard__iconWrap lokNatureCard__iconWrap--blue" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>
+                </div>
+                <span class="lokNatureCard__name">Kanjon Zrmanje</span>
+                <span class="lokNatureCard__dist">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M15 17a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M5 17h-2v-6l2 -5h9l4 5h1a2 2 0 0 1 2 2v4h-2m-4 0h-6m-6 -6h15m-6 0v-5" /></svg>
+                  32 km
+                </span>
+              </div>
+
+              <div class="lokNatureCard">
+                <div class="lokNatureCard__iconWrap lokNatureCard__iconWrap--amber" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+                </div>
+                <span class="lokNatureCard__name">Cerovečke špilje</span>
+                <span class="lokNatureCard__dist">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M15 17a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M5 17h-2v-6l2 -5h9l4 5h1a2 2 0 0 1 2 2v4h-2m-4 0h-6m-6 -6h15m-6 0v-5" /></svg>
+                  62 km
+                </span>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
       </div>
     </section>
 
-    <section id="recenzije" class="section">
+    <section id="recenzije" class="section revSection">
       <div class="container">
-        <h2>Recenzije</h2>
+
+        <div class="revHead">
+          <p class="revHead__kicker">
+            <span class="revHead__line"></span>
+            RECENZIJE GOSTIJU
+            <span class="revHead__line"></span>
+          </p>
+          <h2 class="revHead__title">Što kažu naši gosti</h2>
+          <p class="revHead__sub">Autentična iskustva gostiju koji su boravili u Apartmanima Lana</p>
+
+          <div class="revHead__agg">
+            <div class="revHead__score">5.0</div>
+            <div>
+              <div class="revHead__stars" aria-label="5 od 5 zvjezdica">
+                <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+              </div>
+              <p class="revHead__based">Prosječna ocjena · Google recenzije</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="revSlider">
+          <button class="revSlider__btn revSlider__btn--prev" aria-label="Prethodno">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+
+          <div class="revSlider__track" id="revTrack">
+
+            <article class="revCard">
+              <header class="revCard__header">
+                <div class="revCard__avatar" style="--av-bg:#c46b45" aria-hidden="true">M</div>
+                <div class="revCard__meta">
+                  <strong class="revCard__name">Maja</strong>
+                  <span class="revCard__loc"><span class="revCard__flag">🇭🇷</span> Zagreb, Hrvatska</span>
+                </div>
+                <div class="revCard__stars" aria-label="5 zvjezdica">★★★★★</div>
+              </header>
+              <blockquote class="revCard__text">
+                "Nevjerojatan odmor! Terasa s pogledom koji oduzima dah — gledali smo zalazak sunca svake večeri. More je kristalno čisto, plaža tik ispod. Domaćini su iznimno ljubazni. Već rezerviramo za sljedeće ljeto!"
+              </blockquote>
+              <footer class="revCard__footer">
+                <span class="revCard__apt">Apartman Sunrise</span>
+                <span class="revCard__date">Kolovoz 2024</span>
+              </footer>
+            </article>
+
+            <article class="revCard">
+              <header class="revCard__header">
+                <div class="revCard__avatar" style="--av-bg:#607642" aria-hidden="true">L</div>
+                <div class="revCard__meta">
+                  <strong class="revCard__name">Lena</strong>
+                  <span class="revCard__loc"><span class="revCard__flag">🇸🇮</span> Ljubljana, Slovenija</span>
+                </div>
+                <div class="revCard__stars" aria-label="5 zvjezdica">★★★★★</div>
+              </header>
+              <blockquote class="revCard__text">
+                "Popolnoma odličen dopust! Apartma Olive prinaša mediteranski mir — zelenilo, tišina in bližina morja. Otroci so se počutili kot doma. Vse brezhibno čisto. Toplo priporočam vsem!"
+              </blockquote>
+              <footer class="revCard__footer">
+                <span class="revCard__apt">Apartman Olive</span>
+                <span class="revCard__date">Srpanj 2022</span>
+              </footer>
+            </article>
+
+            <article class="revCard">
+              <header class="revCard__header">
+                <div class="revCard__avatar" style="--av-bg:#247c9f" aria-hidden="true">A</div>
+                <div class="revCard__meta">
+                  <strong class="revCard__name">Amra</strong>
+                  <span class="revCard__loc"><span class="revCard__flag">🇧🇦</span> Mostar, BiH</span>
+                </div>
+                <div class="revCard__stars" aria-label="5 zvjezdica">★★★★★</div>
+              </header>
+              <blockquote class="revCard__text">
+                "Apartman Sky je idealan za obitelji! Prostran, udoban i ima sve što treba. Plaža je doslovno 80-ak metara — djeca su cijeli dan bila u moru. Dalmatinska kuhinja u obližnjim restoranima je vrhunska!"
+              </blockquote>
+              <footer class="revCard__footer">
+                <span class="revCard__apt">Apartman Sky</span>
+                <span class="revCard__date">Kolovoz 2023</span>
+              </footer>
+            </article>
+
+            <article class="revCard">
+              <header class="revCard__header">
+                <div class="revCard__avatar" style="--av-bg:#c46b45" aria-hidden="true">T</div>
+                <div class="revCard__meta">
+                  <strong class="revCard__name">Thomas</strong>
+                  <span class="revCard__loc"><span class="revCard__flag">🇦🇹</span> Wien, Austrija</span>
+                </div>
+                <div class="revCard__stars" aria-label="5 zvjezdica">★★★★★</div>
+              </header>
+              <blockquote class="revCard__text">
+                "Wunderschöner Urlaub! Ruhige Bucht, kristallklares Wasser und ein sehr herzlicher Empfang. Das Appartement war tadellos sauber und modern eingerichtet. Wir kommen definitiv wieder!"
+              </blockquote>
+              <footer class="revCard__footer">
+                <span class="revCard__apt">Apartman Sunrise</span>
+                <span class="revCard__date">Kolovoz 2020</span>
+              </footer>
+            </article>
+
+            <article class="revCard">
+              <header class="revCard__header">
+                <div class="revCard__avatar" style="--av-bg:#607642" aria-hidden="true">K</div>
+                <div class="revCard__meta">
+                  <strong class="revCard__name">Klaus</strong>
+                  <span class="revCard__loc"><span class="revCard__flag">🇩🇪</span> München, Njemačka</span>
+                </div>
+                <div class="revCard__stars" aria-label="5 zvjezdica">★★★★★</div>
+              </header>
+              <blockquote class="revCard__text">
+                "Traumhafter Urlaub in Rtina! Das Olive-Apartment ist perfekt ausgestattet, die Terrasse ein Highlight. Strand nur 150 Meter entfernt, ruhige Umgebung — genau das, was man zum Entspannen braucht."
+              </blockquote>
+              <footer class="revCard__footer">
+                <span class="revCard__apt">Apartman Olive</span>
+                <span class="revCard__date">Srpanj 2025</span>
+              </footer>
+            </article>
+
+            <article class="revCard">
+              <header class="revCard__header">
+                <div class="revCard__avatar" style="--av-bg:#247c9f" aria-hidden="true">P</div>
+                <div class="revCard__meta">
+                  <strong class="revCard__name">Petra</strong>
+                  <span class="revCard__loc"><span class="revCard__flag">🇭🇷</span> Osijek, Hrvatska</span>
+                </div>
+                <div class="revCard__stars" aria-label="5 zvjezdica">★★★★★</div>
+              </header>
+              <blockquote class="revCard__text">
+                "Lokacija je savršena — mirna uvala, čisto more i predivni zalasci s terase. Apartman je moderno opremljen i besprijekorno čist. Domaćini uvijek dostupni i susretljivi. Svakako se vraćamo!"
+              </blockquote>
+              <footer class="revCard__footer">
+                <span class="revCard__apt">Apartman Sky</span>
+                <span class="revCard__date">Lipanj 2021</span>
+              </footer>
+            </article>
+
+            <article class="revCard">
+              <header class="revCard__header">
+                <div class="revCard__avatar" style="--av-bg:#c46b45" aria-hidden="true">G</div>
+                <div class="revCard__meta">
+                  <strong class="revCard__name">Gregor</strong>
+                  <span class="revCard__loc"><span class="revCard__flag">🇸🇮</span> Maribor, Slovenija</span>
+                </div>
+                <div class="revCard__stars" aria-label="5 zvjezdica">★★★★★</div>
+              </header>
+              <blockquote class="revCard__text">
+                "Čudovito mesto za počitek! Tiha zaliv, čisto morje in prijazen sprejem. Apartma Olive je bil perfektno opremljen, vrt pa pravi raj. Priporočamo vsem, ki iščejo mir in naravo ob morju."
+              </blockquote>
+              <footer class="revCard__footer">
+                <span class="revCard__apt">Apartman Olive</span>
+                <span class="revCard__date">Kolovoz 2024</span>
+              </footer>
+            </article>
+
+            <article class="revCard">
+              <header class="revCard__header">
+                <div class="revCard__avatar" style="--av-bg:#607642" aria-hidden="true">S</div>
+                <div class="revCard__meta">
+                  <strong class="revCard__name">Sabine</strong>
+                  <span class="revCard__loc"><span class="revCard__flag">🇩🇪</span> Berlin, Njemačka</span>
+                </div>
+                <div class="revCard__stars" aria-label="5 zvjezdica">★★★★★</div>
+              </header>
+              <blockquote class="revCard__text">
+                "Unser schönster Kroatienurlaub bisher! Sky-Apartment mit toller Aussicht, das Meer so klar und ruhig. Die Gastgeber haben uns mit lokalen Tipps versorgt. Absolut empfehlenswert — wir kommen wieder!"
+              </blockquote>
+              <footer class="revCard__footer">
+                <span class="revCard__apt">Apartman Sky</span>
+                <span class="revCard__date">Srpanj 2022</span>
+              </footer>
+            </article>
+
+            <article class="revCard">
+              <header class="revCard__header">
+                <div class="revCard__avatar" style="--av-bg:#247c9f" aria-hidden="true">I</div>
+                <div class="revCard__meta">
+                  <strong class="revCard__name">Ivana</strong>
+                  <span class="revCard__loc"><span class="revCard__flag">🇭🇷</span> Rijeka, Hrvatska</span>
+                </div>
+                <div class="revCard__stars" aria-label="5 zvjezdica">★★★★★</div>
+              </header>
+              <blockquote class="revCard__text">
+                "Treći put dolazimo i svaki put je bolji! Apartman Sky nudi pravi obiteljski odmor — prostran, uredan, s predivnom terasom. More čisto, djeca sretna. Rtina je pravi skriveni biser Jadrana!"
+              </blockquote>
+              <footer class="revCard__footer">
+                <span class="revCard__apt">Apartman Sky</span>
+                <span class="revCard__date">Lipanj 2023</span>
+              </footer>
+            </article>
+
+          </div>
+
+          <button class="revSlider__btn revSlider__btn--next" aria-label="Sljedeće">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
+        </div>
       </div>
     </section>
 
