@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="css/style.css?v=202" />
 
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
 
 <body>
@@ -207,8 +208,8 @@
           <h2 class="apartmentsS__title">Prostor za opuštanje uz more.</h2>
 
           <p class="apartmentsS__subtitle">
-            Svaki apartman nudi vlastitu terasu s pogledom na more, potpunu privatnost
-            i ugođaj koji od odmora čini pravo iskustvo.
+            Vlastita terasa s pogledom na more i ugođaj koji od odmora
+            čini pravo iskustvo.
           </p>
 
           <ul class="apartmentsS__pills" aria-label="Ključne prednosti">
@@ -216,28 +217,26 @@
               <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"
                 fill="none" stroke="currentColor" stroke-width="2.2"
                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+                <circle cx="12" cy="9" r="2.5"/>
+              </svg>
+              Mirno okruženje
+            </li>
+            <li class="apartmentsS__pill">
+              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"
+                fill="none" stroke="currentColor" stroke-width="2.2"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
               </svg>
-              Privatnost
+              Idealno za odmor
             </li>
             <li class="apartmentsS__pill">
               <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"
                 fill="none" stroke="currentColor" stroke-width="2.2"
                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <circle cx="12" cy="12" r="4"/>
-                <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+                <path d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z"/>
               </svg>
-              Terasa
-            </li>
-            <li class="apartmentsS__pill">
-              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"
-                fill="none" stroke="currentColor" stroke-width="2.2"
-                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/>
-                <path d="M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/>
-                <path d="M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/>
-              </svg>
-              Pogled na more
+              Brza rezervacija
             </li>
           </ul>
         </header>
@@ -534,9 +533,7 @@
               <div class="dm__rules">
                 <div class="dm__rule"><span>Check-in</span><b>od 14:00</b></div>
                 <div class="dm__rule"><span>Check-out</span><b>do 10:00</b></div>
-                <div class="dm__rule"><span>Pušenje</span><b>nije dozvoljeno</b></div>
                 <div class="dm__rule"><span>Kućni ljubimci</span><b>nisu dozvoljeni</b></div>
-                <div class="dm__rule"><span>Zabave</span><b>nisu dozvoljene</b></div>
               </div>
             </div>
 
@@ -757,20 +754,23 @@
         <div class="revHead">
           <p class="revHead__kicker">
             <span class="revHead__line"></span>
-            RECENZIJE GOSTIJU
+            RECENZIJE
             <span class="revHead__line"></span>
           </p>
           <h2 class="revHead__title">Što kažu naši gosti</h2>
-          <p class="revHead__sub">Autentična iskustva gostiju koji su boravili u Apartmanima Lana</p>
 
-          <div class="revHead__agg">
-            <div class="revHead__score">5.0</div>
-            <div>
-              <div class="revHead__stars" aria-label="5 od 5 zvjezdica">
-                <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-              </div>
-              <p class="revHead__based">Prosječna ocjena · Google recenzije</p>
+          <div class="revHead__badge">
+            <svg class="revHead__gLogo" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-label="Google" width="20" height="20">
+              <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+              <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+              <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/>
+              <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+            </svg>
+            <span class="revHead__score">5.0</span>
+            <div class="revHead__stars" aria-label="5 od 5 zvjezdica">
+              <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
             </div>
+            <span class="revHead__based">Prosječna ocjena</span>
           </div>
         </div>
 
@@ -952,42 +952,220 @@
       </div>
     </section>
 
-    <section id="kontakt" class="section">
+    <section id="kontakt" class="section ktSection">
       <div class="container">
-        <h2>Rezerviraj</h2>
 
-        <div class="contact">
-          <div class="card">
-            <h3>Javi nam se</h3>
-            <p><strong>Telefon/WhatsApp:</strong> <a href="tel:+385955335829">+385 95 533 5829</a></p>
-            <p><strong>E-mail:</strong> <a href="mailto:info.apartments.lana@gmail.com">info.apartments.lana@gmail.com</a></p>
-            <p><strong>Adresa:</strong> Rtina 2, 171 G</p>
+        <div class="ktHead">
+          <p class="ktHead__kicker">JAVITE NAM SE</p>
+          <h2 class="ktHead__title">Rezerviraj</h2>
+          <p class="ktHead__sub">Pošaljite nam upit ili nas kontaktirajte direktno — rado ćemo vam pomoći s rezervacijom.</p>
+        </div>
+
+        <div class="ktLayout">
+
+          <!-- LEFT: Form -->
+          <div class="ktFormWrap">
+            <form class="ktForm" id="ktForm" onsubmit="return false;">
+
+              <!-- Ime + Email -->
+              <div class="ktForm__row2">
+                <div class="ktForm__field">
+                  <span class="ktForm__dateLabel">IME I PREZIME <span class="ktForm__req">*</span></span>
+                  <input class="ktForm__input" id="ktFullName" name="fullName" type="text" placeholder="Unesite ime i prezime" autocomplete="name" />
+                  <span class="ktForm__errMsg" id="ktNameErr"></span>
+                </div>
+                <div class="ktForm__field">
+                  <span class="ktForm__dateLabel">EMAIL ADRESA <span class="ktForm__req">*</span></span>
+                  <input class="ktForm__input" id="ktEmail" name="email" type="email" placeholder="Unesite email adresu" autocomplete="email" />
+                  <span class="ktForm__errMsg" id="ktEmailErr"></span>
+                </div>
+              </div>
+
+              <!-- Apartman -->
+              <div class="ktForm__field">
+                <span class="ktForm__dateLabel">APARTMAN <span class="ktForm__req">*</span></span>
+                <select name="apartment" id="ktAptSelect" class="ktForm__input ktForm__select">
+                  <option value="">— Odaberite apartman —</option>
+                  <option value="a1">Apartman Sunrise</option>
+                  <option value="a2">Apartman Olive</option>
+                  <option value="a3">Apartman Sky</option>
+                </select>
+                <span class="ktForm__errMsg" id="ktAptErr"></span>
+              </div>
+
+              <!-- Broj gostiju -->
+              <div class="ktForm__row2">
+                <div class="ktForm__dateField">
+                  <span class="ktForm__dateLabel">Odrasli <span class="ktForm__req">*</span></span>
+                  <select class="ktForm__input ktForm__select" id="ktAdults" name="adults" disabled>
+                    <option value="">— odaberite apartman —</option>
+                  </select>
+                  <span class="ktForm__errMsg" id="ktAdultsErr"></span>
+                </div>
+                <div class="ktForm__dateField">
+                  <span class="ktForm__dateLabel">Djeca</span>
+                  <select class="ktForm__input ktForm__select" id="ktChildren" name="children" disabled>
+                    <option value="0">0 djece</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Datumi -->
+              <div class="ktForm__row2">
+                <div class="ktForm__dateField">
+                  <span class="ktForm__dateLabel">Datum dolaska <span class="ktForm__req">*</span></span>
+                  <input class="ktForm__input ktForm__dateInput" type="text" id="ktDateFrom" placeholder="Nije odabrano" readonly />
+                  <span class="ktForm__errMsg" id="ktDateFromErr"></span>
+                </div>
+                <div class="ktForm__dateField">
+                  <span class="ktForm__dateLabel">Datum odlaska <span class="ktForm__req">*</span></span>
+                  <input class="ktForm__input ktForm__dateInput" type="text" id="ktDateTo" placeholder="Nije odabrano" readonly />
+                  <span class="ktForm__errMsg" id="ktDateToErr"></span>
+                </div>
+              </div>
+              <p class="ktForm__calNote" id="ktCalNote" hidden>
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0;margin-top:1px"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+                Termine odaberite klikom na željene datume u kalendaru dostupnosti s desne strane.
+              </p>
+
+              <!-- Sažetak termina -->
+              <div class="ktSummary" id="ktSummary" hidden>
+                <div class="ktSummary__info">
+                  <span class="ktSummary__dates" id="ktSumDates"></span>
+                  <span class="ktSummary__nights" id="ktSumNights"></span>
+                </div>
+                <span class="ktSummary__total" id="ktSumTotal"></span>
+              </div>
+
+              <textarea class="ktForm__input ktForm__textarea" name="message" rows="4" placeholder="Vaša poruka... (nije obavezno)"></textarea>
+
+              <button type="button" class="ktForm__btn" id="ktSubmitBtn">Pošalji upit</button>
+              <p class="ktForm__success" id="ktSuccess" hidden>✓ Hvala! Vaš upit je poslan. Javit ćemo vam se uskoro na navedenu email adresu.</p>
+              <p class="ktForm__sendErr" id="ktSendErr" hidden>Došlo je do greške pri slanju. Pokušajte ponovno ili nas kontaktirajte direktno na <a href="mailto:info.apartments.lana@gmail.com">info.apartments.lana@gmail.com</a>.</p>
+
+            </form>
           </div>
 
-          <form class="card form" onsubmit="return false;">
-            <h3>Upit</h3>
-            <label>
-              Ime i prezime
-              <input name="fullName" type="text" placeholder="Upiši ime" />
-            </label>
-            <label>
-              E-mail
-              <input name="email" type="email" placeholder="Upiši e-mail" />
-            </label>
-            <label>
-              Poruka
-              <textarea name="message" rows="4" placeholder="Napiši poruku..."></textarea>
-            </label>
-            <button class="btn" type="button">Pošalji (demo)</button>
-          </form>
+          <!-- RIGHT: Calendar + Info -->
+          <div class="ktRight">
+
+            <!-- Mini availability calendar -->
+            <div class="ktCal" id="ktCal">
+              <div class="ktCal__titleRow">
+                <span class="ktCal__title">Dostupnost</span>
+                <span class="ktCal__phase" id="ktCalPhase"></span>
+              </div>
+
+              <!-- Locked overlay -->
+              <div class="ktCal__lock" id="ktCalLock">
+                <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                  <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                </svg>
+                <p>Odaberite apartman<br>za prikaz dostupnosti</p>
+              </div>
+
+              <!-- Active calendar -->
+              <div class="ktCal__inner" id="ktCalInner" hidden>
+                <div class="ktCal__nav">
+                  <button class="ktCal__navBtn" id="ktCalPrev" type="button" aria-label="Prethodni mjesec">&#8249;</button>
+                  <span class="ktCal__monthLabel" id="ktCalLabel"></span>
+                  <button class="ktCal__navBtn" id="ktCalNext" type="button" aria-label="Sljedeći mjesec">&#8250;</button>
+                </div>
+                <div class="ktCal__weekdays" aria-hidden="true">
+                  <div>Po</div><div>Ut</div><div>Sr</div><div>Čt</div><div>Pe</div><div>Su</div><div>Ne</div>
+                </div>
+                <div class="ktCal__grid" id="ktCalGrid"></div>
+                <div class="ktCal__legend">
+                  <span class="ktCal__legendItem"><span class="ktCal__dot ktCal__dot--free"></span>Slobodno</span>
+                  <span class="ktCal__legendItem"><span class="ktCal__dot ktCal__dot--busy"></span>Zauzeto</span>
+                  <span class="ktCal__legendItem"><span class="ktCal__dot ktCal__dot--sel"></span>Odabrano</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Contact info -->
+            <div class="ktInfo">
+
+              <div class="ktInfo__item">
+                <div class="ktInfo__icon" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.7 12.6 19.79 19.79 0 0 1 1.61 4a2 2 0 0 1 1.99-2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.18 6.18l.96-.96a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 17.92z"/>
+                  </svg>
+                </div>
+                <div class="ktInfo__text">
+                  <strong>Telefon / WhatsApp</strong>
+                  <a href="tel:+385955335829">+385 95 533 5829</a>
+                </div>
+              </div>
+
+              <div class="ktInfo__item">
+                <div class="ktInfo__icon" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect width="20" height="16" x="2" y="4" rx="2"/>
+                    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+                  </svg>
+                </div>
+                <div class="ktInfo__text">
+                  <strong>E-mail</strong>
+                  <a href="mailto:info.apartments.lana@gmail.com">info.apartments.lana@gmail.com</a>
+                </div>
+              </div>
+
+              <div class="ktInfo__item">
+                <div class="ktInfo__icon" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
+                    <circle cx="12" cy="10" r="3"/>
+                  </svg>
+                </div>
+                <div class="ktInfo__text">
+                  <strong>Adresa</strong>
+                  <span>Rtina 2, 171 G, Rtina Miočići</span>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
         </div>
+
       </div>
     </section>
 
     <footer class="footer">
-      <div class="container footer__inner">
-        <p>© <span id="year"></span> Apartmani Lana</p>
-        <p class="muted small">GitHub Pages.</p>
+      <div class="container">
+
+        <!-- Main row: brand | nav links | contact -->
+        <div class="footer__main">
+
+          <div class="footer__brand">
+            <span class="footer__logo">Apartmani Lana</span>
+            <p class="footer__tagline">Rtina 2, 171 G, Rtina Miočići</p>
+          </div>
+
+          <nav class="footer__nav" aria-label="Footer navigacija">
+            <a href="#onama">O nama</a>
+            <a href="#apartmani">Apartmani</a>
+            <a href="#lokacija">Lokacija</a>
+            <a href="#recenzije">Recenzije</a>
+            <a href="#kontakt">Rezerviraj</a>
+          </nav>
+
+          <div class="footer__contact">
+            <a href="tel:+385955335829">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.86 19.86 0 0 1 3.08 4.18 2 2 0 0 1 5.09 2h3a2 2 0 0 1 2 1.72c.13 1 .37 1.97.72 2.9a2 2 0 0 1-.45 2.11L9.09 9.91a16 16 0 0 0 5 5l1.18-1.18a2 2 0 0 1 2.11-.45c.93.35 1.9.59 2.9.72A2 2 0 0 1 22 16.92z"/></svg>
+              +385 95 533 5829
+            </a>
+            <a href="mailto:info.apartments.lana@gmail.com">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+              info.apartments.lana@gmail.com
+            </a>
+          </div>
+
+        </div>
+
+
       </div>
     </footer>
   </main>

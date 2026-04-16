@@ -1,3 +1,63 @@
+/* =========================
+   Inicijalizacija kalendara 2026 — sezona i cjenik
+   Postavlja sve dane kao zauzete osim slobodnog perioda 13.6. – 13.9.2026.
+   Unutar slobodnog perioda automatski su postavljene cijene po noći.
+   Izvršava se samo jednom (flag u localStorage); admin može ručno
+   mijenjati dostupnost i cijene u admin modu kao i obično.
+   ========================= */
+(() => {
+  const INIT_FLAG = 'aptCalendarInit:2026v1';
+  if (localStorage.getItem(INIT_FLAG)) return;
+
+  function pad2(n) { return String(n).padStart(2, '0'); }
+  function toKey(d) {
+    return `${d.getFullYear()}-${pad2(d.getMonth()+1)}-${pad2(d.getDate())}`;
+  }
+
+  // Slobodan period: 13.6. – 13.9.2026. (oba datuma uključena)
+  const seasonStart = new Date(2026, 5, 13);
+  const seasonEnd   = new Date(2026, 8, 13);
+
+  // Cjenik po rasponima datuma
+  const bands = [
+    { from: new Date(2026, 5, 13), to: new Date(2026, 5, 20), price: 60 },
+    { from: new Date(2026, 5, 21), to: new Date(2026, 5, 30), price: 70 },
+    { from: new Date(2026, 6,  1), to: new Date(2026, 6, 11), price: 75 },
+    { from: new Date(2026, 6, 12), to: new Date(2026, 6, 18), price: 80 },
+    { from: new Date(2026, 6, 19), to: new Date(2026, 7, 15), price: 90 },
+    { from: new Date(2026, 7, 16), to: new Date(2026, 7, 22), price: 80 },
+    { from: new Date(2026, 7, 23), to: new Date(2026, 7, 31), price: 75 },
+    { from: new Date(2026, 8,  1), to: new Date(2026, 8, 13), price: 65 },
+  ];
+
+  function getPrice(date) {
+    for (const b of bands) {
+      if (date >= b.from && date <= b.to) return b.price;
+    }
+    return null;
+  }
+
+  // Generiraj sve dane 2026. godine
+  const data = {};
+  const cursor = new Date(2026, 0, 1);
+  const yearEnd = new Date(2026, 11, 31);
+  while (cursor <= yearEnd) {
+    const inSeason = cursor >= seasonStart && cursor <= seasonEnd;
+    data[toKey(cursor)] = {
+      busy:  !inSeason,
+      price: inSeason ? getPrice(new Date(cursor)) : null,
+    };
+    cursor.setDate(cursor.getDate() + 1);
+  }
+
+  const payload = JSON.stringify(data);
+  ['a1', 'a2', 'a3'].forEach(id => {
+    localStorage.setItem(`aptCalendar:${id}`, payload);
+  });
+
+  localStorage.setItem(INIT_FLAG, '1');
+})();
+
 const burger = document.getElementById("burger");
 const nav = document.getElementById("nav");
 const menuBackdrop = document.getElementById("menuBackdrop");
@@ -251,18 +311,30 @@ window.addEventListener("scroll", onHeaderScroll, { passive: true });
   items.forEach(el => io.observe(el));
 })();
 
-// Reviews slider prev/next
+// Reviews slider — infinite loop
 (() => {
   const track = document.getElementById('revTrack');
   if (!track) return;
   const btnPrev = document.querySelector('.revSlider__btn--prev');
   const btnNext = document.querySelector('.revSlider__btn--next');
-  const scrollBy = 340;
-  btnPrev && btnPrev.addEventListener('click', () => {
-    track.scrollBy({ left: -scrollBy, behavior: 'smooth' });
-  });
+  const scrollStep = 340;
+
   btnNext && btnNext.addEventListener('click', () => {
-    track.scrollBy({ left: scrollBy, behavior: 'smooth' });
+    const atEnd = track.scrollLeft + track.clientWidth >= track.scrollWidth - 8;
+    if (atEnd) {
+      track.scrollTo({ left: 0, behavior: 'smooth' });
+    } else {
+      track.scrollBy({ left: scrollStep, behavior: 'smooth' });
+    }
+  });
+
+  btnPrev && btnPrev.addEventListener('click', () => {
+    const atStart = track.scrollLeft <= 8;
+    if (atStart) {
+      track.scrollTo({ left: track.scrollWidth, behavior: 'smooth' });
+    } else {
+      track.scrollBy({ left: -scrollStep, behavior: 'smooth' });
+    }
   });
 })();
 
@@ -912,5 +984,546 @@ window.addEventListener("scroll", onHeaderScroll, { passive: true });
 
   window.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
+  });
+})();
+
+/* =========================
+   Kontakt section — inline date-range picker
+   Reads availability from same localStorage as the main calendar modal.
+   Phase 1 = pick check-in, Phase 2 = pick check-out (must be >= check-in + 1 day).
+   Dates after the first busy day following check-in are blocked for check-out.
+   ========================= */
+(() => {
+  const aptSelect  = document.getElementById('ktAptSelect');
+  const calLock    = document.getElementById('ktCalLock');
+  const calInner   = document.getElementById('ktCalInner');
+  const calGrid    = document.getElementById('ktCalGrid');
+  const calLabel   = document.getElementById('ktCalLabel');
+  const calPhase   = document.getElementById('ktCalPhase');
+  const btnPrev    = document.getElementById('ktCalPrev');
+  const btnNext    = document.getElementById('ktCalNext');
+  const dateFromEl = document.getElementById('ktDateFrom');
+  const dateToEl   = document.getElementById('ktDateTo');
+  const summaryEl  = document.getElementById('ktSummary');
+  const sumDatesEl = document.getElementById('ktSumDates');
+  const sumNightsEl= document.getElementById('ktSumNights');
+  const sumTotalEl = document.getElementById('ktSumTotal');
+  const submitBtn  = document.getElementById('ktSubmitBtn');
+  const successMsg = document.getElementById('ktSuccess');
+
+  if (!aptSelect || !calGrid) return;
+
+  // Default price per night per apartment (fallback when no custom price is set)
+  const defaultPrices = { a1: 60, a2: 60, a3: 70 };
+
+  const monthNames    = ['Siječanj','Veljača','Ožujak','Travanj','Svibanj','Lipanj',
+                         'Srpanj','Kolovoz','Rujan','Listopad','Studeni','Prosinac'];
+  const monthGenitive = ['siječnja','veljače','ožujka','travnja','svibnja','lipnja',
+                         'srpnja','kolovoza','rujna','listopada','studenog','prosinca'];
+
+  let currentApt  = null;
+  let viewYear    = new Date().getFullYear();
+  let viewMonth   = new Date().getMonth();
+  let checkIn     = null;   // Date at midnight
+  let checkOut    = null;   // Date at midnight
+  let phase       = 1;      // 1 = picking check-in, 2 = picking check-out
+  let hoverDate   = null;   // Date for range preview
+  let maxCOut     = null;   // first busy day after checkIn (inclusive = valid check-out)
+
+  // ── Helpers ──
+  function storageKey(id) { return `aptCalendar:${id}`; }
+  function loadData(id) {
+    try { return JSON.parse(localStorage.getItem(storageKey(id)) || '{}'); }
+    catch { return {}; }
+  }
+  function pad2(n) { return String(n).padStart(2, '0'); }
+  function toYmd(d) {
+    return `${d.getFullYear()}-${pad2(d.getMonth()+1)}-${pad2(d.getDate())}`;
+  }
+  function mkDate(y, m, d) {
+    const dt = new Date(y, m, d);
+    dt.setHours(0,0,0,0);
+    return dt;
+  }
+  function today0() {
+    const t = new Date();
+    t.setHours(0,0,0,0);
+    return t;
+  }
+  function fmtDate(date) {
+    if (!date) return '';
+    return `${date.getDate()}. ${monthGenitive[date.getMonth()]} ${date.getFullYear()}.`;
+  }
+  function isBusy(date) {
+    if (!currentApt) return false;
+    return loadData(currentApt)[toYmd(date)]?.busy === true;
+  }
+
+  // Find the first busy day strictly after `from`.
+  // Returns that Date (it IS a valid check-out — guest leaves that morning).
+  // Returns null if no busy day found in the next year.
+  function findMaxCheckOut(from) {
+    const data = loadData(currentApt);
+    const d = new Date(from);
+    d.setDate(d.getDate() + 1);
+    const limit = new Date(from);
+    limit.setFullYear(limit.getFullYear() + 1);
+    while (d <= limit) {
+      if (data[toYmd(d)]?.busy) return new Date(d);
+      d.setDate(d.getDate() + 1);
+    }
+    return null;
+  }
+
+  // ── Phase label ──
+  function updatePhase() {
+    if (!calPhase) return;
+    if (phase === 1 && !checkIn)  calPhase.textContent = 'Odaberite datum dolaska';
+    else if (phase === 2)         calPhase.textContent = 'Odaberite datum odlaska';
+    else                          calPhase.textContent = '';
+  }
+
+  // ── Calculate total price for selected range ──
+  // Sums prices for nights: checkIn, checkIn+1, ..., checkOut-1
+  function calcTotal() {
+    if (!checkIn || !checkOut || !currentApt) return null;
+    const data = loadData(currentApt);
+    const defPrice = defaultPrices[currentApt] || 60;
+    let total = 0;
+    let nights = 0;
+    const d = new Date(checkIn);
+    while (d < checkOut) {
+      const entry = data[toYmd(d)];
+      const price = (entry?.price != null) ? Number(entry.price) : defPrice;
+      total += price;
+      nights++;
+      d.setDate(d.getDate() + 1);
+    }
+    return { total, nights };
+  }
+
+  // ── Update summary row ──
+  function updateSummary() {
+    if (!summaryEl) return;
+    if (!checkIn || !checkOut) {
+      summaryEl.hidden = true;
+      return;
+    }
+    const result = calcTotal();
+    if (!result) { summaryEl.hidden = true; return; }
+
+    const fmtShort = (date) => `${date.getDate()}. ${monthGenitive[date.getMonth()]}`;
+    if (sumDatesEl)  sumDatesEl.textContent  = `${fmtShort(checkIn)} → ${fmtShort(checkOut)} ${checkOut.getFullYear()}.`;
+    if (sumNightsEl) sumNightsEl.textContent = `${result.nights} ${result.nights === 1 ? 'noć' : result.nights < 5 ? 'noći' : 'noći'}`;
+    if (sumTotalEl)  sumTotalEl.textContent  = `Ukupno: ${result.total}€`;
+    summaryEl.hidden = false;
+  }
+
+  // ── Render ──
+  function render() {
+    if (!calGrid || !currentApt) return;
+
+    const data   = loadData(currentApt);
+    const todayD = today0();
+
+    calLabel.textContent = `${monthNames[viewMonth]} ${viewYear}`;
+    if (btnPrev) btnPrev.disabled = (viewYear === todayD.getFullYear() && viewMonth <= todayD.getMonth());
+    if (btnNext) btnNext.disabled = false;
+    updatePhase();
+
+    calGrid.innerHTML = '';
+
+    const first       = new Date(viewYear, viewMonth, 1);
+    const daysInMonth = new Date(viewYear, viewMonth + 1, 0).getDate();
+    const startIdx    = (first.getDay() + 6) % 7;   // Mon = 0
+    const totalCells  = Math.ceil((startIdx + daysInMonth) / 7) * 7;
+
+    for (let i = 0; i < totalCells; i++) {
+      const dayNum = i - startIdx + 1;
+      const cell   = document.createElement('div');
+      cell.className = 'ktCell';
+
+      if (dayNum < 1 || dayNum > daysInMonth) {
+        cell.classList.add('ktCell--out');
+        calGrid.appendChild(cell);
+        continue;
+      }
+
+      const d      = mkDate(viewYear, viewMonth, dayNum);
+      const key    = toYmd(d);
+      const busy   = data[key]?.busy === true;
+      const isPast = d < todayD;
+      const isToday = d.getTime() === todayD.getTime();
+
+      cell.dataset.date = key;
+
+      if (isToday) cell.classList.add('ktCell--today');
+
+      // Phase 2: block dates after first busy day following check-in
+      const isBlocked = phase === 2 && checkIn && maxCOut && d > maxCOut;
+
+      if (busy)      cell.classList.add('ktCell--busy');
+      else if (isPast)    cell.classList.add('ktCell--past');
+      else if (isBlocked) cell.classList.add('ktCell--blocked');
+
+      // Selected / range
+      const isCIn  = checkIn  && d.getTime() === checkIn.getTime();
+      const isCOut = checkOut && d.getTime() === checkOut.getTime();
+      const inRange = checkIn && checkOut && d > checkIn && d < checkOut;
+      if (isCIn)   cell.classList.add('ktCell--selStart');
+      if (isCOut)  cell.classList.add('ktCell--selEnd');
+      if (inRange) cell.classList.add('ktCell--inRange');
+
+      // Hover range preview (phase 2 only)
+      if (phase === 2 && checkIn && hoverDate && !checkOut) {
+        const validHover = hoverDate > checkIn && (!maxCOut || hoverDate <= maxCOut);
+        if (validHover) {
+          if (!isCIn && d.getTime() === hoverDate.getTime()) cell.classList.add('ktCell--previewEnd');
+          if (d > checkIn && d < hoverDate)                  cell.classList.add('ktCell--inPreview');
+        }
+      }
+
+      // Price display (free days only)
+      const defPrice = defaultPrices[currentApt] || 60;
+      const entry = data[key];
+      const priceVal = (!busy && !isPast) ? ((entry?.price != null) ? Number(entry.price) : defPrice) : null;
+      const priceHtml = priceVal != null ? `<span class="ktCell__pr">${priceVal}€</span>` : '';
+
+      cell.innerHTML = `<span class="ktCell__num">${dayNum}</span>${priceHtml}`;
+      calGrid.appendChild(cell);
+    }
+
+    updateSummary();
+  }
+
+  // ── Day click handler ──
+  function handleClick(dateStr) {
+    const d = new Date(dateStr + 'T00:00:00');
+    d.setHours(0,0,0,0);
+
+    if (isBusy(d) || d < today0()) return;
+
+    if (phase === 1) {
+      // Set check-in, move to phase 2
+      checkIn  = d;
+      checkOut = null;
+      phase    = 2;
+      maxCOut  = findMaxCheckOut(d);
+      hoverDate = null;
+      if (dateFromEl) { dateFromEl.value = fmtDate(d); dateFromEl.classList.add('is-set'); }
+      if (dateToEl)   { dateToEl.value = '';            dateToEl.classList.remove('is-set'); }
+    } else {
+      // Phase 2 — picking check-out
+      if (d <= checkIn) {
+        // Clicked earlier than check-in → restart with this as new check-in
+        checkIn  = d;
+        checkOut = null;
+        maxCOut  = findMaxCheckOut(d);
+        hoverDate = null;
+        if (dateFromEl) { dateFromEl.value = fmtDate(d); dateFromEl.classList.add('is-set'); }
+        if (dateToEl)   { dateToEl.value = '';            dateToEl.classList.remove('is-set'); }
+        render();
+        return;
+      }
+      // Blocked: after first busy day
+      if (maxCOut && d > maxCOut) return;
+
+      checkOut  = d;
+      phase     = 1;
+      hoverDate = null;
+      if (dateToEl) { dateToEl.value = fmtDate(d); dateToEl.classList.add('is-set'); }
+    }
+    render();
+  }
+
+  // ── Event delegation ──
+  calGrid.addEventListener('click', (e) => {
+    const cell = e.target.closest('.ktCell[data-date]');
+    if (!cell || cell.classList.contains('ktCell--busy') ||
+        cell.classList.contains('ktCell--past') ||
+        cell.classList.contains('ktCell--blocked')) return;
+    handleClick(cell.dataset.date);
+  });
+
+  calGrid.addEventListener('mouseover', (e) => {
+    if (phase !== 2 || !checkIn || checkOut) return;
+    const cell = e.target.closest('.ktCell[data-date]');
+    if (!cell || cell.classList.contains('ktCell--busy') ||
+        cell.classList.contains('ktCell--past') ||
+        cell.classList.contains('ktCell--blocked')) {
+      if (hoverDate) { hoverDate = null; render(); }
+      return;
+    }
+    const d = new Date(cell.dataset.date + 'T00:00:00');
+    d.setHours(0,0,0,0);
+    if (!hoverDate || d.getTime() !== hoverDate.getTime()) {
+      hoverDate = d;
+      render();
+    }
+  });
+
+  calGrid.addEventListener('mouseleave', () => {
+    if (hoverDate) { hoverDate = null; render(); }
+  });
+
+  // ── Apartment select ──
+  aptSelect.addEventListener('change', () => {
+    const val = aptSelect.value;
+    if (val) {
+      currentApt = val;
+      // Use style.display as a reliable override for display:flex/block CSS
+      if (calLock)  { calLock.setAttribute('hidden', ''); calLock.style.display = ''; }
+      if (calInner) { calInner.removeAttribute('hidden'); calInner.style.display = ''; }
+      checkIn = checkOut = hoverDate = maxCOut = null;
+      phase = 1;
+      viewYear  = new Date().getFullYear();
+      viewMonth = new Date().getMonth();
+      if (dateFromEl) { dateFromEl.value = ''; dateFromEl.classList.remove('is-set'); }
+      if (dateToEl)   { dateToEl.value   = ''; dateToEl.classList.remove('is-set');   }
+      if (summaryEl)  summaryEl.hidden = true;
+      render();
+    } else {
+      currentApt = null;
+      if (calLock)  { calLock.removeAttribute('hidden'); calLock.style.display = ''; }
+      if (calInner) { calInner.setAttribute('hidden', ''); calInner.style.display = ''; }
+      if (summaryEl) summaryEl.hidden = true;
+    }
+  });
+
+  // ── Month navigation ──
+  btnPrev?.addEventListener('click', () => {
+    if (viewMonth === 0) { viewMonth = 11; viewYear--; } else viewMonth--;
+    hoverDate = null;
+    render();
+  });
+  btnNext?.addEventListener('click', () => {
+    if (viewMonth === 11) { viewMonth = 0; viewYear++; } else viewMonth++;
+    hoverDate = null;
+    render();
+  });
+
+  // Submit — validation handled by the separate IIFE below
+})();
+
+/* =========================
+   Kontakt forma — gosti i validacija
+   ========================= */
+(() => {
+  // ── Limiti po apartmanu ──
+  const aptLimits = {
+    a1: { adults: 2, children: 2 }, // Sunrise
+    a2: { adults: 2, children: 2 }, // Olive
+    a3: { adults: 2, children: 3 }, // Sky
+  };
+
+  const aptSelect   = document.getElementById('ktAptSelect');
+  const adultsEl    = document.getElementById('ktAdults');
+  const childrenEl  = document.getElementById('ktChildren');
+  const submitBtn   = document.getElementById('ktSubmitBtn');
+  const successMsg  = document.getElementById('ktSuccess');
+
+  if (!aptSelect || !adultsEl || !childrenEl || !submitBtn) return;
+
+  // ── Ažuriraj opcije padajućih izbornika ──
+  function updateGuestOptions(aptId) {
+    const lim = aptLimits[aptId] || { adults: 2, children: 2 };
+
+    // Odrasli: 1 do max
+    adultsEl.innerHTML = '<option value="">— odaberite —</option>';
+    for (let i = 1; i <= lim.adults; i++) {
+      const opt = document.createElement('option');
+      opt.value = i;
+      opt.textContent = i === 1 ? '1 odrasla osoba' : `${i} odrasle osobe`;
+      adultsEl.appendChild(opt);
+    }
+    adultsEl.disabled = false;
+
+    // Djeca: 0 do max
+    childrenEl.innerHTML = '';
+    for (let i = 0; i <= lim.children; i++) {
+      const opt = document.createElement('option');
+      opt.value = i;
+      opt.textContent = i === 0 ? '0 djece' : i === 1 ? '1 dijete' : `${i} djece`;
+      childrenEl.appendChild(opt);
+    }
+    childrenEl.value = '0';
+    childrenEl.disabled = false;
+  }
+
+  function resetGuestOptions() {
+    adultsEl.innerHTML = '<option value="">— odaberite apartman —</option>';
+    adultsEl.disabled = true;
+    childrenEl.innerHTML = '<option value="0">0 djece</option>';
+    childrenEl.disabled = true;
+  }
+
+  const calNote = document.getElementById('ktCalNote');
+
+  // Slušaj promjenu apartmana (dodaje se uz postojeći listener u calendar bloku)
+  aptSelect.addEventListener('change', () => {
+    const val = aptSelect.value;
+    if (val) {
+      updateGuestOptions(val);
+      if (calNote) calNote.removeAttribute('hidden');
+    } else {
+      resetGuestOptions();
+      if (calNote) calNote.setAttribute('hidden', '');
+    }
+    // Očisti error na apartmanu i gostima
+    clearErr(aptSelect, 'ktAptErr');
+    clearErr(adultsEl,  'ktAdultsErr');
+  });
+
+  adultsEl.addEventListener('change', () => clearErr(adultsEl, 'ktAdultsErr'));
+
+  // ── Pomoćne funkcije za error/clear ──
+  function setErr(el, msgId, msg) {
+    el.classList.add('is-error');
+    const span = document.getElementById(msgId);
+    if (span) span.textContent = msg;
+  }
+  function clearErr(el, msgId) {
+    el.classList.remove('is-error');
+    const span = document.getElementById(msgId);
+    if (span) span.textContent = '';
+  }
+
+  // Briši errore live kad korisnik tipka / mijenja polje
+  document.getElementById('ktFullName')?.addEventListener('input', () => clearErr(document.getElementById('ktFullName'), 'ktNameErr'));
+  document.getElementById('ktEmail')?.addEventListener('input',    () => clearErr(document.getElementById('ktEmail'), 'ktEmailErr'));
+
+  // ── Validacija forme ──
+  function validateForm() {
+    let valid = true;
+
+    // Ime
+    const nameEl = document.getElementById('ktFullName');
+    if (!nameEl?.value.trim()) {
+      setErr(nameEl, 'ktNameErr', 'Unesite ime i prezime');
+      valid = false;
+    } else {
+      clearErr(nameEl, 'ktNameErr');
+    }
+
+    // Email
+    const emailEl = document.getElementById('ktEmail');
+    const emailVal = emailEl?.value.trim() || '';
+    const emailOk  = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal);
+    if (!emailVal) {
+      setErr(emailEl, 'ktEmailErr', 'Unesite email adresu');
+      valid = false;
+    } else if (!emailOk) {
+      setErr(emailEl, 'ktEmailErr', 'Unesite ispravnu email adresu');
+      valid = false;
+    } else {
+      clearErr(emailEl, 'ktEmailErr');
+    }
+
+    // Apartman
+    if (!aptSelect.value) {
+      setErr(aptSelect, 'ktAptErr', 'Odaberite apartman');
+      valid = false;
+    } else {
+      clearErr(aptSelect, 'ktAptErr');
+    }
+
+    // Odrasli (min. 1)
+    if (!adultsEl.value) {
+      setErr(adultsEl, 'ktAdultsErr', 'Odaberite broj odraslih osoba');
+      valid = false;
+    } else {
+      clearErr(adultsEl, 'ktAdultsErr');
+    }
+
+    // Datum dolaska
+    const fromEl = document.getElementById('ktDateFrom');
+    if (!fromEl?.value) {
+      setErr(fromEl, 'ktDateFromErr', 'Odaberite datum dolaska u kalendaru');
+      valid = false;
+    } else {
+      clearErr(fromEl, 'ktDateFromErr');
+    }
+
+    // Datum odlaska
+    const toEl = document.getElementById('ktDateTo');
+    if (!toEl?.value) {
+      setErr(toEl, 'ktDateToErr', 'Odaberite datum odlaska u kalendaru');
+      valid = false;
+    } else {
+      clearErr(toEl, 'ktDateToErr');
+    }
+
+    // Skrolaj do prvog errora
+    if (!valid) {
+      const firstErr = document.querySelector('#ktForm .is-error');
+      firstErr?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    return valid;
+  }
+
+  // ── EmailJS konfiguracija — popuni nakon postavljanja EmailJS accounta ──
+  const EJS_PUBLIC_KEY  = 'fmcojn4q2cFuXOBxB';
+  const EJS_SERVICE_ID  = 'service_0y6b249';
+  const EJS_TEMPLATE_ID = 'template_ue3hcho';
+
+  // Inicijaliziraj EmailJS
+  if (typeof emailjs !== 'undefined') {
+    emailjs.init({ publicKey: EJS_PUBLIC_KEY });
+  }
+
+  // ── Submit — šalje mail putem EmailJS ──
+  submitBtn.addEventListener('click', () => {
+    if (!validateForm()) return;
+
+    const nameEl    = document.getElementById('ktFullName');
+    const emailEl   = document.getElementById('ktEmail');
+    const fromEl    = document.getElementById('ktDateFrom');
+    const toEl      = document.getElementById('ktDateTo');
+    const msgEl     = document.querySelector('#ktForm [name="message"]');
+    const sendErrEl = document.getElementById('ktSendErr');
+
+    const aptNames  = { a1: 'Apartman Sunrise', a2: 'Apartman Olive', a3: 'Apartman Sky' };
+    const aptName   = aptNames[aptSelect.value] || aptSelect.value;
+    const adultsLbl = adultsEl.options[adultsEl.selectedIndex]?.text || adultsEl.value;
+    const childLbl  = childrenEl.options[childrenEl.selectedIndex]?.text || childrenEl.value;
+    const sumTotalTxt  = document.getElementById('ktSumTotal')?.textContent || '';
+    const sumNightsTxt = document.getElementById('ktSumNights')?.textContent || '';
+    const ukupna_cijena = sumTotalTxt
+      ? `${sumTotalTxt.replace('Ukupno: ', '')} (${sumNightsTxt})`
+      : '/';
+
+    if (successMsg) successMsg.hidden = true;
+    if (sendErrEl)  sendErrEl.hidden  = true;
+    submitBtn.disabled    = true;
+    submitBtn.textContent = 'Slanje…';
+
+    if (typeof emailjs === 'undefined') {
+      if (sendErrEl) sendErrEl.hidden = false;
+      submitBtn.disabled    = false;
+      submitBtn.textContent = 'Pošalji upit';
+      return;
+    }
+
+    emailjs.send(EJS_SERVICE_ID, EJS_TEMPLATE_ID, {
+      from_name:      nameEl.value.trim(),
+      reply_to:       emailEl.value.trim(),
+      apartman:       aptName,
+      odrasli:        adultsLbl,
+      djeca:          childLbl,
+      datum_dolaska:   fromEl.value,
+      datum_odlaska:   toEl.value,
+      ukupna_cijena:   ukupna_cijena,
+      poruka:          msgEl?.value.trim() || '/',
+    })
+    .then(() => {
+      if (successMsg) successMsg.hidden = false;
+      submitBtn.textContent = 'Poslano ✓';
+    })
+    .catch(() => {
+      if (sendErrEl) sendErrEl.hidden = false;
+      submitBtn.disabled    = false;
+      submitBtn.textContent = 'Pošalji upit';
+    });
   });
 })();
