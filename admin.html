@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin — Apartmani Lana</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --clr-bg:      #0f1117;
+      --clr-surface: #1a1d27;
+      --clr-border:  #2a2d3a;
+      --clr-accent:  #c8a96e;
+      --clr-text:    #e8e6e0;
+      --clr-muted:   #7a7a8a;
+      --clr-busy:    #c0392b;
+      --clr-free:    #27ae60;
+      --clr-today:   #2980b9;
+      --clr-weekend: #1e2535;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: var(--clr-bg);
+      color: var(--clr-text);
+      min-height: 100vh;
+    }
+
+    /* ── LOGIN ── */
+    #loginScreen {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 1rem;
+    }
+
+    .login__card {
+      background: var(--clr-surface);
+      border: 1px solid var(--clr-border);
+      border-radius: 12px;
+      padding: 2.5rem 2rem;
+      width: 100%;
+      max-width: 360px;
+    }
+
+    .login__logo {
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      color: var(--clr-accent);
+      text-transform: uppercase;
+      margin-bottom: 0.4rem;
+    }
+
+    .login__title {
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 2rem;
+      color: var(--clr-text);
+    }
+
+    .login__label {
+      display: block;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      color: var(--clr-muted);
+      text-transform: uppercase;
+      margin-bottom: 0.4rem;
+    }
+
+    .login__input {
+      width: 100%;
+      background: var(--clr-bg);
+      border: 1px solid var(--clr-border);
+      border-radius: 7px;
+      color: var(--clr-text);
+      font-size: 0.95rem;
+      padding: 0.65rem 0.85rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .login__input:focus { border-color: var(--clr-accent); }
+
+    .login__btn {
+      margin-top: 1.5rem;
+      width: 100%;
+      background: var(--clr-accent);
+      border: none;
+      border-radius: 7px;
+      color: #0f1117;
+      font-size: 0.95rem;
+      font-weight: 600;
+      padding: 0.7rem;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .login__btn:hover { opacity: 0.88; }
+
+    .login__err {
+      margin-top: 0.8rem;
+      font-size: 0.85rem;
+      color: #e74c3c;
+      text-align: center;
+      min-height: 1.2em;
+    }
+
+    /* ── ADMIN PANEL ── */
+    #adminPanel { display: none; }
+
+    .admin__topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.9rem 1.5rem;
+      background: var(--clr-surface);
+      border-bottom: 1px solid var(--clr-border);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .admin__brand {
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      color: var(--clr-accent);
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .admin__logoutBtn {
+      background: transparent;
+      border: 1px solid var(--clr-border);
+      color: var(--clr-muted);
+      border-radius: 6px;
+      padding: 0.35rem 0.8rem;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .admin__logoutBtn:hover { color: var(--clr-text); border-color: var(--clr-text); }
+
+    .admin__main {
+      padding: 2rem 1.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .admin__heading {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+    }
+    .admin__sub {
+      font-size: 0.8rem;
+      color: var(--clr-muted);
+      margin-bottom: 2rem;
+    }
+
+    /* ── APT TABS ── */
+    .apt__tabs {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .apt__tab {
+      background: var(--clr-surface);
+      border: 1px solid var(--clr-border);
+      border-radius: 7px;
+      color: var(--clr-muted);
+      font-size: 0.85rem;
+      font-weight: 500;
+      padding: 0.45rem 1.1rem;
+      cursor: pointer;
+      transition: color 0.2s, border-color 0.2s, background 0.2s;
+    }
+    .apt__tab:hover { color: var(--clr-text); border-color: var(--clr-accent); }
+    .apt__tab.is-active {
+      background: var(--clr-accent);
+      border-color: var(--clr-accent);
+      color: #0f1117;
+    }
+
+    /* ── CALENDAR ── */
+    .cal__wrap {
+      background: var(--clr-surface);
+      border: 1px solid var(--clr-border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      max-width: 600px;
+    }
+
+    .cal__nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.2rem;
+    }
+
+    .cal__navBtn {
+      background: var(--clr-bg);
+      border: 1px solid var(--clr-border);
+      color: var(--clr-text);
+      border-radius: 6px;
+      width: 32px; height: 32px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: border-color 0.2s;
+    }
+    .cal__navBtn:hover:not(:disabled) { border-color: var(--clr-accent); }
+    .cal__navBtn:disabled { opacity: 0.3; cursor: default; }
+
+    .cal__monthLabel {
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+    }
+
+    .cal__weekdays {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 3px;
+      margin-bottom: 4px;
+    }
+    .cal__weekdays div {
+      text-align: center;
+      font-size: 0.68rem;
+      color: var(--clr-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 0.2rem 0;
+    }
+
+    .cal__grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 3px;
+    }
+
+    .calCell {
+      aspect-ratio: 1;
+      border-radius: 5px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      position: relative;
+      transition: border-color 0.15s, background 0.15s;
+      user-select: none;
+    }
+    .calCell:hover { border-color: var(--clr-accent); }
+    .calCell--out { opacity: 0; pointer-events: none; }
+    .calCell--weekend { background: var(--clr-weekend); }
+    .calCell--busy { background: rgba(192,57,43,0.25); color: #e57373; }
+    .calCell--busy .calCell__num { text-decoration: line-through; opacity: 0.7; }
+    .calCell--today { border-color: var(--clr-today) !important; }
+    .calCell__num { font-weight: 600; line-height: 1; }
+    .calCell__price { font-size: 0.62rem; color: var(--clr-accent); margin-top: 1px; }
+    .calCell__busy { font-size: 0.55rem; color: #e57373; margin-top: 1px; }
+
+    /* ── ADMIN BAR ── */
+    .cal__adminBar {
+      margin-top: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .cal__hint {
+      font-size: 0.72rem;
+      color: var(--clr-muted);
+    }
+
+    .cal__blockBtn {
+      background: transparent;
+      border: 1px solid var(--clr-border);
+      color: var(--clr-text);
+      border-radius: 6px;
+      padding: 0.35rem 0.8rem;
+      font-size: 0.78rem;
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .cal__blockBtn:hover { border-color: var(--clr-accent); color: var(--clr-accent); }
+
+    /* ── PRICE POPUP ── */
+    .pricePopup {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+    }
+    .pricePopup[hidden] { display: none; }
+
+    .pricePopup__card {
+      background: var(--clr-surface);
+      border: 1px solid var(--clr-border);
+      border-radius: 10px;
+      padding: 1.5rem;
+      width: 260px;
+    }
+
+    .pricePopup__day {
+      font-size: 0.85rem;
+      color: var(--clr-muted);
+      margin-bottom: 0.8rem;
+    }
+
+    .pricePopup__field {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-bottom: 1rem;
+    }
+
+    .pricePopup__input {
+      flex: 1;
+      background: var(--clr-bg);
+      border: 1px solid var(--clr-border);
+      border-radius: 6px;
+      color: var(--clr-text);
+      font-size: 1rem;
+      padding: 0.5rem 0.7rem;
+      outline: none;
+    }
+    .pricePopup__input:focus { border-color: var(--clr-accent); }
+    .pricePopup__suffix { color: var(--clr-accent); font-weight: 600; }
+
+    .pricePopup__btns { display: flex; gap: 0.5rem; }
+    .pricePopup__save, .pricePopup__cancel {
+      flex: 1;
+      border-radius: 6px;
+      padding: 0.45rem;
+      font-size: 0.85rem;
+      font-weight: 500;
+      cursor: pointer;
+      border: 1px solid var(--clr-border);
+      transition: opacity 0.2s;
+    }
+    .pricePopup__save {
+      background: var(--clr-accent);
+      color: #0f1117;
+      border-color: var(--clr-accent);
+    }
+    .pricePopup__save:hover { opacity: 0.85; }
+    .pricePopup__cancel { background: transparent; color: var(--clr-text); }
+    .pricePopup__cancel:hover { border-color: var(--clr-text); }
+
+    /* ── LEGEND ── */
+    .cal__legend {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+      flex-wrap: wrap;
+    }
+    .cal__legendItem {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.75rem;
+      color: var(--clr-muted);
+    }
+    .cal__dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+    }
+    .cal__dot--free  { background: var(--clr-free); }
+    .cal__dot--busy  { background: var(--clr-busy); }
+  </style>
+</head>
+<body>
+
+<!-- ══ LOGIN SCREEN ══════════════════════════════════════ -->
+<div id="loginScreen">
+  <div class="login__card">
+    <p class="login__logo">Apartmani Lana</p>
+    <h1 class="login__title">Admin pristup</h1>
+
+    <label class="login__label" for="loginPass">Lozinka</label>
+    <input class="login__input" type="password" id="loginPass" autocomplete="current-password" placeholder="••••••••" />
+
+    <button class="login__btn" id="loginBtn" type="button">Prijava</button>
+    <p class="login__err" id="loginErr"></p>
+  </div>
+</div>
+
+<!-- ══ ADMIN PANEL ════════════════════════════════════════ -->
+<div id="adminPanel">
+
+  <div class="admin__topbar">
+    <span class="admin__brand">Apartmani Lana &mdash; Admin</span>
+    <button class="admin__logoutBtn" id="logoutBtn" type="button">Odjava</button>
+  </div>
+
+  <div class="admin__main">
+    <h2 class="admin__heading">Upravljanje kalendarom</h2>
+    <p class="admin__sub">Desni klik na dan: zauzeto / slobodno &nbsp;·&nbsp; Dvostruki klik: postavi cijenu</p>
+
+    <!-- Apartment tabs -->
+    <div class="apt__tabs">
+      <button class="apt__tab is-active" data-apt="a1" type="button">Sunrise</button>
+      <button class="apt__tab" data-apt="a2" type="button">Olive</button>
+      <button class="apt__tab" data-apt="a3" type="button">Sky</button>
+    </div>
+
+    <!-- Calendar -->
+    <div class="cal__wrap">
+      <div class="cal__nav">
+        <button class="cal__navBtn" id="calPrev" type="button" aria-label="Prethodni mjesec">&#8249;</button>
+        <div class="cal__monthLabel" id="calMonthLabel">Siječanj 2026</div>
+        <button class="cal__navBtn" id="calNext" type="button" aria-label="Sljedeći mjesec">&#8250;</button>
+      </div>
+
+      <div class="cal__weekdays" aria-hidden="true">
+        <div>Pon</div><div>Uto</div><div>Sri</div><div>Čet</div><div>Pet</div><div>Sub</div><div>Ned</div>
+      </div>
+
+      <div class="cal__grid" id="calGrid"></div>
+
+      <div class="cal__legend">
+        <span class="cal__legendItem"><span class="cal__dot cal__dot--free"></span>Slobodno</span>
+        <span class="cal__legendItem"><span class="cal__dot cal__dot--busy"></span>Zauzeto</span>
+      </div>
+
+      <div class="cal__adminBar">
+        <button class="cal__blockBtn" id="calBlockBtn" type="button">Blokiraj cijeli mjesec</button>
+        <span class="cal__hint" id="calHint">Desni klik: zauzeto/slobodno &nbsp;·&nbsp; 2× klik: cijena</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ PRICE POPUP ════════════════════════════════════════ -->
+<div class="pricePopup" id="pricePopup" hidden>
+  <div class="pricePopup__card">
+    <p class="pricePopup__day" id="priceDay"></p>
+    <div class="pricePopup__field">
+      <input class="pricePopup__input" type="number" id="priceVal" min="0" step="1" placeholder="75" aria-label="Cijena u eurima" />
+      <span class="pricePopup__suffix">&euro;</span>
+    </div>
+    <div class="pricePopup__btns">
+      <button class="pricePopup__save" id="priceSave" type="button">Spremi</button>
+      <button class="pricePopup__cancel" id="priceCancel" type="button">Odustani</button>
+    </div>
+  </div>
+</div>
+
+<script>
+
+const PASS_HASH = '783738cbbda2a7129f7c65478c157f2a312ca79651ca332fb877ccb37b5f3af3';
+
+/* ── Auth ── */
+async function sha256(str) {
+  const buf  = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
+}
+
+function isLoggedIn() {
+  return sessionStorage.getItem('adminAuth') === '1';
+}
+
+function showPanel() {
+  document.getElementById('loginScreen').style.display = 'none';
+  document.getElementById('adminPanel').style.display  = 'block';
+  initCalendar();
+}
+
+document.getElementById('loginBtn').addEventListener('click', async () => {
+  const pass = document.getElementById('loginPass').value;
+  const errEl = document.getElementById('loginErr');
+  if (!pass) { errEl.textContent = 'Unesite lozinku.'; return; }
+  const hash = await sha256(pass);
+  if (hash === PASS_HASH) {
+    sessionStorage.setItem('adminAuth', '1');
+    errEl.textContent = '';
+    showPanel();
+  } else {
+    errEl.textContent = 'Pogrešna lozinka.';
+    document.getElementById('loginPass').value = '';
+    document.getElementById('loginPass').focus();
+  }
+});
+
+document.getElementById('loginPass').addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') document.getElementById('loginBtn').click();
+});
+
+document.getElementById('logoutBtn').addEventListener('click', () => {
+  sessionStorage.removeItem('adminAuth');
+  location.reload();
+});
+
+if (isLoggedIn()) showPanel();
+
+/* ── Calendar ── */
+function initCalendar() {
+  const YEAR = new Date().getFullYear();
+  const monthNames = ['Siječanj','Veljača','Ožujak','Travanj','Svibanj','Lipanj',
+                      'Srpanj','Kolovoz','Rujan','Listopad','Studeni','Prosinac'];
+  const monthGenitive = ['siječnja','veljače','ožujka','travnja','svibnja','lipnja',
+                         'srpnja','kolovoza','rujna','listopada','studenog','prosinca'];
+
+  let currentApt = 'a1';
+  let viewMonth  = new Date().getMonth();
+  let priceKey   = null;
+
+  const grid        = document.getElementById('calGrid');
+  const monthLabel  = document.getElementById('calMonthLabel');
+  const btnPrev     = document.getElementById('calPrev');
+  const btnNext     = document.getElementById('calNext');
+  const blockBtn    = document.getElementById('calBlockBtn');
+  const pricePopup  = document.getElementById('pricePopup');
+  const priceDayEl  = document.getElementById('priceDay');
+  const priceInput  = document.getElementById('priceVal');
+  const priceSave   = document.getElementById('priceSave');
+  const priceCancel = document.getElementById('priceCancel');
+
+  function pad2(n) { return String(n).padStart(2,'0'); }
+  function ymd(m, d) { return `${YEAR}-${pad2(m+1)}-${pad2(d)}`; }
+
+  function storageKey(id) { return `aptCalendar:${id}`; }
+  function loadData(id) {
+    try { return JSON.parse(localStorage.getItem(storageKey(id)) || '{}'); }
+    catch { return {}; }
+  }
+  function saveData(id, data) {
+    localStorage.setItem(storageKey(id), JSON.stringify(data));
+  }
+
+  /* Tabs */
+  document.querySelectorAll('.apt__tab').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.apt__tab').forEach(b => b.classList.remove('is-active'));
+      btn.classList.add('is-active');
+      currentApt = btn.dataset.apt;
+      render();
+    });
+  });
+
+  /* Month nav */
+  btnPrev.addEventListener('click', () => { if (viewMonth > 0)  { viewMonth--; render(); } });
+  btnNext.addEventListener('click', () => { if (viewMonth < 11) { viewMonth++; render(); } });
+
+  /* Block entire month */
+  function isMonthFullyBlocked() {
+    const data = loadData(currentApt);
+    const days = new Date(YEAR, viewMonth + 1, 0).getDate();
+    for (let d = 1; d <= days; d++) {
+      if (!data[ymd(viewMonth, d)]?.busy) return false;
+    }
+    return true;
+  }
+
+  function updateBlockBtn() {
+    blockBtn.textContent = isMonthFullyBlocked() ? 'Odblokiraj cijeli mjesec' : 'Blokiraj cijeli mjesec';
+  }
+
+  blockBtn.addEventListener('click', () => {
+    const data = loadData(currentApt);
+    const days = new Date(YEAR, viewMonth + 1, 0).getDate();
+    const shouldBlock = !isMonthFullyBlocked();
+    for (let d = 1; d <= days; d++) {
+      const key = ymd(viewMonth, d);
+      const cur = data[key] || { price: null, busy: false };
+      cur.busy = shouldBlock;
+      data[key] = cur;
+    }
+    saveData(currentApt, data);
+    render();
+  });
+
+  /* Price popup */
+  function openPricePopup(key, dayNum) {
+    const data = loadData(currentApt);
+    const cur  = data[key] || { price: null, busy: false };
+    priceKey = key;
+    priceDayEl.textContent = `${dayNum}. ${monthGenitive[viewMonth]} ${YEAR}`;
+    priceInput.value = cur.price ?? '';
+    pricePopup.hidden = false;
+    priceInput.focus();
+  }
+
+  function closePricePopup() {
+    pricePopup.hidden = true;
+    priceKey = null;
+  }
+
+  function savePricePopup() {
+    if (!priceKey) { closePricePopup(); return; }
+    const data = loadData(currentApt);
+    const cur  = data[priceKey] || { price: null, busy: false };
+    const val  = String(priceInput.value ?? '').trim();
+    cur.price  = val === '' ? null : Number(val);
+    if (cur.price !== null && Number.isNaN(cur.price)) { closePricePopup(); return; }
+    data[priceKey] = cur;
+    saveData(currentApt, data);
+    closePricePopup();
+    render();
+  }
+
+  priceSave.addEventListener('click', savePricePopup);
+  priceCancel.addEventListener('click', closePricePopup);
+  priceInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') savePricePopup();
+    if (e.key === 'Escape') closePricePopup();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !pricePopup.hidden) closePricePopup();
+  });
+
+  /* Render */
+  function render() {
+    grid.innerHTML = '';
+    closePricePopup();
+
+    const data        = loadData(currentApt);
+    const today       = new Date();
+    const isThisYear  = today.getFullYear() === YEAR;
+    const todayKey    = isThisYear ? ymd(today.getMonth(), today.getDate()) : null;
+
+    monthLabel.textContent = `${monthNames[viewMonth]} ${YEAR}`;
+    btnPrev.disabled = (viewMonth === 0);
+    btnNext.disabled = (viewMonth === 11);
+    updateBlockBtn();
+
+    const first       = new Date(YEAR, viewMonth, 1);
+    const daysInMonth = new Date(YEAR, viewMonth + 1, 0).getDate();
+    const startIndex  = (first.getDay() + 6) % 7;
+    const totalCells  = Math.ceil((startIndex + daysInMonth) / 7) * 7;
+
+    for (let i = 0; i < totalCells; i++) {
+      const dayNum  = i - startIndex + 1;
+      const inMonth = dayNum >= 1 && dayNum <= daysInMonth;
+
+      const cell = document.createElement('div');
+      cell.className = 'calCell';
+
+      if (!inMonth) {
+        cell.classList.add('calCell--out');
+        grid.appendChild(cell);
+        continue;
+      }
+
+      const key   = ymd(viewMonth, dayNum);
+      const info  = data[key] || { price: null, busy: false };
+      const isToday = (key === todayKey);
+      const colPos  = (startIndex + dayNum - 1) % 7;
+
+      if (info.busy)                       cell.classList.add('calCell--busy');
+      if (isToday)                         cell.classList.add('calCell--today');
+      if (colPos === 5 || colPos === 6)    cell.classList.add('calCell--weekend');
+
+      const priceText = (!info.busy && info.price != null && info.price !== '') ? `${info.price}€` : '';
+
+      cell.setAttribute('role', 'button');
+      cell.setAttribute('tabindex', '0');
+      cell.title = 'Desni klik: zauzeto/slobodno · 2× klik: postavi cijenu';
+
+      cell.innerHTML = `
+        <span class="calCell__num">${dayNum}</span>
+        ${priceText ? `<span class="calCell__price">${priceText}</span>` : ''}
+        ${info.busy ? `<span class="calCell__busy">Zauzeto</span>` : ''}
+      `;
+
+      cell.addEventListener('contextmenu', (e) => {
+        e.preventDefault();
+        const fresh = loadData(currentApt);
+        const cur   = fresh[key] || { price: null, busy: false };
+        cur.busy    = !cur.busy;
+        if (cur.busy) cur.price = null;
+        fresh[key]  = cur;
+        saveData(currentApt, fresh);
+        render();
+      });
+
+      cell.addEventListener('dblclick', () => openPricePopup(key, dayNum));
+
+      cell.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          const fresh = loadData(currentApt);
+          const cur   = fresh[key] || { price: null, busy: false };
+          cur.busy    = !cur.busy;
+          if (cur.busy) cur.price = null;
+          fresh[key]  = cur;
+          saveData(currentApt, fresh);
+          render();
+        }
+        if (e.key === 'F2') openPricePopup(key, dayNum);
+      });
+
+      grid.appendChild(cell);
+    }
+  }
+
+  render();
+}
+</script>
+</body>
+</html>

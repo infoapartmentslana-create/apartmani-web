@@ -820,34 +820,33 @@ window.applyLang = function(lang) {
     submitBtn.disabled    = true;
     submitBtn.textContent = window.t('rf-sending');
 
-    const EJS_SERVICE_ID  = 'service_0y6b249';
-    const EJS_TEMPLATE_ID = 'template_ue3hcho';
-
-    if (typeof emailjs === 'undefined') {
-      if (errEl) errEl.hidden = false;
-      submitBtn.disabled    = false;
-      submitBtn.textContent = window.t('rf-submit');
-      return;
-    }
-
-    emailjs.send(EJS_SERVICE_ID, EJS_TEMPLATE_ID, {
-      from_name:    `[RECENZIJA] ${name}`,
-      reply_to:     'noreply@recenzija',
-      apartman:     apt,
-      odrasli:      `${city}, ${country}`,
-      djeca:        stars_str,
-      datum_dolaska: datum,
-      datum_odlaska: '/',
-      ukupna_cijena: '/',
-      poruka:        text,
+    fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        access_key:    'ce98548c-234e-4296-a5cf-b3e0635e0ede',
+        subject:       `[RECENZIJA] ${apt} — ${name}`,
+        from_name:     name,
+        email:         'noreply@recenzija.com',
+        Apartman:      apt,
+        Lokacija:      `${city}, ${country}`,
+        Ocjena:        stars_str,
+        'Datum boravka': datum,
+        Recenzija:     text,
+      }),
     })
-    .then(() => {
-      if (successEl) successEl.hidden = false;
-      submitBtn.textContent = window.t('rf-sent');
-      submitBtn.classList.add('is-sent');
-      form?.reset();
-      selectedRating = 0;
-      stars.forEach(s => s.classList.remove('is-active'));
+    .then(res => res.json())
+    .then(data => {
+      if (data.success) {
+        if (successEl) successEl.hidden = false;
+        submitBtn.textContent = window.t('rf-sent');
+        submitBtn.classList.add('is-sent');
+        form?.reset();
+        selectedRating = 0;
+        stars.forEach(s => s.classList.remove('is-active'));
+      } else {
+        throw new Error('failed');
+      }
     })
     .catch(() => {
       if (errEl) errEl.hidden = false;
@@ -923,37 +922,6 @@ const menuBackdrop = document.getElementById("menuBackdrop");
 const year = document.getElementById("year");
 let isMenuOpen = false;
 let hideTimer = null;
-let isAdminMode = false;
-
-/* ADMIN LOGIN */
-
-const ADMIN_PASSWORD = "1234"; // promijeni u svoju lozinku
-
-document.addEventListener('keydown', (e) => {
-  if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'o') {
-
-    if (!isAdminMode) {
-
-      const entered = prompt("Admin password:");
-
-      if (entered === ADMIN_PASSWORD) {
-        isAdminMode = true;
-        alert("Admin mode ON");
-        document.dispatchEvent(new CustomEvent('adminModeChanged'));
-      } else {
-        alert("Wrong password");
-      }
-
-    } else {
-
-      isAdminMode = false;
-      alert("Admin mode OFF");
-      document.dispatchEvent(new CustomEvent('adminModeChanged'));
-
-    }
-
-  }
-});
 
 if (year) year.textContent = new Date().getFullYear();
 
@@ -1341,9 +1309,9 @@ window.addEventListener("scroll", onHeaderScroll, { passive: true });
     if (btnPrev) btnPrev.disabled = (viewMonth === 0);
     if (btnNext) btnNext.disabled = (viewMonth === 11);
 
-    // Admin controls
-    if (cmAdminBar) cmAdminBar.hidden = !isAdminMode;
-    if (cmHint)     cmHint.style.display = isAdminMode ? '' : 'none';
+    // Admin controls always hidden on public site
+    if (cmAdminBar) cmAdminBar.hidden = true;
+    if (cmHint)     cmHint.style.display = 'none';
     updateBlockBtn();
 
     // Build grid
@@ -1385,43 +1353,6 @@ window.addEventListener("scroll", onHeaderScroll, { passive: true });
         ${info.busy ? `<span class="cmCell__status">${window.t('cell-busy')}</span>` : ''}
       `;
 
-      if (isAdminMode) {
-        cell.setAttribute('role', 'button');
-        cell.setAttribute('tabindex', '0');
-        cell.title = 'Desni klik: zauzeto/slobodno · 2× klik: postavi cijenu';
-
-        // Right click: toggle busy (clears price when marking busy)
-        cell.addEventListener('contextmenu', (e) => {
-          e.preventDefault();
-          const fresh = loadData(currentApt);
-          const cur   = fresh[key] || { price: null, busy: false };
-          cur.busy    = !cur.busy;
-          if (cur.busy) cur.price = null;
-          fresh[key]  = cur;
-          saveData(currentApt, fresh);
-          render();
-        });
-
-        // Double click: open price popup
-        cell.addEventListener('dblclick', () => {
-          openPricePopup(key, dayNum);
-        });
-
-        // Keyboard: Enter/Space toggles busy
-        cell.addEventListener('keydown', (e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            const fresh = loadData(currentApt);
-            const cur   = fresh[key] || { price: null, busy: false };
-            cur.busy    = !cur.busy;
-            if (cur.busy) cur.price = null;
-            fresh[key]  = cur;
-            saveData(currentApt, fresh);
-            render();
-          }
-        });
-      }
-
       cmGrid.appendChild(cell);
     }
   }
@@ -1461,10 +1392,6 @@ window.addEventListener("scroll", onHeaderScroll, { passive: true });
   btnPrev?.addEventListener('click', () => { if (viewMonth > 0)  { viewMonth--; render(); } });
   btnNext?.addEventListener('click', () => { if (viewMonth < 11) { viewMonth++; render(); } });
   btnBlock?.addEventListener('click', toggleBlockMonth);
-
-  document.addEventListener('adminModeChanged', () => {
-    if (modal.classList.contains('is-open')) render();
-  });
 
   document.addEventListener('langChanged', () => {
     if (modal.classList.contains('is-open')) render();
@@ -2312,17 +2239,7 @@ window.addEventListener("scroll", onHeaderScroll, { passive: true });
     return valid;
   }
 
-  // ── EmailJS konfiguracija — popuni nakon postavljanja EmailJS accounta ──
-  const EJS_PUBLIC_KEY  = 'fmcojn4q2cFuXOBxB';
-  const EJS_SERVICE_ID  = 'service_0y6b249';
-  const EJS_TEMPLATE_ID = 'template_ue3hcho';
-
-  // Inicijaliziraj EmailJS
-  if (typeof emailjs !== 'undefined') {
-    emailjs.init({ publicKey: EJS_PUBLIC_KEY });
-  }
-
-  // ── Submit — šalje mail putem EmailJS ──
+  // ── Submit — šalje mail putem Web3Forms ──
   submitBtn.addEventListener('click', () => {
     if (!validateForm()) return;
 
@@ -2349,32 +2266,34 @@ window.addEventListener("scroll", onHeaderScroll, { passive: true });
     submitBtn.disabled    = true;
     submitBtn.textContent = window.t('kt-sending');
 
-    if (typeof emailjs === 'undefined') {
-      if (sendErrEl) sendErrEl.hidden = false;
-      submitBtn.disabled    = false;
-      submitBtn.textContent = window.t('kt-submit');
-      return;
-    }
-
-    emailjs.send(EJS_SERVICE_ID, EJS_TEMPLATE_ID, {
-      from_name:      nameEl.value.trim(),
-      reply_to:       emailEl.value.trim(),
-      apartman:       aptName,
-      odrasli:        adultsLbl,
-      djeca:          childLbl,
-      datum_dolaska:   fromEl.value,
-      datum_odlaska:   toEl.value,
-      ukupna_cijena:   ukupna_cijena,
-      poruka:          msgEl?.value.trim() || '/',
+    fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        access_key:      'ce98548c-234e-4296-a5cf-b3e0635e0ede',
+        subject:         `Upit za rezervaciju — ${aptName}`,
+        from_name:       nameEl.value.trim(),
+        email:           emailEl.value.trim(),
+        Apartman:        aptName,
+        Odrasli:         adultsLbl,
+        Djeca:           childLbl,
+        'Datum dolaska': fromEl.value,
+        'Datum odlaska': toEl.value,
+        'Ukupna cijena': ukupna_cijena,
+        Poruka:          msgEl?.value.trim() || '/',
+      }),
     })
-    .then(() => {
-      if (successMsg) successMsg.hidden = false;
-      // Reset cijelu formu — polja se čiste, kalendar se zaključava
-      document.getElementById('ktForm')?.reset();
-      aptSelect.dispatchEvent(new Event('change'));
-      // Re-enable gumb za eventualno novo slanje
-      submitBtn.disabled    = false;
-      submitBtn.textContent = window.t('kt-submit');
+    .then(res => res.json())
+    .then(data => {
+      if (data.success) {
+        if (successMsg) successMsg.hidden = false;
+        document.getElementById('ktForm')?.reset();
+        aptSelect.dispatchEvent(new Event('change'));
+        submitBtn.disabled    = false;
+        submitBtn.textContent = window.t('kt-submit');
+      } else {
+        throw new Error('failed');
+      }
     })
     .catch(() => {
       if (sendErrEl) sendErrEl.hidden = false;
