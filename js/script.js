@@ -636,9 +636,9 @@ window.applyLang = function(lang) {
   });
 
   /* Update dropdown UI */
-  const flagCodes = { hr:'hr', si:'si', de:'de', en:'gb' };
+  const flagEmojis = { hr:'🇭🇷', si:'🇸🇮', de:'🇩🇪', en:'🇬🇧' };
   const flagEl = document.getElementById('langCurrentFlag');
-  if (flagEl) flagEl.className = `langSwitcher__flag fi fi-${flagCodes[lang] || 'hr'}`;
+  if (flagEl) { flagEl.className = 'langSwitcher__flag'; flagEl.textContent = flagEmojis[lang] || '🇭🇷'; }
   document.querySelectorAll('.langSwitcher__option').forEach(btn => {
     btn.classList.toggle('is-active', btn.dataset.lang === lang);
   });
