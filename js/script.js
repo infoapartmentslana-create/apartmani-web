@@ -1821,6 +1821,7 @@ window.addEventListener("scroll", onHeaderScroll, { passive: true });
    ========================= */
 (() => {
   const aptSelect  = document.getElementById('ktAptSelect');
+  const calEl      = document.getElementById('ktCal');
   const calLock    = document.getElementById('ktCalLock');
   const calInner   = document.getElementById('ktCalInner');
   const calGrid    = document.getElementById('ktCalGrid');
@@ -1950,8 +1951,8 @@ window.addEventListener("scroll", onHeaderScroll, { passive: true });
     const todayD = today0();
 
     calLabel.textContent = `${window.getMonthNameIdx(viewMonth)} ${viewYear}`;
-    if (btnPrev) btnPrev.disabled = (viewYear === todayD.getFullYear() && viewMonth <= todayD.getMonth());
-    if (btnNext) btnNext.disabled = false;
+    if (btnPrev) btnPrev.disabled = (viewMonth === 0);
+    if (btnNext) btnNext.disabled = (viewMonth === 11);
     updatePhase();
 
     calGrid.innerHTML = '';
@@ -2100,6 +2101,9 @@ window.addEventListener("scroll", onHeaderScroll, { passive: true });
     const val = aptSelect.value;
     if (val) {
       currentApt = val;
+      aptSelect.classList.remove('kt--a1','kt--a2','kt--a3');
+      aptSelect.classList.add(`kt--${val}`);
+      if (calEl) { calEl.classList.remove('kt--a1','kt--a2','kt--a3'); calEl.classList.add(`kt--${val}`); }
       // Use style.display as a reliable override for display:flex/block CSS
       if (calLock)  { calLock.setAttribute('hidden', ''); calLock.style.display = ''; }
       if (calInner) { calInner.removeAttribute('hidden'); calInner.style.display = ''; }
@@ -2113,6 +2117,8 @@ window.addEventListener("scroll", onHeaderScroll, { passive: true });
       render();
     } else {
       currentApt = null;
+      aptSelect.classList.remove('kt--a1','kt--a2','kt--a3');
+      if (calEl) calEl.classList.remove('kt--a1','kt--a2','kt--a3');
       if (calLock)  { calLock.removeAttribute('hidden'); calLock.style.display = ''; }
       if (calInner) { calInner.setAttribute('hidden', ''); calInner.style.display = ''; }
       if (summaryEl) summaryEl.hidden = true;
@@ -2121,12 +2127,14 @@ window.addEventListener("scroll", onHeaderScroll, { passive: true });
 
   // ── Month navigation ──
   btnPrev?.addEventListener('click', () => {
-    if (viewMonth === 0) { viewMonth = 11; viewYear--; } else viewMonth--;
+    if (viewMonth === 0) return;
+    viewMonth--;
     hoverDate = null;
     render();
   });
   btnNext?.addEventListener('click', () => {
-    if (viewMonth === 11) { viewMonth = 0; viewYear++; } else viewMonth++;
+    if (viewMonth === 11) return;
+    viewMonth++;
     hoverDate = null;
     render();
   });

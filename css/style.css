@@ -978,6 +978,12 @@ input:focus, textarea:focus{
   flex-shrink: 0;
 }
 
+.hero__star-single{
+  color: #f5a623;
+  font-size: .95rem;
+  line-height: 1;
+}
+
 .hero__stars{
   display: flex;
   gap: 1px;
@@ -2575,10 +2581,12 @@ main > .section:nth-of-type(even){
 }
 
 .calCell__price{
-  margin-top: 6px;
+  position: absolute;
+  bottom: 7px;
+  right: 9px;
   font-weight: 900;
-  color: rgba(11,27,43,.65);
-  font-size: .92rem;
+  color: rgba(11,27,43,.70);
+  font-size: 1.05rem;
 }
 
 .calCell.is-busy .calCell__price{
@@ -5657,10 +5665,13 @@ button.dm__cta {
 }
 
 .cmCell__price {
-  font-size: .70rem;
-  font-weight: 800;
+  position: absolute;
+  bottom: 7px;
+  right: 7px;
+  font-size: .88rem;
+  font-weight: 900;
   color: var(--cm-accent, #b8892a);
-  line-height: 1.1;
+  line-height: 1;
 }
 
 .cmCell__status {
@@ -6130,6 +6141,46 @@ button.dm__cta {
   top: 88px;
 }
 
+/* ── Per-apartment accent tokens ── */
+#ktAptSelect.kt--a1, #ktCal.kt--a1 { --kt-accent: #c46b45; --kt-soft: rgba(196,107,69,.12); --kt-border: rgba(196,107,69,.35); }
+#ktAptSelect.kt--a2, #ktCal.kt--a2 { --kt-accent: #607642; --kt-soft: rgba(96,118,66,.12);  --kt-border: rgba(96,118,66,.35);  }
+#ktAptSelect.kt--a3, #ktCal.kt--a3 { --kt-accent: #247c9f; --kt-soft: rgba(36,124,159,.12); --kt-border: rgba(36,124,159,.35); }
+
+
+#ktCal.kt--a1,
+#ktCal.kt--a2,
+#ktCal.kt--a3 {
+  border-color: var(--kt-border);
+}
+
+#ktCal.kt--a1 .ktCell__pr,
+#ktCal.kt--a2 .ktCell__pr,
+#ktCal.kt--a3 .ktCell__pr {
+  color: var(--kt-accent);
+}
+
+#ktCal.kt--a1 .ktCal__navBtn:not(:disabled),
+#ktCal.kt--a2 .ktCal__navBtn:not(:disabled),
+#ktCal.kt--a3 .ktCal__navBtn:not(:disabled) {
+  color: var(--kt-accent);
+  border-color: var(--kt-border);
+}
+
+#ktCal.kt--a1 .ktCell--selStart,
+#ktCal.kt--a2 .ktCell--selStart,
+#ktCal.kt--a3 .ktCell--selStart,
+#ktCal.kt--a1 .ktCell--selEnd,
+#ktCal.kt--a2 .ktCell--selEnd,
+#ktCal.kt--a3 .ktCell--selEnd {
+  background: var(--kt-accent);
+}
+
+#ktCal.kt--a1 .ktCell--inRange,
+#ktCal.kt--a2 .ktCell--inRange,
+#ktCal.kt--a3 .ktCell--inRange {
+  background: var(--kt-soft);
+}
+
 /* ── Calendar (inside form, full-width) ── */
 .ktCal {
   border-radius: 14px;
@@ -6253,8 +6304,8 @@ button.dm__cta {
 }
 .ktCell__pr {
   font-size: .65rem;
-  font-weight: 600;
-  color: rgba(11,27,43,.40);
+  font-weight: 700;
+  color: var(--kt-accent, #c46b45);
   line-height: 1;
   z-index: 1;
 }
