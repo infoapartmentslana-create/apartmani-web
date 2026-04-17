@@ -7081,3 +7081,303 @@ button.dm__cta {
 .nav.is-open ~ .header__right .burger span:nth-child(3) {
   transform: translateY(-8px) rotate(-45deg);
 }
+
+/* ═══════════════════════════════════════════════
+   MOBITEL OVERHAUL — fokus na ≤ 600px i ≤ 420px
+═══════════════════════════════════════════════ */
+
+@media (max-width: 600px) {
+
+  /* Body: manji gradient koji ne dominira na malim ekranima */
+  body {
+    background:
+      radial-gradient(380px 200px at 100% 0%, rgba(102,204,255,.10), transparent 65%),
+      var(--bg);
+  }
+
+  /* Sekcije: svjetlije boje na mobitelu (manje "tamno") */
+  main > .section:nth-of-type(odd) {
+    background: #FAFAF7;
+  }
+  main > .section:nth-of-type(even) {
+    background: #F5F1EC;
+  }
+  .section {
+    padding: 52px 0;
+  }
+
+  /* ── HEADER ─────────────────────────────── */
+  .header {
+    top: 10px;
+    width: calc(100% - 24px);
+  }
+  .header__inner {
+    padding: 8px 11px;
+  }
+  .logo__name {
+    font-size: 1.15rem;
+  }
+  .logo__label {
+    font-size: .67rem;
+    letter-spacing: .14em;
+  }
+
+  /* ── HERO ────────────────────────────────── */
+  .hero--new .hero__wrap,
+  .hero__wrap {
+    padding: 90px 0 50px;
+  }
+  .hero__panel--simple {
+    padding: 20px 18px 22px;
+    border-radius: 18px;
+    background: linear-gradient(
+      160deg,
+      rgba(255,255,255,.80) 0%,
+      rgba(255,255,255,.58) 100%
+    );
+  }
+  .hero__panel--simple h1 {
+    font-size: clamp(1.7rem, 7.5vw, 2.4rem);
+    margin: 0 0 12px;
+  }
+  .hero__sub--simple {
+    font-size: .93rem;
+    line-height: 1.7;
+    max-width: 100%;
+  }
+  .hero__welcome {
+    font-size: .67rem;
+    letter-spacing: .18em;
+    margin: 0 0 10px;
+  }
+  /* Meta bar: sakri separatore, wrapaj stavke */
+  .hero__meta {
+    flex-wrap: wrap;
+    gap: 6px 10px;
+    padding: 7px 12px;
+    justify-content: center;
+    margin-top: 18px;
+  }
+  .hero__meta-sep {
+    display: none;
+  }
+  .hero__meta-item {
+    gap: 4px;
+  }
+  .hero__location,
+  .hero__rating {
+    font-size: .78rem;
+  }
+  .hero__google-icon {
+    width: 15px;
+    height: 15px;
+  }
+  .hero__stars {
+    font-size: .72rem;
+  }
+
+  /* ── O NAMA / ABOUT SPLIT ────────────────── */
+  .aboutSplit__intro {
+    padding: 40px 0 48px;
+    border-radius: 18px !important;
+  }
+  .aboutSplit__title {
+    font-size: clamp(1.22rem, 5vw, 1.58rem);
+    padding: 0 2px;
+  }
+  .aboutSplit__subtitle {
+    font-size: .90rem;
+    line-height: 1.72;
+  }
+  .aboutSplit__benefits {
+    background: #EDF0EA;
+    padding: 32px 0 42px;
+  }
+  .aboutSplit__benefitTitle {
+    font-size: clamp(1.3rem, 4.8vw, 1.7rem);
+  }
+  .aboutSplit__grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .aboutSplit__item {
+    padding: 20px 17px;
+  }
+  .aboutSplit__desc {
+    margin-left: 0;
+    margin-top: 8px;
+  }
+
+  /* ── APARTMANI ───────────────────────────── */
+  .apartmentsS__head {
+    margin-bottom: 28px;
+  }
+  .apartmentsS__title {
+    font-size: clamp(1.55rem, 6.2vw, 2.1rem);
+  }
+  .apt {
+    grid-template-columns: 1fr !important;
+    border-radius: 18px;
+    gap: 0;
+  }
+  .apt:hover {
+    transform: none;
+  }
+  .apt--alt .apt__media { order: unset; }
+  .apt--alt .apt__body  { order: unset; }
+  .apt__media {
+    border-radius: 18px 18px 0 0;
+  }
+  .apt__media > img {
+    min-height: 240px !important;
+    border-radius: 18px 18px 0 0;
+  }
+  .apt__thumbs img {
+    height: 70px;
+  }
+  .apt__body--clean {
+    padding: 18px 16px 18px;
+    border-radius: 0 0 18px 18px;
+  }
+  .apt__body h3,
+  .apt__name {
+    font-size: 1.65rem !important;
+  }
+  .apt__quick {
+    grid-template-columns: 1fr 1fr !important;
+  }
+  .apt__checklist {
+    grid-template-columns: 1fr 1fr !important;
+  }
+  .apt__footer {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 8px;
+  }
+  .apt__btnBook {
+    grid-column: 1 / -1;
+    order: -1;
+  }
+  .apt__priceBadge {
+    bottom: auto;
+    top: 14px;
+    right: 14px;
+  }
+
+  /* ── RECENZIJE ───────────────────────────── */
+  .revHead {
+    margin-bottom: 28px;
+  }
+  .revHead__title {
+    font-size: clamp(1.42rem, 5.5vw, 1.88rem);
+  }
+  .revHead__sub {
+    font-size: .92rem;
+  }
+  .revSlider__btn {
+    display: none;
+  }
+  .revSlider__track {
+    padding: 6px 0 14px;
+    gap: 14px;
+  }
+
+  /* ── LOKACIJA / KARTA ────────────────────── */
+  .map iframe {
+    height: 240px;
+  }
+  .lokMapFull iframe {
+    height: 240px;
+  }
+  .lokNearbyGrid {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  /* ── KONTAKT / FORMA ─────────────────────── */
+  .ktLayout {
+    grid-template-columns: 1fr;
+  }
+  .ktRight {
+    grid-template-columns: 1fr !important;
+    display: flex !important;
+    flex-direction: column;
+  }
+  .ktCell {
+    height: 42px;
+  }
+  .ktCell__num  { font-size: .80rem; }
+  .ktCell__pr   { font-size: .58rem; }
+  .ktForm__row2 {
+    grid-template-columns: 1fr;
+  }
+
+  /* ── FOOTER ──────────────────────────────── */
+  .footer__main {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+  .footer__contact {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .footer__nav {
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+}
+
+/* ── 420px i manji ─────────────────────────── */
+@media (max-width: 420px) {
+
+  .header {
+    width: calc(100% - 16px);
+    top: 8px;
+  }
+  .header__inner {
+    padding: 7px 10px;
+  }
+  .logo__name {
+    font-size: 1.05rem;
+  }
+  .logo__label {
+    display: none;
+  }
+  .logo__divider {
+    display: none;
+  }
+
+  .section {
+    padding: 44px 0;
+  }
+
+  .hero__panel--simple {
+    padding: 16px 14px 18px;
+    border-radius: 14px;
+  }
+  .hero__panel--simple h1 {
+    font-size: 1.62rem;
+  }
+  .hero__sub--simple {
+    font-size: .88rem;
+  }
+
+  .aboutSplit__intro {
+    padding: 32px 0 40px;
+  }
+
+  /* Apt footer na 420px → jedan stupac */
+  .apt__footer {
+    grid-template-columns: 1fr;
+  }
+  .apt__btnBook {
+    grid-column: 1;
+    order: -1;
+  }
+
+  /* Rezerviraj btn u footer nav */
+  .footer__contact a {
+    font-size: .76rem;
+    padding: 4px 8px;
+  }
+}
