@@ -132,6 +132,11 @@ window.I18N = {
     'rf-err-name':'Unesite ime','rf-err-apt':'Odaberite apartman',
     'rf-err-city':'Unesite grad','rf-err-country':'Unesite zemlju',
     'rf-err-rating':'Odaberite ocjenu','rf-err-text':'Napišite recenziju (min. 20 znakova)',
+    /* cookie banner */
+    'wa-label':'Pišite nam',
+    'cookie-text':'Ova stranica koristi kolačiće radi ispravnog rada i boljeg iskustva. Nastavkom korištenja pristajete na upotrebu kolačića sukladno <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Pravilima privatnosti</a>.',
+    'cookie-accept':'Prihvaćam',
+    'cookie-decline':'Odbijam',
     /* details content */
     details: {
       a1: {
@@ -277,6 +282,10 @@ window.I18N = {
     'rf-err-name':'Vnesite ime','rf-err-apt':'Izberite apartma',
     'rf-err-city':'Vnesite mesto','rf-err-country':'Vnesite državo',
     'rf-err-rating':'Izberite oceno','rf-err-text':'Napišite oceno (vsaj 20 znakov)',
+    'wa-label':'Pišite nam',
+    'cookie-text':'Ta spletna stran uporablja piškotke za pravilno delovanje in boljšo izkušnjo. Z nadaljevanjem uporabe se strinjate z uporabo piškotkov v skladu s <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Pravilnikom o zasebnosti</a>.',
+    'cookie-accept':'Sprejmem',
+    'cookie-decline':'Zavrnem',
     details: {
       a1: {
         nameSpan:'Sunrise',
@@ -421,6 +430,10 @@ window.I18N = {
     'rf-err-name':'Bitte Namen eingeben','rf-err-apt':'Bitte Apartment wählen',
     'rf-err-city':'Bitte Stadt eingeben','rf-err-country':'Bitte Land eingeben',
     'rf-err-rating':'Bitte Bewertung wählen','rf-err-text':'Bitte Bewertung schreiben (min. 20 Zeichen)',
+    'wa-label':'Schreiben Sie uns',
+    'cookie-text':'Diese Website verwendet Cookies für die einwandfreie Funktion und ein besseres Nutzererlebnis. Durch die weitere Nutzung stimmen Sie der Verwendung von Cookies gemäß unserer <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Datenschutzrichtlinie</a> zu.',
+    'cookie-accept':'Akzeptieren',
+    'cookie-decline':'Ablehnen',
     details: {
       a1: {
         nameSpan:'Sunrise',
@@ -565,6 +578,10 @@ window.I18N = {
     'rf-err-name':'Please enter your name','rf-err-apt':'Please select an apartment',
     'rf-err-city':'Please enter your city','rf-err-country':'Please enter your country',
     'rf-err-rating':'Please select a rating','rf-err-text':'Please write your review (min. 20 characters)',
+    'wa-label':'Message us',
+    'cookie-text':'This website uses cookies to ensure proper functionality and a better experience. By continuing to use the site, you agree to the use of cookies in accordance with our <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Privacy Policy</a>.',
+    'cookie-accept':'Accept',
+    'cookie-decline':'Decline',
     details: {
       a1: {
         nameSpan:'Sunrise',
@@ -2355,5 +2372,81 @@ window.addEventListener("scroll", onHeaderScroll, { passive: true });
   });
 })();
 
+/* =========================
+   GDPR Cookie Banner
+   ========================= */
+(() => {
+  const banner  = document.getElementById('cookieBanner');
+  const acceptBtn = document.getElementById('cookieAccept');
+  const declineBtn = document.getElementById('cookieDecline');
+  if (!banner) return;
+
+  if (!localStorage.getItem('cookieConsent')) {
+    banner.hidden = false;
+  }
+
+  function dismiss() {
+    banner.style.animation = 'none';
+    banner.style.transition = 'transform .3s ease, opacity .3s ease';
+    banner.style.transform = 'translateY(100%)';
+    banner.style.opacity = '0';
+    setTimeout(() => { banner.hidden = true; }, 320);
+  }
+
+  acceptBtn?.addEventListener('click', () => {
+    localStorage.setItem('cookieConsent', 'accepted');
+    dismiss();
+  });
+
+  declineBtn?.addEventListener('click', () => {
+    localStorage.setItem('cookieConsent', 'declined');
+    dismiss();
+  });
+})();
+
+/* =========================
+   Kalendar — premještanje na mobilnom
+   Na mobitelu kalendar ide odmah ispod apt selecta, ne na dno stranice.
+   ========================= */
+(() => {
+  const cal      = document.getElementById('ktCal');
+  const aptField = document.getElementById('ktAptSelect')?.closest('.ktForm__field');
+  const ktRight  = document.querySelector('.ktRight');
+  if (!cal || !aptField || !ktRight) return;
+
+  let isMobile = null;
+
+  function reposition() {
+    const mobile = window.innerWidth <= 820;
+    if (mobile === isMobile) return;
+    isMobile = mobile;
+    if (mobile) {
+      aptField.after(cal);
+    } else {
+      ktRight.prepend(cal);
+    }
+  }
+
+  reposition();
+  window.addEventListener('resize', reposition);
+})();
+
 /* Apply initial language after all IIFEs have set up their langChanged listeners */
 window.applyLang(window.currentLang);
+
+/* ── WhatsApp button scroll expand/collapse ─────────────────── */
+(() => {
+  const btn = document.querySelector('.waBtn');
+  if (!btn) return;
+  let timer = null;
+
+  function collapse() {
+    btn.classList.remove('waBtn--expanded');
+  }
+
+  window.addEventListener('scroll', () => {
+    btn.classList.add('waBtn--expanded');
+    clearTimeout(timer);
+    timer = setTimeout(collapse, 1500);
+  }, { passive: true });
+})();

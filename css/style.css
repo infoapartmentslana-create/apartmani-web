@@ -4634,6 +4634,8 @@ main > .section:nth-of-type(even){
 
 .revSection{
   scroll-margin-top: 110px;
+  background: linear-gradient(180deg, #f9f6f0 0%, #ffffff 60%);
+  position: relative;
 }
 
 /* Head */
@@ -4771,26 +4773,27 @@ main > .section:nth-of-type(even){
 .revCard{
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  flex: 0 0 320px;
+  gap: 18px;
+  flex: 0 0 340px;
   scroll-snap-align: start;
+  position: relative;
+  overflow: hidden;
 
-  padding: 26px 24px;
-  border-radius: 22px;
+  padding: 32px 28px 26px;
+  border-radius: 20px;
 
-  background: rgba(255,255,255,.82);
-  border: 1px solid rgba(10,25,40,.09);
-  box-shadow: 0 8px 30px rgba(10,40,70,.08);
-
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
+  background: #fff;
+  border: 1px solid rgba(195,160,90,.18);
+  border-top: 3px solid rgba(195,160,90,.6);
+  box-shadow: 0 4px 24px rgba(10,40,70,.07), 0 1px 4px rgba(10,40,70,.04);
 
   transition: transform .28s ease, box-shadow .28s ease;
 }
 
+
 .revCard:hover{
-  transform: translateY(-5px);
-  box-shadow: 0 22px 58px rgba(10,40,70,.14);
+  transform: translateY(-6px);
+  box-shadow: 0 20px 52px rgba(10,40,70,.13), 0 4px 12px rgba(10,40,70,.06);
 }
 
 /* Card header: avatar + meta + stars */
@@ -4801,17 +4804,17 @@ main > .section:nth-of-type(even){
 }
 
 .revCard__avatar{
-  width: 44px;
-  height: 44px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
   flex-shrink: 0;
   display: grid;
   place-items: center;
   font-weight: 900;
-  font-size: 1rem;
+  font-size: 1.05rem;
   color: #fff;
   background: var(--av-bg, #8B7355);
-  box-shadow: 0 6px 16px rgba(0,0,0,.16);
+  box-shadow: 0 0 0 3px rgba(195,160,90,.2), 0 6px 16px rgba(0,0,0,.14);
   letter-spacing: .02em;
 }
 
@@ -4847,9 +4850,10 @@ main > .section:nth-of-type(even){
 
 .revCard__stars{
   color: #f5a623;
-  font-size: .9rem;
-  letter-spacing: 1px;
+  font-size: 1rem;
+  letter-spacing: 2px;
   flex-shrink: 0;
+  text-shadow: 0 1px 4px rgba(245,166,35,.3);
 }
 
 /* Quote text */
@@ -4857,11 +4861,13 @@ main > .section:nth-of-type(even){
   margin: 0;
   padding: 0;
   border: 0;
-  font-size: .93rem;
-  line-height: 1.82;
-  color: rgba(11,27,43,.68);
-  font-style: normal;
+  font-size: .97rem;
+  line-height: 1.85;
+  color: rgba(11,27,43,.72);
+  font-style: italic;
   flex: 1;
+  position: relative;
+  z-index: 1;
 }
 
 /* Footer: apartment tag + date */
@@ -4878,14 +4884,15 @@ main > .section:nth-of-type(even){
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 5px 12px;
+  padding: 5px 13px;
   border-radius: 999px;
-  background: rgba(255,255,255,.70);
-  border: 1px solid rgba(195,160,90,.25);
+  background: linear-gradient(135deg, rgba(195,160,90,.1), rgba(195,160,90,.06));
+  border: 1px solid rgba(195,160,90,.3);
   font-size: .75rem;
-  font-weight: 750;
-  color: rgba(11,27,43,.70);
+  font-weight: 700;
+  color: rgba(11,27,43,.72);
   letter-spacing: .2px;
+  font-style: normal;
 }
 
 .revCard__apt::before{
@@ -4905,7 +4912,11 @@ main > .section:nth-of-type(even){
 
 @media (max-width: 600px){
   .revCard{
-    flex: 0 0 280px;
+    flex: 0 0 290px;
+    padding: 26px 22px 22px;
+  }
+  .revCard::before{
+    font-size: 5.5rem;
   }
   .revSlider__btn{
     display: none;
@@ -7707,4 +7718,170 @@ button.dm__cta {
 
 @media (max-width: 420px) {
   .gal__grid { columns: 2 120px; }
+}
+
+/* ==============================================
+   GDPR COOKIE BANNER
+   ============================================== */
+.cookieBanner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  background: rgba(11, 22, 35, 0.97);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(195, 160, 90, 0.25);
+  padding: 18px 20px;
+  animation: cookieSlideUp 0.35s ease forwards;
+}
+
+@keyframes cookieSlideUp {
+  from { transform: translateY(100%); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+
+.cookieBanner__inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.cookieBanner__text {
+  flex: 1;
+  min-width: 240px;
+  font-size: .85rem;
+  line-height: 1.65;
+  color: rgba(232, 224, 210, 0.85);
+  margin: 0;
+}
+
+.cookieBanner__text a {
+  color: rgba(195, 160, 90, 0.9);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.cookieBanner__btns {
+  display: flex;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.cookieBanner__btn {
+  padding: 9px 22px;
+  border-radius: 8px;
+  font-size: .85rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background .18s, color .18s, transform .14s;
+  border: none;
+}
+
+.cookieBanner__btn--decline {
+  background: transparent;
+  border: 1px solid rgba(232, 224, 210, 0.25);
+  color: rgba(232, 224, 210, 0.65);
+}
+
+.cookieBanner__btn--decline:hover {
+  background: rgba(255,255,255,.07);
+  color: rgba(232, 224, 210, 0.9);
+}
+
+.cookieBanner__btn--accept {
+  background: rgba(195, 160, 90, 0.92);
+  color: #0f1117;
+}
+
+.cookieBanner__btn--accept:hover {
+  background: rgba(195, 160, 90, 1);
+  transform: translateY(-1px);
+}
+
+@media (max-width: 560px) {
+  .cookieBanner__inner {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+  }
+  .cookieBanner__btns {
+    justify-content: flex-end;
+  }
+}
+
+/* ── WhatsApp floating button ───────────────────────────────── */
+.waBtn {
+  position: fixed;
+  bottom: 28px;
+  right: 24px;
+  z-index: 900;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  background: #25D366;
+  color: #fff;
+  text-decoration: none;
+  padding: 14px;
+  border-radius: 50%;
+  box-shadow: 0 4px 18px rgba(37,211,102,.45), 0 2px 6px rgba(0,0,0,.2);
+  transition: transform .18s, box-shadow .18s, background .18s, border-radius .35s, padding .35s, gap .35s;
+  white-space: nowrap;
+}
+
+.waBtn--expanded {
+  padding: 13px 20px 13px 16px;
+  border-radius: 50px;
+  gap: 10px;
+}
+
+.waBtn:hover {
+  background: #1ebe5d;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 26px rgba(37,211,102,.55), 0 3px 8px rgba(0,0,0,.22);
+}
+
+.waBtn:active {
+  transform: translateY(0);
+}
+
+.waBtn__icon {
+  width: 26px;
+  height: 26px;
+  flex-shrink: 0;
+}
+
+.waBtn__label {
+  font-size: .95rem;
+  font-weight: 600;
+  letter-spacing: .02em;
+  max-width: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-width .35s ease, opacity .25s ease;
+}
+
+.waBtn--expanded .waBtn__label {
+  max-width: 160px;
+  opacity: 1;
+}
+
+@media (max-width: 480px) {
+  .waBtn {
+    bottom: 20px;
+    right: 16px;
+  }
+  .waBtn__label {
+    display: none;
+  }
+  .waBtn--expanded {
+    padding: 14px;
+    border-radius: 50%;
+    gap: 0;
+  }
 }
