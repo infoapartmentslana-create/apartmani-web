@@ -1638,9 +1638,9 @@ window.addEventListener("scroll", onHeaderScroll, { passive: true });
 
     const generated = [];
     if (aptId) {
-      generated.push(`images/apartmani/${aptId}/hero.jpg`);
+      generated.push(`images/apartmani/${aptId}/hero.webp`);
       for (let i = 1; i <= count; i++) {
-        generated.push(`images/apartmani/${aptId}/${i}.jpg`);
+        generated.push(`images/apartmani/${aptId}/${i}.webp`);
       }
     }
 
@@ -1739,7 +1739,7 @@ window.addEventListener("scroll", onHeaderScroll, { passive: true });
 
     // Hero image
     if (heroImg) {
-      heroImg.src = `images/apartmani/${aptId}/hero.jpg`;
+      heroImg.src = `images/apartmani/${aptId}/hero.webp`;
       heroImg.alt = `Apartman ${cfg.nameSpan}`;
     }
 
