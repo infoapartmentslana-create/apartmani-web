@@ -768,7 +768,7 @@ input:focus, textarea:focus{
 ═══════════════════════════════════════════════ */
 .footer{
   background: #b5763a;
-  padding:32px 0 24px;
+  padding:22px 0 18px;
 }
 
 /* Main row */
@@ -776,21 +776,21 @@ input:focus, textarea:focus{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  gap:24px;
-  flex-wrap:wrap;
+  gap:16px;
+  flex-wrap:nowrap;
 }
 
 /* Brand */
-.footer__brand{ display:flex; flex-direction:column; gap:3px; }
+.footer__brand{ display:flex; flex-direction:column; gap:2px; flex-shrink:0; }
 .footer__logo{
-  font-size:1rem;
+  font-size:.93rem;
   font-weight:800;
   color:#fff;
   letter-spacing:-.01em;
 }
 .footer__tagline{
   margin:0;
-  font-size:.75rem;
+  font-size:.70rem;
   color:#0b1b2b;
 }
 
@@ -798,64 +798,71 @@ input:focus, textarea:focus{
 .footer__nav{
   display:flex;
   align-items:center;
-  gap:22px;
-  flex-wrap:wrap;
+  gap:14px;
+  flex-wrap:nowrap;
 }
 .footer__nav a{
-  font-size:.93rem;
+  font-size:.82rem;
   font-weight:600;
   color:#0b1b2b;
   text-decoration:none;
   transition:opacity .2s;
+  white-space:nowrap;
 }
 .footer__nav a:hover{ opacity:.6; }
 .footer__bookGroup {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
 }
 .footer__howBtn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 24px;
-  height: 24px;
-  background: rgba(255,255,255,.18);
-  border: 1px solid rgba(255,255,255,.35);
+  width: 20px;
+  height: 20px;
+  background: rgba(255,255,255,.22);
+  border: 1.5px solid rgba(255,255,255,.50);
   border-radius: 999px;
-  color: rgba(255,255,255,.90);
+  color: #fff;
   cursor: pointer;
   padding: 0;
   flex-shrink: 0;
-  transition: background .18s ease, color .18s ease;
+  transition: background .18s ease, border-color .18s ease, transform .18s ease;
 }
 .footer__howBtn:hover {
-  background: rgba(255,255,255,.32);
-  color: #fff;
+  background: rgba(255,255,255,.38);
+  border-color: rgba(255,255,255,.75);
+  transform: translateY(-1px);
 }
 
-/* Contact */
+/* Contact — icon-only pills */
 .footer__contact{
   display:flex;
   align-items:center;
-  gap:14px;
+  gap:7px;
+  flex-shrink:0;
 }
 .footer__contact a{
   display:flex;
   align-items:center;
-  gap:6px;
-  font-size:.82rem;
-  font-weight:700;
+  justify-content:center;
+  width:34px;
+  height:34px;
   color:#fff;
   text-decoration:none;
   background:rgba(0,0,0,.18);
-  padding:4px 10px;
-  border-radius:20px;
-  transition:background .2s;
-  white-space: nowrap;
+  border-radius:999px;
+  transition:background .2s, transform .18s;
+  flex-shrink:0;
 }
-.footer__contact a:hover{ background:rgba(0,0,0,.30); }
+.footer__contact a:hover{
+  background:rgba(0,0,0,.30);
+  transform:translateY(-1px);
+}
 .footer__contact svg{ flex-shrink:0; }
+.footer__contact .footer__contactText{ display:none; }
+.footer__fbLink:hover { background: rgba(0,0,0,.30) !important; }
 
 /* Divider */
 .footer__divider{
@@ -6447,6 +6454,7 @@ button.dm__cta {
 }
 .ktInfo__text a:hover { color: #b5763a; }
 
+
 /* ── Responsive ── */
 @media (max-width: 820px) {
   .ktLayout {
@@ -6470,6 +6478,61 @@ button.dm__cta {
   }
   .ktCell__num { font-size: .82rem; }
   .ktCell__pr  { font-size: .58rem; }
+}
+
+/* =============================================
+   NAV QUICK CONTACT (burger dropdown)
+   ============================================= */
+.nav__quick {
+  display: none;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.nav.is-open .nav__quick {
+  display: flex;
+}
+
+.nav__quickLink {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 11px;
+  border-radius: 10px;
+  font-size: .85rem;
+  font-weight: 600;
+  color: rgba(11,27,43,.72);
+  text-decoration: none;
+  transition: background .16s, color .16s;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.nav__quickLink:hover {
+  background: rgba(195,160,90,.12);
+  color: rgba(11,27,43,.92);
+}
+
+.nav__quickIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  background: rgba(181,118,58,.10);
+  color: #b5763a;
+  flex-shrink: 0;
+}
+
+.nav__quickLink--fb .nav__quickIcon {
+  background: rgba(24,119,242,.10);
+  color: #1877f2;
+}
+
+.nav__quickLink--fb:hover {
+  background: rgba(24,119,242,.08);
 }
 
 /* =============================================
