@@ -2696,102 +2696,192 @@ main > .section:nth-of-type(even){
    GALLERY MODAL
    ========================= */
 
-.modal__panel--gallery{
-  width: min(980px, calc(100% - 28px));
-  margin: 7vh auto 0;
+/* Backdrop */
+.modal--gallery .modal__backdrop{
+  background: rgba(11, 27, 43, 0.55);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
-/* Gallery header – da naslov ne bude zalijepljen i da izgleda premium */
-.modal--gallery .modal__head{
-  padding: 18px 22px;
-  background: rgba(255,255,255,55);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(255,255,255,6);
+.modal__panel--gallery{
+  width: min(1080px, calc(100% - 24px));
+  margin: 4vh auto 0;
+  background: #ffffff;
+  border: 1px solid rgba(195,160,90,.22);
+  border-radius: 20px;
   box-shadow:
-    0 8px 30px rgba(10,40,70,08),
-    inset 0 1px 0 rgba(255,255,255,8);
+    0 32px 90px rgba(11,27,43,.22),
+    0 0 0 1px rgba(195,160,90,.08);
+  overflow: hidden;
+  max-height: 92vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header */
+.modal--gallery .modal__head{
+  padding: 14px 20px;
+  background: #ffffff;
+  border-bottom: 1px solid rgba(11,27,43,.08);
+  backdrop-filter: none;
+  align-items: center;
+  flex-shrink: 0;
+  box-shadow: 0 1px 0 rgba(195,160,90,.10);
 }
 
 .modal--gallery .modal__head h3{
   margin: 0;
-  font-size: 1.15rem;
-  letter-spacing: -.01em;
-  font-weight: 800;
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: .01em;
+  color: #0b1b2b;
 }
 
 .galleryModal__meta{
   margin-left: auto;
-  margin-right: 10px;
-  font-weight: 800;
-  color: rgba(11,27,43,.62);
-  font-size: .95rem;
+  margin-right: 14px;
+  font-weight: 700;
+  color: rgba(195,160,90,.95);
+  font-size: .85rem;
+  letter-spacing: .06em;
+  font-variant-numeric: tabular-nums;
 }
 
+/* Close button override for gallery */
+.modal--gallery .modal__close{
+  width: 36px;
+  height: 36px;
+  background: rgba(11,27,43,.05) !important;
+  border: 1px solid rgba(11,27,43,.14) !important;
+  color: #0b1b2b !important;
+  box-shadow: none !important;
+  transition: background .18s, border-color .18s, transform .18s, box-shadow .18s !important;
+}
+
+.modal--gallery .modal__close:hover{
+  background: rgba(195,160,90,.12) !important;
+  border-color: rgba(195,160,90,.55) !important;
+  color: #0b1b2b !important;
+  transform: scale(1.1) !important;
+  box-shadow: none !important;
+}
+
+.modal--gallery .modal__close:active{
+  transform: scale(.94) !important;
+}
+
+/* Image stage */
 .galleryModal__stage{
   position: relative;
-  padding: 14px;
-  display: grid;
-  place-items: center;
-  background: rgba(255,255,255,.55);
-}
-
-.galleryModal__img{
-  width: 100%;
-  max-height: 72vh;
-  object-fit: contain;
-  border-radius: 18px;
-  border: 1px solid rgba(10,25,40,.10);
-  box-shadow: 0 22px 70px rgba(10,40,70,.16);
-  background: #fff;
-  will-change: transform;
-}
-
-.galleryModal__stage{
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 74px;
+  background: #f4f7fb;
+  min-height: 0;
+  overflow: visible;
   touch-action: pan-y;
 }
 
+.galleryModal__img{
+  max-width: 100%;
+  max-height: calc(92vh - 148px);
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 8px;
+  display: block;
+  user-select: none;
+  -webkit-user-drag: none;
+  pointer-events: auto;
+  will-change: transform;
+  box-shadow: 0 8px 32px rgba(11,27,43,.12);
+}
+
+/* Nav arrows */
 .galleryModal__nav{
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  width: 46px;
-  height: 46px;
-  border-radius: 999px;
-  border: 1px solid rgba(10,25,40,.14);
-  background: rgba(255,255,255,.82);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  cursor: pointer;
-  font-size: 28px;
-  line-height: 1;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
   display: grid;
   place-items: center;
-  box-shadow: 0 14px 34px rgba(10,40,70,.12);
+  background: rgba(255,255,255,.92);
+  border: 1px solid rgba(11,27,43,.12);
+  color: #0b1b2b;
+  cursor: pointer;
+  z-index: 9999;
+  pointer-events: auto;
+  box-shadow: 0 4px 18px rgba(11,27,43,.12);
+  transition: background .18s, border-color .18s, color .18s, transform .18s ease, box-shadow .18s;
 }
 
-.galleryModal__nav--prev{ left: 14px; }
+.galleryModal__nav:hover{
+  background: #ffffff;
+  border-color: rgba(195,160,90,.55);
+  color: rgba(195,160,90,1);
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 6px 24px rgba(11,27,43,.16);
+}
+
+.galleryModal__nav:active{
+  transform: translateY(-50%) scale(.94);
+}
+
+.galleryModal__nav--prev{ left: 14px; right: auto; }
 .galleryModal__nav--next{ right: 14px; }
 
+/* Dots indicator */
+.galleryModal__dots{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 7px;
+  padding: 11px 0 13px;
+  background: #ffffff;
+  border-top: 1px solid rgba(11,27,43,.07);
+  flex-shrink: 0;
+  flex-wrap: wrap;
+}
+
+.galleryModal__dot{
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(11,27,43,.2);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: background .2s, transform .2s;
+  flex-shrink: 0;
+}
+
+.galleryModal__dot.is-active{
+  background: rgba(195,160,90,.95);
+  transform: scale(1.55);
+}
+
 @media (max-width: 700px){
-  .modal__panel--gallery{ margin: 6vh auto 0; }
+  .modal__panel--gallery{
+    margin: 0;
+    width: 100%;
+    border-radius: 0;
+    max-height: 100dvh;
+    border: none;
+  }
+  .galleryModal__stage{ padding: 12px 56px; }
   .galleryModal__nav{ width: 42px; height: 42px; }
+  .galleryModal__img{ max-height: calc(100dvh - 140px); }
 }
 
-/* Gallery: dok je otvoreno, spriječi pinch zoom i “gumeni” touch */
+/* Gallery: dok je otvoreno, spriječi pinch zoom */
 .modal--gallery.is-open .galleryModal__stage{
-  touch-action: none; /* disable pinch + browser gestures na tom području */
+  touch-action: none;
 }
-.modal--gallery.is-open .galleryModal__img{
-  user-select: none;
-  -webkit-user-drag: none;
-  pointer-events: auto;
-}
-
-/* FIX: da se oba gumba vide i budu klikabilna */
-.galleryModal__stage { position: relative; overflow: visible; }
-.galleryModal__nav { z-index: 9999; pointer-events: auto; }
-.galleryModal__nav--prev { left: 14px !important; right: auto !important; }
 
 /* =========================
    DETAILS MODAL — BOUTIQUE

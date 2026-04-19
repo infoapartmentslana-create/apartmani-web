@@ -365,7 +365,7 @@
         </article>
 
         <!-- Olive -->
-        <article class="apt apt--alt apt--a2 reveal" data-gallery="a2" data-gallery-title="Apartman Olive" data-gallery-count="11">
+        <article class="apt apt--alt apt--a2 reveal" data-gallery="a2" data-gallery-title="Apartman Olive" data-gallery-count="10">
           <div class="apt__media">
             <img src="images/apartmani/a2/hero.jpg" alt="Apartman Olive - interijer i uvala" loading="lazy">
             <div class="apt__priceBadge" aria-label="Cijena od 60 eura po noći"><span data-i18n="price-od">od</span> <strong>60€</strong> / <span data-i18n="price-noc">noć</span></div>
@@ -425,7 +425,7 @@
         </article>
 
         <!-- Sky -->
-        <article class="apt apt--a3 reveal" data-gallery="a3" data-gallery-title="Apartman Sky" data-gallery-count="11">
+        <article class="apt apt--a3 reveal" data-gallery="a3" data-gallery-title="Apartman Sky" data-gallery-count="10">
           <div class="apt__media">
             <img src="images/apartmani/a3/hero.jpg" alt="Apartman Sky - interijer" loading="lazy">
             <div class="apt__priceBadge" aria-label="Cijena od 60 eura po noći"><span data-i18n="price-od">od</span> <strong>60€</strong> / <span data-i18n="price-noc">noć</span></div>
@@ -727,16 +727,30 @@
 
           <div class="galleryModal__meta" id="galleryMeta" aria-live="polite"></div>
 
-          <button class="modal__close" type="button" aria-label="Zatvori" data-close-gallery>✕</button>
+          <button class="modal__close" type="button" aria-label="Zatvori" data-close-gallery>
+            <svg width="15" height="15" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <line x1="2" y1="2" x2="13" y2="13"/><line x1="13" y1="2" x2="2" y2="13"/>
+            </svg>
+          </button>
         </div>
 
         <div class="galleryModal__stage">
-          <button class="galleryModal__nav galleryModal__nav--prev" type="button" aria-label="Prethodna" data-gallery-prev>‹</button>
+          <button class="galleryModal__nav galleryModal__nav--prev" type="button" aria-label="Prethodna" data-gallery-prev>
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="11 3 5 9 11 15"/>
+            </svg>
+          </button>
 
           <img class="galleryModal__img" id="galleryImg" alt="">
 
-          <button class="galleryModal__nav galleryModal__nav--next" type="button" aria-label="Sljedeća" data-gallery-next>›</button>
+          <button class="galleryModal__nav galleryModal__nav--next" type="button" aria-label="Sljedeća" data-gallery-next>
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="7 3 13 9 7 15"/>
+            </svg>
+          </button>
         </div>
+
+        <div class="galleryModal__dots" id="galleryDots"></div>
       </div>
     </div>
 

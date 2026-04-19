@@ -69,10 +69,10 @@ window.I18N = {
     /* contact */
     'kt-kicker':'JAVITE NAM SE','kt-title':'Rezerviraj',
     'kt-sub':'Pošaljite nam upit ili nas kontaktirajte direktno i rado ćemo vam pomoći s rezervacijom.',
-    'kt-lbl-name':'IME I PREZIME','kt-lbl-email':'EMAIL ADRESA','kt-lbl-apt':'APARTMAN',
+    'kt-lbl-name':'IME I PREZIME','kt-lbl-email':'E-MAIL ADRESA','kt-lbl-apt':'APARTMAN',
     'kt-lbl-adults':'Odrasli','kt-lbl-children':'Djeca',
     'kt-lbl-checkin':'Datum dolaska','kt-lbl-checkout':'Datum odlaska',
-    'kt-ph-name':'Unesite ime i prezime','kt-ph-email':'Unesite email adresu',
+    'kt-ph-name':'Unesite ime i prezime','kt-ph-email':'Unesite e-mail adresu',
     'kt-ph-msg':'Vaša poruka... (nije obavezno)','kt-ph-nodate':'Nije odabrano',
     'kt-apt-default':'— Odaberite apartman —',
     'kt-availability':'Dostupnost',
@@ -80,7 +80,7 @@ window.I18N = {
     'kt-cal-note':'Termine odaberite klikom na željene datume u kalendaru dostupnosti s desne strane.',
     'kt-phase-1':'Odaberite datum dolaska','kt-phase-2':'Odaberite datum odlaska',
     'kt-submit':'Pošalji upit','kt-sending':'Slanje…','kt-sent':'Poslano ✓',
-    'kt-success':'✓ Hvala! Vaš upit je poslan. Javit ćemo vam se uskoro na navedenu email adresu.',
+    'kt-success':'✓ Hvala! Vaš upit je poslan. Javit ćemo vam se uskoro na navedenu e-mail adresu.',
     'kt-send-err':'Došlo je do greške pri slanju. Pokušajte ponovno ili nas kontaktirajte direktno na <a href="mailto:info.apartments.lana@gmail.com">info.apartments.lana@gmail.com</a>.',
     'kt-info-phone':'Telefon / WhatsApp','kt-info-email':'E-mail','kt-info-address':'Adresa',
     'kt-total':'Ukupno',
@@ -90,8 +90,8 @@ window.I18N = {
     'child-0':'0 djece','child-1':'1 dijete','children-n':'djece',
     'adults-placeholder':'— odaberite —','adults-no-apt':'— odaberite apartman —',
     /* validation errors */
-    'err-name':'Unesite ime i prezime','err-email-empty':'Unesite email adresu',
-    'err-email-invalid':'Unesite ispravnu email adresu','err-apt':'Odaberite apartman',
+    'err-name':'Unesite ime i prezime','err-email-empty':'Unesite e-mail adresu',
+    'err-email-invalid':'Unesite ispravnu e-mail adresu','err-apt':'Odaberite apartman',
     'err-adults':'Odaberite broj odraslih osoba',
     'err-checkin':'Odaberite datum dolaska u kalendaru','err-checkout':'Odaberite datum odlaska u kalendaru',
     /* footer */
@@ -140,7 +140,7 @@ window.I18N = {
         badge:'Otvoren horizont · terasa · tople boje zalaska',
         lead:'Apartman Sunrise naglašava najljepši dio dana uz more: pogled, terasu i tople boje zalaska. Terasa je idealna za jutarnju kavu, večernje opuštanje i pogled koji ostaje u sjećanju.',
         summary:['40 m² · 1. kat (7 stepenica)','Bračni krevet + kauč na razvlačenje','Terasa s pogledom na more'],
-        equipment:['Kuhinja s pećnicom, pločom i kuhalnom','Kompletno posuđe i pribor','Smart TV + klima uređaj','Wi-Fi','Kupaonica s tušem i ručnicima','Terasa: stol i stolice','Zajednički roštilj u dvorištu'],
+        equipment:['Kuhinja s pećnicom, pločom i kuhalom','Kompletno posuđe i pribor','Smart TV + klima uređaj','Wi-Fi','Kupaonica s tušem i ručnicima','Terasa: stol i stolice','Zajednički roštilj u dvorištu'],
       },
       a2: {
         nameSpan:'Olive',
@@ -148,7 +148,7 @@ window.I18N = {
         badge:'Mediteranski mir · udoban interijer · blizina plaže',
         lead:'Apartman Olive donosi miran, prirodan ugođaj i udoban prostor za lagan odmor. Idealan je za goste koji žele jednostavnost, privatnost i sve potrebno nadohvat ruke.',
         summary:['40 m² · 1. kat','Bračni krevet + kauč na razvlačenje','Vrtni prostor i pogled na maslinike'],
-        equipment:['Kuhinja s pećnicom, pločom i kuhalnom','Kompletno posuđe i pribor','Smart TV + klima uređaj','Wi-Fi','Kupaonica s tušem i ručnicima','Terasa: stol i stolice','Zajednički roštilj u dvorištu'],
+        equipment:['Kuhinja s pećnicom, pločom i kuhalom','Kompletno posuđe i pribor','Smart TV + klima uređaj','Wi-Fi','Kupaonica s tušem i ručnicima','Terasa: stol i stolice','Zajednički roštilj u dvorištu'],
       },
       a3: {
         nameSpan:'Sky',
@@ -156,7 +156,7 @@ window.I18N = {
         badge:'Prostran boravak · obiteljski odmor · morska svježina',
         lead:'Apartman Sky pruža najviše prostora za obiteljski odmor uz more. Komotan raspored, dodatni ležajevi i prostrana terasa stvaraju svjež, opušten ritam ljetnih dana.',
         summary:['40 m² · 2. kat','Bračni krevet + kauč na razvlačenje','Krevet 90×200','Terasa s pogledom na more'],
-        equipment:['Kuhinja s pločom i kuhalnom','Kompletno posuđe i pribor','TV + klima uređaj','Wi-Fi','Kupaonica s tušem i ručnicima','Terasa: stol i stolice','Zajednički roštilj u dvorištu'],
+        equipment:['Kuhinja s pločom i kuhalom','Kompletno posuđe i pribor','TV + klima uređaj','Wi-Fi','Kupaonica s tušem i ručnicima','Terasa: stol i stolice','Zajednički roštilj u dvorištu'],
       },
     },
   },
@@ -256,7 +256,7 @@ window.I18N = {
     'bm-step-4-h':'Pošljite povpraševanje',
     'bm-step-4-p':'Po želji dodajte sporočilo (ni obvezno) in kliknite »Pošlji povpraševanje«. Povpraševanje prispe na naš e-mail.',
     'bm-step-5-h':'Odgovor v roku 24 ur',
-    'bm-step-5-p':'Javimo se vam po e-pošti s potrditvijo razpoložljivosti in podatki za plačilo predujma.',
+    'bm-step-5-p':'Javimo se vam po e-pošti s potrditvijo razpoložljivosti in podatkami za plačilo predujma.',
     'bm-step-6-h':'Plačilo predujma: 25 %',
     'bm-step-6-p':'Za potrditev rezervacije se plača 25 % celotnega zneska. Preostalo plačate ob prihodu.',
     'bm-step-7-h':'Prejmite uradno potrditev',
@@ -284,15 +284,15 @@ window.I18N = {
         badge:'Odprt horizont · terasa · tople barve zahoda',
         lead:'Apartma Sunrise poudarja najlepši del dneva ob morju: pogled, teraso in tople barve zahoda. Terasa je idealna za jutranje kavo, večerno sprostitev in pogled, ki ostane v spominu.',
         summary:['40 m² · 1. nadstropje (7 stopnic)','Zakonska postelja + kavč za spanje','Terasa s pogledom na morje'],
-        equipment:['Kuhinja s pečico, ploščo in kuhalnico','Kompletno posuđe in pribor','Smart TV + klima naprava','Wi-Fi','Kopalnica s tušem in brisačami','Terasa: miza in stoli','Skupni žar na dvorišču'],
+        equipment:['Kuhinja s pečico, ploščo in kuhalnico','Kompletno posodo in pribor','Smart TV + klima naprava','Wi-Fi','Kopalnica s tušem in brisačami','Terasa: miza in stoli','Skupni žar na dvorišču'],
       },
       a2: {
         nameSpan:'Olive',
         meta:'40 m² · 1. nadstropje · Zakonska postelja + kavč za spanje',
         badge:'Mediteranski mir · udobna notranjost · bližina plaže',
-        lead:'Apartma Olive prinaša miren, naraven ugoden in udoben prostor za lahkoten počitek. Idealen je za goste, ki si želijo preprostost, zasebnost in vse potrebno pri roki.',
+        lead:'Apartma Olive prinaša miren, naraven, ugoden in udoben prostor za lahkoten počitek. Idealen je za goste, ki si želijo preprostost, zasebnost in vse potrebno pri roki.',
         summary:['40 m² · 1. nadstropje','Zakonska postelja + kavč za spanje','Vrtni prostor in pogled na oljčnike'],
-        equipment:['Kuhinja s pečico, ploščo in kuhalnico','Kompletno posuđe in pribor','Smart TV + klima naprava','Wi-Fi','Kopalnica s tušem in brisačami','Terasa: miza in stoli','Skupni žar na dvorišču'],
+        equipment:['Kuhinja s pečico, ploščo in kuhalnico','Kompletno posodo in pribor','Smart TV + klima naprava','Wi-Fi','Kopalnica s tušem in brisačami','Terasa: miza in stoli','Skupni žar na dvorišču'],
       },
       a3: {
         nameSpan:'Sky',
@@ -300,7 +300,7 @@ window.I18N = {
         badge:'Prostoren bivalni prostor · družinski počitek · morska svežina',
         lead:'Apartma Sky ponuja največ prostora za družinski počitek ob morju. Udobna razporeditev, dodatne ležišča in prostorna terasa ustvarjajo svež, sproščen ritem poletnih dni.',
         summary:['40 m² · 2. nadstropje','Zakonska postelja + kavč za spanje','Postelja 90×200','Terasa s pogledom na morje'],
-        equipment:['Kuhinja s ploščo in kuhalnico','Kompletno posuđe in pribor','TV + klima naprava','Wi-Fi','Kopalnica s tušem in brisačami','Terasa: miza in stoli','Skupni žar na dvorišču'],
+        equipment:['Kuhinja s ploščo in kuhalnico','Kompletno posodo in pribor','TV + klima naprava','Wi-Fi','Kopalnica s tušem in brisačami','Terasa: miza in stoli','Skupni žar na dvorišču'],
       },
     },
   },
@@ -311,7 +311,7 @@ window.I18N = {
     'nav-apartmani':'Apartments','nav-lokacija':'Lage','nav-recenzije':'Bewertungen','nav-rezerviraj':'Buchen',
     'hero-welcome':'Willkommen',
     'hero-h1':'Ihr Urlaub am Meer<br>beginnt hier',
-    'hero-sub':'Gemütliche Apartments am Meer, die mediterranen Frieden und die Wärme der dalmatinischen Küste bieten, ideal für Paare und Familien.',
+    'hero-sub':'Gemütliche Apartments am Meer, den mediterranen Frieden und die Wärme der dalmatinischen Küste bieten, ideal für Paare und Familien.',
     'hero-apartments':'3 Apartments',
     'about-kicker':'URLAUB IM RHYTHMUS DER NATUR',
     'about-title':'Ein ruhiger Ort am Meer, Blick auf den Sonnenuntergang und Apartments, in denen man sich von Anfang an erholt.',
@@ -1439,6 +1439,7 @@ window.addEventListener("scroll", onHeaderScroll, { passive: true });
   const closeEls = modal.querySelectorAll('[data-close-gallery]');
   const prevBtn = modal.querySelector('[data-gallery-prev]');
   const nextBtn = modal.querySelector('[data-gallery-next]');
+  const dotsEl = document.getElementById('galleryDots');
 
   // Svi apartmani koji imaju galeriju
   const cards = Array.from(document.querySelectorAll('[data-gallery]'));
@@ -1447,17 +1448,32 @@ window.addEventListener("scroll", onHeaderScroll, { passive: true });
   let sources = [];
   let index = 0;
 
+  function renderDots() {
+    if (!dotsEl) return;
+    Array.from(dotsEl.children).forEach((dot, i) => {
+      dot.classList.toggle('is-active', i === index);
+    });
+  }
+
   function render() {
     if (!sources.length) return;
     imgEl.src = sources[index];
     imgEl.alt = `${titleEl?.textContent || 'Galerija'} — slika ${index + 1} od ${sources.length}`;
     if (metaEl) metaEl.textContent = `${index + 1} / ${sources.length}`;
+    renderDots();
   }
 
   function openGallery(opts) {
     sources = opts.sources || [];
     index = Math.max(0, Math.min(opts.index ?? 0, sources.length - 1));
     if (titleEl && opts.title) titleEl.textContent = opts.title;
+
+    // Build dots
+    if (dotsEl) {
+      dotsEl.innerHTML = sources.map((_, i) =>
+        `<button class="galleryModal__dot${i === index ? ' is-active' : ''}" data-dot="${i}" aria-label="Slika ${i + 1}" type="button"></button>`
+      ).join('');
+    }
 
     render();
 
@@ -1487,10 +1503,16 @@ window.addEventListener("scroll", onHeaderScroll, { passive: true });
     render();
   }
 
-  // Bind close/prev/next
+  // Bind close/prev/next/dots
   closeEls.forEach(el => el.addEventListener('click', closeGallery));
   prevBtn?.addEventListener('click', prev);
   nextBtn?.addEventListener('click', next);
+  dotsEl?.addEventListener('click', (e) => {
+    const dot = e.target.closest('[data-dot]');
+    if (!dot) return;
+    index = parseInt(dot.dataset.dot, 10);
+    render();
+  });
 
   // Tipkovnica
   window.addEventListener('keydown', (e) => {
