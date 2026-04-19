@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Admin — Apartmani Lana</title>
   <meta name="robots" content="noindex, nofollow" />
+  <script type="module" src="js/firebase-db.js"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -455,7 +456,7 @@
   </div>
 </div>
 
-<script>
+<script type="module">
 
 const PASS_HASH = '783738cbbda2a7129f7c65478c157f2a312ca79651ca332fb877ccb37b5f3af3';
 
@@ -503,7 +504,8 @@ document.getElementById('logoutBtn').addEventListener('click', () => {
 if (isLoggedIn()) showPanel();
 
 /* ── Calendar ── */
-function initCalendar() {
+async function initCalendar() {
+  await window._aptDBReady;
   const YEAR = new Date().getFullYear();
   const monthNames = ['Siječanj','Veljača','Ožujak','Travanj','Svibanj','Lipanj',
                       'Srpanj','Kolovoz','Rujan','Listopad','Studeni','Prosinac'];
@@ -528,13 +530,12 @@ function initCalendar() {
   function pad2(n) { return String(n).padStart(2,'0'); }
   function ymd(m, d) { return `${YEAR}-${pad2(m+1)}-${pad2(d)}`; }
 
-  function storageKey(id) { return `aptCalendar:${id}`; }
   function loadData(id) {
-    try { return JSON.parse(localStorage.getItem(storageKey(id)) || '{}'); }
-    catch { return {}; }
+    return window._aptCache?.[id] || {};
   }
   function saveData(id, data) {
-    localStorage.setItem(storageKey(id), JSON.stringify(data));
+    if (window._aptCache) window._aptCache[id] = data;
+    window.aptDB?.save(id, data).catch(console.warn);
   }
 
   /* Tabs */

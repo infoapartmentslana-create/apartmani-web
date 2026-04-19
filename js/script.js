@@ -865,12 +865,13 @@ window.applyLang = function(lang) {
    Inicijalizacija kalendara 2026 — sezona i cjenik
    Postavlja sve dane kao zauzete osim slobodnog perioda 13.6. – 13.9.2026.
    Unutar slobodnog perioda automatski su postavljene cijene po noći.
-   Izvršava se samo jednom (flag u localStorage); admin može ručno
+   Izvršava se samo jednom (flag u Firestoru); admin može ručno
    mijenjati dostupnost i cijene u admin modu kao i obično.
    ========================= */
-(() => {
-  const INIT_FLAG = 'aptCalendarInit:2026v1';
-  if (localStorage.getItem(INIT_FLAG)) return;
+(async () => {
+  const INIT_FLAG = 'init2026v1';
+  await window._aptDBReady;
+  if (await window.aptDB.isInit(INIT_FLAG)) return;
 
   function pad2(n) { return String(n).padStart(2, '0'); }
   function toKey(d) {
@@ -913,12 +914,10 @@ window.applyLang = function(lang) {
     cursor.setDate(cursor.getDate() + 1);
   }
 
-  const payload = JSON.stringify(data);
-  ['a1', 'a2', 'a3'].forEach(id => {
-    localStorage.setItem(`aptCalendar:${id}`, payload);
-  });
-
-  localStorage.setItem(INIT_FLAG, '1');
+  for (const id of ['a1', 'a2', 'a3']) {
+    await window.aptDB.save(id, { ...data });
+  }
+  await window.aptDB.setInit(INIT_FLAG);
 })();
 
 const burger = document.getElementById("burger");
@@ -1217,13 +1216,12 @@ window.addEventListener("scroll", onHeaderScroll, { passive: true });
                       '21.','22.','23.','24.','25.','26.','27.','28.','29.','30.','31.'];
 
   // ── Storage ────────────────────────────────
-  const storageKey = (id) => `aptCalendar:${id}`;
   function loadData(id) {
-    try { return JSON.parse(localStorage.getItem(storageKey(id)) || '{}'); }
-    catch { return {}; }
+    return window._aptCache?.[id] || {};
   }
   function saveData(id, data) {
-    localStorage.setItem(storageKey(id), JSON.stringify(data));
+    if (window._aptCache) window._aptCache[id] = data;
+    window.aptDB?.save(id, data).catch(console.warn);
   }
 
   function pad2(n) { return String(n).padStart(2,'0'); }
@@ -1363,7 +1361,7 @@ window.addEventListener("scroll", onHeaderScroll, { passive: true });
   }
 
   // ── Open / Close ───────────────────────────
-  function openModal(e) {
+  async function openModal(e) {
     const card  = e?.currentTarget?.closest('.apt');
     const aptId = (card?.getAttribute('data-gallery') || 'a1').toLowerCase();
     currentApt  = ['a1','a2','a3'].includes(aptId) ? aptId : 'a1';
@@ -1380,6 +1378,7 @@ window.addEventListener("scroll", onHeaderScroll, { passive: true });
     // Start at June
     viewMonth = 5;
 
+    await window._aptDBReady;
     render();
 
     modal.classList.add('is-open');
@@ -1409,7 +1408,7 @@ window.addEventListener("scroll", onHeaderScroll, { passive: true });
   });
 
   // Otvaranje iz detalja modala (zna koji apartman)
-  document.addEventListener('openCalendarFor', (e) => {
+  document.addEventListener('openCalendarFor', async (e) => {
     const aptId = e.detail?.aptId || 'a1';
     currentApt = ['a1','a2','a3'].includes(aptId) ? aptId : 'a1';
     if (panel) {
@@ -1418,6 +1417,7 @@ window.addEventListener("scroll", onHeaderScroll, { passive: true });
     }
     if (cmAptSpan) cmAptSpan.textContent = aptMeta[currentApt]?.span || '';
     viewMonth = 5;
+    await window._aptDBReady;
     render();
     modal.classList.add('is-open');
     modal.setAttribute('aria-hidden', 'false');
@@ -1836,10 +1836,8 @@ window.addEventListener("scroll", onHeaderScroll, { passive: true });
   let maxCOut     = null;   // first busy day after checkIn (inclusive = valid check-out)
 
   // ── Helpers ──
-  function storageKey(id) { return `aptCalendar:${id}`; }
   function loadData(id) {
-    try { return JSON.parse(localStorage.getItem(storageKey(id)) || '{}'); }
-    catch { return {}; }
+    return window._aptCache?.[id] || {};
   }
   function pad2(n) { return String(n).padStart(2, '0'); }
   function toYmd(d) {
