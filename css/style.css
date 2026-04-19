@@ -7432,3 +7432,126 @@ button.dm__cta {
     padding: 4px 8px;
   }
 }
+
+/* ═══════════════════════════════════════════
+   GALERIJA — ispod apartmana
+   ═══════════════════════════════════════════ */
+
+.gal {
+  margin-top: 80px;
+  padding-top: 60px;
+  border-top: 1px solid rgba(195,160,90,.20);
+}
+
+/* Header */
+.gal__head {
+  text-align: center;
+  margin-bottom: 44px;
+}
+
+.gal__kicker {
+  margin: 0 0 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  font-weight: 950;
+  letter-spacing: .8px;
+  text-transform: uppercase;
+  font-size: .86rem;
+  color: rgba(11,27,43,.60);
+}
+
+.gal__title {
+  margin: 0 0 10px;
+  font-size: clamp(1.55rem, 2.6vw, 2.25rem);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: rgba(11,27,43,.92);
+}
+
+.gal__subtitle {
+  margin: 0;
+  font-size: .96rem;
+  color: var(--muted);
+  max-width: 46ch;
+  margin-inline: auto;
+}
+
+/* Masonry grid via CSS columns */
+.gal__grid {
+  columns: 3 260px;
+  column-gap: 10px;
+}
+
+/* Each image cell */
+.gal__item {
+  break-inside: avoid;
+  margin-bottom: 10px;
+  border-radius: 14px;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  display: block;
+  outline: none;
+}
+
+.gal__item img {
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: transform .45s cubic-bezier(.25,.46,.45,.94);
+}
+
+.gal__item:hover img,
+.gal__item:focus-visible img {
+  transform: scale(1.05);
+}
+
+/* Hover overlay with zoom icon */
+.gal__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(11,27,43,0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background .35s ease;
+  border-radius: 14px;
+}
+
+.gal__overlay svg {
+  color: #fff;
+  opacity: 0;
+  transform: scale(.7);
+  transition: opacity .3s ease, transform .3s ease;
+  filter: drop-shadow(0 2px 8px rgba(0,0,0,.35));
+}
+
+.gal__item:hover .gal__overlay,
+.gal__item:focus-visible .gal__overlay {
+  background: rgba(11,27,43,.28);
+}
+
+.gal__item:hover .gal__overlay svg,
+.gal__item:focus-visible .gal__overlay svg {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Focus ring */
+.gal__item:focus-visible {
+  box-shadow: 0 0 0 3px rgba(195,160,90,.55);
+}
+
+/* Responsive */
+@media (max-width: 720px) {
+  .gal { margin-top: 56px; padding-top: 44px; }
+  .gal__grid { columns: 2 160px; column-gap: 8px; }
+  .gal__item { margin-bottom: 8px; border-radius: 10px; }
+}
+
+@media (max-width: 420px) {
+  .gal__grid { columns: 2 120px; }
+}

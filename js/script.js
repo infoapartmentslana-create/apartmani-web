@@ -64,6 +64,7 @@ window.I18N = {
     'lok-address-lbl':'ADRESA',
     'lok-nearby-title':'Okolna mjesta i gradovi','lok-nature-title':'Prirodne atrakcije',
     /* reviews */
+    'gal-kicker':'GALERIJA','gal-title':'Naša kuća i okolica','gal-subtitle':'Pogled na more, terasa, plaže i dalmatinsko okruženje.',
     'rev-kicker':'RECENZIJE','rev-title':'Što kažu naši gosti','rev-avg':'Prosječna ocjena',
     /* contact */
     'kt-kicker':'JAVITE NAM SE','kt-title':'Rezerviraj',
@@ -212,6 +213,7 @@ window.I18N = {
     'lok-sub':'Nahajamo se v prvi vrsti do morja v mirnem kraju Rtina, idealno za sproščen počitek.',
     'lok-address-lbl':'NASLOV',
     'lok-nearby-title':'Okoliška mesta in kraji','lok-nature-title':'Naravne atrakcije',
+    'gal-kicker':'GALERIJA','gal-title':'Naša hiša in okolica','gal-subtitle':'Pogled na morje, terasa, plaže in dalmatinsko okolje.',
     'rev-kicker':'OCENE','rev-title':'Kaj pravijo naši gosti','rev-avg':'Povprečna ocena',
     'kt-kicker':'PIŠITE NAM','kt-title':'Rezerviraj',
     'kt-sub':'Pošljite nam povpraševanje ali nas kontaktirajte neposredno in z veseljem vam bomo pomagali pri rezervaciji.',
@@ -355,6 +357,7 @@ window.I18N = {
     'lok-sub':'In der ersten Reihe zum Meer im ruhigen Ort Rtina gelegen, ideal für entspannten Urlaub.',
     'lok-address-lbl':'ADRESSE',
     'lok-nearby-title':'Umliegende Orte und Städte','lok-nature-title':'Naturattraktionen',
+    'gal-kicker':'GALERIE','gal-title':'Unser Haus und die Umgebung','gal-subtitle':'Meerblick, Terrasse, Strände und dalmatinische Atmosphäre.',
     'rev-kicker':'BEWERTUNGEN','rev-title':'Was unsere Gäste sagen','rev-avg':'Durchschnittliche Bewertung',
     'kt-kicker':'KONTAKTIEREN SIE UNS','kt-title':'Buchen',
     'kt-sub':'Senden Sie uns eine Anfrage oder kontaktieren Sie uns direkt und wir helfen Ihnen gerne bei der Buchung.',
@@ -498,6 +501,7 @@ window.I18N = {
     'lok-sub':'Located in the front row to the sea in the peaceful village of Rtina, ideal for a relaxed holiday.',
     'lok-address-lbl':'ADDRESS',
     'lok-nearby-title':'Nearby places and towns','lok-nature-title':'Natural attractions',
+    'gal-kicker':'GALLERY','gal-title':'Our house and surroundings','gal-subtitle':'Sea views, terraces, beaches and the Dalmatian atmosphere.',
     'rev-kicker':'REVIEWS','rev-title':'What our guests say','rev-avg':'Average rating',
     'kt-kicker':'GET IN TOUCH','kt-title':'Book',
     'kt-sub':'Send us an enquiry or contact us directly and we will be happy to help you with your booking.',
@@ -1592,6 +1596,9 @@ window.addEventListener("scroll", onHeaderScroll, { passive: true });
     }, { passive: false });
   }
 
+  // Expose za galeriju sekciju
+  window._openGallery = openGallery;
+
   // Za svaki apartman: hero + thumbs otvaraju isti modal
   cards.forEach(card => {
     const rawTitle = card.getAttribute('data-gallery-title') || 'Galerija';
@@ -1634,6 +1641,30 @@ window.addEventListener("scroll", onHeaderScroll, { passive: true });
     thumbs.forEach((t, i) => {
       t.style.cursor = 'pointer';
       t.addEventListener('click', () => openGallery({ title: getTitle(), sources: cardSources, index: i + 1 }));
+    });
+  });
+})();
+
+/* =========================
+   Galerija sekcija — kuća i okolica
+   ========================= */
+(() => {
+  const items = Array.from(document.querySelectorAll('.gal__item'));
+  if (!items.length) return;
+
+  const sources = items.map(item => item.querySelector('img')?.getAttribute('src')).filter(Boolean);
+
+  function getTitle() {
+    return window.t('gal-title') || 'Galerija';
+  }
+
+  items.forEach((item, i) => {
+    function open() {
+      window._openGallery?.({ title: getTitle(), sources, index: i });
+    }
+    item.addEventListener('click', open);
+    item.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); }
     });
   });
 })();
